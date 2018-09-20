@@ -34,6 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
        
         FirebaseApp.configure()
+        
+        switchToLoginStoryBoard()
+        
         return true
     }
 
