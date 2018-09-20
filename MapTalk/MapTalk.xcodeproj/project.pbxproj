@@ -15,6 +15,7 @@
 		01EBF3592152824000D23871 /* FacebookManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3582152824000D23871 /* FacebookManager.swift */; };
 		01EBF35B215282FA00D23871 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF35A215282FA00D23871 /* LoginViewController.swift */; };
 		01EBF35F21533C1900D23871 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01EBF35E21533C1800D23871 /* GoogleService-Info.plist */; };
+		01EBF3652153462100D23871 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3642153462100D23871 /* UIStoryboard.swift */; };
 		D15D5023EE57C02F7B1B6AAF /* Pods_MapTalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8043B726871211DBC3CB8C3 /* Pods_MapTalk.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		01EBF3582152824000D23871 /* FacebookManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookManager.swift; sourceTree = "<group>"; };
 		01EBF35A215282FA00D23871 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		01EBF35E21533C1800D23871 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		01EBF3642153462100D23871 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		BD2347F9D8128DEC7896CE1E /* Pods-MapTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapTalk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MapTalk/Pods-MapTalk.debug.xcconfig"; sourceTree = "<group>"; };
 		E6AB68BB4748EF35DB152280 /* Pods-MapTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapTalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-MapTalk/Pods-MapTalk.release.xcconfig"; sourceTree = "<group>"; };
 		E8043B726871211DBC3CB8C3 /* Pods_MapTalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapTalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,11 +69,11 @@
 		01EBF3402151FEA100D23871 /* MapTalk */ = {
 			isa = PBXGroup;
 			children = (
+				01EBF3632153456E00D23871 /* Extension */,
+				01EBF361215343BA00D23871 /* Storyboard */,
+				01EBF3602153439E00D23871 /* Controller */,
 				01EBF3562152815D00D23871 /* Model */,
-				01EBF3432151FEA200D23871 /* ViewController.swift */,
-				01EBF35A215282FA00D23871 /* LoginViewController.swift */,
 				01EBF3412151FEA100D23871 /* AppDelegate.swift */,
-				01EBF3452151FEA200D23871 /* Main.storyboard */,
 				01EBF3482151FEA500D23871 /* Assets.xcassets */,
 				01EBF34A2151FEA500D23871 /* LaunchScreen.storyboard */,
 				01EBF34D2151FEA500D23871 /* Info.plist */,
@@ -94,6 +96,39 @@
 				01EBF3582152824000D23871 /* FacebookManager.swift */,
 			);
 			path = Facebook;
+			sourceTree = "<group>";
+		};
+		01EBF3602153439E00D23871 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				01EBF3622153442600D23871 /* Login */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		01EBF361215343BA00D23871 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				01EBF3452151FEA200D23871 /* Main.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		01EBF3622153442600D23871 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				01EBF35A215282FA00D23871 /* LoginViewController.swift */,
+				01EBF3432151FEA200D23871 /* ViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		01EBF3632153456E00D23871 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				01EBF3642153462100D23871 /* UIStoryboard.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		23AB1D1DD67843988FCBBA82 /* Frameworks */ = {
@@ -253,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01EBF35B215282FA00D23871 /* LoginViewController.swift in Sources */,
+				01EBF3652153462100D23871 /* UIStoryboard.swift in Sources */,
 				01EBF3592152824000D23871 /* FacebookManager.swift in Sources */,
 				01EBF3442151FEA200D23871 /* ViewController.swift in Sources */,
 				01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */,

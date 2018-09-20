@@ -71,4 +71,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
     
+    func switchToLoginStoryBoard() {
+        
+        guard Thread.current.isMainThread else {
+            
+            DispatchQueue.main.async { [weak self] in
+                
+                self?.switchToLoginStoryBoard()
+            }
+            
+            return
+        }
+        
+        window?.rootViewController = UIStoryboard.loginStoryboard().instantiateInitialViewController()
+    }
+    
 }
