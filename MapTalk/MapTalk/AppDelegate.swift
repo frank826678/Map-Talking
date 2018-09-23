@@ -10,12 +10,19 @@ import UIKit
 import FBSDKLoginKit
 import FBSDKCoreKit
 import Firebase
+import GoogleMaps
+import GooglePlaces
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    // swiftlint:disable force_cast
+    static let shared = UIApplication.shared.delegate as! AppDelegate
+    // swiftlint:enable force_cast
+    
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -34,6 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
        
         FirebaseApp.configure()
+        
+        GMSServices.provideAPIKey("AIzaSyDUQVZIOfdopcNAHEgv0mJY3VlEYtAaLOc")
+        
+        // OLD GMSPlacesClient.provideAPIKey("AIzaSyDDFveJ8LPRLCJKfmQqU-rBlbY7MPXYoUw")
         
         switchToLoginStoryBoard()
         
@@ -87,6 +98,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         window?.rootViewController = UIStoryboard.loginStoryboard().instantiateInitialViewController()
+    }
+    
+    func switchToMainStoryBoard() {
+        
+        guard Thread.current.isMainThread else {
+            
+            DispatchQueue.main.async { [weak self] in
+                
+                self?.switchToMainStoryBoard()
+            }
+            
+            return
+        }
+        
+        //window?.rootViewController = UIStoryboard.mainStoryboard().instantiateInitialViewController()
+       
+        window?.rootViewController = UIStoryboard.mapStoryboard().instantiateInitialViewController()
+        
     }
     
 }

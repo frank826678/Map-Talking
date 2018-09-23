@@ -21,9 +21,9 @@ extension UIStoryboard {
         return UIStoryboard(name: "Login", bundle: nil)
     }
     
-    static func discoverStoryboard() -> UIStoryboard {
+    static func mapStoryboard() -> UIStoryboard {
         
-        return UIStoryboard(name: "map", bundle: nil)
+        return UIStoryboard(name: "Map", bundle: nil)
     }
     
     static func mainStoryboard() -> UIStoryboard {
@@ -37,7 +37,7 @@ extension UIStoryboard {
     }
     
     static func chatStoryboard() -> UIStoryboard {
-        return UIStoryboard(name: "message", bundle: nil)
+        return UIStoryboard(name: "Message", bundle: nil)
     }
     
 //    static func arStoryboard() -> UIStoryboard {

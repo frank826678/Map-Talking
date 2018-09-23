@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="R81-B1-rel">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Map View Controller-->
+        <scene sceneID="0Ro-Xa-UOx">
+            <objects>
+                <viewController id="R81-B1-rel" customClass="MapViewController" customModule="MapTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W1b-SP-zxy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="knJ-Cf-MT3">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otg-qD-yJC">
+                                <rect key="frame" x="167.5" y="527" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ekF-jB-rmK"/>
+                                    <constraint firstAttribute="width" constant="40" id="f1O-2G-425"/>
+                                </constraints>
+                                <state key="normal" image="icons8-user-location-64"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IEA-ex-wId">
+                                <rect key="frame" x="167.5" y="607" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="603-4R-ZxK"/>
+                                    <constraint firstAttribute="height" constant="40" id="nBt-HT-lTn"/>
+                                </constraints>
+                                <state key="normal" image="icons8-plus-64"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1m6-TL-58c">
+                                <rect key="frame" x="305" y="597" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="e7T-jn-fVN"/>
+                                    <constraint firstAttribute="width" constant="40" id="fZp-Hp-ibb"/>
+                                </constraints>
+                                <state key="normal" image="icons8-speech-bubble-64"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnL-Uy-6uO">
+                                <rect key="frame" x="30" y="597" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="OSB-vq-4s6"/>
+                                    <constraint firstAttribute="width" constant="40" id="qUv-Gt-ON2"/>
+                                </constraints>
+                                <state key="normal" image="icons8-anonymous-mask-80-2"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cnL-Uy-6uO" firstAttribute="leading" secondItem="iLF-qr-FYc" secondAttribute="leading" constant="30" id="5Bm-np-8h8"/>
+                            <constraint firstItem="knJ-Cf-MT3" firstAttribute="trailing" secondItem="iLF-qr-FYc" secondAttribute="trailing" id="CQN-uu-MTc"/>
+                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="cnL-Uy-6uO" secondAttribute="bottom" constant="30" id="EZD-zK-VpW"/>
+                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="1m6-TL-58c" secondAttribute="bottom" constant="30" id="LLl-1h-fwI"/>
+                            <constraint firstItem="knJ-Cf-MT3" firstAttribute="leading" secondItem="iLF-qr-FYc" secondAttribute="leading" id="c6E-St-DGa"/>
+                            <constraint firstItem="knJ-Cf-MT3" firstAttribute="bottom" secondItem="iLF-qr-FYc" secondAttribute="bottom" id="gcn-9p-hk5"/>
+                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="IEA-ex-wId" secondAttribute="bottom" constant="20" id="gtM-jL-DIr"/>
+                            <constraint firstItem="Otg-qD-yJC" firstAttribute="centerX" secondItem="W1b-SP-zxy" secondAttribute="centerX" id="jTj-8a-FWn"/>
+                            <constraint firstItem="IEA-ex-wId" firstAttribute="centerX" secondItem="W1b-SP-zxy" secondAttribute="centerX" id="wAg-lT-JEt"/>
+                            <constraint firstItem="knJ-Cf-MT3" firstAttribute="top" secondItem="W1b-SP-zxy" secondAttribute="top" id="wls-tf-sE3"/>
+                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="Otg-qD-yJC" secondAttribute="bottom" constant="100" id="xmQ-sf-2V2"/>
+                            <constraint firstItem="iLF-qr-FYc" firstAttribute="trailing" secondItem="1m6-TL-58c" secondAttribute="trailing" constant="30" id="yln-Tf-KJQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="iLF-qr-FYc"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rko-14-Eoy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1732" y="897.30134932533736"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icons8-anonymous-mask-80-2" width="80" height="80"/>
+        <image name="icons8-plus-64" width="64" height="64"/>
+        <image name="icons8-speech-bubble-64" width="64" height="64"/>
+        <image name="icons8-user-location-64" width="64" height="64"/>
+    </resources>
+</document>

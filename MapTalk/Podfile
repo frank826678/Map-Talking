@@ -13,7 +13,13 @@ target 'MapTalk' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+  pod 'Kingfisher', '~> 4.0'
   
+  
+
+#  pod 'SDWebImage'
 #  pod 'RAMAnimatedTabBarController'
 #  pod 'FBSDKCoreKit'
 #  pod 'FacebookCore'
