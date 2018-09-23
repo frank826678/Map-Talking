@@ -13,10 +13,10 @@ import MapKit
 import Firebase
 import FirebaseDatabase
 
-enum UserType {
-    case man
-    case femail
-}
+//enum UserType {
+//    case man
+//    case femail
+//}
 
 class UserLocation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
@@ -38,13 +38,13 @@ class UserLocation: NSObject, MKAnnotation {
 
 struct Locations {
     
-    var lat: Double {
+    var latitude: Double {
         didSet {
             updateCoordinate()
         }
     }
     
-    var lon: Double {
+    var longitude: Double {
         didSet {
             updateCoordinate()
         }
@@ -70,14 +70,14 @@ struct Locations {
         self.annotation.name = self.name
         self.annotation.userImage = self.userImage
         self.annotation.message = self.message
-        self.annotation.coordinate = CLLocationCoordinate2D(latitude: self.lat, longitude: self.lon)
+        self.annotation.coordinate = CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
         
         return annotation
     }
     
     private func updateCoordinate() {
         
-        let coordinate = CLLocationCoordinate2D(latitude: self.lat, longitude: self.lon)
+        let coordinate = CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
         
         annotation.coordinate = coordinate
     }

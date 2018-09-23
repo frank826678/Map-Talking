@@ -25,15 +25,16 @@ import UIKit
 import MapKit
 import FirebaseDatabase
 import FirebaseAuth
+import Kingfisher
 
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
-    @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var mapView: MKMapView!
     
     var locationManager = CLLocationManager()
     
-    var ref: DatabaseReference!
+    var refference: DatabaseReference!
     var userName: String!
     var locations: [Locations] = []
     var trackLocation: [String: Any] = [ : ]
@@ -46,10 +47,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        map.delegate = self
+        mapView.delegate = self
         //        map.showsUserLocation = true
         
-        ref = Database.database().reference()
+        refference = Database.database().reference()
         
         if let name = Auth.auth().currentUser?.displayName {
             userName = name
@@ -67,11 +68,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func dataBaseLocation() {
-        ref.child("location").observe(.childAdded) { (snapshot) in
+        refference.child("location").observe(.childAdded) { (snapshot) in
             guard let value = snapshot.value as? NSDictionary else { return }
             guard let location = value["location"] as? NSDictionary else { return }
-            guard let lat = location["lat"] as? Double else { return }
-            guard let lon = location["lon"] as? Double else { return }
+            guard let latitude = location["lat"] as? Double else { return }
+            guard let longitude = location["lon"] as? Double else { return }
             guard let userName = location["userName"] as? String else { return }
             guard let userImage = location["userImage"] as? String else { return }
             
@@ -83,9 +84,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 messageInput = text
             }
             
-            let userlocations = Locations(lat: lat, lon: lon, name: userName, userImage: userImage, id: snapshot.key, message: messageInput)
+            let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput)
             
-            self.map.addAnnotation(userlocations.userAnnotation)
+            self.mapView.addAnnotation(userlocations.userAnnotation)
             
             self.locations.append(userlocations)
             
@@ -94,7 +95,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 self.selfLocation = userlocations
                 
-                self.map.setRegion(
+                self.mapView.setRegion(
                     MKCoordinateRegion(
                         center: userlocations.userAnnotation.coordinate,
                         span: MKCoordinateSpan(
@@ -111,11 +112,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func dataBaseTrack() {
-        ref.child("location").observe(.childChanged) { (snapshot) in
+        refference.child("location").observe(.childChanged) { (snapshot) in
             guard let value = snapshot.value as? NSDictionary else { return }
             guard let location = value["location"] as? NSDictionary else { return }
-            guard let lat = location["lat"] as? Double else { return }
-            guard let lon = location["lon"] as? Double else { return }
+            guard let latitude = location["lat"] as? Double else { return }
+            guard let longtitude = location["lon"] as? Double else { return }
             
             guard let userName = location["userName"] as? String else { return }
             
@@ -129,25 +130,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 messageInput = text
             }
             
-            let userLocations = Locations(lat: lat, lon: lon, name: userName, userImage: userImage, id: snapshot.key, message: messageInput)
+            let userLocations = Locations(latitude: latitude, longitude: longtitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput)
             
             for (index, user) in self.locations.enumerated() where user.id == userLocations.id {
                 
-                self.locations[index].lat = userLocations.lat
+                self.locations[index].latitude = userLocations.latitude
                 
-                self.locations[index].lon = userLocations.lon
+                self.locations[index].longitude = userLocations.longitude
                 
                 self.locations[index].message = userLocations.message
                 
                 for index in 0..<self.locations.count {
-                    self.map.removeAnnotation(self.locations[index].userAnnotation)
-                    self.map.addAnnotation(self.locations[index].userAnnotation)
+                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
+                    self.mapView.addAnnotation(self.locations[index].userAnnotation)
                 }
                 
                 return
             }
             
-            self.map.addAnnotation(userLocations.userAnnotation)
+            self.mapView.addAnnotation(userLocations.userAnnotation)
             
             
             self.locations.append(userLocations)
@@ -157,7 +158,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBAction func locationButtonClick(_ sender: UIButton) {
         
         if let location = selfLocation {
-            self.map.setRegion(
+            self.mapView.setRegion(
                 MKCoordinateRegion(
                     center: location.userAnnotation.coordinate,
                     span: MKCoordinateSpan(
@@ -179,7 +180,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //            let region = MKCoordinateRegion(center: center,
             //                                            span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08))
             
-            saveSelfLocation(lat: center.latitude, lon: center.longitude)
+            saveSelfLocation(latitude: center.latitude, longitude: center.longitude)
         }
         
     }
@@ -217,11 +218,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
             
+            //將 URL 轉換成圖片
 //            if let image = annotation?.userImage {
 //                imageView.sd_setImage(with: URL(string: image), completed: nil)
 //            } else {
 //                imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
 //            }
+            
+            if let userImage = annotation?.userImage {
+                imageView.kf.setImage(with: URL(string: userImage))
+            } else {
+                imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+            }
             
             
             //設定照片圓角
@@ -231,14 +239,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             imageView.layer.borderWidth = 4
             
             //增加三角形圖案
-            let lbl = UILabel(frame: CGRect(x: 0, y: 45, width: 50, height: 10)) // 50, 10
-            lbl.text = "▾"
-            lbl.font = UIFont.systemFont(ofSize: 24) //24
-            lbl.textColor = #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1)
-            lbl.textAlignment = .center
+            let triangle = UILabel(frame: CGRect(x: 0, y: 45, width: 50, height: 10)) // 50, 10
+            triangle.text = "▾"
+            triangle.font = UIFont.systemFont(ofSize: 24) //24
+            triangle.textColor = #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1)
+            triangle.textAlignment = .center
             
             pinView.addSubview(imageView)
-            pinView.addSubview(lbl)
+            pinView.addSubview(triangle)
             
             
             let annotationLabel = UILabel(frame: CGRect(x: -40, y: -35, width: 105, height: 30))
@@ -285,13 +293,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     
-    func saveSelfLocation(lat: Double, lon: Double) {
+    func saveSelfLocation(latitude: Double, longitude: Double) {
         
         guard let userId = Auth.auth().currentUser?.uid else { return }
         guard let userImage = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
-        ref.child("location").child(userId).child("location").setValue([
-            "lat": lat,
-            "lon": lon,
+        refference.child("location").child(userId).child("location").setValue([
+            "lat": latitude,
+            "lon": longitude,
             "userName": userName,
             "userImage": userImage])
     }
@@ -354,7 +362,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 let childUpdates = ["/location/\(userId)/message": userStatus]
                 
-                self.ref.updateChildValues(childUpdates)
+                self.refference.updateChildValues(childUpdates)
             }
         })
         
