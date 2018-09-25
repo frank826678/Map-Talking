@@ -16,7 +16,7 @@ target 'MapTalk' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'Kingfisher', '~> 4.0'
-  
+  pod 'RAMAnimatedTabBarController'
   
 
 #  pod 'SDWebImage'
