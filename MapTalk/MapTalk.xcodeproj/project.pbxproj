@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		016A51352159DCBA00AB2745 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A51342159DCBA00AB2745 /* TabBarViewController.swift */; };
+		016A51372159F50A00AB2745 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016A51362159F50A00AB2745 /* Message.storyboard */; };
+		016A513A2159F54F00AB2745 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016A51392159F54F00AB2745 /* Profile.storyboard */; };
 		01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3412151FEA100D23871 /* AppDelegate.swift */; };
 		01EBF3442151FEA200D23871 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3432151FEA200D23871 /* LoginViewController.swift */; };
 		01EBF3472151FEA200D23871 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01EBF3452151FEA200D23871 /* Login.storyboard */; };
@@ -28,6 +30,8 @@
 
 /* Begin PBXFileReference section */
 		016A51342159DCBA00AB2745 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		016A51362159F50A00AB2745 /* Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
+		016A51392159F54F00AB2745 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		01EBF33E2151FEA100D23871 /* MapTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01EBF3412151FEA100D23871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01EBF3432151FEA200D23871 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +141,8 @@
 				01EBF3452151FEA200D23871 /* Login.storyboard */,
 				01EBF3662153483F00D23871 /* Main.storyboard */,
 				01EBF368215353C600D23871 /* Map.storyboard */,
+				016A51362159F50A00AB2745 /* Message.storyboard */,
+				016A51392159F54F00AB2745 /* Profile.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -257,10 +263,12 @@
 			files = (
 				01EBF34C2151FEA500D23871 /* LaunchScreen.storyboard in Resources */,
 				01EBF3672153483F00D23871 /* Main.storyboard in Resources */,
+				016A513A2159F54F00AB2745 /* Profile.storyboard in Resources */,
 				01EBF35F21533C1900D23871 /* GoogleService-Info.plist in Resources */,
 				01EBF3492151FEA500D23871 /* Assets.xcassets in Resources */,
 				01EBF3472151FEA200D23871 /* Login.storyboard in Resources */,
 				01EBF369215353C600D23871 /* Map.storyboard in Resources */,
+				016A51372159F50A00AB2745 /* Message.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

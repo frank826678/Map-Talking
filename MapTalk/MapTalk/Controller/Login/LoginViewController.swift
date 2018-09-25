@@ -57,8 +57,13 @@ class LoginViewController: UIViewController {
                         
                         AppDelegate.shared.window?.rootViewController
                                                 = UIStoryboard
-                                                    .mapStoryboard()
+                                                    .mainStoryboard()
                                                     .instantiateInitialViewController()
+//                        AppDelegate.shared.window?.rootViewController
+//                            = UIStoryboard
+//                                .mapStoryboard()
+//                                .instantiateInitialViewController()
+
 
                         
                     } else {

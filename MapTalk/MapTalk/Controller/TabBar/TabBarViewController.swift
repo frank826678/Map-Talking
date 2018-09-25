@@ -27,14 +27,14 @@ private enum Tab {
         
         switch self {
             
-//        case .article:
-//
-//            return UIStoryboard
-//                .articleStoryboard()
-//                .instantiateInitialViewController()!
-//
+            //        case .article:
+            //
+            //            return UIStoryboard
+            //                .articleStoryboard()
+            //                .instantiateInitialViewController()!
+        //
         case .map:
-
+            
             return UIStoryboard
                 .mapStoryboard()
                 .instantiateInitialViewController()!
@@ -50,11 +50,11 @@ private enum Tab {
                 .chatStoryboard()
                 .instantiateInitialViewController()!
             
-//        case .arView:
-//            return UIStoryboard
-//                .arStoryboard()
-//                .instantiateInitialViewController()!
-        
+            //        case .arView:
+            //            return UIStoryboard
+            //                .arStoryboard()
+            //                .instantiateInitialViewController()!
+            
         }
     }
     
@@ -62,15 +62,16 @@ private enum Tab {
         
         switch self {
             
-        //case .article: return #imageLiteral(resourceName: "tab_main_normal")
+            //case .article: return #imageLiteral(resourceName: "tab_main_normal")
+        case .chat: return #imageLiteral(resourceName: "tab_chat_normal")
             
         case .map: return #imageLiteral(resourceName: "map")
             
         case .profile: return #imageLiteral(resourceName: "tab_profile_normal")
             
-        case .chat: return #imageLiteral(resourceName: "tab_chat_normal")
+        
             
-        //case .arView: return #imageLiteral(resourceName: "arTab")
+            //case .arView: return #imageLiteral(resourceName: "arTab")
             
         }
     }
@@ -79,15 +80,16 @@ private enum Tab {
         
         switch self {
             
-//        case .article: return #imageLiteral(resourceName: "tab_main_normal").withRenderingMode(.alwaysTemplate)
-//
-        case .map: return #imageLiteral(resourceName: "map").withRenderingMode(.alwaysTemplate)
-
-        case .profile: return #imageLiteral(resourceName: "tab_profile_normal").withRenderingMode(.alwaysTemplate)
+            //        case .article: return #imageLiteral(resourceName: "tab_main_normal").withRenderingMode(.alwaysTemplate)
+        //
             
         case .chat: return #imageLiteral(resourceName: "tab_chat_normal").withRenderingMode(.alwaysTemplate)
+        
+        case .map: return #imageLiteral(resourceName: "map").withRenderingMode(.alwaysTemplate)
+        
+        case .profile: return #imageLiteral(resourceName: "tab_profile_normal").withRenderingMode(.alwaysTemplate)
             
-       // case .arView: return #imageLiteral(resourceName: "arTab").withRenderingMode(.alwaysTemplate)
+            // case .arView: return #imageLiteral(resourceName: "arTab").withRenderingMode(.alwaysTemplate)
         }
     }
 }
@@ -103,16 +105,15 @@ class TabBarViewController: RAMAnimatedTabBarController {
     private func setupTab() {
         
         //tabBar.tintColor = VoyageColor.tabBarTintColor.color()
-        
-        var controllers: [UIViewController] = []
+                var controllers: [UIViewController] = []
         
         //let tabs: [Tab] = [.article, .discover, .arView,  .chat, .profile]
         
-        let tabs: [Tab] = [.map,  .chat, .profile]
+        let tabs: [Tab] = [.chat, .map, .profile]
         
         // swiftlint:disable identifier_name
         for tab in tabs {
-        // swiftlint:enable identifier_name
+            // swiftlint:enable identifier_name
             let controller = tab.controller()
             
             let item = RAMAnimatedTabBarItem(title: nil, image: tab.image(), selectedImage: tab.selectedImage())

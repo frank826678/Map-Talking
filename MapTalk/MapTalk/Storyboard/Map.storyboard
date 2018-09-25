@@ -21,52 +21,32 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otg-qD-yJC">
-                                <rect key="frame" x="167.5" y="527" width="40" height="40"/>
+                                <rect key="frame" x="295" y="597" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ekF-jB-rmK"/>
                                     <constraint firstAttribute="width" constant="40" id="f1O-2G-425"/>
                                 </constraints>
                                 <state key="normal" image="icons8-user-location-64"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IEA-ex-wId">
-                                <rect key="frame" x="167.5" y="607" width="40" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6h9-LW-iF6">
+                                <rect key="frame" x="40" y="597" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="603-4R-ZxK"/>
-                                    <constraint firstAttribute="height" constant="40" id="nBt-HT-lTn"/>
+                                    <constraint firstAttribute="height" constant="40" id="0YP-tk-eva"/>
+                                    <constraint firstAttribute="width" constant="40" id="FNL-dq-Qxr"/>
                                 </constraints>
-                                <state key="normal" image="icons8-plus-64"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1m6-TL-58c">
-                                <rect key="frame" x="305" y="597" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="e7T-jn-fVN"/>
-                                    <constraint firstAttribute="width" constant="40" id="fZp-Hp-ibb"/>
-                                </constraints>
-                                <state key="normal" image="icons8-speech-bubble-64"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnL-Uy-6uO">
-                                <rect key="frame" x="30" y="597" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="OSB-vq-4s6"/>
-                                    <constraint firstAttribute="width" constant="40" id="qUv-Gt-ON2"/>
-                                </constraints>
-                                <state key="normal" image="icons8-anonymous-mask-80-2"/>
+                                <state key="normal" image="icons8-heart-outline-64"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="cnL-Uy-6uO" firstAttribute="leading" secondItem="iLF-qr-FYc" secondAttribute="leading" constant="30" id="5Bm-np-8h8"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="trailing" secondItem="iLF-qr-FYc" secondAttribute="trailing" id="CQN-uu-MTc"/>
-                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="cnL-Uy-6uO" secondAttribute="bottom" constant="30" id="EZD-zK-VpW"/>
-                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="1m6-TL-58c" secondAttribute="bottom" constant="30" id="LLl-1h-fwI"/>
+                            <constraint firstItem="iLF-qr-FYc" firstAttribute="trailing" secondItem="Otg-qD-yJC" secondAttribute="trailing" constant="40" id="CwQ-Gw-2e4"/>
+                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="Otg-qD-yJC" secondAttribute="bottom" constant="30" id="QOg-5h-Mss"/>
+                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="6h9-LW-iF6" secondAttribute="bottom" constant="30" id="TPN-UM-jnb"/>
+                            <constraint firstItem="6h9-LW-iF6" firstAttribute="leading" secondItem="iLF-qr-FYc" secondAttribute="leading" constant="40" id="Uhy-Nx-c2e"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="leading" secondItem="iLF-qr-FYc" secondAttribute="leading" id="c6E-St-DGa"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="bottom" secondItem="iLF-qr-FYc" secondAttribute="bottom" id="gcn-9p-hk5"/>
-                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="IEA-ex-wId" secondAttribute="bottom" constant="20" id="gtM-jL-DIr"/>
-                            <constraint firstItem="Otg-qD-yJC" firstAttribute="centerX" secondItem="W1b-SP-zxy" secondAttribute="centerX" id="jTj-8a-FWn"/>
-                            <constraint firstItem="IEA-ex-wId" firstAttribute="centerX" secondItem="W1b-SP-zxy" secondAttribute="centerX" id="wAg-lT-JEt"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="top" secondItem="W1b-SP-zxy" secondAttribute="top" id="wls-tf-sE3"/>
-                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="Otg-qD-yJC" secondAttribute="bottom" constant="100" id="xmQ-sf-2V2"/>
-                            <constraint firstItem="iLF-qr-FYc" firstAttribute="trailing" secondItem="1m6-TL-58c" secondAttribute="trailing" constant="30" id="yln-Tf-KJQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iLF-qr-FYc"/>
                     </view>
@@ -80,9 +60,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-anonymous-mask-80-2" width="80" height="80"/>
-        <image name="icons8-plus-64" width="64" height="64"/>
-        <image name="icons8-speech-bubble-64" width="64" height="64"/>
+        <image name="icons8-heart-outline-64" width="64" height="64"/>
         <image name="icons8-user-location-64" width="64" height="64"/>
     </resources>
 </document>
