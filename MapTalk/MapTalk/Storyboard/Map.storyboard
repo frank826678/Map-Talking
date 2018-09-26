@@ -21,29 +21,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otg-qD-yJC">
-                                <rect key="frame" x="295" y="597" width="40" height="40"/>
+                                <rect key="frame" x="315" y="597" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.76470588235294112" green="0.47450980392156861" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ekF-jB-rmK"/>
                                     <constraint firstAttribute="width" constant="40" id="f1O-2G-425"/>
                                 </constraints>
-                                <state key="normal" image="icons8-user-location-64"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6h9-LW-iF6">
-                                <rect key="frame" x="40" y="597" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="0YP-tk-eva"/>
-                                    <constraint firstAttribute="width" constant="40" id="FNL-dq-Qxr"/>
-                                </constraints>
-                                <state key="normal" image="icons8-heart-outline-64"/>
+                                <state key="normal" image="icons8-near-me-30"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="trailing" secondItem="iLF-qr-FYc" secondAttribute="trailing" id="CQN-uu-MTc"/>
-                            <constraint firstItem="iLF-qr-FYc" firstAttribute="trailing" secondItem="Otg-qD-yJC" secondAttribute="trailing" constant="40" id="CwQ-Gw-2e4"/>
+                            <constraint firstItem="iLF-qr-FYc" firstAttribute="trailing" secondItem="Otg-qD-yJC" secondAttribute="trailing" constant="20" id="CwQ-Gw-2e4"/>
                             <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="Otg-qD-yJC" secondAttribute="bottom" constant="30" id="QOg-5h-Mss"/>
-                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="6h9-LW-iF6" secondAttribute="bottom" constant="30" id="TPN-UM-jnb"/>
-                            <constraint firstItem="6h9-LW-iF6" firstAttribute="leading" secondItem="iLF-qr-FYc" secondAttribute="leading" constant="40" id="Uhy-Nx-c2e"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="leading" secondItem="iLF-qr-FYc" secondAttribute="leading" id="c6E-St-DGa"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="bottom" secondItem="iLF-qr-FYc" secondAttribute="bottom" id="gcn-9p-hk5"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="top" secondItem="W1b-SP-zxy" secondAttribute="top" id="wls-tf-sE3"/>
@@ -51,6 +42,7 @@
                         <viewLayoutGuide key="safeArea" id="iLF-qr-FYc"/>
                     </view>
                     <connections>
+                        <outlet property="location" destination="Otg-qD-yJC" id="J8Z-hG-YME"/>
                         <outlet property="mapView" destination="knJ-Cf-MT3" id="R6I-XS-64A"/>
                     </connections>
                 </viewController>
@@ -60,7 +52,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-heart-outline-64" width="64" height="64"/>
-        <image name="icons8-user-location-64" width="64" height="64"/>
+        <image name="icons8-near-me-30" width="30" height="30"/>
     </resources>
 </document>

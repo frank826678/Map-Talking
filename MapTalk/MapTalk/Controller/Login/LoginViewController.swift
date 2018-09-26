@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginFacebook(_ sender: UIButton) {
         
-        manager.facebookLogin(
+        manager.facebookLogIn(
             fromController: self,
             success: { [weak self] token in
                 
@@ -44,37 +44,37 @@ class LoginViewController: UIViewController {
                 self?.signInFirebase(token: token)
                 //這裡有 signInFirebase 下面 firebase login 可以刪掉
                 
-                let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+            //    let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 
                 
-                Auth.auth().signInAndRetrieveData(with: credential, completion: { (result, error) in
-                    if error == nil {
+              //  Auth.auth().signInAndRetrieveData(with: credential, completion: { (result, error) in
                         print("登入成功 Success")
-                        print(Auth.auth().currentUser?.displayName)
-                        print(Auth.auth().currentUser?.email)
-                        print(Auth.auth().currentUser?.photoURL)
-                        
-                        
-                        AppDelegate.shared.window?.rootViewController
-                                                = UIStoryboard
-                                                    .mainStoryboard()
-                                                    .instantiateInitialViewController()
-//                        AppDelegate.shared.window?.rootViewController
-//                            = UIStoryboard
-//                                .mapStoryboard()
-//                                .instantiateInitialViewController()
-
-
-                        
-                    } else {
-                        print(error)
-                    }
-                })
+//                        print(Auth.auth().currentUser?.displayName)
+//                        print(Auth.auth().currentUser?.email)
+//                        print(Auth.auth().currentUser?.photoURL)
+//
                 
+//                        AppDelegate.shared.window?.rootViewController
+//                                                = UIStoryboard
+//                                                    .mainStoryboard()
+//                                                    .instantiateInitialViewController()
+//
             },
-            failure: { _ in
-                // TODO
-        }
+            failure: { [weak self ] (error) in
+                
+                guard let error = error as? FBError else {
+                    
+                    return
+                    
+                }
+                
+                self?.present(
+                    UIAlertController.errorMessage(errorType: error),
+                    animated: true,
+                    completion: nil
+                )
+                
+            }
         )
         
         /*
@@ -118,32 +118,62 @@ class LoginViewController: UIViewController {
         */
     }
     
-    // NEW
+    
     private func signInFirebase(token: String) {
         
-        firebaseManager.logInFirebase(token: token, sucess: { (userInfo) in
-            
-            DispatchQueue.main.async {
-                AppDelegate.shared.switchToMainStoryBoard()
-            }
-            
-        }) { (error) in
-            
-            // TODO:
-            
-        }
+        firebaseManager.logInFirebase(
+            token: token,
+            sucess: { (userInfo) in
+                
+                DispatchQueue.main.async {
+                   AppDelegate.shared.switchToMainStoryBoard()
+                }
+                
+        },
+            faliure: { [weak self ] (error) in
+                
+                guard let error = error as? FBError else {
+                    
+                    return
+                    
+                }
+                
+                self?.present(
+                    UIAlertController.errorMessage(errorType: error),
+                    animated: true,
+                    completion: nil
+                )
+                
+        })
         
     }
     
+    // old
+//    private func signInFirebase(token: String) {
+//
+//        firebaseManager.logInFirebase(token: token, sucess: { (userInfo) in
+//
+//            DispatchQueue.main.async {
+//                AppDelegate.shared.switchToMainStoryBoard()
+//            }
+//
+//        }) { (error) in
+//
+//            // TODO:
+//
+//        }
+//
+//    }
     
-    func loginErrorAlert(errorMessage: String?) {
-        
-        let alert = UIAlertController(title: "Login Failed", message: errorMessage, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
-    }
+    
+//    func loginErrorAlert(errorMessage: String?) {
+//        
+//        let alert = UIAlertController(title: "Login Failed", message: errorMessage, preferredStyle: .alert)
+//        
+//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//        
+//        self.present(alert, animated: true, completion: nil)
+//    }
     
     func changeStyle() {
         

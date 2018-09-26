@@ -30,9 +30,10 @@ import Kingfisher
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
+    @IBOutlet weak var location: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
-    var locationManager = CLLocationManager()
+//    var locationManager = CLLocationManager()
     
     var refference: DatabaseReference!
     var userName: String!
@@ -59,12 +60,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         userName = Auth.auth().currentUser?.displayName
         
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+//        locationManager.delegate = self
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+//        locationManager.requestWhenInUseAuthorization()
+//        locationManager.startUpdatingLocation()
         
         dataBaseLocation()
+        
+        setIcon()
+        
     }
     
     func dataBaseLocation() {
@@ -372,6 +376,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         editAlert.addAction(cancel)
         
         self.present(editAlert, animated: true)
+    }
+    
+    func setIcon() {
+        
+        location.clipsToBounds = true
+        location.layer.cornerRadius = 20
+        
     }
     
 }

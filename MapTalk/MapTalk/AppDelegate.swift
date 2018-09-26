@@ -46,7 +46,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // OLD GMSPlacesClient.provideAPIKey("AIzaSyDDFveJ8LPRLCJKfmQqU-rBlbY7MPXYoUw")
         
-        switchToLoginStoryBoard()
+        //switch page
+        if UserDefaults.standard.value(forKey: FirebaseType.uuid.rawValue) != nil {
+            
+            switchToMainStoryBoard()
+            
+        } else {
+            switchToLoginStoryBoard()
+            
+        }
+
         
         return true
     }
@@ -112,9 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
-        //window?.rootViewController = UIStoryboard.mainStoryboard().instantiateInitialViewController()
-       
-        window?.rootViewController = UIStoryboard.mapStoryboard().instantiateInitialViewController()
+        window?.rootViewController = UIStoryboard.mainStoryboard().instantiateInitialViewController()
         
     }
     

@@ -12,6 +12,32 @@ import UIKit
 
 extension UIAlertController {
     
+    private static func alertMessage(
+        title: String? = "錯誤",
+        message: String,
+        preferredStyle: UIAlertController.Style? = UIAlertController.Style.alert
+        ) -> UIAlertController {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle!)
+        
+        let action = UIAlertAction(title: "確定", style: .default, handler: nil)
+        
+        alert.addAction(action)
+        
+        return alert
+    }
+    
+    static func errorMessage(errorType: ErrorComment) -> UIAlertController {
+        
+        return alertMessage(message: errorType.errorMessage())
+        
+    }
+    
+}
+
+/*
+extension UIAlertController {
+    
     static func alertMessage(
         title: String? = "錯誤",
         message: String,
@@ -74,3 +100,5 @@ extension UIAlertController {
     }
     
 }
+
+ */
