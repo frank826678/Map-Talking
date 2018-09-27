@@ -11,8 +11,12 @@ import UIKit
 class ChatViewController: UIViewController {
 
     @IBOutlet weak var chatTableView: UITableView!
+   
+    @IBOutlet weak var userImage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setImage()
 
         // Do any additional setup after loading the view.
         
@@ -26,16 +30,37 @@ class ChatViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        guard let identifier = segue.identifier else { return }
+        
+        switch identifier {
+            
+        case String(describing: ChatDetailViewController.self):
+            
+            guard let detailController =  segue.destination as? ChatDetailViewController,
+                let indexPath = sender as? IndexPath else {
+                    
+                    return
+            }
+            
+           // 對方 controller 的資料
+           // detailController.article = datas[indexPath.row]
+            
+        default:
+            
+            return super.prepare(for: segue, sender: sender)
+        }
     }
-    */
+    
+    func setImage() {
+        
+        userImage.layer.cornerRadius = 25
+        userImage.clipsToBounds = true
+        
+    }
 
+    
 }
 
 extension ChatViewController: UITableViewDataSource {
@@ -64,6 +89,22 @@ extension ChatViewController: UITableViewDataSource {
         return UITableViewCell()
     }
     
-
 }
-extension ChatViewController: UITableViewDelegate {}
+
+extension ChatViewController: UITableViewDelegate {
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//
+//        return 150.0
+//    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        performSegue(
+            withIdentifier: String(describing: ChatDetailViewController.self),
+            sender: indexPath
+        )
+    }
+    
+}

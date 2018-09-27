@@ -1,5 +1,5 @@
 //
-//  ChatDetailTableViewCell.swift
+//  ChatImageOwnerTableViewCell.swift
 //  MapTalk
 //
 //  Created by Frank on 2018/9/27.
@@ -8,26 +8,21 @@
 
 import UIKit
 
-class ChatDetailTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var userImage: UIImageView!
-    
-    @IBOutlet weak var messageBody: UILabel!
-    
-    @IBOutlet weak var messageBg: UIView!
+class ChatImageOwnerTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var messageImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        messageBg.layer.cornerRadius = 15.0
+        messageImageView.layer.cornerRadius = 15.0
         
-        messageBg.layer.maskedCorners = [
+        messageImageView.layer.maskedCorners = [
             CACornerMask.layerMinXMinYCorner,
             CACornerMask.layerMaxXMinYCorner,
-            CACornerMask.layerMaxXMaxYCorner
+            CACornerMask.layerMinXMaxYCorner
         ]
     }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

@@ -17,7 +17,7 @@ target 'MapTalk' do
   pod 'GooglePlaces'
   pod 'Kingfisher', '~> 4.0'
   pod 'RAMAnimatedTabBarController'
-  
+  pod 'IQKeyboardManagerSwift'
 
 #  pod 'SDWebImage'
 #  pod 'RAMAnimatedTabBarController'

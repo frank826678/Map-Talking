@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="118" id="h9g-62-0Ua" customClass="ChatImageTableViewCell" customModule="MapTalk" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="309" height="141"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="h9g-62-0Ua" id="eEZ-7H-YZB">
+                <rect key="frame" x="0.0" y="0.0" width="309" height="140.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GTV-ll-e5v">
+                        <rect key="frame" x="0.0" y="0.0" width="309" height="140.5"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PVl-Pd-RE8">
+                                <rect key="frame" x="10" y="80" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="8tZ-BA-Gay"/>
+                                    <constraint firstAttribute="width" constant="50" id="He2-mU-i0A"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_image" translatesAutoresizingMaskIntoConstraints="NO" id="HRf-qJ-K3x">
+                                <rect key="frame" x="70" y="10" width="160" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="4Sw-6X-mMG"/>
+                                    <constraint firstAttribute="height" constant="120" id="QvW-It-pZs"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="HRf-qJ-K3x" firstAttribute="top" secondItem="GTV-ll-e5v" secondAttribute="top" constant="10" id="58J-He-kNo"/>
+                            <constraint firstItem="HRf-qJ-K3x" firstAttribute="bottom" secondItem="PVl-Pd-RE8" secondAttribute="bottom" id="6dy-kY-52i"/>
+                            <constraint firstItem="HRf-qJ-K3x" firstAttribute="leading" secondItem="PVl-Pd-RE8" secondAttribute="trailing" constant="10" id="P8W-Kd-Ri3"/>
+                            <constraint firstAttribute="bottom" secondItem="HRf-qJ-K3x" secondAttribute="bottom" constant="10" id="VtR-wU-xFj"/>
+                            <constraint firstItem="PVl-Pd-RE8" firstAttribute="leading" secondItem="GTV-ll-e5v" secondAttribute="leading" constant="10" id="c1M-Ab-g17"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="GTV-ll-e5v" secondAttribute="bottom" id="1EK-1S-vg2"/>
+                    <constraint firstItem="GTV-ll-e5v" firstAttribute="leading" secondItem="eEZ-7H-YZB" secondAttribute="leading" id="96s-CJ-3Ju"/>
+                    <constraint firstAttribute="trailing" secondItem="GTV-ll-e5v" secondAttribute="trailing" id="DNN-DL-voX"/>
+                    <constraint firstItem="GTV-ll-e5v" firstAttribute="top" secondItem="eEZ-7H-YZB" secondAttribute="top" id="Nl8-u2-Ibu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="M2x-Q2-K78"/>
+            <connections>
+                <outlet property="messageImageView" destination="HRf-qJ-K3x" id="C5h-r1-1Ck"/>
+                <outlet property="userImage" destination="PVl-Pd-RE8" id="f62-wP-dhP"/>
+            </connections>
+            <point key="canvasLocation" x="88.5" y="139.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Login_image" width="414" height="736"/>
+    </resources>
+</document>

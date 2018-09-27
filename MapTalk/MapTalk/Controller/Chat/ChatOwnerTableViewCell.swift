@@ -9,10 +9,21 @@
 import UIKit
 
 class ChatOwnerTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var messageBody: UILabel!
+    
+    @IBOutlet weak var messageBg: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        messageBg.layer.cornerRadius = 15.0
+        
+        messageBg.layer.maskedCorners = [
+            CACornerMask.layerMinXMinYCorner,
+            CACornerMask.layerMaxXMinYCorner,
+            CACornerMask.layerMinXMaxYCorner
+        ]
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

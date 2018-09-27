@@ -19,6 +19,13 @@
 		01701AF9215C5C4E0074B0B9 /* ChatDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01701AF7215C5C4E0074B0B9 /* ChatDetailTableViewCell.xib */; };
 		01701AFC215C5DEB0074B0B9 /* ChatOwnerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01701AFA215C5DEB0074B0B9 /* ChatOwnerTableViewCell.swift */; };
 		01701AFD215C5DEB0074B0B9 /* ChatOwnerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01701AFB215C5DEB0074B0B9 /* ChatOwnerTableViewCell.xib */; };
+		01701AFF215C7E1B0074B0B9 /* ChatDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01701AFE215C7E1B0074B0B9 /* ChatDetailViewController.swift */; };
+		01701B03215C7F5F0074B0B9 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01701B02215C7F5F0074B0B9 /* PhotoViewController.swift */; };
+		01701B06215C88EF0074B0B9 /* ChatImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01701B04215C88EF0074B0B9 /* ChatImageTableViewCell.swift */; };
+		01701B07215C88EF0074B0B9 /* ChatImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01701B05215C88EF0074B0B9 /* ChatImageTableViewCell.xib */; };
+		01701B0A215C89140074B0B9 /* ChatImageOwnerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01701B08215C89140074B0B9 /* ChatImageOwnerTableViewCell.swift */; };
+		01701B0B215C89140074B0B9 /* ChatImageOwnerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01701B09215C89140074B0B9 /* ChatImageOwnerTableViewCell.xib */; };
+		01701B0D215C8A280074B0B9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01701B0C215C8A280074B0B9 /* Message.swift */; };
 		01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3412151FEA100D23871 /* AppDelegate.swift */; };
 		01EBF3442151FEA200D23871 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3432151FEA200D23871 /* LoginViewController.swift */; };
 		01EBF3472151FEA200D23871 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01EBF3452151FEA200D23871 /* Login.storyboard */; };
@@ -50,6 +57,13 @@
 		01701AF7215C5C4E0074B0B9 /* ChatDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatDetailTableViewCell.xib; sourceTree = "<group>"; };
 		01701AFA215C5DEB0074B0B9 /* ChatOwnerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatOwnerTableViewCell.swift; sourceTree = "<group>"; };
 		01701AFB215C5DEB0074B0B9 /* ChatOwnerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatOwnerTableViewCell.xib; sourceTree = "<group>"; };
+		01701AFE215C7E1B0074B0B9 /* ChatDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailViewController.swift; sourceTree = "<group>"; };
+		01701B02215C7F5F0074B0B9 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		01701B04215C88EF0074B0B9 /* ChatImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageTableViewCell.swift; sourceTree = "<group>"; };
+		01701B05215C88EF0074B0B9 /* ChatImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageTableViewCell.xib; sourceTree = "<group>"; };
+		01701B08215C89140074B0B9 /* ChatImageOwnerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageOwnerTableViewCell.swift; sourceTree = "<group>"; };
+		01701B09215C89140074B0B9 /* ChatImageOwnerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageOwnerTableViewCell.xib; sourceTree = "<group>"; };
+		01701B0C215C8A280074B0B9 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		01EBF33E2151FEA100D23871 /* MapTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01EBF3412151FEA100D23871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01EBF3432151FEA200D23871 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -104,13 +118,20 @@
 		01701AEF215BBE3E0074B0B9 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				01701B0C215C8A280074B0B9 /* Message.swift */,
 				01701AF0215BC6930074B0B9 /* ChatViewController.swift */,
+				01701AFE215C7E1B0074B0B9 /* ChatDetailViewController.swift */,
+				01701B02215C7F5F0074B0B9 /* PhotoViewController.swift */,
 				01701AF2215BC6BE0074B0B9 /* ChatTableViewCell.swift */,
 				01701AF3215BC6BE0074B0B9 /* ChatTableViewCell.xib */,
 				01701AF6215C5C4E0074B0B9 /* ChatDetailTableViewCell.swift */,
 				01701AF7215C5C4E0074B0B9 /* ChatDetailTableViewCell.xib */,
 				01701AFA215C5DEB0074B0B9 /* ChatOwnerTableViewCell.swift */,
 				01701AFB215C5DEB0074B0B9 /* ChatOwnerTableViewCell.xib */,
+				01701B04215C88EF0074B0B9 /* ChatImageTableViewCell.swift */,
+				01701B05215C88EF0074B0B9 /* ChatImageTableViewCell.xib */,
+				01701B08215C89140074B0B9 /* ChatImageOwnerTableViewCell.swift */,
+				01701B09215C89140074B0B9 /* ChatImageOwnerTableViewCell.xib */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -305,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01EBF34C2151FEA500D23871 /* LaunchScreen.storyboard in Resources */,
+				01701B07215C88EF0074B0B9 /* ChatImageTableViewCell.xib in Resources */,
 				01701AF5215BC6BE0074B0B9 /* ChatTableViewCell.xib in Resources */,
 				01EBF3672153483F00D23871 /* Main.storyboard in Resources */,
 				016A513A2159F54F00AB2745 /* Profile.storyboard in Resources */,
@@ -314,6 +336,7 @@
 				01EBF3472151FEA200D23871 /* Login.storyboard in Resources */,
 				01701AFD215C5DEB0074B0B9 /* ChatOwnerTableViewCell.xib in Resources */,
 				01EBF369215353C600D23871 /* Map.storyboard in Resources */,
+				01701B0B215C89140074B0B9 /* ChatImageOwnerTableViewCell.xib in Resources */,
 				016A51372159F50A00AB2745 /* Message.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,15 +441,20 @@
 				01EBF37121546D2500D23871 /* FirebaseManager.swift in Sources */,
 				01FEB5E92157A86E00D57B47 /* UserLocation.swift in Sources */,
 				01EBF3592152824000D23871 /* FacebookManager.swift in Sources */,
+				01701B03215C7F5F0074B0B9 /* PhotoViewController.swift in Sources */,
+				01701B0D215C8A280074B0B9 /* Message.swift in Sources */,
 				01701AFC215C5DEB0074B0B9 /* ChatOwnerTableViewCell.swift in Sources */,
 				01EBF37321546F2600D23871 /* UIAlertController.swift in Sources */,
 				01701AEE215B39A00074B0B9 /* ErrorManager.swift in Sources */,
 				01701AEB215A72760074B0B9 /* TabBarColor.swift in Sources */,
+				01701B06215C88EF0074B0B9 /* ChatImageTableViewCell.swift in Sources */,
 				01EBF3442151FEA200D23871 /* LoginViewController.swift in Sources */,
 				01701AF1215BC6930074B0B9 /* ChatViewController.swift in Sources */,
 				01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */,
 				01701AF4215BC6BE0074B0B9 /* ChatTableViewCell.swift in Sources */,
+				01701B0A215C89140074B0B9 /* ChatImageOwnerTableViewCell.swift in Sources */,
 				016A51352159DCBA00AB2745 /* TabBarViewController.swift in Sources */,
+				01701AFF215C7E1B0074B0B9 /* ChatDetailViewController.swift in Sources */,
 				01701AF8215C5C4E0074B0B9 /* ChatDetailTableViewCell.swift in Sources */,
 				01EBF36E215357B000D23871 /* MapViewController.swift in Sources */,
 			);
