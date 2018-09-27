@@ -20,29 +20,32 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="knJ-Cf-MT3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otg-qD-yJC">
-                                <rect key="frame" x="315" y="597" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.76470588235294112" green="0.47450980392156861" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1k-e6-6CM">
+                                <rect key="frame" x="305" y="587" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="ekF-jB-rmK"/>
-                                    <constraint firstAttribute="width" constant="40" id="f1O-2G-425"/>
+                                    <constraint firstAttribute="height" constant="50" id="f9P-rr-1YU"/>
+                                    <constraint firstAttribute="width" constant="50" id="hzC-cM-6cJ"/>
                                 </constraints>
-                                <state key="normal" image="icons8-near-me-30"/>
+                                <state key="normal" image="new2-near-me-40"/>
+                                <connections>
+                                    <action selector="locationButtonClick:" destination="R81-B1-rel" eventType="touchUpInside" id="uP8-Xh-LE5"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="trailing" secondItem="iLF-qr-FYc" secondAttribute="trailing" id="CQN-uu-MTc"/>
-                            <constraint firstItem="iLF-qr-FYc" firstAttribute="trailing" secondItem="Otg-qD-yJC" secondAttribute="trailing" constant="20" id="CwQ-Gw-2e4"/>
-                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="Otg-qD-yJC" secondAttribute="bottom" constant="30" id="QOg-5h-Mss"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="leading" secondItem="iLF-qr-FYc" secondAttribute="leading" id="c6E-St-DGa"/>
+                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="b1k-e6-6CM" secondAttribute="bottom" constant="30" id="ehY-Rn-o0B"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="bottom" secondItem="iLF-qr-FYc" secondAttribute="bottom" id="gcn-9p-hk5"/>
+                            <constraint firstItem="iLF-qr-FYc" firstAttribute="trailing" secondItem="b1k-e6-6CM" secondAttribute="trailing" constant="20" id="pyQ-30-qj2"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="top" secondItem="W1b-SP-zxy" secondAttribute="top" id="wls-tf-sE3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iLF-qr-FYc"/>
                     </view>
                     <connections>
-                        <outlet property="location" destination="Otg-qD-yJC" id="J8Z-hG-YME"/>
+                        <outlet property="location" destination="b1k-e6-6CM" id="V8t-z7-VmS"/>
                         <outlet property="mapView" destination="knJ-Cf-MT3" id="R6I-XS-64A"/>
                     </connections>
                 </viewController>
@@ -50,8 +53,23 @@
             </objects>
             <point key="canvasLocation" x="-1732" y="897.30134932533736"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="ewR-4w-bUe">
+            <objects>
+                <viewController id="PJ7-HV-k74" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5RA-be-4zA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="WG5-IN-pWz"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W8v-Ck-qbD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-906" y="897"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="icons8-near-me-30" width="30" height="30"/>
+        <image name="new2-near-me-40" width="40" height="40"/>
     </resources>
 </document>

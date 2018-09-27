@@ -33,7 +33,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var location: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
-//    var locationManager = CLLocationManager()
+    var locationManager = CLLocationManager()
     
     var refference: DatabaseReference!
     var userName: String!
@@ -60,10 +60,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         userName = Auth.auth().currentUser?.displayName
         
-//        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
         
         dataBaseLocation()
         
@@ -239,7 +239,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //設定照片圓角
             imageView.clipsToBounds = true
             imageView.layer.cornerRadius = 25
-            imageView.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+            imageView.layer.borderColor = #colorLiteral(red: 0, green: 0.5690457821, blue: 0.5746168494, alpha: 1)
             imageView.layer.borderWidth = 4
             
             //增加三角形圖案
@@ -266,7 +266,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 annotationLabel.text = "媽 我上地圖了 Ya"
             }
             
-            annotationLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            annotationLabel.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
             annotationLabel.layer.cornerRadius = 15
             annotationLabel.clipsToBounds = true
             
@@ -291,10 +291,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             annotationName.clipsToBounds = true
             pinView.addSubview(annotationName)
             
-            pinView.clusteringIdentifier = pinIdent
+           // pinView.clusteringIdentifier = pinIdent
             return pinView
         }
     }
+    
+//    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
+//        let test = MKClusterAnnotation(memberAnnotations: memberAnnotations)
+//        test.title = "Emojis"
+//        test.subtitle = nil
+//        return test
+//    }
+//
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier, for: annotation)
+//        annotationView.clusteringIdentifier = "identifier"
+//        return annotationView
+//    }
+
     
     
     func saveSelfLocation(latitude: Double, longitude: Double) {
@@ -381,8 +395,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func setIcon() {
         
         location.clipsToBounds = true
-        location.layer.cornerRadius = 20
+        location.layer.cornerRadius = 25
         
     }
     
 }
+
+//extension MapViewController: ClusterDelegate {
+//
+//    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> ClusterAnnotation {
+//        let annotation = ClusterAnnotation(memberAnnotations: memberAnnotations)
+//        annotation.title = "Emojis"
+//        return annotation
+//    }
+//
+//}
+
+//extension MapViewController: MKMapViewDelegate {
+//
+//    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
+//        let test = MKClusterAnnotation(memberAnnotations: memberAnnotations)
+//        test.title = "Emojis"
+//        test.subtitle = nil
+//        return test
+//    }
+//}

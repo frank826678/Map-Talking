@@ -64,11 +64,11 @@ private enum Tab {
             
             //case .article: return #imageLiteral(resourceName: "tab_main_normal")
             
-        case .chat: return #imageLiteral(resourceName: "icons8-speech-bubble-30")
+        case .chat: return #imageLiteral(resourceName: "new2-chat-bubble-30")
 
-        case .map: return #imageLiteral(resourceName: "icons8-asia-30")
+        case .map: return #imageLiteral(resourceName: "new2-europe-30")
 
-        case .profile: return #imageLiteral(resourceName: "icons8-user-30")
+        case .profile: return #imageLiteral(resourceName: "new2-male-user-30")
             
         
             
@@ -84,11 +84,11 @@ private enum Tab {
             //        case .article: return #imageLiteral(resourceName: "tab_main_normal").withRenderingMode(.alwaysTemplate)
         //
             
-        case .chat: return #imageLiteral(resourceName: "icons8-speech-bubble-30").withRenderingMode(.alwaysTemplate)
+        case .chat: return #imageLiteral(resourceName: "new2-chat-bubble-30").withRenderingMode(.alwaysTemplate)
 
-        case .map: return #imageLiteral(resourceName: "icons8-asia-30").withRenderingMode(.alwaysTemplate)
+        case .map: return #imageLiteral(resourceName: "new2-europe-30").withRenderingMode(.alwaysTemplate)
 
-        case .profile: return #imageLiteral(resourceName: "icons8-user-30").withRenderingMode(.alwaysTemplate)
+        case .profile: return #imageLiteral(resourceName: "new2-male-user-30").withRenderingMode(.alwaysTemplate)
             
             // case .arView: return #imageLiteral(resourceName: "arTab").withRenderingMode(.alwaysTemplate)
         }
@@ -96,6 +96,8 @@ private enum Tab {
 }
 
 class TabBarViewController: RAMAnimatedTabBarController {
+    
+    @IBOutlet weak var frankTabBar: UITabBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,10 +111,17 @@ class TabBarViewController: RAMAnimatedTabBarController {
                 var controllers: [UIViewController] = []
         
         //修改 tab bar 高度，沒作用
-        var tabFrame: CGRect = self.tabBar.frame
-        tabFrame.size.height = 80
-        tabFrame.origin.y = self.view.frame.size.height - 80
-        self.tabBar.frame = tabFrame
+       
+//        var tabFrame: CGRect = self.frankTabBar.frame
+//        tabFrame.size.height = 80
+//        tabFrame.origin.y = self.view.frame.size.height - 80
+//        self.frankTabBar.frame = tabFrame
+
+        
+//        var tabFrame: CGRect = self.tabBar.frame
+//        tabFrame.size.height = 80
+//        tabFrame.origin.y = self.view.frame.size.height - 80
+//        self.tabBar.frame = tabFrame
         
         
         //let layerGradient = CAGradientLayer()
@@ -129,22 +138,30 @@ class TabBarViewController: RAMAnimatedTabBarController {
             
             let item = RAMAnimatedTabBarItem(title: nil, image: tab.image(), selectedImage: tab.selectedImage())
             
+//            let itemSize = item.image?.size ?? CGSize(width: 30, height: 30)
+            
+            //item.selectedImage?.size.
+            
+//            item.t
+            
             //item.badgeValue = "5"
             item.badgeValue = "3"
             
             let animation = RAMBounceAnimation()
             //animation.iconSelectedColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
-            animation.iconSelectedColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            animation.iconSelectedColor = #colorLiteral(red: 0.1019607843, green: 0.4509803922, blue: 0.9098039216, alpha: 1)
             item.animation = animation
             
             item.imageInsets = UIEdgeInsets(
                 
-                top: -20, //8 or 6
+                top: 20, //8 or 6
                 left: 0,
-                bottom: 0, //-6
+                bottom: -8, //-6
                 right: 0
             
             )
+            //調整照片的 icon 在 tabbar 的高度
+            item.yOffSet = -4
             
             controller.tabBarItem = item
             
@@ -166,7 +183,9 @@ class TabBarViewController: RAMAnimatedTabBarController {
         
         //self.tabBar.layer.addSublayer(layerGradient)
         
-        self.tabBar.setup(width: self.view.bounds.width, height: self.view.bounds.height)
+        //tabbar 漸層
+        
+        //self.tabBar.setup(width: self.view.bounds.width, height: self.view.bounds.height)
         
 
         setViewControllers(controllers, animated: false)
