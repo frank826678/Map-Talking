@@ -79,6 +79,7 @@ PODS:
   - GoogleUtilities/Reachability (5.2.3):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.0)
+  - IQKeyboardManagerSwift (6.1.1)
   - Kingfisher (4.9.0)
   - leveldb-library (1.20)
   - nanopb (0.3.8):
@@ -97,6 +98,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - GoogleMaps
   - GooglePlaces
+  - IQKeyboardManagerSwift
   - Kingfisher (~> 4.0)
   - RAMAnimatedTabBarController
   - SwiftLint
@@ -119,6 +121,7 @@ SPEC REPOS:
     - GooglePlaces
     - GoogleUtilities
     - GTMSessionFetcher
+    - IQKeyboardManagerSwift
     - Kingfisher
     - leveldb-library
     - nanopb
@@ -142,12 +145,13 @@ SPEC CHECKSUMS:
   GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
   GoogleUtilities: 6f681e27050c5e130325e89fa0316dfca826f954
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
+  IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
   Kingfisher: 64539b51826b778206daa6ed815d12653caa69dd
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   RAMAnimatedTabBarController: 7e259e89b669c7bc833a6441c7d8fbfd6580f473
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 
-PODFILE CHECKSUM: 90c058cdcdb9c339b765e8a925fe1c67cc4df55c
+PODFILE CHECKSUM: de0fcfd4c2ec0a61d4237ad0f692405acfddb36c
 
 COCOAPODS: 1.5.3

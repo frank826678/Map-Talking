@@ -23,7 +23,7 @@
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgs-RA-vXI">
                                 <rect key="frame" x="238" y="10" width="62" height="45.5"/>
-                                <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.090196078431372548" green="0.52941176470588236" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="">
                                         <integer key="value" value="10"/>
@@ -62,7 +62,7 @@
                 <outlet property="messageBg" destination="Dgs-RA-vXI" id="zHU-YF-IOY"/>
                 <outlet property="messageBody" destination="cPy-yY-0Xv" id="Ydo-o9-GeQ"/>
             </connections>
-            <point key="canvasLocation" x="66" y="-42"/>
+            <point key="canvasLocation" x="272" y="-50"/>
         </tableViewCell>
     </objects>
 </document>

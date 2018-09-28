@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Me-jo-4zc">
                         <rect key="frame" x="0.0" y="0.0" width="309" height="140.5"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_image" translatesAutoresizingMaskIntoConstraints="NO" id="j6j-KY-4bt">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="underWater" translatesAutoresizingMaskIntoConstraints="NO" id="j6j-KY-4bt">
                                 <rect key="frame" x="129" y="10" width="160" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="Qj6-Ug-rL5"/>
@@ -52,6 +52,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Login_image" width="414" height="736"/>
+        <image name="underWater" width="800" height="600"/>
     </resources>
 </document>

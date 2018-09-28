@@ -64,6 +64,15 @@ class ChatDetailViewController: UIViewController {
         //END
     }
     
+    // MARK: - Action
+    
+    @IBAction func didTouchBackButton() {
+        
+        dismiss(animated: true
+            , completion: nil)
+//        self.navigationController?.popViewController(animated: true)
+    }
+    
     func registerCells() {
         
         chatDetailTableView.register(UINib(nibName: "ChatDetailTableViewCell", bundle: nil),
@@ -84,6 +93,20 @@ class ChatDetailViewController: UIViewController {
         
     }
     //END
+    
+    func setBackground() {
+        
+        messageBorder.layer.borderWidth = 1
+        messageBorder.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        
+        backgroundView.layer.borderWidth = 1
+        backgroundView.layer.borderColor = #colorLiteral(red: 0.862745098, green: 0.862745098, blue: 0.862745098, alpha: 1) // FB message borderColor
+
+        backgroundView.layer.shadowColor = #colorLiteral(red: 0.862745098, green: 0.862745098, blue: 0.862745098, alpha: 1) // FB message borderColor
+        backgroundView.layer.shadowOpacity = 1.0
+        backgroundView.layer.shadowRadius = 10.0
+        backgroundView.layer.shadowOffset = CGSize(width: 0, height: 0 )
+    }
     
     func getMessages() {
         
@@ -217,6 +240,14 @@ extension ChatDetailViewController: UITableViewDataSource {
                     
                    // cell.messageImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
                     
+                    cell.messageImageView.kf.setImage(with: URL(string: imageUrl))
+                    
+//                    if let userImage = annotation?.userImage {
+//                        imageView.kf.setImage(with: URL(string: userImage))
+//                    } else {
+//                        imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+//                    }
+                    
                     return cell
                 }
             }
@@ -225,7 +256,7 @@ extension ChatDetailViewController: UITableViewDataSource {
                 withIdentifier: "ChatOwner", for: indexPath)
                 as? ChatOwnerTableViewCell {
                 
-              //  cell.messageBody.text = message.content
+                cell.messageBody.text = message.content
                 
                 return cell
             }
@@ -237,6 +268,15 @@ extension ChatDetailViewController: UITableViewDataSource {
                 if let cell = tableView.dequeueReusableCell(
                     withIdentifier: "ChatImage", for: indexPath)
                     as? ChatImageTableViewCell {
+                    
+                    cell.messageImageView.kf.setImage(with: URL(string: imageUrl))
+                    
+                    if let photoString = message.senderPhoto {
+                        cell.userImage.kf.setImage(with: URL(string: photoString))
+                    } else {
+                        cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+                    }
+                    
                     
 //                    cell.messageImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
 //
@@ -252,14 +292,15 @@ extension ChatDetailViewController: UITableViewDataSource {
             
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: "Chat", for: indexPath)
-                as? ChatTableViewCell {
+                as? ChatDetailTableViewCell {
                 
-//                cell.messageBody.text = message.content
-//                if let photoString = message.senderPhoto {
-//                    cell.userImage.sd_setImage(with: URL(string: photoString), completed: nil)
-//                } else {
-//                    cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
-//                }
+                cell.messageBody.text = message.content
+                if let photoString = message.senderPhoto {
+                    cell.userImage.kf.setImage(with: URL(string: photoString))
+                    //cell.userImage.sd_setImage(with: URL(string: photoString), completed: nil)
+                } else {
+                    cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+                }
                 
                 return cell
             }

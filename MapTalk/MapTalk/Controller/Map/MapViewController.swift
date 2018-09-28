@@ -239,7 +239,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //設定照片圓角
             imageView.clipsToBounds = true
             imageView.layer.cornerRadius = 25
-            imageView.layer.borderColor = #colorLiteral(red: 0, green: 0.5690457821, blue: 0.5746168494, alpha: 1)
+            imageView.layer.borderColor = #colorLiteral(red: 0.9940910533, green: 0.5045479749, blue: 0.8829658057, alpha: 1)
             imageView.layer.borderWidth = 4
             
             //增加三角形圖案

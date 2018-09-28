@@ -12,6 +12,7 @@ import FBSDKCoreKit
 import Firebase
 import GoogleMaps
 import GooglePlaces
+import IQKeyboardManagerSwift
 
 
 @UIApplicationMain
@@ -45,6 +46,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyDUQVZIOfdopcNAHEgv0mJY3VlEYtAaLOc")
         
         // OLD GMSPlacesClient.provideAPIKey("AIzaSyDDFveJ8LPRLCJKfmQqU-rBlbY7MPXYoUw")
+        
+        //鍵盤第三方
+        IQKeyboardManager.shared.enable = true
+        
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+
         
         //switch page
         if UserDefaults.standard.value(forKey: FirebaseType.uuid.rawValue) != nil {

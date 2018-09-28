@@ -18,11 +18,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="309" height="140.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GTV-ll-e5v">
-                        <rect key="frame" x="0.0" y="0.0" width="309" height="140.5"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GTV-ll-e5v">
+                        <rect key="frame" x="0.0" y="0.0" width="309" height="145.5"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PVl-Pd-RE8">
-                                <rect key="frame" x="10" y="80" width="50" height="50"/>
+                                <rect key="frame" x="10" y="85.5" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="8tZ-BA-Gay"/>
                                     <constraint firstAttribute="width" constant="50" id="He2-mU-i0A"/>
@@ -33,21 +33,21 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_image" translatesAutoresizingMaskIntoConstraints="NO" id="HRf-qJ-K3x">
-                                <rect key="frame" x="70" y="10" width="160" height="120"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="underWater" translatesAutoresizingMaskIntoConstraints="NO" id="HRf-qJ-K3x">
+                                <rect key="frame" x="70" y="10.5" width="160" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="4Sw-6X-mMG"/>
-                                    <constraint firstAttribute="height" constant="120" id="QvW-It-pZs"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="HRf-qJ-K3x" secondAttribute="bottom" constant="10" id="3aQ-F1-iDH"/>
                             <constraint firstItem="HRf-qJ-K3x" firstAttribute="top" secondItem="GTV-ll-e5v" secondAttribute="top" constant="10" id="58J-He-kNo"/>
                             <constraint firstItem="HRf-qJ-K3x" firstAttribute="bottom" secondItem="PVl-Pd-RE8" secondAttribute="bottom" id="6dy-kY-52i"/>
                             <constraint firstItem="HRf-qJ-K3x" firstAttribute="leading" secondItem="PVl-Pd-RE8" secondAttribute="trailing" constant="10" id="P8W-Kd-Ri3"/>
-                            <constraint firstAttribute="bottom" secondItem="HRf-qJ-K3x" secondAttribute="bottom" constant="10" id="VtR-wU-xFj"/>
                             <constraint firstItem="PVl-Pd-RE8" firstAttribute="leading" secondItem="GTV-ll-e5v" secondAttribute="leading" constant="10" id="c1M-Ab-g17"/>
+                            <constraint firstAttribute="height" constant="145" id="fUU-sl-QdC"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -67,6 +67,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Login_image" width="414" height="736"/>
+        <image name="underWater" width="800" height="600"/>
     </resources>
 </document>
