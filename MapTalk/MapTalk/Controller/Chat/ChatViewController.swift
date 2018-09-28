@@ -26,10 +26,14 @@ class ChatViewController: UIViewController {
         chatTableView.register(UINib(nibName: "ChatTableViewCell", bundle: nil),
                                forCellReuseIdentifier: "Chat")
         
+     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
         
     }
     
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let identifier = segue.identifier else { return }

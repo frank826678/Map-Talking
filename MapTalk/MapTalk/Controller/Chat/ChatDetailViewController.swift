@@ -45,6 +45,7 @@ class ChatDetailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        navigationController?.setNavigationBarHidden(false, animated: true)
         registerCells()
         
         chatDetailTableView.delegate = self
@@ -52,7 +53,7 @@ class ChatDetailViewController: UIViewController {
         
         ref = Database.database().reference()
 
-        //setBackground()
+        setBackground()
         
         getMessages()
         
@@ -98,6 +99,9 @@ class ChatDetailViewController: UIViewController {
         
         messageBorder.layer.borderWidth = 1
         messageBorder.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        
+        messageBorder.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1) // FB message borderColor
+        messageBorder.layer.borderWidth = 1
         
         backgroundView.layer.borderWidth = 1
         backgroundView.layer.borderColor = #colorLiteral(red: 0.862745098, green: 0.862745098, blue: 0.862745098, alpha: 1) // FB message borderColor
