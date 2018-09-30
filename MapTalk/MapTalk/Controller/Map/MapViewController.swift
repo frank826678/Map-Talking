@@ -247,14 +247,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //設定照片圓角
             imageView.clipsToBounds = true
             imageView.layer.cornerRadius = 25
-            imageView.layer.borderColor = #colorLiteral(red: 0.9940910533, green: 0.5045479749, blue: 0.8829658057, alpha: 1)
+            imageView.layer.borderColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
             imageView.layer.borderWidth = 4
             
             //增加三角形圖案
             let triangle = UILabel(frame: CGRect(x: 0, y: 45, width: 50, height: 10)) // 50, 10
             triangle.text = "▾"
             triangle.font = UIFont.systemFont(ofSize: 24) //24
-            triangle.textColor = #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1)
+            //triangle.textColor = #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1)
+            triangle.textColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
+            
             triangle.textAlignment = .center
             
             pinView.addSubview(imageView)

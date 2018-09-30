@@ -107,6 +107,35 @@ extension ProfileViewController: UITableViewDataSource{
         return UITableViewCell()
 
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            //configure action when tap cell 1
+            print("點了編輯資料")
+            performSegue(
+                withIdentifier: String(describing: EditViewController.self),
+                sender: indexPath
+            )
+
+        } else if indexPath.row == 1 {
+            //configure action when tap cell 1
+             print("點了獲取金幣")
+            performSegue(
+                withIdentifier: String(describing: ADCoinViewController.self),
+                sender: indexPath
+            )
+
+        } else if indexPath.row == 2 {
+            //configure action when tap cell 1
+            print("點了設定")
+
+        } else if indexPath.row == 3 {
+            //configure action when tap cell 1
+            print("點了聯絡我們")
+
+        }
+        
+    }
 }
 
 extension ProfileViewController: UITableViewDelegate {}

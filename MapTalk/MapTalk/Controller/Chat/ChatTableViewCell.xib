@@ -40,10 +40,11 @@
                             <constraint firstAttribute="height" constant="20" id="I1r-bl-yTQ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" red="0.088707479340000006" green="0.82153077740000002" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="shK-rg-djc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5.5" id="Aev-8N-k7Z"/>
                     <constraint firstAttribute="trailing" secondItem="Zre-65-s6h" secondAttribute="trailing" constant="80" id="F2Y-3y-ZQG"/>

@@ -159,7 +159,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最大距離" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ywf-IJ-5Ze">
-                                <rect key="frame" x="10" y="205" width="82" height="24"/>
+                                <rect key="frame" x="10" y="192" width="82" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="21m-mG-WEw"/>
                                 </constraints>
@@ -176,7 +176,7 @@
                                 </segments>
                             </segmentedControl>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="18" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Sca-4l-XQL">
-                                <rect key="frame" x="38" y="155" width="299" height="31"/>
+                                <rect key="frame" x="38" y="152" width="299" height="31"/>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18 - 30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eE-3r-gKw">
                                 <rect key="frame" x="300.5" y="116" width="64.5" height="24"/>
@@ -188,10 +188,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15" minValue="1" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="caY-b2-gyP">
-                                <rect key="frame" x="38" y="244" width="299" height="31"/>
+                                <rect key="frame" x="38" y="228" width="299" height="31"/>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 公里" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyB-G7-iih">
-                                <rect key="frame" x="298" y="205" width="67" height="24"/>
+                                <rect key="frame" x="298" y="192" width="67" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="WcD-NG-wUB"/>
                                 </constraints>
@@ -203,11 +203,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="SMM-3l-Xn3" firstAttribute="centerX" secondItem="Hzw-Qd-RrU" secondAttribute="centerX" id="1lQ-ij-PhA"/>
-                            <constraint firstItem="Mj3-ut-2Je" firstAttribute="top" secondItem="caY-b2-gyP" secondAttribute="bottom" constant="35" id="4ES-eD-OpI"/>
                             <constraint firstItem="GOl-sb-zog" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" id="6bc-gI-7Dx"/>
                             <constraint firstItem="SMM-3l-Xn3" firstAttribute="top" secondItem="3dZ-SK-vKl" secondAttribute="bottom" constant="10" id="8P9-F9-5rW"/>
                             <constraint firstItem="V3n-i0-uK6" firstAttribute="top" secondItem="0hV-vY-Zad" secondAttribute="top" constant="10" id="9ea-b4-nUe"/>
-                            <constraint firstItem="caY-b2-gyP" firstAttribute="top" secondItem="ywf-IJ-5Ze" secondAttribute="bottom" constant="15" id="COp-RT-4s7"/>
+                            <constraint firstItem="caY-b2-gyP" firstAttribute="top" secondItem="ywf-IJ-5Ze" secondAttribute="bottom" constant="12" id="COp-RT-4s7"/>
                             <constraint firstItem="VT1-su-UkK" firstAttribute="top" secondItem="0hV-vY-Zad" secondAttribute="top" constant="10" id="EBy-tz-cv5"/>
                             <constraint firstItem="caY-b2-gyP" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" constant="40" id="J1Q-px-KL8"/>
                             <constraint firstItem="V3n-i0-uK6" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" constant="10" id="KuK-Cy-jeN"/>
@@ -216,15 +215,15 @@
                             <constraint firstItem="3dZ-SK-vKl" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" constant="10" id="TDr-iv-FEY"/>
                             <constraint firstItem="VT1-su-UkK" firstAttribute="leading" secondItem="V3n-i0-uK6" secondAttribute="trailing" constant="10" id="Tph-hm-74q"/>
                             <constraint firstItem="l81-OK-dvh" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" constant="10" id="Ttl-0l-PmE"/>
-                            <constraint firstItem="Sca-4l-XQL" firstAttribute="top" secondItem="l81-OK-dvh" secondAttribute="bottom" constant="15" id="UR6-5j-zOU"/>
+                            <constraint firstItem="Sca-4l-XQL" firstAttribute="top" secondItem="l81-OK-dvh" secondAttribute="bottom" constant="12" id="UR6-5j-zOU"/>
                             <constraint firstItem="0hV-vY-Zad" firstAttribute="trailing" secondItem="Sca-4l-XQL" secondAttribute="trailing" constant="40" id="Vob-9W-86N"/>
                             <constraint firstItem="0hV-vY-Zad" firstAttribute="trailing" secondItem="VT1-su-UkK" secondAttribute="trailing" constant="10" id="XV6-Fy-25u"/>
-                            <constraint firstItem="ywf-IJ-5Ze" firstAttribute="top" secondItem="Sca-4l-XQL" secondAttribute="bottom" constant="20" id="abE-eR-Ufa"/>
+                            <constraint firstItem="ywf-IJ-5Ze" firstAttribute="top" secondItem="Sca-4l-XQL" secondAttribute="bottom" constant="10" id="abE-eR-Ufa"/>
                             <constraint firstItem="0hV-vY-Zad" firstAttribute="trailing" secondItem="caY-b2-gyP" secondAttribute="trailing" constant="40" id="cds-v3-LYB"/>
                             <constraint firstItem="Sca-4l-XQL" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" constant="40" id="cz7-mY-goZ"/>
                             <constraint firstItem="0hV-vY-Zad" firstAttribute="bottom" secondItem="SMM-3l-Xn3" secondAttribute="bottom" id="dJ9-4j-Zra"/>
                             <constraint firstItem="0hV-vY-Zad" firstAttribute="trailing" secondItem="PyB-G7-iih" secondAttribute="trailing" constant="10" id="fMz-Rh-ArI"/>
-                            <constraint firstItem="caY-b2-gyP" firstAttribute="top" secondItem="PyB-G7-iih" secondAttribute="bottom" constant="15" id="hfY-TM-MzI"/>
+                            <constraint firstItem="caY-b2-gyP" firstAttribute="top" secondItem="PyB-G7-iih" secondAttribute="bottom" constant="12" id="hfY-TM-MzI"/>
                             <constraint firstItem="0hV-vY-Zad" firstAttribute="trailing" secondItem="4eE-3r-gKw" secondAttribute="trailing" constant="10" id="iKA-Kk-LrT"/>
                             <constraint firstItem="Mj3-ut-2Je" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" constant="10" id="mVm-0J-awO"/>
                             <constraint firstItem="ywf-IJ-5Ze" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" constant="10" id="pea-fM-i26"/>
@@ -232,7 +231,7 @@
                             <constraint firstItem="GOl-sb-zog" firstAttribute="top" secondItem="Mj3-ut-2Je" secondAttribute="bottom" constant="10" id="vRk-Jg-Ige"/>
                             <constraint firstItem="l81-OK-dvh" firstAttribute="top" secondItem="V3n-i0-uK6" secondAttribute="bottom" constant="15" id="wfI-6C-qJU"/>
                             <constraint firstItem="0hV-vY-Zad" firstAttribute="trailing" secondItem="SMM-3l-Xn3" secondAttribute="trailing" id="xrE-5S-xh7"/>
-                            <constraint firstItem="Sca-4l-XQL" firstAttribute="top" secondItem="4eE-3r-gKw" secondAttribute="bottom" constant="15" id="yYj-04-Jhq"/>
+                            <constraint firstItem="Sca-4l-XQL" firstAttribute="top" secondItem="4eE-3r-gKw" secondAttribute="bottom" constant="12" id="yYj-04-Jhq"/>
                             <constraint firstItem="SMM-3l-Xn3" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" id="yra-5X-jsd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0hV-vY-Zad"/>

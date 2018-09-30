@@ -21,9 +21,9 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mSX-cw-d8b">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="65.5"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2g-jP-qi8">
+                            <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2g-jP-qi8">
                                 <rect key="frame" x="70" y="10" width="62" height="45.5"/>
-                                <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.99607843137254903" green="0.83137254901960789" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="">
                                         <integer key="value" value="10"/>
@@ -49,7 +49,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.088707479340000006" green="0.82153077740000002" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="N2g-jP-qi8" firstAttribute="centerY" secondItem="HYe-Fi-Rua" secondAttribute="centerY" id="0Jf-xp-reI"/>
                             <constraint firstItem="HYe-Fi-Rua" firstAttribute="top" secondItem="mSX-cw-d8b" secondAttribute="top" constant="20" id="2Pu-8K-80X"/>
@@ -65,6 +65,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" red="0.088707479340000006" green="0.82153077740000002" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="mSX-cw-d8b" secondAttribute="trailing" id="11q-Mp-GnL"/>
                     <constraint firstAttribute="bottom" secondItem="mSX-cw-d8b" secondAttribute="bottom" id="LgF-as-eR4"/>

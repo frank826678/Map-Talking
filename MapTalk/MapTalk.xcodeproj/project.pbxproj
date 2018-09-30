@@ -32,6 +32,10 @@
 		0177E2A22160CA630038F29A /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2A12160CA630038F29A /* FilterViewController.swift */; };
 		0177E2A52160D3CA0038F29A /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2A32160D3CA0038F29A /* FilterCollectionViewCell.swift */; };
 		0177E2A62160D3CA0038F29A /* FilterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0177E2A42160D3CA0038F29A /* FilterCollectionViewCell.xib */; };
+		0177E2A821612F9B0038F29A /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2A721612F9B0038F29A /* EditViewController.swift */; };
+		0177E2AC216131B50038F29A /* ADCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2AB216131B50038F29A /* ADCoinViewController.swift */; };
+		0177E2AE216131E30038F29A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2AD216131E30038F29A /* SettingViewController.swift */; };
+		0177E2B0216131F60038F29A /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2AF216131F60038F29A /* ContactUsViewController.swift */; };
 		01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3412151FEA100D23871 /* AppDelegate.swift */; };
 		01EBF3442151FEA200D23871 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3432151FEA200D23871 /* LoginViewController.swift */; };
 		01EBF3472151FEA200D23871 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01EBF3452151FEA200D23871 /* Login.storyboard */; };
@@ -76,6 +80,10 @@
 		0177E2A12160CA630038F29A /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		0177E2A32160D3CA0038F29A /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
 		0177E2A42160D3CA0038F29A /* FilterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterCollectionViewCell.xib; sourceTree = "<group>"; };
+		0177E2A721612F9B0038F29A /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		0177E2AB216131B50038F29A /* ADCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCoinViewController.swift; sourceTree = "<group>"; };
+		0177E2AD216131E30038F29A /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		0177E2AF216131F60038F29A /* ContactUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsViewController.swift; sourceTree = "<group>"; };
 		01EBF33E2151FEA100D23871 /* MapTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01EBF3412151FEA100D23871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01EBF3432151FEA200D23871 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +162,10 @@
 				0177E29B215FCB590038F29A /* ProfileViewController.swift */,
 				0177E29D216095EE0038F29A /* ProfileTableViewCell.swift */,
 				0177E29E216095EE0038F29A /* ProfileTableViewCell.xib */,
+				0177E2A721612F9B0038F29A /* EditViewController.swift */,
+				0177E2AB216131B50038F29A /* ADCoinViewController.swift */,
+				0177E2AD216131E30038F29A /* SettingViewController.swift */,
+				0177E2AF216131F60038F29A /* ContactUsViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -466,11 +478,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0177E2A821612F9B0038F29A /* EditViewController.swift in Sources */,
 				01EBF35B215282FA00D23871 /* LdddoginViewController.swift in Sources */,
 				01EBF3652153462100D23871 /* UIStoryboard.swift in Sources */,
 				0177E29F216095EE0038F29A /* ProfileTableViewCell.swift in Sources */,
 				01EBF37121546D2500D23871 /* FirebaseManager.swift in Sources */,
 				01FEB5E92157A86E00D57B47 /* UserLocation.swift in Sources */,
+				0177E2AC216131B50038F29A /* ADCoinViewController.swift in Sources */,
 				0177E2A52160D3CA0038F29A /* FilterCollectionViewCell.swift in Sources */,
 				01EBF3592152824000D23871 /* FacebookManager.swift in Sources */,
 				01701B03215C7F5F0074B0B9 /* PhotoViewController.swift in Sources */,
@@ -483,11 +497,13 @@
 				01701B06215C88EF0074B0B9 /* ChatImageTableViewCell.swift in Sources */,
 				01EBF3442151FEA200D23871 /* LoginViewController.swift in Sources */,
 				01701AF1215BC6930074B0B9 /* ChatViewController.swift in Sources */,
+				0177E2AE216131E30038F29A /* SettingViewController.swift in Sources */,
 				01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */,
 				01701AF4215BC6BE0074B0B9 /* ChatTableViewCell.swift in Sources */,
 				0177E2A22160CA630038F29A /* FilterViewController.swift in Sources */,
 				01701B0A215C89140074B0B9 /* ChatImageOwnerTableViewCell.swift in Sources */,
 				016A51352159DCBA00AB2745 /* TabBarViewController.swift in Sources */,
+				0177E2B0216131F60038F29A /* ContactUsViewController.swift in Sources */,
 				01701AFF215C7E1B0074B0B9 /* ChatDetailViewController.swift in Sources */,
 				01701AF8215C5C4E0074B0B9 /* ChatDetailTableViewCell.swift in Sources */,
 				01EBF36E215357B000D23871 /* MapViewController.swift in Sources */,

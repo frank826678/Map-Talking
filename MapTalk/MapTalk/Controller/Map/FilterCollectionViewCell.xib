@@ -25,7 +25,7 @@
                             <constraint firstAttribute="height" constant="50" id="px8-U3-cQA"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喝咖啡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coF-Wp-FWL">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喝咖啡" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coF-Wp-FWL">
                         <rect key="frame" x="20" y="65" width="54" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="lzy-L0-A8E"/>
@@ -46,6 +46,10 @@
                 <constraint firstAttribute="trailing" secondItem="8L9-SI-md0" secondAttribute="trailing" constant="20" id="qmw-au-pWP"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="iconImage" destination="8L9-SI-md0" id="Ad7-br-P15"/>
+                <outlet property="iconName" destination="coF-Wp-FWL" id="ovG-yb-tNM"/>
+            </connections>
             <point key="canvasLocation" x="137.59999999999999" y="126.83658170914543"/>
         </collectionViewCell>
     </objects>
