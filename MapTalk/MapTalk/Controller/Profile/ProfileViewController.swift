@@ -36,6 +36,13 @@ class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        
+    }
+
+    
     func setImage() {
         
         userImage.layer.cornerRadius = 60
@@ -128,10 +135,20 @@ extension ProfileViewController: UITableViewDataSource{
         } else if indexPath.row == 2 {
             //configure action when tap cell 1
             print("點了設定")
+            performSegue(
+                withIdentifier: String(describing: SettingViewController.self),
+                sender: indexPath
+            )
+
 
         } else if indexPath.row == 3 {
             //configure action when tap cell 1
             print("點了聯絡我們")
+            performSegue(
+                withIdentifier: String(describing: ContactUsViewController.self),
+                sender: indexPath
+            )
+
 
         }
         

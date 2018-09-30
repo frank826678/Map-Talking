@@ -16,6 +16,15 @@ class SettingViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        self.navigationController?.navigationBar.topItem?.title = "     設定"
+
+        
+    }
+
 
     /*
     // MARK: - Navigation
