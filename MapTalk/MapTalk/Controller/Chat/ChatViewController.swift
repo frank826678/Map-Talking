@@ -63,6 +63,15 @@ class ChatViewController: UIViewController {
         userImage.clipsToBounds = true
         
     }
+    
+//    func setButtonTemplateImage() {
+//        var templateImage = #imageLiteral(resourceName: "btn_play").withRenderingMode(.alwaysTemplate)
+//        playButton.setImage(templateImage, for: .normal)
+//
+//        templateImage = #imageLiteral(resourceName: "btn_stop").withRenderingMode(.alwaysTemplate)
+//        playButton.setImage(templateImage, for: .selected)
+//
+//    }
 
     
 }

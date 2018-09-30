@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilterCollectionViewCell" id="gTV-IL-0wX" customClass="FilterCollectionViewCell" customModule="MapTalk" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="94" height="90"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="94" height="90"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new3-cheap-2-50" translatesAutoresizingMaskIntoConstraints="NO" id="8L9-SI-md0">
+                        <rect key="frame" x="20" y="10" width="54" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="54" id="Vuu-a8-eM0"/>
+                            <constraint firstAttribute="height" constant="50" id="px8-U3-cQA"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喝咖啡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coF-Wp-FWL">
+                        <rect key="frame" x="20" y="65" width="54" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="lzy-L0-A8E"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="coF-Wp-FWL" secondAttribute="trailing" constant="20" id="2QF-Rc-Dg8"/>
+                <constraint firstItem="8L9-SI-md0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="D0o-eL-cMd"/>
+                <constraint firstItem="coF-Wp-FWL" firstAttribute="top" secondItem="8L9-SI-md0" secondAttribute="bottom" constant="5" id="Rgd-pb-Na6"/>
+                <constraint firstAttribute="bottom" secondItem="coF-Wp-FWL" secondAttribute="bottom" constant="5" id="WbS-KG-XtG"/>
+                <constraint firstItem="coF-Wp-FWL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="jfz-1A-Gce"/>
+                <constraint firstItem="8L9-SI-md0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="neb-uc-Mmf"/>
+                <constraint firstAttribute="trailing" secondItem="8L9-SI-md0" secondAttribute="trailing" constant="20" id="qmw-au-pWP"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <point key="canvasLocation" x="137.59999999999999" y="126.83658170914543"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="new3-cheap-2-50" width="50" height="50"/>
+    </resources>
+</document>

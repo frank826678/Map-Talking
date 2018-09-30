@@ -30,6 +30,7 @@ import Kingfisher
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
+    @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var location: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
@@ -67,7 +68,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         dataBaseLocation()
         
-        setIcon()
+        setButtonTemplateImage()
+        setIconCorner()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
         
     }
     
@@ -392,11 +400,41 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         self.present(editAlert, animated: true)
     }
     
-    func setIcon() {
+    func setIconCorner() {
         
         location.clipsToBounds = true
         location.layer.cornerRadius = 25
+        filterButton.clipsToBounds = true
+        filterButton.layer.cornerRadius = 25
+
+    }
+    
+    func setButtonTemplateImage() {
+        var templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
+        filterButton.setImage(templateImage, for: .normal)
+
+        templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
+        filterButton.setImage(templateImage, for: .selected)
         
+        setButtonColor(with: #colorLiteral(red: 0.137254902, green: 0.462745098, blue: 0.8980392157, alpha: 1)) //顏色已經挑選完成 是根據定位的按鈕的藍色
+
+    }
+    
+    func setButtonColor(with color: UIColor) {
+        //filterButton.imageView?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) //按鈕的圖案的背景 顏色已經挑選完成 是根據定位的按鈕的白色
+        
+        filterButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) // 按鈕的背景
+        
+        filterButton.imageView?.tintColor = color
+//        playButton.imageView?.tintColor = color
+//
+//        rewindButton.imageView?.tintColor = color
+//
+//        forwardButton.imageView?.tintColor = color
+//
+//        muteButton.imageView?.tintColor = color
+//
+//        fullScreenButton.imageView?.tintColor = color
     }
     
 }
