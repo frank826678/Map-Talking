@@ -205,7 +205,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if self.userAnnotation != nil {
             
             navigationUserName = userAnnotation?.name!
-            self.showAlert(title: "新增\(navigationUserName!) 為好友？", message: "認識一下吧！")
+            self.showAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
             
         } else {
             navigationUserName = "使用者"

@@ -37,6 +37,10 @@ class FilterViewController: UIViewController {
 
         navigationController?.setNavigationBarHidden(false, animated: true)
         
+        self.view.backgroundColor = .clear
+        self.view.backgroundColor = #colorLiteral(red: 0.3098039216, green: 0.8588235294, blue: 0.9921568627, alpha: 1)
+
+        
         // swiftlint:disable identifier_name
         let nib = UINib(nibName: "FilterCollectionViewCell", bundle: nil)
         // swiftlint:enable identifier_name
@@ -47,7 +51,7 @@ class FilterViewController: UIViewController {
         timeCollectionView.delegate = self
         timeCollectionView.dataSource = self
         
-
+        
         
         datingTypeCollectionView.register(nib, forCellWithReuseIdentifier: "FilterCollectionViewCell")
         
