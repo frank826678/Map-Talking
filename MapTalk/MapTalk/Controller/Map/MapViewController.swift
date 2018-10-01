@@ -198,9 +198,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        //新增下面這行 20181001
+//           self.showAlert(title: "新增\(navigationUserName!) 為好友？", message: "認識一下吧！")
+        
+        if self.userAnnotation != nil {
+            
+            navigationUserName = userAnnotation?.name!
+            self.showAlert(title: "新增\(navigationUserName!) 為好友？", message: "認識一下吧！")
+            
+        } else {
+            navigationUserName = "使用者"
+        }
+
+        
+        
         if let userLocation = view.annotation as? UserAnnotation {
             self.userAnnotation = userLocation
         }
+        
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
