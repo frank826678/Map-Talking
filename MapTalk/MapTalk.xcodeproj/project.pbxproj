@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0141678E216321760080EDCE /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141678D216321760080EDCE /* Icon.swift */; };
+		01416790216323520080EDCE /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141678F216323520080EDCE /* UIImage.swift */; };
 		016A51352159DCBA00AB2745 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A51342159DCBA00AB2745 /* TabBarViewController.swift */; };
 		016A51372159F50A00AB2745 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016A51362159F50A00AB2745 /* Message.storyboard */; };
 		016A513A2159F54F00AB2745 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016A51392159F54F00AB2745 /* Profile.storyboard */; };
@@ -61,6 +63,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0141678D216321760080EDCE /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		0141678F216323520080EDCE /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		016A51342159DCBA00AB2745 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		016A51362159F50A00AB2745 /* Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
 		016A51392159F54F00AB2745 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -130,6 +134,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0141678C216320DE0080EDCE /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				0141678D216321760080EDCE /* Icon.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		016A51332159DC2400AB2745 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +237,7 @@
 		01EBF3562152815D00D23871 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0141678C216320DE0080EDCE /* Enum */,
 				01701AEC215B39820074B0B9 /* Error */,
 				01EBF36F21546CED00D23871 /* Firebase */,
 				01EBF3572152816E00D23871 /* Facebook */,
@@ -278,6 +291,7 @@
 			children = (
 				01EBF3642153462100D23871 /* UIStoryboard.swift */,
 				01EBF37221546F2600D23871 /* UIAlertController.swift */,
+				0141678F216323520080EDCE /* UIImage.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -520,6 +534,7 @@
 				01701B06215C88EF0074B0B9 /* ChatImageTableViewCell.swift in Sources */,
 				01EBF3442151FEA200D23871 /* LoginViewController.swift in Sources */,
 				01701AF1215BC6930074B0B9 /* ChatViewController.swift in Sources */,
+				0141678E216321760080EDCE /* Icon.swift in Sources */,
 				0177E2AE216131E30038F29A /* SettingViewController.swift in Sources */,
 				01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */,
 				01701AF4215BC6BE0074B0B9 /* ChatTableViewCell.swift in Sources */,
@@ -528,6 +543,7 @@
 				016A51352159DCBA00AB2745 /* TabBarViewController.swift in Sources */,
 				0177E2B0216131F60038F29A /* ContactUsViewController.swift in Sources */,
 				01701AFF215C7E1B0074B0B9 /* ChatDetailViewController.swift in Sources */,
+				01416790216323520080EDCE /* UIImage.swift in Sources */,
 				0177E2BB216143B10038F29A /* EditContentTableViewCell.swift in Sources */,
 				01701AF8215C5C4E0074B0B9 /* ChatDetailTableViewCell.swift in Sources */,
 				01EBF36E215357B000D23871 /* MapViewController.swift in Sources */,

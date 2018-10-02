@@ -23,7 +23,7 @@
                         <subviews>
                             <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2g-jP-qi8">
                                 <rect key="frame" x="70" y="10" width="62" height="45.5"/>
-                                <color key="backgroundColor" red="0.99607843137254903" green="0.83137254901960789" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="">
                                         <integer key="value" value="10"/>

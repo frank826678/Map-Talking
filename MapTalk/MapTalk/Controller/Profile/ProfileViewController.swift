@@ -22,9 +22,12 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .clear
-        self.view.backgroundColor = #colorLiteral(red: 0.3098039216, green: 0.8588235294, blue: 0.9921568627, alpha: 1)
+
+        #warning ("TODO: 改成 static 用程式碼控制顏色")
+
+//        self.view.backgroundColor = .clear
+//        self.view.backgroundColor = #colorLiteral(red: 0.3098039216, green: 0.8588235294, blue: 0.9921568627, alpha: 1)
+
         setImage()
         
         profileTableView.delegate = self
@@ -107,6 +110,7 @@ extension ProfileViewController: UITableViewDataSource{
             //cell.iconImage.backgroundColor =  #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1) // FB message borderColor
             
             cell.iconImage.image = UIImage(named: iconImageArray[indexPath.row])
+            cell.selectedBackgroundView?.backgroundColor = UIColor.orange
 
             return cell
         }

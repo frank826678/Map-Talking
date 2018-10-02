@@ -72,6 +72,10 @@ struct Locations {
         self.annotation.message = self.message
         self.annotation.coordinate = CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
         
+        //補這行 20181002
+        self.annotation.title = self.name
+        
+        
         return annotation
     }
     

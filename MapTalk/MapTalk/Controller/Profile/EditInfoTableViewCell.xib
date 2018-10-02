@@ -222,7 +222,6 @@
                     <constraint firstItem="xQj-4l-hAu" firstAttribute="trailing" secondItem="N2D-oA-jP7" secondAttribute="trailing" id="uFc-fT-06n"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.088707479340000006" green="0.82153077740000002" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <point key="canvasLocation" x="163.19999999999999" y="89.505247376311857"/>
         </tableViewCell>

@@ -18,15 +18,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="94" height="90"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U9S-6e-zLo">
+                        <rect key="frame" x="0.0" y="0.0" width="94" height="90"/>
+                    </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new3-cheap-2-50" translatesAutoresizingMaskIntoConstraints="NO" id="8L9-SI-md0">
-                        <rect key="frame" x="20" y="10" width="54" height="50"/>
+                        <rect key="frame" x="27" y="10" width="40" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="54" id="Vuu-a8-eM0"/>
-                            <constraint firstAttribute="height" constant="50" id="px8-U3-cQA"/>
+                            <constraint firstAttribute="width" constant="40" id="Vuu-a8-eM0"/>
+                            <constraint firstAttribute="height" constant="40" id="px8-U3-cQA"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喝咖啡" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coF-Wp-FWL">
-                        <rect key="frame" x="20" y="65" width="54" height="20"/>
+                        <rect key="frame" x="20" y="55" width="54" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="lzy-L0-A8E"/>
                         </constraints>
@@ -38,12 +41,14 @@
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="coF-Wp-FWL" secondAttribute="trailing" constant="20" id="2QF-Rc-Dg8"/>
+                <constraint firstItem="U9S-6e-zLo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7lf-bG-h5U"/>
                 <constraint firstItem="8L9-SI-md0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="D0o-eL-cMd"/>
+                <constraint firstItem="8L9-SI-md0" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="P4p-mD-dkF"/>
                 <constraint firstItem="coF-Wp-FWL" firstAttribute="top" secondItem="8L9-SI-md0" secondAttribute="bottom" constant="5" id="Rgd-pb-Na6"/>
-                <constraint firstAttribute="bottom" secondItem="coF-Wp-FWL" secondAttribute="bottom" constant="5" id="WbS-KG-XtG"/>
+                <constraint firstAttribute="bottom" secondItem="U9S-6e-zLo" secondAttribute="bottom" id="TJp-Ih-hVe"/>
+                <constraint firstItem="U9S-6e-zLo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ZCj-5Z-IeI"/>
                 <constraint firstItem="coF-Wp-FWL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="jfz-1A-Gce"/>
-                <constraint firstItem="8L9-SI-md0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="neb-uc-Mmf"/>
-                <constraint firstAttribute="trailing" secondItem="8L9-SI-md0" secondAttribute="trailing" constant="20" id="qmw-au-pWP"/>
+                <constraint firstAttribute="trailing" secondItem="U9S-6e-zLo" secondAttribute="trailing" id="wpB-5J-4l5"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>

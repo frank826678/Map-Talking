@@ -108,20 +108,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="約會類型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mj3-ut-2Je">
-                                <rect key="frame" x="10" y="309" width="82" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="s6P-67-bbw"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GOl-sb-zog">
-                                <rect key="frame" x="0.0" y="343" width="375" height="180"/>
+                                <rect key="frame" x="0.0" y="333" width="375" height="190"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="Lr5-eK-ZIa"/>
+                                    <constraint firstAttribute="height" constant="190" id="Lr5-eK-ZIa"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4Fs-uI-BZO">
                                     <size key="itemSize" width="50" height="50"/>
@@ -199,6 +190,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="約會類型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mj3-ut-2Je">
+                                <rect key="frame" x="10" y="299" width="82" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="s6P-67-bbw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -227,8 +227,8 @@
                             <constraint firstItem="0hV-vY-Zad" firstAttribute="trailing" secondItem="4eE-3r-gKw" secondAttribute="trailing" constant="10" id="iKA-Kk-LrT"/>
                             <constraint firstItem="Mj3-ut-2Je" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" constant="10" id="mVm-0J-awO"/>
                             <constraint firstItem="ywf-IJ-5Ze" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" constant="10" id="pea-fM-i26"/>
+                            <constraint firstItem="GOl-sb-zog" firstAttribute="top" secondItem="Mj3-ut-2Je" secondAttribute="bottom" constant="10" id="qUC-NW-gdJ"/>
                             <constraint firstItem="3dZ-SK-vKl" firstAttribute="top" secondItem="GOl-sb-zog" secondAttribute="bottom" constant="10" id="qfx-gT-vWh"/>
-                            <constraint firstItem="GOl-sb-zog" firstAttribute="top" secondItem="Mj3-ut-2Je" secondAttribute="bottom" constant="10" id="vRk-Jg-Ige"/>
                             <constraint firstItem="l81-OK-dvh" firstAttribute="top" secondItem="V3n-i0-uK6" secondAttribute="bottom" constant="15" id="wfI-6C-qJU"/>
                             <constraint firstItem="0hV-vY-Zad" firstAttribute="trailing" secondItem="SMM-3l-Xn3" secondAttribute="trailing" id="xrE-5S-xh7"/>
                             <constraint firstItem="Sca-4l-XQL" firstAttribute="top" secondItem="4eE-3r-gKw" secondAttribute="bottom" constant="12" id="yYj-04-Jhq"/>
