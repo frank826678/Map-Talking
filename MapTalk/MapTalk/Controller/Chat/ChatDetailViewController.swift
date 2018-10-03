@@ -12,7 +12,7 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class ChatDetailViewController: UIViewController {
-
+    
     @IBOutlet weak var chatDetailTableView: UITableView!
     
     
@@ -30,12 +30,13 @@ class ChatDetailViewController: UIViewController {
     //新增的
     var friendName: String?
     var friendUserId: String?
+    var friendChannel: String = "測試"
     //
     
     // swiftlint:disable identifier_name
     var ref: DatabaseReference!
     // swiftlint:enable identifier_name
-
+    
     var userName = ""
     var userEmail = ""
     var messages: [Message] = []
@@ -43,7 +44,7 @@ class ChatDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -53,20 +54,22 @@ class ChatDetailViewController: UIViewController {
         chatDetailTableView.dataSource = self
         
         ref = Database.database().reference()
-
+        
         setBackground()
         
-        getMessages()
+        
+        
+        //getMessages()
         
         //addObservers()
-
+        
         //NEW
         
-//        guard let friendName = friendName else { return }
-//        guard let friendUserId = friendUserId else { return }
-//
-//        setupData(friendName: friendName)
-//        setupChat(friendUserId: friendUserId)
+        //        guard let friendName = friendName else { return }
+        //        guard let friendUserId = friendUserId else { return }
+        //
+        //        setupData(friendName: friendName)
+        //        setupChat(friendUserId: friendUserId)
         
         //END
         
@@ -76,27 +79,28 @@ class ChatDetailViewController: UIViewController {
             
         }
         
-        setupChat(friendUserId: friendUserId)
-        
+        setupChat(friendUserId: friendUserId) //1
+        setChannel(friendUserId: friendUserId) //new
+        getPersonalMessages(channel: friendChannel)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        guard let friendName = friendName else {
-//
-//            return
-//
-//        }
+        //        guard let friendName = friendName else {
+        //
+        //            return
+        //
+        //        }
         
-//        guard let friendUserId = friendUserId else {
-//
-//            return
-//
-//        }
-//
-//        //setupData(friendName: friendName)
-//        setupChat(friendUserId: friendUserId)
+        //        guard let friendUserId = friendUserId else {
+        //
+        //            return
+        //
+        //        }
+        //
+        //        //setupData(friendName: friendName)
+        //        setupChat(friendUserId: friendUserId)
         
     }
     
@@ -106,26 +110,42 @@ class ChatDetailViewController: UIViewController {
         
         dismiss(animated: true
             , completion: nil)
-//        self.navigationController?.popViewController(animated: true)
+        //        self.navigationController?.popViewController(animated: true)
     }
     
     func registerCells() {
         
         chatDetailTableView.register(UINib(nibName: "ChatDetailTableViewCell", bundle: nil),
-                               forCellReuseIdentifier: "Chat")
+                                     forCellReuseIdentifier: "Chat")
         
         chatDetailTableView.register(UINib(nibName: "ChatOwnerTableViewCell", bundle: nil),
-                               forCellReuseIdentifier: "ChatOwner")
+                                     forCellReuseIdentifier: "ChatOwner")
         
         chatDetailTableView.register(UINib(nibName: "ChatImageTableViewCell", bundle: nil),
-                               forCellReuseIdentifier: "ChatImage")
+                                     forCellReuseIdentifier: "ChatImage")
         
         chatDetailTableView.register(UINib(nibName: "ChatImageOwnerTableViewCell", bundle: nil),
-                               forCellReuseIdentifier: "ChatImageOwner")
+                                     forCellReuseIdentifier: "ChatImageOwner")
     }
     
     //NEW
-    private func setupData(friendName: String) {
+    private func setChannel(friendUserId: String) {
+        
+        var channel :String?
+        
+        let friendId = friendUserId
+        guard let myselfId = Auth.auth().currentUser?.uid else { return }
+        
+        if myselfId > friendId {
+            channel = "\(myselfId)_\(friendId)"
+        } else {
+            channel = "\(friendId)_\(myselfId)"
+        }
+        
+        //讓不管名字是啥都可以照順序排序
+        
+        guard let myselfIdAndFriendId = channel else { return }
+        friendChannel = myselfIdAndFriendId
         
     }
     
@@ -152,7 +172,7 @@ class ChatDetailViewController: UIViewController {
         //讓不管名字是啥都可以照順序排序
         
         guard let myselfIdAndFriendId = channel else { return }
-        
+        friendChannel = myselfIdAndFriendId
         //尋找 channel 是否已經存在
         ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).observeSingleEvent(of: .value) { (snapshot) in
             
@@ -160,7 +180,7 @@ class ChatDetailViewController: UIViewController {
             guard let value = snapshot.value as? NSDictionary else {
                 
                 print("找不到原始資料，創建新頻道")
-               
+                
                 let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).childByAutoId().key
                 self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).child(messageKey).setValue([
                     "content": " Hello World~~~~ ",
@@ -188,6 +208,8 @@ class ChatDetailViewController: UIViewController {
             print("頻道已存在")
             //讀取上次聊天資料
             
+            self.getPersonalMessages(channel:  myselfIdAndFriendId)
+            
         }
         
     }
@@ -205,18 +227,20 @@ class ChatDetailViewController: UIViewController {
         
         backgroundView.layer.borderWidth = 1
         backgroundView.layer.borderColor = #colorLiteral(red: 0.862745098, green: 0.862745098, blue: 0.862745098, alpha: 1) // FB message borderColor
-
+        
         backgroundView.layer.shadowColor = #colorLiteral(red: 0.862745098, green: 0.862745098, blue: 0.862745098, alpha: 1) // FB message borderColor
         backgroundView.layer.shadowOpacity = 1.0
         backgroundView.layer.shadowRadius = 10.0
         backgroundView.layer.shadowOffset = CGSize(width: 0, height: 0 )
     }
     
-    func getPersonalMessages() {
+    func getPersonalMessages(channel: String) {
         
-        let chatroomKey = "PersonalChannel"
+        //let chatroomKey = "PersonalChannel"
         
-        ref.child("chatroom").child(chatroomKey)
+        //self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).child(messageKey)
+        
+        ref.child("chatroom").child("PersonalChannel").child(channel)
             .observe(.childAdded) { (snapshot) in
                 
                 guard let value = snapshot.value as? NSDictionary else { return }
@@ -256,49 +280,49 @@ class ChatDetailViewController: UIViewController {
         }
     }
     
-    func getMessages() {
-        
-        let chatroomKey = "publicChannel"
-        
-        ref.child("chatroom").child(chatroomKey)
-            .observe(.childAdded) { (snapshot) in
-                
-                guard let value = snapshot.value as? NSDictionary else { return }
-                
-                guard let senderId = value["senderId"] as? String else { return }
-                
-                guard let senderName = value["senderName"] as? String else { return }
-                
-                guard let time = value["time"] as? Int else { return }
-                
-                let content = value["content"] as? String
-                
-                let senderPhoto = value["senderPhoto"] as? String
-                
-                let imageUrl = value["imageUrl"] as? String
-                
-                let message = Message(
-                    content: content,
-                    senderId: senderId,
-                    senderName: senderName,
-                    senderPhoto: senderPhoto,
-                    time: time,
-                    imageUrl: imageUrl
-                )
-                
-                self.messages.append(message)
-                
-                self.chatDetailTableView.beginUpdates()
-                
-                let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-                
-                self.chatDetailTableView.insertRows(at: [indexPath], with: .automatic)
-                
-                self.chatDetailTableView.endUpdates()
-                
-                self.chatDetailTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-        }
-    }
+    //    func getMessages() {
+    //
+    //        let chatroomKey = "publicChannel"
+    //
+    //        ref.child("chatroom").child(chatroomKey)
+    //            .observe(.childAdded) { (snapshot) in
+    //
+    //                guard let value = snapshot.value as? NSDictionary else { return }
+    //
+    //                guard let senderId = value["senderId"] as? String else { return }
+    //
+    //                guard let senderName = value["senderName"] as? String else { return }
+    //
+    //                guard let time = value["time"] as? Int else { return }
+    //
+    //                let content = value["content"] as? String
+    //
+    //                let senderPhoto = value["senderPhoto"] as? String
+    //
+    //                let imageUrl = value["imageUrl"] as? String
+    //
+    //                let message = Message(
+    //                    content: content,
+    //                    senderId: senderId,
+    //                    senderName: senderName,
+    //                    senderPhoto: senderPhoto,
+    //                    time: time,
+    //                    imageUrl: imageUrl
+    //                )
+    //
+    //                self.messages.append(message)
+    //
+    //                self.chatDetailTableView.beginUpdates()
+    //
+    //                let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+    //
+    //                self.chatDetailTableView.insertRows(at: [indexPath], with: .automatic)
+    //
+    //                self.chatDetailTableView.endUpdates()
+    //
+    //                self.chatDetailTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    //        }
+    //    }
     
     @IBAction func send(_ sender: Any) {
         
@@ -312,29 +336,31 @@ class ChatDetailViewController: UIViewController {
         
         let createdTime = Date().millisecondsSince1970
         
-        let chatroomKey = "publicChannel"
+        //let chatroomKey = "publicChannel"
         
-        let messageKey = ref.child(chatroomKey).childByAutoId().key
-        
-        ref.child("chatroom").child(chatroomKey).child(messageKey)
-            .setValue([
-                "content": text,
-                "senderId": userId,
-                "senderName": userName,
-                "senderPhoto": userImage,
-                "time": createdTime
-            ]) { (error, _) in
+        //        let messageKey = ref.child(chatroomKey).childByAutoId().key
+        //
+        //        ref.child("chatroom").child(chatroomKey).child(messageKey)
+        //            .setValue
+        let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(friendChannel).childByAutoId().key
+        self.ref.child("chatroom").child("PersonalChannel").child(friendChannel).child(messageKey).setValue([
+            "content": text,
+            "senderId": userId,
+            "senderName": userName,
+            "senderPhoto": userImage,
+            "time": createdTime
+        ]) { (error, _) in
+            
+            if let error = error {
                 
-                if let error = error {
-                    
-                    print("Data could not be saved: \(error).")
-                    
-                } else {
-                    
-                    print("Data saved successfully!")
-                    
-                    self.messageTxt.text = ""
-                }
+                print("Data could not be saved: \(error).")
+                
+            } else {
+                
+                print("Data saved successfully!")
+                
+                self.messageTxt.text = ""
+            }
         }
     }
     
@@ -373,7 +399,7 @@ extension ChatDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let message = messages[indexPath.row]
-
+        
         guard let userId = Auth.auth().currentUser?.uid else { return UITableViewCell() }
         
         switch message.senderId {
@@ -386,15 +412,15 @@ extension ChatDetailViewController: UITableViewDataSource {
                     withIdentifier: "ChatImageOwner", for: indexPath)
                     as? ChatImageOwnerTableViewCell {
                     
-                   // cell.messageImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
+                    // cell.messageImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
                     
                     cell.messageImageView.kf.setImage(with: URL(string: imageUrl))
                     
-//                    if let userImage = annotation?.userImage {
-//                        imageView.kf.setImage(with: URL(string: userImage))
-//                    } else {
-//                        imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
-//                    }
+                    //                    if let userImage = annotation?.userImage {
+                    //                        imageView.kf.setImage(with: URL(string: userImage))
+                    //                    } else {
+                    //                        imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+                    //                    }
                     
                     return cell
                 }
@@ -426,13 +452,13 @@ extension ChatDetailViewController: UITableViewDataSource {
                     }
                     
                     
-//                    cell.messageImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
-//
-//                    if let photoString = message.senderPhoto {
-//                        cell.userImage.sd_setImage(with: URL(string: photoString), completed: nil)
-//                    } else {
-//                        cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
-//                    }
+                    //                    cell.messageImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
+                    //
+                    //                    if let photoString = message.senderPhoto {
+                    //                        cell.userImage.sd_setImage(with: URL(string: photoString), completed: nil)
+                    //                    } else {
+                    //                        cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+                    //                    }
                     
                     return cell
                 }
