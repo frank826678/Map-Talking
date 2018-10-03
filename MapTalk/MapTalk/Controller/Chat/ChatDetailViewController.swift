@@ -29,6 +29,7 @@ class ChatDetailViewController: UIViewController {
     
     //新增的
     var friendName: String?
+    var friendUserId: String?
     //
     
     // swiftlint:disable identifier_name
@@ -60,9 +61,43 @@ class ChatDetailViewController: UIViewController {
         //addObservers()
 
         //NEW
-        guard let friendName = friendName else { return }
-        setupData(friendName: friendName)
+        
+//        guard let friendName = friendName else { return }
+//        guard let friendUserId = friendUserId else { return }
+//
+//        setupData(friendName: friendName)
+//        setupChat(friendUserId: friendUserId)
+        
         //END
+        
+        guard let friendUserId = friendUserId else {
+            
+            return
+            
+        }
+        
+        setupChat(friendUserId: friendUserId)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+//        guard let friendName = friendName else {
+//
+//            return
+//
+//        }
+        
+//        guard let friendUserId = friendUserId else {
+//
+//            return
+//
+//        }
+//
+//        //setupData(friendName: friendName)
+//        setupChat(friendUserId: friendUserId)
+        
     }
     
     // MARK: - Action
@@ -93,6 +128,71 @@ class ChatDetailViewController: UIViewController {
     private func setupData(friendName: String) {
         
     }
+    
+    private func setupChat(friendUserId: String) {
+        
+        var channel :String?
+        
+        //如果沒開過聊天室 開一個新的 如果有 讀取上次的資料
+        guard let myselfId = Auth.auth().currentUser?.uid else { return }
+        guard let myselfName = Auth.auth().currentUser?.displayName else { return }
+        guard let userImage = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
+        
+        
+        let createdTime = Date().millisecondsSince1970
+        
+        let friendId = friendUserId
+        
+        if myselfId > friendId {
+            channel = "\(myselfId)_\(friendId)"
+        } else {
+            channel = "\(friendId)_\(myselfId)"
+        }
+        
+        //讓不管名字是啥都可以照順序排序
+        
+        guard let myselfIdAndFriendId = channel else { return }
+        
+        //尋找 channel 是否已經存在
+        ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).observeSingleEvent(of: .value) { (snapshot) in
+            
+            // guard let 要做的事情要寫在 return 的前面
+            guard let value = snapshot.value as? NSDictionary else {
+                
+                print("找不到原始資料，創建新頻道")
+               
+                let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).childByAutoId().key
+                self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).child(messageKey).setValue([
+                    "content": " Hello World~~~~ ",
+                    "senderId": myselfId,
+                    "senderName": myselfName,
+                    "senderPhoto": userImage,
+                    "time": createdTime
+                ]) { (error, _) in
+                    
+                    if let error = error {
+                        
+                        print("Data could not be saved: \(error).")
+                        
+                    } else {
+                        
+                        print("** 資料存檔成功 Data saved successfully!")
+                        
+                    }
+                }
+                
+                return //guard let 的 return
+                
+            }
+            
+            print("頻道已存在")
+            //讀取上次聊天資料
+            
+        }
+        
+    }
+    
+    
     //END
     
     func setBackground() {
@@ -110,6 +210,50 @@ class ChatDetailViewController: UIViewController {
         backgroundView.layer.shadowOpacity = 1.0
         backgroundView.layer.shadowRadius = 10.0
         backgroundView.layer.shadowOffset = CGSize(width: 0, height: 0 )
+    }
+    
+    func getPersonalMessages() {
+        
+        let chatroomKey = "PersonalChannel"
+        
+        ref.child("chatroom").child(chatroomKey)
+            .observe(.childAdded) { (snapshot) in
+                
+                guard let value = snapshot.value as? NSDictionary else { return }
+                
+                guard let senderId = value["senderId"] as? String else { return }
+                
+                guard let senderName = value["senderName"] as? String else { return }
+                
+                guard let time = value["time"] as? Int else { return }
+                
+                let content = value["content"] as? String
+                
+                let senderPhoto = value["senderPhoto"] as? String
+                
+                let imageUrl = value["imageUrl"] as? String
+                
+                let message = Message(
+                    content: content,
+                    senderId: senderId,
+                    senderName: senderName,
+                    senderPhoto: senderPhoto,
+                    time: time,
+                    imageUrl: imageUrl
+                )
+                
+                self.messages.append(message)
+                
+                self.chatDetailTableView.beginUpdates()
+                
+                let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                
+                self.chatDetailTableView.insertRows(at: [indexPath], with: .automatic)
+                
+                self.chatDetailTableView.endUpdates()
+                
+                self.chatDetailTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
     }
     
     func getMessages() {
