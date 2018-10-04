@@ -173,10 +173,10 @@ class LoginViewController: UIViewController {
                     print("info: \(info)")
                     guard let fbID = info["id"] as? String else { return }
                     guard let fbName = info["name"] as? String else { return }
-                    guard let fbEmail = info["email"] as? String else { return }
-                    guard let fbPhoto = info["picture"] as? [String: Any] else { return }
-                    guard let photoData = fbPhoto["data"] as? [String: Any] else { return }
-                    guard let photoURL = photoData["url"] as? String else { return }
+                    //guard let fbEmail = info["email"] as? String else { return }
+//                  guard let fbPhoto = info["picture"] as? [String: Any] else { return }
+//                    guard let photoData = fbPhoto["data"] as? [String: Any] else { return }
+//                    guard let photoURL = photoData["url"] as? String else { return }
                     guard let userId = Auth.auth().currentUser?.uid else { return }
                     guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
 
@@ -187,16 +187,19 @@ class LoginViewController: UIViewController {
                     self.refference.child("UserData").child(userId).setValue([
                         "FBID": fbID,
                         "FBName": fbName,
-                        "FBEmail": fbEmail,
-                        "FBPhotoURL": photoURL,
-                        "FBPhotoSmallURL": photoSmallURL])
+                        "FBPhotoSmallURL": photoSmallURL,
+                        "UID": userId
+                        ])
                     
-//                    self.refference.child("UserData").child("userId").setValue([
-//                        "FBID": "fbID",
-//                        "FBName": "fbName",
-//                        "FBEmail": "fbEmail",
-//                        "FBPhotoURL": "photoURL",
-//                        "FBPhotoSmallURL": "photoSmallURL"])
+//                    self.refference.child("UserData").child(userId).setValue([
+//                        "FBID": fbID,
+//                        "FBName": fbName,
+//                        "FBEmail": fbEmail,
+//                        "FBPhotoURL": photoURL,
+//                        "FBPhotoSmallURL": photoSmallURL,
+//                        "UID": userId
+//                        ])
+
                     
                     print("----存到 firebase 成功")
                 }

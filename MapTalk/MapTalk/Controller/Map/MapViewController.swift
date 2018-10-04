@@ -455,7 +455,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.showMessageAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
             print("選取的人的 userID 是 \(friendUserId)")
             
-            
         } else {
             navigationUserName = "使用者"
         }
@@ -558,6 +557,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.show(controller, sender: nil)
             print("跳頁成功")
             
+            //新增對方到 firebase 的好友列表
+            guard let friendId =  self.friendUserId else { return }
+            guard let myselfId = Auth.auth().currentUser?.uid else { return }
+            guard let friendName = self.navigationUserName else { return }
+            //refference.child("UserFriendList").child(myselfId).child(friendId).setValue([])
+            let childUpdates = ["/UserData/\(myselfId)/FriendsList/\(friendId)": ["FriendUID": "\(friendId)","FriendName": "\(friendName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
+            
+//            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
+//
+            self.refference.updateChildValues(childUpdates)
+
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -588,6 +598,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 let childUpdates = ["/location/\(userId)/message": userStatus]
                 
                 self.refference.updateChildValues(childUpdates)
+
             }
         })
         

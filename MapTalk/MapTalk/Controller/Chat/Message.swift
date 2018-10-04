@@ -23,3 +23,11 @@ struct Message {
     let imageUrl: String?
 
 }
+
+struct FriendInfo {
+    
+    let friendName: String
+    
+    let friendImageUrl: String?
+
+}

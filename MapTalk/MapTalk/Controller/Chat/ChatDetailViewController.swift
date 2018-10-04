@@ -79,8 +79,9 @@ class ChatDetailViewController: UIViewController {
             
         }
         
-        setupChat(friendUserId: friendUserId) //1
         setChannel(friendUserId: friendUserId) //new
+        
+        setupChat(friendUserId: friendUserId) //1
         getPersonalMessages(channel: friendChannel)
     }
     
@@ -131,7 +132,7 @@ class ChatDetailViewController: UIViewController {
     //NEW
     private func setChannel(friendUserId: String) {
         
-        var channel :String?
+        var channel: String?
         
         let friendId = friendUserId
         guard let myselfId = Auth.auth().currentUser?.uid else { return }
