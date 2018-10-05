@@ -125,12 +125,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DispatchQueue.main.async { [weak self] in
                 
                 self?.switchToMainStoryBoard()
+
             }
             
             return
         }
         
         window?.rootViewController = UIStoryboard.mainStoryboard().instantiateInitialViewController()
+        
+       // 沒用 window?.rootViewController?.tabBarController?.selectedIndex = 1
+        
+//        window?.rootViewController = UIStoryboard.mapStoryboard().instantiateInitialViewController()
+
         
     }
     

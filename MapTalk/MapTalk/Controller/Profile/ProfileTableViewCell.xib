@@ -14,19 +14,19 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ProfileTableViewCell" customModule="MapTalk" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="94.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4NG-Zr-0ee">
-                        <rect key="frame" x="30" y="17" width="50" height="50"/>
+                        <rect key="frame" x="30" y="17" width="40" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="8b8-lA-YtH"/>
-                            <constraint firstAttribute="width" constant="50" id="oV9-js-U0B"/>
+                            <constraint firstAttribute="height" constant="40" id="8b8-lA-YtH"/>
+                            <constraint firstAttribute="width" constant="40" id="oV9-js-U0B"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOa-aU-dSF">
-                        <rect key="frame" x="100" y="17" width="245" height="50"/>
+                        <rect key="frame" x="90" y="17" width="255" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="LgB-SI-UkF"/>
                         </constraints>

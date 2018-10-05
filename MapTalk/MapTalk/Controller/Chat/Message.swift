@@ -31,3 +31,32 @@ struct FriendInfo {
     let friendImageUrl: String?
 
 }
+
+struct FreindData {
+    
+    let info: FriendInfo
+    let message:  Message
+    
+}
+
+struct NewMessage {
+    
+    var content: String?
+    
+    let senderId: String
+    
+    let senderName: String
+    
+    let senderPhoto: String?
+    
+    let time: Int
+    
+    let imageUrl: String?
+    
+    let friendName: String?
+    
+    let friendImageUrl: String?
+    
+    let friendUID: String?
+    
+}

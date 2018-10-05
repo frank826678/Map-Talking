@@ -201,7 +201,7 @@ class LoginViewController: UIViewController {
 //                        ])
 
                     
-                    print("----存到 firebase 成功")
+                    print("----存到 firebase 成功 -----")
                 }
             }
         })
@@ -224,7 +224,7 @@ class LoginViewController: UIViewController {
             if let error = error {
                 return
             } else {
-                print("Storage Success")
+                print(" ***存照片成功 Storage Success *** ")
             }
         }
     }

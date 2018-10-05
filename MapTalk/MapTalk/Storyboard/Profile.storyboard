@@ -47,6 +47,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="x7c-5i-Da3" firstAttribute="trailing" secondItem="4Dx-9V-YAm" secondAttribute="trailing" constant="10" id="1hc-xt-5mr"/>
                             <constraint firstItem="4Dx-9V-YAm" firstAttribute="centerX" secondItem="ZTb-i0-z3h" secondAttribute="centerX" id="3aB-NS-Y8Z"/>
@@ -67,6 +68,7 @@
                     <connections>
                         <outlet property="profileTableView" destination="DZn-hv-FMN" id="pPL-00-UfI"/>
                         <outlet property="userImage" destination="hLD-Pf-W6k" id="0In-20-bcf"/>
+                        <outlet property="userName" destination="zCF-ut-ww4" id="Lta-IJ-IfI"/>
                         <segue destination="HuO-uy-mCW" kind="show" identifier="EditViewController" id="FqI-eW-yNA"/>
                         <segue destination="BiF-ZW-PW7" kind="show" identifier="ADCoinViewController" id="voI-Bo-HGi"/>
                         <segue destination="2LA-cz-Bcv" kind="show" identifier="SettingViewController" id="PKc-RE-rLL"/>

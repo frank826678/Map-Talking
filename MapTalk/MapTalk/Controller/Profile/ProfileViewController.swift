@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var profileTableView: UITableView!
     @IBOutlet weak var userImage: UIImageView!
 
-
+    @IBOutlet weak var userName: UILabel!
+    
     var iconNameArray: [String] = ["編輯資料","獲取金幣","設定","聯絡我們"]
     //imageArray: [UIImage] = []
     //var iconImageArray: [UIImage] = [UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!]
@@ -52,6 +56,11 @@ class ProfileViewController: UIViewController {
         userImage.clipsToBounds = true //沒這行的話 圖片還是方方正正的
         //profileTableView.backgroundView?.backgroundColor = #colorLiteral(red: 0.08870747934, green: 0.8215307774, blue: 1, alpha: 0.8)
         
+        guard let userDisplayName = Auth.auth().currentUser?.displayName else { return }
+        guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
+        
+        userImage.kf.setImage(with: URL(string: photoSmallURL))
+        userName.text = userDisplayName
     }
     
     /*
@@ -109,9 +118,18 @@ extension ProfileViewController: UITableViewDataSource{
             
             //cell.iconImage.backgroundColor =  #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1) // FB message borderColor
             
-            cell.iconImage.image = UIImage(named: iconImageArray[indexPath.row])
-            cell.selectedBackgroundView?.backgroundColor = UIColor.orange
+            //原本
+            //cell.iconImage.image = UIImage(named: iconImageArray[indexPath.row])
+            //原本 END
+            
+            cell.iconImage.image = UIImage.setIconTemplate(iconName: iconImageArray[indexPath.row])
 
+            
+            cell.selectedBackgroundView?.backgroundColor = UIColor.orange
+            
+//            cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
+//
+            
             return cell
         }
         

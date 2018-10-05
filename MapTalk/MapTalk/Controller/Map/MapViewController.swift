@@ -548,6 +548,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             //collectionView.deselectItem(at: indexPath, animated: true)
             
+            // 換頁並且改變 detail頁的 friendUserId 的值
             guard let controller = UIStoryboard.chatStoryboard().instantiateViewController(
                 withIdentifier: String(describing: ChatDetailViewController.self)
                 ) as? ChatDetailViewController else { return }
@@ -561,12 +562,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             guard let friendId =  self.friendUserId else { return }
             guard let myselfId = Auth.auth().currentUser?.uid else { return }
             guard let friendName = self.navigationUserName else { return }
+            
+            guard let myselfName = Auth.auth().currentUser?.displayName else { return }
+            
+            
             //refference.child("UserFriendList").child(myselfId).child(friendId).setValue([])
-            let childUpdates = ["/UserData/\(myselfId)/FriendsList/\(friendId)": ["FriendUID": "\(friendId)","FriendName": "\(friendName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
+            let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(friendId)": ["FriendUID": "\(friendId)","FriendName": "\(friendName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
+            
+            let friendChildUpdates = ["/UserData/\(friendId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)","FriendName": "\(myselfName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
+
             
 //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
 //
-            self.refference.updateChildValues(childUpdates)
+            self.refference.updateChildValues(myChildUpdates)
+            self.refference.updateChildValues(friendChildUpdates)
+            
 
         }
         

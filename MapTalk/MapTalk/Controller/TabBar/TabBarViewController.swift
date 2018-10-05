@@ -70,8 +70,6 @@ private enum Tab {
 
         case .profile: return #imageLiteral(resourceName: "new2-male-user-30")
             
-        
-            
             //case .arView: return #imageLiteral(resourceName: "arTab")
             
         }
@@ -99,10 +97,22 @@ class TabBarViewController: RAMAnimatedTabBarController {
     
     @IBOutlet weak var frankTabBar: UITabBar!
     
+   // let tabs: [Tab] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTab()
+        
+        //20181005
+        
+//        let controller = tab.controller()
+//
+//        let item = RAMAnimatedTabBarItem(title: nil, image: tab.image(), selectedImage: ta)
+
+        // self.selectedViewController = tabs
+//        UIImage *anImage = [UIImage imageNamed:@"foo"];
+//        self.tabBarItem.image = anImage;
     }
     
     private func setupTab() {
@@ -173,6 +183,8 @@ class TabBarViewController: RAMAnimatedTabBarController {
 //            )
             
             controllers.append(controller)
+            
+//            self.selectedIndex = 1
             
         }
         

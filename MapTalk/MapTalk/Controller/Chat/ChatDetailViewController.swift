@@ -41,6 +41,9 @@ class ChatDetailViewController: UIViewController {
     var userEmail = ""
     var messages: [Message] = []
     
+    //201801005
+    var friendInfo: [FriendInfo] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +86,9 @@ class ChatDetailViewController: UIViewController {
         
         setupChat(friendUserId: friendUserId) //1
         getPersonalMessages(channel: friendChannel)
+        
+        //20181005
+        getFriendInfo(friendUserId: friendUserId)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -337,6 +343,19 @@ class ChatDetailViewController: UIViewController {
         
         let createdTime = Date().millisecondsSince1970
         
+        //friendInfo
+        
+//        guard let friendName = value["FBName"] as? String else { return }
+//
+//        guard let friendMmageUrl = value["FBPhotoSmallURL"] as? String  else { return }
+        
+        //20181005 Start
+        let friendName = friendInfo[0].friendName
+        let friendNameURL =  friendInfo[0].friendImageUrl
+        
+        //20181005 End
+        
+        
         //let chatroomKey = "publicChannel"
         
         //        let messageKey = ref.child(chatroomKey).childByAutoId().key
@@ -349,7 +368,10 @@ class ChatDetailViewController: UIViewController {
             "senderId": userId,
             "senderName": userName,
             "senderPhoto": userImage,
-            "time": createdTime
+            "time": createdTime,
+            "friendName": friendName,
+            "friendImageUrl": friendNameURL,
+            "friendUID": friendUserId,
         ]) { (error, _) in
             
             if let error = error {
@@ -363,6 +385,40 @@ class ChatDetailViewController: UIViewController {
                 self.messageTxt.text = ""
             }
         }
+    }
+    
+    func getFriendInfo(friendUserId: String) {
+        
+        self.ref.child("UserData/\(friendUserId)").observeSingleEvent(of: .value, with: { (snapshot)
+            
+            in
+            
+            print("找到的資料是\(snapshot)")
+            
+            //            let a = snapshot.value as! NSDictionary
+            //            print("奇怪東西\(a)")
+            
+            guard let value = snapshot.value as? NSDictionary else { return }
+            
+            guard let friendName = value["FBName"] as? String else { return }
+            
+            guard let friendImageUrl = value["FBPhotoSmallURL"] as? String  else { return }
+            
+            let friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
+            
+            self.friendInfo.append(friendInfo)
+            
+            
+            //試著加入到同一個 array
+            //            let friendDataArray = freindData(info: friendInfo, message: nil)
+            //            self.friendDataArray.append(<#T##newElement: freindData##freindData#>)
+            
+            //old 可以
+            print("＊＊＊＊朋友的資料")
+            print(self.friendInfo)
+            
+        })
+        
     }
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {

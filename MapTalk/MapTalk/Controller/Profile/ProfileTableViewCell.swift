@@ -25,12 +25,22 @@ class ProfileTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setColor() {
-
-        iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    private func setColor() {
         
-        //目前四張照片 icon 是用 storyboard 的 renderAs 改成 template
+        iconImage.tintColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+        iconImage.contentMode = .scaleAspectFit
+        iconName.textColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+        
+        //目前12張照片 icon 是用 程式碼控制 template
+        //目前12張照片 icon 是用 storyboard 的 renderAs 改成 template
     }
+    
+//    func setColor() {
+//
+//        iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//        
+//        //目前四張照片 icon 是用 storyboard 的 renderAs 改成 template
+//    }
     
     func setIconTemplateImage() {
         var templateImage = #imageLiteral(resourceName: "new3-pencil-50").withRenderingMode(.alwaysTemplate)

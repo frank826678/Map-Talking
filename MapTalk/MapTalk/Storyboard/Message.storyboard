@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="127" width="375" height="540"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frank_FB_origin" translatesAutoresizingMaskIntoConstraints="NO" id="BFs-zt-WQf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_like_selected" translatesAutoresizingMaskIntoConstraints="NO" id="BFs-zt-WQf">
                                 <rect key="frame" x="315" y="67" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="CKi-bL-DwK"/>
@@ -408,11 +408,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="btn_like_selected" width="20" height="20"/>
         <image name="btn_send" width="30" height="30"/>
         <image name="chat_photo_normal" width="150" height="168"/>
         <image name="chat_photo_selected" width="130" height="146"/>
         <image name="chat_x" width="50" height="50"/>
-        <image name="frank_FB_origin" width="1536" height="1536"/>
         <image name="new2-microphone-50" width="50" height="50"/>
         <image name="new2_search-50-2" width="50" height="50"/>
     </resources>
