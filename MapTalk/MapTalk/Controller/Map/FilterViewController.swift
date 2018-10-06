@@ -10,9 +10,11 @@ import UIKit
 
 class FilterViewController: UIViewController {
     
-    @IBOutlet weak var datingTypeCollectionView: UICollectionView!
+    //@IBOutlet weak var datingTypeCollectionView: UICollectionView!
     
-    @IBOutlet weak var timeCollectionView: UICollectionView!
+    //@IBOutlet weak var timeCollectionView: UICollectionView!
+    
+    @IBOutlet weak var filterCollectionView: UICollectionView!
     
     var iconNameArray: [String] = ["看夜景","唱歌","喝酒","吃飯","看電影","浪漫","喝咖啡","兜風"]
     //imageArray: [UIImage] = []
@@ -71,17 +73,36 @@ class FilterViewController: UIViewController {
         let nib = UINib(nibName: "FilterCollectionViewCell", bundle: nil)
         // swiftlint:enable identifier_name
         
-        datingTypeCollectionView.delegate = self
-        datingTypeCollectionView.dataSource = self
-        
-        timeCollectionView.delegate = self
-        timeCollectionView.dataSource = self
+        filterCollectionView.register(nib, forCellWithReuseIdentifier: "FilterCollectionViewCell")
         
         
+        filterCollectionView.delegate = self
+        filterCollectionView.dataSource = self
         
-        datingTypeCollectionView.register(nib, forCellWithReuseIdentifier: "FilterCollectionViewCell")
+        let headerNib = UINib(nibName: "FilterHeaderCollectionViewCell", bundle: nil)
         
-        timeCollectionView.register(nib, forCellWithReuseIdentifier: "FilterCollectionViewCell")
+        filterCollectionView.register(headerNib, forCellWithReuseIdentifier: "FilterHeaderCell")
+        
+        filterCollectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FilterHeaderCell")
+        
+        
+        
+        //self.filterCollectionView.register(headerNib, forCellReuseIdentifier: "FilterHeader")
+        
+        //let cellNib = UINib(nibName: "TypeCollectionViewCell", bundle: nil)
+        //self.typeCollectionView.register(cellNib, forCellWithReuseIdentifier: "typeCell")
+        
+        
+        
+        //        datingTypeCollectionView.delegate = self
+        //        datingTypeCollectionView.dataSource = self
+        //
+        //        timeCollectionView.delegate = self
+        //        timeCollectionView.dataSource = self
+        //
+        //        datingTypeCollectionView.register(nib, forCellWithReuseIdentifier: "FilterCollectionViewCell")
+        //
+        //        timeCollectionView.register(nib, forCellWithReuseIdentifier: "FilterCollectionViewCell")
         
         
         //        datingTypeCollectionView.register(UINib(nibName: "FilterCollectionViewCell", bundle: nil),
@@ -110,49 +131,84 @@ class FilterViewController: UIViewController {
 }
 
 extension FilterViewController: UICollectionViewDataSource{
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return 12
-        if(collectionView == self.datingTypeCollectionView) {
-            //cell.backgroundColor = UIColor.black
+        
+        if section == 0 {
+            
             return 8
+            
         } else {
             return 4
-            //cell.backgroundColor = self.randomColor()
         }
+        
+        //return 12
+        //        if(collectionView == self.datingTypeCollectionView) {
+        //            //cell.backgroundColor = UIColor.black
+        //            return 8
+        //        } else {
+        //            return 4
+        //            //cell.backgroundColor = self.randomColor()
+        //        }
+        
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCollectionViewCell", for: indexPath) as? FilterCollectionViewCell
         
-        if(collectionView == self.datingTypeCollectionView) {
-            //cell.backgroundColor = UIColor.black
-            //cell?.iconName.text =
-            //cell?.iconImage
+        if indexPath.section == 0 {
             
-            //cell?.backgroundColor = #colorLiteral(red: 0.08870747934, green: 0.8215307774, blue: 1, alpha: 0.8)
             cell?.iconName.text = iconNameArray[indexPath.row]
-            
-            //cell.iconImage.backgroundColor =  #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1) // FB message borderColor
-            
-            //原本寫法
-            //            cell?.iconImage.image = UIImage(named: iconImageArray[indexPath.row])
             
             //傳輸照片的同時 把照片 set 成 template
             cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
             //cell?.iconImage.image = UIImage(named: filterEnum[indexPath.row.])
             
             
-            //return cell
         } else {
             
-            //cell?.backgroundColor = #colorLiteral(red: 0.08870747934, green: 0.8215307774, blue: 1, alpha: 0.8)
             cell?.iconName.text = timeNameArray[indexPath.row]
             
             cell?.iconImage.image = UIImage(named: timeImageArray[indexPath.row])
             
-            //return cell
-            //cell.backgroundColor = self.randomColor()
         }
+        
+        
+        //        if(collectionView == self.datingTypeCollectionView) {
+        //            //cell.backgroundColor = UIColor.black
+        //            //cell?.iconName.text =
+        //            //cell?.iconImage
+        //
+        //            //cell?.backgroundColor = #colorLiteral(red: 0.08870747934, green: 0.8215307774, blue: 1, alpha: 0.8)
+        //            cell?.iconName.text = iconNameArray[indexPath.row]
+        //
+        //            //cell.iconImage.backgroundColor =  #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1) // FB message borderColor
+        //
+        //            //原本寫法
+        //            //            cell?.iconImage.image = UIImage(named: iconImageArray[indexPath.row])
+        //
+        //            //傳輸照片的同時 把照片 set 成 template
+        //            cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
+        //            //cell?.iconImage.image = UIImage(named: filterEnum[indexPath.row.])
+        //
+        //
+        //            //return cell
+        //        } else {
+        //
+        //            //cell?.backgroundColor = #colorLiteral(red: 0.08870747934, green: 0.8215307774, blue: 1, alpha: 0.8)
+        //            cell?.iconName.text = timeNameArray[indexPath.row]
+        //
+        //            cell?.iconImage.image = UIImage(named: timeImageArray[indexPath.row])
+        //
+        //            //return cell
+        //            //cell.backgroundColor = self.randomColor()
+        //        }
         
         
         
@@ -160,6 +216,52 @@ extension FilterViewController: UICollectionViewDataSource{
         //        cell.backgroundColor = indexPath.row % 2 == 0 ? UIColor.orange : UIColor.brown
         
         return cell!
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+        return CGSize(width: 103, height: 40)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        //        var reusableview:UICollectionReusableView!
+        //        //分区头
+        //        if kind == UICollectionView.elementKindSectionHeader{
+        //            reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+        //                                                                           withReuseIdentifier: "HeaderView", for: indexPath)
+        //            //设置头部标题
+        //            let label = reusableview.viewWithTag(1) as! UILabel
+        //            label.text = books[indexPath.section].title
+        //        }
+        //            //分区尾
+        //        else if kind == UICollectionView.elementKindSectionFooter{
+        //            reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+        //                                                                           withReuseIdentifier: "FooterView", for: indexPath)
+        //
+        //        }
+        //        return reusableview
+        
+        if let headerCellView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier:
+            "FilterHeaderCell", for: indexPath) as? FilterHeaderCollectionViewCell {
+            
+            if indexPath.section == 0 {
+                headerCellView.headerLabel.text = "約會類型"
+                
+            } else {
+                headerCellView.headerLabel.text = "時間範圍"
+            }
+            
+            headerCellView.headerBackgroundView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            
+            return headerCellView
+        }
+        
+        
+        return UICollectionReusableView()
+        
         
     }
     
@@ -171,39 +273,47 @@ extension FilterViewController: UICollectionViewDataSource{
         
         //selectedCell.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
-        if selectedDateIcon1 == indexPath {
+        if  indexPath.section == 0 {
             
-            // selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-            collectionView.cellForItem(at: selectedDateIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
+            if selectedDateIcon1 == indexPath {
+                
+                // selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+                collectionView.cellForItem(at: selectedDateIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
+                
+                print("相同")
+                
+            } else {
+                
+                //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+                collectionView.cellForItem(at: selectedDateIcon1)?.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                
+            }
             
-            print("相同")
             
-        } else {
-            
-            //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-            collectionView.cellForItem(at: selectedDateIcon1)?.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            
-        }
-        
-        if selectedTimeIcon1 == indexPath {
-            
-            // selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-            collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
-            
-            print("相同")
-            
-        } else {
-            
-            //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-            collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             
         }
+        if   indexPath.section == 1 {
+            
+            if selectedTimeIcon1 == indexPath {
+                
+                // selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+                collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
+                
+                print("相同")
+                
+                
+            } else {
+                
+                //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+                collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                
+            }
+        }
         
         
-        
-        if(collectionView == self.datingTypeCollectionView) {
-            print("你選擇了 Dating \(indexPath.section + 1) 組的")
-            print("第 \(indexPath.item + 1) 張圖片")
+        if indexPath.section == 0 {
+            print("你選擇了 Dating \(indexPath.section) 組的")
+            print("第 \(indexPath.item ) 張圖片")
             selectedDateIcon1 = indexPath
             #warning ("TODO: 點擊後變色 且只能點一個 點了其中一個其他的就不能點 或者再把原本的取消才能再點下一個，或是點擊後再點其他的 本來的會消失 只顯示另外ㄧ個")
             //let selectedCell:UICollectionViewCell = collectionView.cellForItem(at: indexPath)!
@@ -218,8 +328,8 @@ extension FilterViewController: UICollectionViewDataSource{
             
         }
         else {
-            print("你選擇了 time \(indexPath.section + 1) 組的")
-            print("第 \(indexPath.item + 1) 張圖片")
+            print("你選擇了 time \(indexPath.section) 組的")
+            print("第 \(indexPath.item) 張圖片")
             
             selectedTimeIcon1 = indexPath
             selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
