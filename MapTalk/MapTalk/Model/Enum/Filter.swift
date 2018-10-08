@@ -30,6 +30,30 @@ struct Filter {
     
 }
 
+struct FilterData {
+    
+    let gender: Int
+    
+    // swiftlint:disable identifier_name
+    let age: Int
+    // swiftlint:enable identifier_name
+    
+    let location: Int //待修
+    
+    let dating: Int
+    
+    let datingTime: Int
+    
+    let time: Int
+    
+    let senderId: String
+    
+    let senderName: String
+    
+    let senderPhotoURL: String
+    
+}
+
 //struct Filter {
 //
 //    let gender: String

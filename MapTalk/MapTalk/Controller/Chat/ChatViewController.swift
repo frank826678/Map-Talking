@@ -191,7 +191,7 @@ class ChatViewController: UIViewController {
                 print(allFriends)
                 
                 self.friendsList.append(allFriends)
-                //這裡有每個朋友的名字 這時候去請求
+                //這裡有每個朋友的 UID , UID 比較重要 為結構的外層第一筆 （名字 這時候去請求
                 print("allFriends資料結束")
                 
                 //OK

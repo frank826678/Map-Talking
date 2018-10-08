@@ -77,6 +77,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //20181003
         //        saveSelfLocation(latitude: (selfLocation?.latitude)!, longitude: (selfLocation?.longitude)!)
         
+        //20181008
+        userDataMappingTrack()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -578,6 +581,98 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.refference.updateChildValues(friendChildUpdates)
             
 
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func userDataMappingTrack() {
+        
+        guard let myselfId = Auth.auth().currentUser?.uid else { return }
+        
+        refference.child("UserData").child(myselfId).child("FriendsList").observe(.childChanged) { (snapshot) in
+            guard let value = snapshot.value as? NSDictionary else { return }
+            
+            print("＊＊＊＊ MappingValue")
+            print(value)
+            
+            guard let accept = value["Accept"] as? String else { return }
+            
+            guard let friendName = value["FriendName"] as? String else { return }
+            
+            guard let friendUID = value["FriendUID"] as? String else { return }
+            
+            guard let friendEmail = value["Friend_Email"] as? String else { return }
+
+            print("userDataMappingTrack 有值變更中")
+            if accept == "收到邀請中" {
+                self.showFriendInvitedAlert(title: "來自 \(friendName) 的邀請～", message: "別害羞 按下確認鍵交個新朋友吧～ ",senderId: friendUID,senderName: friendName)
+            } else {
+                print("沒有收到邀請")
+            }
+            
+            //做一個 alert
+            
+        }
+    }
+    
+    func showFriendInvitedAlert(title: String, message: String,senderId: String,senderName: String) {
+        
+        //把全域變數拿掉
+        
+        //要直接跳到 chatDetail 頁面
+        //可以跳過去 但是返回上一頁會直接跳回 map 主頁
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "確認", style: .default) { (action) in
+            
+            //collectionView.deselectItem(at: indexPath, animated: true)
+            
+            // 換頁並且改變 detail頁的 friendUserId 的值
+            guard let controller = UIStoryboard.chatStoryboard().instantiateViewController(
+                withIdentifier: String(describing: ChatDetailViewController.self)
+                ) as? ChatDetailViewController else { return }
+            
+            //controller.article = articles[indexPath.row]
+            
+            controller.friendUserId = senderId
+            
+            self.show(controller, sender: nil)
+            print("跳頁成功")
+            
+            
+//            //新增對方到 firebase 的好友列表
+//
+//            //guard let friendId =  self.friendUserId else { return }
+//
+//            guard let myselfId = Auth.auth().currentUser?.uid else { return }
+//            //guard let friendName = self.friendUserName else { return }
+//
+//            guard let myselfName = Auth.auth().currentUser?.displayName else { return }
+//
+//
+//            //refference.child("UserFriendList").child(myselfId).child(friendId).setValue([])
+//
+//            // 我媒合到 friend 在我自己的節點下 存朋友的 ID 並且 朋友的狀態為 發出邀請中
+//            // 被我媒合的到的朋友 在朋友的節點下 存下自己的 ID 並且 朋友的狀態為 收到邀請中
+//            // 朋友應該監控自己下方的節點 邀請中 如果有 要跳出 alert 提醒有人要跟你當朋友
+//
+//            let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(senderId)": ["FriendUID": "\(senderId)","FriendName": "\(senderName)","Accept": "發出邀請中","Friend_Email": "emailTest"]]
+//
+//            let friendChildUpdates = ["/UserData/\(senderId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)","FriendName": "\(myselfName)","Accept": "收到邀請中","Friend_Email": "emailTest"]]
+//
+//
+//            //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
+//            //
+//            self.refference.updateChildValues(myChildUpdates)
+//            self.refference.updateChildValues(friendChildUpdates)
+            
+            
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
