@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
 class FilterViewController: UIViewController {
     
@@ -15,6 +18,21 @@ class FilterViewController: UIViewController {
     //@IBOutlet weak var timeCollectionView: UICollectionView!
     
     @IBOutlet weak var filterCollectionView: UICollectionView!
+    
+    @IBOutlet weak var genderSegment: UISegmentedControl!
+    
+    @IBOutlet weak var ageSegment: UISegmentedControl!
+    
+    @IBOutlet weak var locationSegment: UISegmentedControl!
+    
+    // swiftlint:disable identifier_name
+    var ref: DatabaseReference!
+    // swiftlint:enable identifier_name
+    
+    var filterData: [Filter] = []
+    //var filterAllData: Filter? //若宣告在這不給問號要給啥???
+    
+    var gender = ""
     
     var iconNameArray: [String] = ["看夜景","唱歌","喝酒","吃飯","看電影","浪漫","喝咖啡","兜風"]
     //imageArray: [UIImage] = []
@@ -56,7 +74,10 @@ class FilterViewController: UIViewController {
                                     "date-calendar-50"]
     
     var selectedDateIcon1 : IndexPath = []
+    var datingNumber: Int?
+    
     var selectedTimeIcon1 : IndexPath = []
+    var timeNumber: Int?
     
     
     
@@ -86,6 +107,9 @@ class FilterViewController: UIViewController {
         filterCollectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FilterHeaderCell")
         
         
+        ref = Database.database().reference() //重要 沒有會 nil
+        
+        
         
         //self.filterCollectionView.register(headerNib, forCellReuseIdentifier: "FilterHeader")
         
@@ -111,23 +135,239 @@ class FilterViewController: UIViewController {
         
     }
     
+    @IBAction func genderChanged(_ sender: UISegmentedControl) {
+        
+        switch genderSegment.selectedSegmentIndex
+        {
+        case 0:
+            print("男生")
+            
+            //filterData[0].gender = "男生"
+//            filterAllData = Filter(gender: <#String#>, age: <#String#>, location: <#String#>, dating: <#String#>, time: <#String#>)
+            
+        case 1:
+            print("女生")
+            
+        case 2:
+            print("全部")
+            
+        default:
+            
+            
+            print("男生")
+            break;
+        }
+        
+    }
+    
+    
+    @IBAction func ageChanged(_ sender: UISegmentedControl) {
+        switch ageSegment.selectedSegmentIndex
+        {
+        case 0:
+            print("18 - 25")
+            
+        case 1:
+            print("26 - 35")
+            
+        case 2:
+            print("36 以上")
+            
+        default:
+            
+            
+            print("年齡")
+            break;
+        }
+        
+    }
+    
+    
+    @IBAction func locationChanged(_ sender: UISegmentedControl) {
+        
+        switch locationSegment.selectedSegmentIndex
+        {
+            case 0:
+            print("3 KM")
+            
+            case 1:
+            print("15 KM")
+            
+            case 2:
+            print("30 KM")
+            
+            default:
+            
+            print("距離")
+            break;
+        }
+        
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         
     }
     
+    func getFilterData() {
+        //let value = genderChanged.(value)
+        //let title = genderChanged
+        print(genderSegment.selectedSegmentIndex)
+        
+        //應該要有個地方 存自己的年紀性別和經緯度來算距離
+        guard let datingNumber = datingNumber else { return }
+        guard let timeNumber = timeNumber else { return }
+        
+        //有可能沒按到約會類型和時間範圍 要給預設值或是設定?
+        guard let filterAllData: Filter = Filter(gender: genderSegment.selectedSegmentIndex,
+                               age: ageSegment.selectedSegmentIndex,
+                               location: locationSegment.selectedSegmentIndex,
+                               dating: datingNumber,
+                               time: timeNumber)    else { return }
+        
+        print("filterALLData 是 \(filterAllData)")
+        
+        //guard let text = messageTxt.text else { return }
+        
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        
+        guard let userName = Auth.auth().currentUser?.displayName else { return }
+        
+        guard let userImage = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
+        
+        let createdTime = Date().millisecondsSince1970
+        
+        //let messageKey = self.ref.child("FilterData").child("PersonalChannel").child(friendChannel).childByAutoId().key
+        self.ref.child("FilterData").child(userId).setValue([
+            "senderId": userId,
+            "senderName": userName,
+            "senderPhoto": userImage,
+            "time": createdTime,
+            "gender": filterAllData.gender,
+            "age": filterAllData.age,
+            "location": filterAllData.location,
+            "dating": filterAllData.dating,
+            "datingTime": filterAllData.time
+            ]) { (error, _) in
+                
+                if let error = error {
+                    
+                    print("Data could not be saved: \(error).")
+                    
+                } else {
+                    
+                    print("Data saved successfully!")
+                    
+                }
+        }
+        
+        searchFilterData(filterData: filterAllData)
+        
+    }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func searchFilterData(filterData: Filter) {
+        
+        //抓一個最難他達到的條件的下來判斷 讓資料量減少
+        
+        ref.child("FilterData").queryOrdered(byChild: "dating").queryEqual(toValue: filterData.dating).observe(.childChanged) { (snapshot) in
+            
+            // childChanged 不能監控自身的變化嗎？ 改了 dating 沒反應 改 datingtime 可以
+            // Q2: 是否要執行過一次 才會持續的監控 childChanged
+            // 應該把相同的都先抓下來 依序判斷是否相同 跳出 alert
+            
+            guard let value = snapshot.value as? NSDictionary else { return }
+            
+//            guard let senderId = value["senderId"] as? String else { return }
+//
+//            guard let senderName = value["senderName"] as? String else { return }
+//
+//            guard let time = value["time"] as? Int else { return }
+//
+//            let content = value["content"] as? String
+//
+//            let senderPhoto = value["senderPhoto"] as? String
+//
+//            let imageUrl = value["imageUrl"] as? String
+//
+//            let message = Message(
+//                content: content,
+//                senderId: senderId,
+//                senderName: senderName,
+//                senderPhoto: senderPhoto,
+//                time: time,
+//                imageUrl: imageUrl
+//            )
+            
+            print(value)
+         
+        }
+        
+        //search 完去比對資料配對
+        self.showMessageAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
+        print("選取的人的 userID 是 \(friendUserId)")
+        
+    }
     
+    
+    
+    @IBAction func saveButtonClick(_ sender: UIButton) {
+        
+        getFilterData()
+        
+    }
+   
+    func showMessageAlert(title: String, message: String) {
+        
+        //要直接跳到 chatDetail 頁面
+        //可以跳過去 但是返回上一頁會直接跳回 map 主頁
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "確認", style: .default) { (action) in
+            
+            //collectionView.deselectItem(at: indexPath, animated: true)
+            
+            // 換頁並且改變 detail頁的 friendUserId 的值
+            guard let controller = UIStoryboard.chatStoryboard().instantiateViewController(
+                withIdentifier: String(describing: ChatDetailViewController.self)
+                ) as? ChatDetailViewController else { return }
+            
+            //controller.article = articles[indexPath.row]
+            controller.friendUserId = self.friendUserId
+            self.show(controller, sender: nil)
+            print("跳頁成功")
+            
+            //新增對方到 firebase 的好友列表
+            guard let friendId =  self.friendUserId else { return }
+            guard let myselfId = Auth.auth().currentUser?.uid else { return }
+            guard let friendName = self.navigationUserName else { return }
+            
+            guard let myselfName = Auth.auth().currentUser?.displayName else { return }
+            
+            
+            //refference.child("UserFriendList").child(myselfId).child(friendId).setValue([])
+            let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(friendId)": ["FriendUID": "\(friendId)","FriendName": "\(friendName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
+            
+            let friendChildUpdates = ["/UserData/\(friendId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)","FriendName": "\(myselfName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
+            
+            
+            //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
+            //
+            self.refference.updateChildValues(myChildUpdates)
+            self.refference.updateChildValues(friendChildUpdates)
+            
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+
 }
 
 extension FilterViewController: UICollectionViewDataSource{
@@ -315,6 +555,7 @@ extension FilterViewController: UICollectionViewDataSource{
             print("你選擇了 Dating \(indexPath.section) 組的")
             print("第 \(indexPath.item ) 張圖片")
             selectedDateIcon1 = indexPath
+            datingNumber = indexPath.item
             #warning ("TODO: 點擊後變色 且只能點一個 點了其中一個其他的就不能點 或者再把原本的取消才能再點下一個，或是點擊後再點其他的 本來的會消失 只顯示另外ㄧ個")
             //let selectedCell:UICollectionViewCell = collectionView.cellForItem(at: indexPath)!
             
@@ -332,6 +573,7 @@ extension FilterViewController: UICollectionViewDataSource{
             print("第 \(indexPath.item) 張圖片")
             
             selectedTimeIcon1 = indexPath
+            timeNumber = indexPath.item
             selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
             
             #warning ("TODO: 儲存他按了哪一個")

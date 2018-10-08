@@ -40,6 +40,7 @@ struct Locations {
     
     var latitude: Double {
         didSet {
+            
             updateCoordinate()
         }
     }

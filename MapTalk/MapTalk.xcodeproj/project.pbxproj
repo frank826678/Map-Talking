@@ -46,6 +46,7 @@
 		0177E2B8216143870038F29A /* EditInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0177E2B6216143870038F29A /* EditInfoTableViewCell.xib */; };
 		0177E2BB216143B10038F29A /* EditContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2B9216143B10038F29A /* EditContentTableViewCell.swift */; };
 		0177E2BC216143B10038F29A /* EditContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0177E2BA216143B10038F29A /* EditContentTableViewCell.xib */; };
+		01A12DE521683DB000833959 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A12DE421683DB000833959 /* Filter.swift */; };
 		01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3412151FEA100D23871 /* AppDelegate.swift */; };
 		01EBF3442151FEA200D23871 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3432151FEA200D23871 /* LoginViewController.swift */; };
 		01EBF3472151FEA200D23871 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01EBF3452151FEA200D23871 /* Login.storyboard */; };
@@ -104,6 +105,7 @@
 		0177E2B6216143870038F29A /* EditInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditInfoTableViewCell.xib; sourceTree = "<group>"; };
 		0177E2B9216143B10038F29A /* EditContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContentTableViewCell.swift; sourceTree = "<group>"; };
 		0177E2BA216143B10038F29A /* EditContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditContentTableViewCell.xib; sourceTree = "<group>"; };
+		01A12DE421683DB000833959 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		01EBF33E2151FEA100D23871 /* MapTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01EBF3412151FEA100D23871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01EBF3432151FEA200D23871 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				0141678D216321760080EDCE /* Icon.swift */,
+				01A12DE421683DB000833959 /* Filter.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				0177E2AE216131E30038F29A /* SettingViewController.swift in Sources */,
 				01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */,
 				01701AF4215BC6BE0074B0B9 /* ChatTableViewCell.swift in Sources */,
+				01A12DE521683DB000833959 /* Filter.swift in Sources */,
 				0172DA2121679A3000A50E1D /* FilterHeaderCollectionViewCell.swift in Sources */,
 				0177E2A22160CA630038F29A /* FilterViewController.swift in Sources */,
 				01701B0A215C89140074B0B9 /* ChatImageOwnerTableViewCell.swift in Sources */,
