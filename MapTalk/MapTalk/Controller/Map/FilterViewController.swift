@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import MapKit //為了拿到 CLLocationCoordinate2D
 
 class FilterViewController: UIViewController {
     
@@ -86,7 +87,12 @@ class FilterViewController: UIViewController {
     var selectedTimeIcon1 : IndexPath = []
     var timeNumber: Int?
     
+    //20181009
+    var centerDeliveryFromMap: CLLocationCoordinate2D?
     
+    var locManager = CLLocationManager()
+    var currentLocation: CLLocation!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,7 +173,17 @@ class FilterViewController: UIViewController {
         //        datingTypeCollectionView.register(UINib(nibName: "FilterCollectionViewCell", bundle: nil),
         //                               forCellReuseIdentifier: "Date")
         
+        //20181009
+        locManager.requestWhenInUseAuthorization()
+        currentLocation = locManager.location
         
+//        if( CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+//            CLLocationManager.authorizationStatus() ==  .authorizedAlways){
+//
+//            currentLocation = locManager.location
+//
+//        }
+
     }
     
     @objc func addTapped() {
@@ -267,7 +283,8 @@ class FilterViewController: UIViewController {
                                                  time: timeNumber)    else { return }
         
         print("filterALLData 是 \(filterAllData)")
-        
+        print("*********")
+        print("自己的位置是\(centerDeliveryFromMap)")
         //guard let text = messageTxt.text else { return }
         
         guard let userId = Auth.auth().currentUser?.uid else { return }
@@ -279,6 +296,13 @@ class FilterViewController: UIViewController {
         let createdTime = Date().millisecondsSince1970
         
         //let messageKey = self.ref.child("FilterData").child("PersonalChannel").child(friendChannel).childByAutoId().key
+               
+        
+        //  "location": filterAllData.location,
+//         "location": ["lat": currentLocation.coordinate.latitude,"lon": currentLocation.coordinate.longitude],
+        
+        // 或是經緯度先給預設值 只要他有移動位置 就會更新他目前的位置 但是要是第一次進來直接媒合 這邊 setvalue 可能會取代掉正確的位置資訊  這邊可以試著用 update
+        // 25°2'51"N   121°31'1"E 北車
         self.ref.child("FilterData").child(userId).setValue([
             "senderId": userId,
             "senderName": userName,
@@ -286,7 +310,7 @@ class FilterViewController: UIViewController {
             "time": createdTime,
             "gender": filterAllData.gender,
             "age": filterAllData.age,
-            "location": filterAllData.location,
+            "location": ["lat": "25.251","lon": "121.311"],
             "dating": filterAllData.dating,
             "datingTime": filterAllData.time
         ]) { (error, _) in
@@ -344,7 +368,11 @@ class FilterViewController: UIViewController {
             
             guard let gender = value["gender"] as? Int else { return }
             
-            guard let location = value["location"] as? Int else { return }
+            guard let location = value["location"] as? NSDictionary else { return }
+
+            guard let userLatitude = location["lat"] as? Double else { return }
+            
+            guard let userLongitude = location["lon"] as? Double else { return }
             
             guard let senderName = value["senderName"] as? String else { return }
 
@@ -355,8 +383,7 @@ class FilterViewController: UIViewController {
             guard let senderPhoto = value["senderPhoto"] as? String else { return }
             
             let filterData = FilterData(gender: gender,
-                                        age: age,
-                                        location: location,
+                                        age: age, location: Location(latitude: userLatitude, longitude: userLongitude) ,
                                         dating: dating,
                                         datingTime: datingTime,
                                         time: time,
@@ -407,6 +434,9 @@ class FilterViewController: UIViewController {
             
             print(" *** 準備印 searchFilterData 的資料 ")
             print(value)
+            
+            print(" *** 準備印 filterData 的資料 ")
+            print(filterData)
             
             //search 完去比對資料配對
             

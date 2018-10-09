@@ -38,7 +38,7 @@ struct FilterData {
     let age: Int
     // swiftlint:enable identifier_name
     
-    let location: Int //待修
+    let location: Location //待修
     
     let dating: Int
     
@@ -51,6 +51,14 @@ struct FilterData {
     let senderName: String
     
     let senderPhotoURL: String
+    
+}
+
+struct Location {
+
+    let latitude: Double
+    
+    let longitude: Double
     
 }
 

@@ -40,7 +40,7 @@
                                 </constraints>
                                 <state key="normal" image="new3-romance-40"/>
                                 <connections>
-                                    <segue destination="sB5-QG-UJ5" kind="show" id="ZCr-iH-jfU"/>
+                                    <segue destination="sB5-QG-UJ5" kind="show" identifier="MappingPage" id="ZCr-iH-jfU"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -98,7 +98,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VT1-su-UkK">
-                                <rect key="frame" x="30" y="113" width="315" height="29"/>
+                                <rect key="frame" x="62.5" y="113" width="250" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="NOZ-vm-max"/>
+                                </constraints>
                                 <segments>
                                     <segment title="男生"/>
                                     <segment title="女生"/>
@@ -159,7 +162,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c2V-Bq-nwl">
                                 <rect key="frame" x="202" y="238" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="測試鈕"/>
                                 <connections>
                                     <action selector="saveButtonClick:" destination="sB5-QG-UJ5" eventType="touchUpInside" id="tEb-OC-UGc"/>
                                 </connections>
@@ -177,14 +180,12 @@
                             <constraint firstItem="ywf-IJ-5Ze" firstAttribute="top" secondItem="wpc-GO-dQ0" secondAttribute="bottom" constant="15" id="LVT-Wn-Bqz"/>
                             <constraint firstItem="l81-OK-dvh" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" constant="10" id="Ttl-0l-PmE"/>
                             <constraint firstItem="h4v-vA-99S" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" id="Xx9-6u-J3F"/>
-                            <constraint firstItem="0hV-vY-Zad" firstAttribute="trailing" secondItem="VT1-su-UkK" secondAttribute="trailing" constant="30" id="a3d-yM-pij"/>
                             <constraint firstItem="h4v-vA-99S" firstAttribute="top" secondItem="lx6-z6-VDS" secondAttribute="bottom" constant="15" id="aYu-XC-70Z"/>
                             <constraint firstItem="VT1-su-UkK" firstAttribute="centerX" secondItem="Hzw-Qd-RrU" secondAttribute="centerX" id="fXC-cv-3Ey"/>
                             <constraint firstItem="lx6-z6-VDS" firstAttribute="centerX" secondItem="Hzw-Qd-RrU" secondAttribute="centerX" id="fgb-cD-hhx"/>
                             <constraint firstItem="ywf-IJ-5Ze" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" constant="10" id="pea-fM-i26"/>
                             <constraint firstItem="wpc-GO-dQ0" firstAttribute="top" secondItem="l81-OK-dvh" secondAttribute="bottom" constant="15" id="sHc-5W-cGU"/>
                             <constraint firstItem="l81-OK-dvh" firstAttribute="top" secondItem="VT1-su-UkK" secondAttribute="bottom" constant="15" id="t8I-FJ-xaU"/>
-                            <constraint firstItem="VT1-su-UkK" firstAttribute="leading" secondItem="0hV-vY-Zad" secondAttribute="leading" constant="30" id="wfn-sg-g7R"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0hV-vY-Zad"/>
                     </view>

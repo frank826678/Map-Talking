@@ -50,6 +50,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     //20181003
     var friendUserId: String?
     
+    //20181009
+    var centerDelivery: CLLocationCoordinate2D?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -87,6 +90,41 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         navigationController?.setNavigationBarHidden(true, animated: true)
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "MappingPage" {
+            
+            // swiftlint:disable force_cast
+            let controller = segue.destination as! FilterViewController
+            // swiftlint:enable force_cast
+            controller.centerDeliveryFromMap = centerDelivery
+//            let tag = sender as! Int
+//            nowIndex = tag //把目前選到的ＥＤＩＴ 放到全域去準備使用
+//            let controller = segue.destination as! TextInputViewController
+//
+//            //print("壞", ObjectIdentifier(controller))
+//
+//            //controller.textInput.text = contentArray[tag]
+//            controller.textFromHomePage = contentArray[tag]
+//
+//            controller.completionHandler = { dataFromVC2 in
+//
+//                self.saveData(passData: dataFromVC2)
+            
+            }
+        
+        else {
+            
+//            let controller = segue.destination as! TextInputViewController
+//            //controller.addObserver(self, forKeyPath: "infoInput", options: .new, context: nil)
+//            controller.completionHandler = { dataFromVC2 in
+//                
+//                self.saveData(passData: dataFromVC2)
+                
+            }
+        }
+    
     
     func dataBaseLocation() {
         refference.child("location").observe(.childAdded) { (snapshot) in
@@ -192,16 +230,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
+//    func fetchCenter(center: CLLocationCoordinate2D) {
+//
+//
+//    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         if let coord = manager.location?.coordinate {
             
             let center = CLLocationCoordinate2D(latitude: coord.latitude, longitude: coord.longitude)
+            
+            centerDelivery = center
+            
+            //fetchCenter(center: center)
             
             //            let region = MKCoordinateRegion(center: center,
             //                                            span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08))
             
             saveSelfLocation(latitude: center.latitude, longitude: center.longitude)
+            
+            //增加一個 closure 傳值 把目前位置傳過去 filter 讓他 setvalue 的時候 也有值可以上傳
         }
         
     }
@@ -497,6 +546,49 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             "lon": longitude,
             "userName": userName,
             "userImage": userImage])
+        
+        //加一個 update 更新 filter 下面的
+        
+        let myLocationUpdates = ["/FilterData/\(userId)/location": [
+            "lat": latitude,
+            "lon": longitude,
+            ]]
+        
+        refference.updateChildValues(myLocationUpdates)
+
+        
+//        let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(friendId)": ["FriendUID": "\(friendId)","FriendName": "\(friendName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
+//
+//        let friendChildUpdates = ["/UserData/\(friendId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)","FriendName": "\(myselfName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
+//
+//
+//        //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
+//        //
+//        self.refference.updateChildValues(myChildUpdates)
+        
+//        self.ref.child("FilterData").child(userId).setValue([
+//            "senderId": userId,
+//            "senderName": userName,
+//            "senderPhoto": userImage,
+//            "time": createdTime,
+//            "gender": filterAllData.gender,
+//            "age": filterAllData.age,
+//            "location": filterAllData.location,
+//            "dating": filterAllData.dating,
+//            "datingTime": filterAllData.time
+//        ]) { (error, _) in
+//
+//            if let error = error {
+//
+//                print("Data could not be saved: \(error).")
+//
+//            } else {
+//
+//                print("Data saved successfully!")
+//
+//            }
+//        }
+        
     }
     
     @IBAction func test(_ sender: Any) {
