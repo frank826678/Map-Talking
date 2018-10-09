@@ -94,19 +94,25 @@ class FilterViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
         
         //20181008
-
-        var pencilImage = UIImage(named: "chat_arrow_up")!
-        // swiftlint:disable force_cast
-        let pencilBtn: UIButton = UIButton(type: UIButton.ButtonType.custom) as! UIButton
-
-        // swiftlint:enable force_cast
-
-        pencilBtn.setImage(pencilImage, for: UIControl.State.normal)
-        pencilBtn.addTarget(self, action: "pencilBtnPressed", for: UIControl.Event.touchUpInside)
-        pencilBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        let pencilBarBtn = UIBarButtonItem(customView: pencilBtn)
+        //可以用
         
-        self.navigationItem.setRightBarButtonItems([pencilBarBtn], animated: false)
+//        var pencilImage = UIImage(named: "chat_arrow_up")!
+//        // swiftlint:disable force_cast
+//        let pencilBtn: UIButton = UIButton(type: UIButton.ButtonType.custom) as! UIButton
+//
+//        // swiftlint:enable force_cast
+//
+//        pencilBtn.setImage(pencilImage, for: UIControl.State.normal)
+//        pencilBtn.addTarget(self, action: "pencilBtnPressed", for: UIControl.Event.touchUpInside)
+//        pencilBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+//        let pencilBarBtn = UIBarButtonItem(customView: pencilBtn)
+//
+//        self.navigationItem.setRightBarButtonItems([pencilBarBtn], animated: false)
+        
+        //END
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(addTapped))
+
 
         
         //        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
@@ -162,6 +168,10 @@ class FilterViewController: UIViewController {
         //                               forCellReuseIdentifier: "Date")
         
         
+    }
+    
+    @objc func addTapped() {
+        print("點擊了按下 Save 的按鈕")
     }
     
     @IBAction func genderChanged(_ sender: UISegmentedControl) {
