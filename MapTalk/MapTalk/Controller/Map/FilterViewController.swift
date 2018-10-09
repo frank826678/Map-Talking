@@ -92,7 +92,9 @@ class FilterViewController: UIViewController {
     
     var locManager = CLLocationManager()
     var currentLocation: CLLocation!
-
+    //
+    //
+    var currentCenter: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,6 +179,9 @@ class FilterViewController: UIViewController {
         locManager.requestWhenInUseAuthorization()
         currentLocation = locManager.location
         
+        //20181009  NotificationCenter
+        NotificationCenter.default.addObserver(self, selector: #selector (getDataFrom(_:)), name: .myselfLocation, object: nil)
+        
 //        if( CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
 //            CLLocationManager.authorizationStatus() ==  .authorizedAlways){
 //
@@ -184,6 +189,32 @@ class FilterViewController: UIViewController {
 //
 //        }
 
+    }
+    
+    @objc func getDataFrom(_ noti: Notification) {
+        
+        guard let center = noti.object as? CLLocationCoordinate2D else {
+            print("no center")
+            return  }
+        
+       currentCenter?.latitude = center.latitude
+       currentCenter?.longitude = center.longitude
+        
+//        guard let text = noti.object as? String else { return print("no text") }
+//
+//        if noti.name == .add {
+//
+//            toDoListItem.append(text)
+//
+//        } else {
+//
+//            guard let indexPath = indexPath else { return print("no index") }
+//            toDoListItem[indexPath.row] = text
+//
+//        }
+//
+//        tableView.reloadData()
+        
     }
     
     @objc func addTapped() {
@@ -382,7 +413,7 @@ class FilterViewController: UIViewController {
             
             guard let senderPhoto = value["senderPhoto"] as? String else { return }
             
-            let filterData = FilterData(gender: gender,
+            let friendFilterData = FilterData(gender: gender,
                                         age: age, location: Location(latitude: userLatitude, longitude: userLongitude) ,
                                         dating: dating,
                                         datingTime: datingTime,
@@ -391,10 +422,39 @@ class FilterViewController: UIViewController {
                                         senderName: senderName,
                                         senderPhotoURL: senderPhoto)
             
-            //先用名字 到時候再加上性別 和時間
-            if senderId != userId {
+            //距離的計算
             
-                self.filterNewData.append(filterData)
+            //let myLocation = CLLocation(latitude: 25.998443,longitude: 120.174183)
+            //下面的預設值是台北車站
+            
+//            let myLocation = CLLocation(latitude: self.currentCenter?.latitude ?? 25.048134,longitude: self.currentCenter?.longitude ?? 121.517314
+//            )
+            
+            let myLocation =  CLLocation(latitude:self.centerDeliveryFromMap?.latitude ?? 25.048134,longitude: self.centerDeliveryFromMap?.longitude ?? 121.517314)
+            
+
+            let friendLocation = CLLocation(latitude: friendFilterData.location.latitude, longitude: friendFilterData.location.longitude)
+
+            
+            let distance = myLocation.distance(from: friendLocation) / 1000
+
+            let roundDistance = round(distance * 100) / 100
+            //print("***自己目前的實際所在地\(self.currentCenter?.latitude),\(self.currentCenter?.longitude )***")
+            
+            print("***自己目前的實際所在地\(myLocation)")
+            print("***算出目前跟朋友的距離***\(senderName)")
+            print("\(roundDistance) km")
+            //打死算距離
+            
+            //時間的限制 用現在時間 減 下載下來資料的時間 小於 24 小時內才比對 （24 小時 友 86400 秒 + 000）一小時 3600 000
+            let createdTime = Date().millisecondsSince1970
+            let in24hr = createdTime - friendFilterData.time
+            
+            // 測試時間 1538924236062 Your time zone: Sunday, October 7, 2018 10:57:16.062 PM GMT+08:00
+            //先用名字 到時候再加上性別 和時間 (上面的搜尋是搜尋 約會類型相同的人)
+            if senderId != userId &&  filterData.time == friendFilterData.datingTime && in24hr < 86400000  {
+            
+                self.filterNewData.append(friendFilterData)
                 
                 self.showMessageAlert(title: "登愣！！！ 發現和 \(senderName) 有相同的喜好", message: "認識一下吧！", senderId: senderId, senderName: senderName)
                 print("選取的人的 userID 是 \(senderId)")
@@ -436,7 +496,7 @@ class FilterViewController: UIViewController {
             print(value)
             
             print(" *** 準備印 filterData 的資料 ")
-            print(filterData)
+            print(friendFilterData)
             
             //search 完去比對資料配對
             

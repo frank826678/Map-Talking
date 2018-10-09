@@ -241,7 +241,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             let center = CLLocationCoordinate2D(latitude: coord.latitude, longitude: coord.longitude)
             
+            //20181009 可以拿掉
             centerDelivery = center
+            
+            //20181009 準備使用 notification 本身的位置 及更新的位置 打去給 filter 那頁
+            NotificationCenter.default.post(name: .myselfLocation, object: center)
+            
             
             //fetchCenter(center: center)
             
@@ -273,7 +278,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //新增 20181001
         let userAnnotation = annotation as? UserAnnotation
         
-        //新增 20181002
+        //新增 20181002 重要 點擊後可以執行 didselect
         annotationView?.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         //annotationView?.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
         
@@ -865,3 +870,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //        return test
 //    }
 //}
+
+extension NSNotification.Name {
+    
+    static let myselfLocation = NSNotification.Name("Location")
+    
+}
