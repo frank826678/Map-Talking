@@ -40,13 +40,15 @@
 		0177E2AC216131B50038F29A /* ADCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2AB216131B50038F29A /* ADCoinViewController.swift */; };
 		0177E2AE216131E30038F29A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2AD216131E30038F29A /* SettingViewController.swift */; };
 		0177E2B0216131F60038F29A /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2AF216131F60038F29A /* ContactUsViewController.swift */; };
-		0177E2B32161424B0038F29A /* EditNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2B12161424B0038F29A /* EditNameTableViewCell.swift */; };
-		0177E2B42161424B0038F29A /* EditNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0177E2B22161424B0038F29A /* EditNameTableViewCell.xib */; };
 		0177E2B7216143870038F29A /* EditInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2B5216143870038F29A /* EditInfoTableViewCell.swift */; };
 		0177E2B8216143870038F29A /* EditInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0177E2B6216143870038F29A /* EditInfoTableViewCell.xib */; };
 		0177E2BB216143B10038F29A /* EditContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2B9216143B10038F29A /* EditContentTableViewCell.swift */; };
 		0177E2BC216143B10038F29A /* EditContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0177E2BA216143B10038F29A /* EditContentTableViewCell.xib */; };
 		01A12DE521683DB000833959 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A12DE421683DB000833959 /* Filter.swift */; };
+		01A12DE8216DC05B00833959 /* EditUserDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A12DE6216DC05B00833959 /* EditUserDataTableViewCell.swift */; };
+		01A12DE9216DC05B00833959 /* EditUserDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A12DE7216DC05B00833959 /* EditUserDataTableViewCell.xib */; };
+		01E6581F216DE40D00928C9B /* ProfileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E6581E216DE40D00928C9B /* ProfileContentView.swift */; };
+		01E65821216DE45700928C9B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E65820216DE45700928C9B /* UIView.swift */; };
 		01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3412151FEA100D23871 /* AppDelegate.swift */; };
 		01EBF3442151FEA200D23871 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3432151FEA200D23871 /* LoginViewController.swift */; };
 		01EBF3472151FEA200D23871 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01EBF3452151FEA200D23871 /* Login.storyboard */; };
@@ -99,13 +101,15 @@
 		0177E2AB216131B50038F29A /* ADCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCoinViewController.swift; sourceTree = "<group>"; };
 		0177E2AD216131E30038F29A /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		0177E2AF216131F60038F29A /* ContactUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsViewController.swift; sourceTree = "<group>"; };
-		0177E2B12161424B0038F29A /* EditNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNameTableViewCell.swift; sourceTree = "<group>"; };
-		0177E2B22161424B0038F29A /* EditNameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditNameTableViewCell.xib; sourceTree = "<group>"; };
 		0177E2B5216143870038F29A /* EditInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoTableViewCell.swift; sourceTree = "<group>"; };
 		0177E2B6216143870038F29A /* EditInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditInfoTableViewCell.xib; sourceTree = "<group>"; };
 		0177E2B9216143B10038F29A /* EditContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContentTableViewCell.swift; sourceTree = "<group>"; };
 		0177E2BA216143B10038F29A /* EditContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditContentTableViewCell.xib; sourceTree = "<group>"; };
 		01A12DE421683DB000833959 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		01A12DE6216DC05B00833959 /* EditUserDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserDataTableViewCell.swift; sourceTree = "<group>"; };
+		01A12DE7216DC05B00833959 /* EditUserDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditUserDataTableViewCell.xib; sourceTree = "<group>"; };
+		01E6581E216DE40D00928C9B /* ProfileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContentView.swift; sourceTree = "<group>"; };
+		01E65820216DE45700928C9B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		01EBF33E2151FEA100D23871 /* MapTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01EBF3412151FEA100D23871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01EBF3432151FEA200D23871 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -197,14 +201,38 @@
 				0177E2AB216131B50038F29A /* ADCoinViewController.swift */,
 				0177E2AD216131E30038F29A /* SettingViewController.swift */,
 				0177E2AF216131F60038F29A /* ContactUsViewController.swift */,
-				0177E2B12161424B0038F29A /* EditNameTableViewCell.swift */,
-				0177E2B22161424B0038F29A /* EditNameTableViewCell.xib */,
+				01A12DE6216DC05B00833959 /* EditUserDataTableViewCell.swift */,
+				01A12DE7216DC05B00833959 /* EditUserDataTableViewCell.xib */,
 				0177E2B5216143870038F29A /* EditInfoTableViewCell.swift */,
 				0177E2B6216143870038F29A /* EditInfoTableViewCell.xib */,
 				0177E2B9216143B10038F29A /* EditContentTableViewCell.swift */,
 				0177E2BA216143B10038F29A /* EditContentTableViewCell.xib */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		01E6581C216DE3BD00928C9B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				01E65822216DE67D00928C9B /* TableViewCell */,
+				01E6581D216DE3DC00928C9B /* Message */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		01E6581D216DE3DC00928C9B /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				01E6581E216DE40D00928C9B /* ProfileContentView.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		01E65822216DE67D00928C9B /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		01EBF3352151FEA100D23871 = {
@@ -228,6 +256,7 @@
 		01EBF3402151FEA100D23871 /* MapTalk */ = {
 			isa = PBXGroup;
 			children = (
+				01E6581C216DE3BD00928C9B /* View */,
 				01EBF3632153456E00D23871 /* Extension */,
 				01EBF361215343BA00D23871 /* Storyboard */,
 				01EBF3602153439E00D23871 /* Controller */,
@@ -299,6 +328,7 @@
 				01EBF3642153462100D23871 /* UIStoryboard.swift */,
 				01EBF37221546F2600D23871 /* UIAlertController.swift */,
 				0141678F216323520080EDCE /* UIImage.swift */,
+				01E65820216DE45700928C9B /* UIView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -405,11 +435,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0177E2B8216143870038F29A /* EditInfoTableViewCell.xib in Resources */,
+				01A12DE9216DC05B00833959 /* EditUserDataTableViewCell.xib in Resources */,
 				01EBF34C2151FEA500D23871 /* LaunchScreen.storyboard in Resources */,
 				0177E2A62160D3CA0038F29A /* FilterCollectionViewCell.xib in Resources */,
 				01701B07215C88EF0074B0B9 /* ChatImageTableViewCell.xib in Resources */,
 				01701AF5215BC6BE0074B0B9 /* ChatTableViewCell.xib in Resources */,
-				0177E2B42161424B0038F29A /* EditNameTableViewCell.xib in Resources */,
 				0177E2A0216095EE0038F29A /* ProfileTableViewCell.xib in Resources */,
 				01EBF3672153483F00D23871 /* Main.storyboard in Resources */,
 				016A513A2159F54F00AB2745 /* Profile.storyboard in Resources */,
@@ -535,7 +565,6 @@
 				01701B03215C7F5F0074B0B9 /* PhotoViewController.swift in Sources */,
 				0177E29C215FCB590038F29A /* ProfileViewController.swift in Sources */,
 				01701B0D215C8A280074B0B9 /* Message.swift in Sources */,
-				0177E2B32161424B0038F29A /* EditNameTableViewCell.swift in Sources */,
 				01701AFC215C5DEB0074B0B9 /* ChatOwnerTableViewCell.swift in Sources */,
 				01EBF37321546F2600D23871 /* UIAlertController.swift in Sources */,
 				0177E2B7216143870038F29A /* EditInfoTableViewCell.swift in Sources */,
@@ -543,6 +572,7 @@
 				01701AEB215A72760074B0B9 /* TabBarColor.swift in Sources */,
 				01701B06215C88EF0074B0B9 /* ChatImageTableViewCell.swift in Sources */,
 				01EBF3442151FEA200D23871 /* LoginViewController.swift in Sources */,
+				01E6581F216DE40D00928C9B /* ProfileContentView.swift in Sources */,
 				01701AF1215BC6930074B0B9 /* ChatViewController.swift in Sources */,
 				0141678E216321760080EDCE /* Icon.swift in Sources */,
 				0177E2AE216131E30038F29A /* SettingViewController.swift in Sources */,
@@ -552,8 +582,10 @@
 				0172DA2121679A3000A50E1D /* FilterHeaderCollectionViewCell.swift in Sources */,
 				0177E2A22160CA630038F29A /* FilterViewController.swift in Sources */,
 				01701B0A215C89140074B0B9 /* ChatImageOwnerTableViewCell.swift in Sources */,
+				01A12DE8216DC05B00833959 /* EditUserDataTableViewCell.swift in Sources */,
 				016A51352159DCBA00AB2745 /* TabBarViewController.swift in Sources */,
 				0177E2B0216131F60038F29A /* ContactUsViewController.swift in Sources */,
+				01E65821216DE45700928C9B /* UIView.swift in Sources */,
 				01701AFF215C7E1B0074B0B9 /* ChatDetailViewController.swift in Sources */,
 				01416790216323520080EDCE /* UIImage.swift in Sources */,
 				0177E2BB216143B10038F29A /* EditContentTableViewCell.swift in Sources */,

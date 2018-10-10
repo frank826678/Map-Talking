@@ -18,11 +18,18 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet weak var userName: UILabel!
     
+    @IBOutlet weak var storyHighlightsTextField: UITextField!
+    
     var iconNameArray: [String] = ["編輯資料","獲取金幣","設定","聯絡我們"]
     //imageArray: [UIImage] = []
     //var iconImageArray: [UIImage] = [UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!]
 
     var iconImageArray: [String] = ["new3-pencil-50","new3-cheap-2-50","new3-settings-50-2","new3-new-post-50"]
+    
+    // swiftlint:disable identifier_name
+    var ref: DatabaseReference!
+    // swiftlint:enable identifier_name
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +46,11 @@ class ProfileViewController: UIViewController {
         
         profileTableView.register(UINib(nibName: "ProfileTableViewCell", bundle: nil),
                                forCellReuseIdentifier: "Profile")
-
-        // Do any additional setup after loading the view.
+        
+        storyHighlightsTextField.delegate = self
+        
+        ref = Database.database().reference() //重要 沒有會 nil
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,9 +69,61 @@ class ProfileViewController: UIViewController {
         guard let userDisplayName = Auth.auth().currentUser?.displayName else { return }
         guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
         
-        userImage.kf.setImage(with: URL(string: photoSmallURL))
+        let bigPhotoURL = URL(string: photoSmallURL + "?height=500")
+        
+        //userImage.kf.setImage(with: URL(string: photoSmallURL))
+        userImage.kf.setImage(with: bigPhotoURL)
         userName.text = userDisplayName
     }
+    
+    // 沒有按鈕 做心情動態的動作 結束編輯後執行
+    // 鍵盤推掉後執行
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("輸入的內容為\(storyHighlightsTextField.text)")
+        
+        if let textFieldInput = storyHighlightsTextField.text {
+            
+            print("輸入的內容2 為\(textFieldInput)")
+            guard let userId = Auth.auth().currentUser?.uid else { return }
+            
+            let userStatus = ["text": textFieldInput]
+            
+            let childUpdates = ["/location/\(userId)/message": userStatus]
+            
+            ref.updateChildValues(childUpdates)
+        }
+        
+    }
+    
+//    @IBAction func changeMessage(_ sender: UIButton) {
+//
+//        let editAlert = UIAlertController(title: "Message:", message: nil, preferredStyle: .alert)
+//
+//        editAlert.addTextField()
+//
+//        let submitAction = UIAlertAction(title: "Send", style: .default, handler: { (_) in
+//
+//            if let alertTextField = editAlert.textFields?.first?.text {
+//
+//                print("alertTextField: \(alertTextField)")
+//
+//                guard let userId = Auth.auth().currentUser?.uid else { return }
+//
+//                let userStatus = ["text": alertTextField]
+//
+//                let childUpdates = ["/location/\(userId)/message": userStatus]
+//
+//                self.ref.updateChildValues(childUpdates)
+//            }
+//        })
+//
+//        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+//
+//        editAlert.addAction(submitAction)
+//        editAlert.addAction(cancel)
+//
+//        self.present(editAlert, animated: true)
+//    }
     
     /*
     func setButtonTemplateImage() {
@@ -178,4 +240,6 @@ extension ProfileViewController: UITableViewDataSource{
 }
 
 extension ProfileViewController: UITableViewDelegate {}
+
+extension ProfileViewController: UITextFieldDelegate {}
 

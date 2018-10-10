@@ -31,8 +31,8 @@ class FilterViewController: UIViewController {
     // swiftlint:enable identifier_name
     
     var filterData: [Filter] = []
-    //var filterAllData: Filter? //若宣告在這不給問號要給啥???
-    
+    //var filterAllData: Filter? //若宣告在這不給問號要給啥???  -- 如果不用 array 只能先給 optional 下面再塞資料時一個一個給他
+
     var filterNewData: [FilterData] = []
     
     var gender = ""
@@ -120,7 +120,6 @@ class FilterViewController: UIViewController {
         //END
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(addTapped))
-
 
         
         //        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
@@ -467,30 +466,6 @@ class FilterViewController: UIViewController {
 //            self.friendUserId = senderId
 //
 //            guard let friendUserName = self.friendUserName  else { return }
-            
-            
-            
-            
-            //            guard let senderId = value["senderId"] as? String else { return }
-            //
-            //            guard let senderName = value["senderName"] as? String else { return }
-            //
-            //            guard let time = value["time"] as? Int else { return }
-            //
-            //            let content = value["content"] as? String
-            //
-            //            let senderPhoto = value["senderPhoto"] as? String
-            //
-            //            let imageUrl = value["imageUrl"] as? String
-            //
-            //            let message = Message(
-            //                content: content,
-            //                senderId: senderId,
-            //                senderName: senderName,
-            //                senderPhoto: senderPhoto,
-            //                time: time,
-            //                imageUrl: imageUrl
-            //            )
             
             print(" *** 準備印 searchFilterData 的資料 ")
             print(value)
