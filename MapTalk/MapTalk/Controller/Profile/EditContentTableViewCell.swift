@@ -10,6 +10,10 @@ import UIKit
 
 class EditContentTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var userInfoLabel: UILabel!
+    
+    @IBOutlet weak var userInfoButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

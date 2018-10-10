@@ -11,6 +11,11 @@ import UIKit
 class EditViewController: UIViewController {
     
     @IBOutlet weak var editTableView: UITableView!
+    
+    var userInfo = ["性別","生日","感情狀態","居住地","體型","我想尋找"]
+    
+    let fullScreenSize = UIScreen.main.bounds.size
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,8 +28,7 @@ class EditViewController: UIViewController {
                                forCellReuseIdentifier: "EditUserData")
         editTableView.register(UINib(nibName: "EditContentTableViewCell", bundle: nil),
                                forCellReuseIdentifier: "EditContent")
-        
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,6 +38,59 @@ class EditViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = "     編輯資料"
         
         
+    }
+    
+    //@IBAction
+    
+    func selectDatePick(_ sender: Any) {
+        //初始化UIPickerView
+        pickerView = UIPickerView()
+        pickerView.dataSource = self
+        pickerView.delegate = self
+        //设置选择框的默认值
+        pickerView.selectRow(0,inComponent:0,animated:true)
+        //把UIPickerView放到alert里面（也可以用datePick）
+        let alertController:UIAlertController=UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        alertController.addAction(UIAlertAction(title: "确定", style: UIAlertAction.Style.default){
+            (alertAction)->Void in
+            print("date select:" + String(self.pickerView.selectedRow(inComponent: 0)+1))
+        })
+        alertController.addAction(UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel,handler:nil))
+        //let width = frameView.frame.width;
+        //350
+        pickerView.frame = CGRect(x: 10, y: 0, width: fullScreenSize.width, height: 250);
+        alertController.view.addSubview(pickerView)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    var pickerView:UIPickerView!
+    @IBOutlet weak var frameView: UIView!
+    
+    //设置选择框的列数为3列,继承于UIPickerViewDataSource协议
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    //设置选择框的行数为9行，继承于UIPickerViewDataSource协议
+    func pickerView(_ pickerView: UIPickerView,
+                    numberOfRowsInComponent component: Int) -> Int {
+        return 12
+    }
+    //设置选择框各选项的内容，继承于UIPickerViewDelegate协议
+    func pickerView(_ pickerView: UIPickerView, titleForRow rowInt: Int,
+                    forComponent component: Int) -> String? {
+        return String(rowInt+1)+""+String("個月")
+    }
+    
+//    作者：人说狂徒富贵在青春
+//    链接：https://www.jianshu.com/p/66e2cbd17448
+//    來源：简书
+//    简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
+    
+    @objc func userInfoButtonClicked(sender: UIButton) {
+        
+        let buttonRow = sender.tag
+        //let result = articles[buttonRow]
+        selectDatePick(buttonRow)
+        print(buttonRow) //OK 可以知道點了哪一個
     }
     
 }
@@ -130,6 +187,17 @@ extension EditViewController: UITableViewDataSource{
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: "EditContent", for: indexPath)
                 as? EditContentTableViewCell {
+                
+                cell.userInfoButton.tag = indexPath.row
+                cell.userInfoButton.addTarget(self, action: #selector(userInfoButtonClicked(sender:)), for: .touchUpInside) //要加 .
+                //cell.userInfoButton.titleLabel?.text = "123"
+                cell.userInfoButton.setTitle("台北市", for: .normal)//设置按钮显示的文字
+                //cell.userInfoButton..titleLabel?.font = UIFont.systemFont(ofSize: 23)
+                cell.userInfoButton.setTitleColor(UIColor.red, for: UIControl.State.normal)
+                
+               
+                cell.userInfoLabel.text = userInfo[indexPath.row]
+                
                 return cell
             }
         case 2:
@@ -312,3 +380,7 @@ extension EditViewController: CellDelegate {
 //    }
     
 }
+
+extension EditViewController: UIPickerViewDataSource {}
+
+extension EditViewController: UIPickerViewDelegate {}
