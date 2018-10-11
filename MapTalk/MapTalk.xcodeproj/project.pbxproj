@@ -47,6 +47,8 @@
 		01A12DE521683DB000833959 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A12DE421683DB000833959 /* Filter.swift */; };
 		01A12DE8216DC05B00833959 /* EditUserDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A12DE6216DC05B00833959 /* EditUserDataTableViewCell.swift */; };
 		01A12DE9216DC05B00833959 /* EditUserDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A12DE7216DC05B00833959 /* EditUserDataTableViewCell.xib */; };
+		01CF3563216F334E00B98D71 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF3562216F334E00B98D71 /* Profile.swift */; };
+		01CF3566216F759500B98D71 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF3565216F759500B98D71 /* DateManager.swift */; };
 		01E6581F216DE40D00928C9B /* ProfileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E6581E216DE40D00928C9B /* ProfileContentView.swift */; };
 		01E65821216DE45700928C9B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E65820216DE45700928C9B /* UIView.swift */; };
 		01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3412151FEA100D23871 /* AppDelegate.swift */; };
@@ -108,6 +110,8 @@
 		01A12DE421683DB000833959 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		01A12DE6216DC05B00833959 /* EditUserDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserDataTableViewCell.swift; sourceTree = "<group>"; };
 		01A12DE7216DC05B00833959 /* EditUserDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditUserDataTableViewCell.xib; sourceTree = "<group>"; };
+		01CF3562216F334E00B98D71 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		01CF3565216F759500B98D71 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		01E6581E216DE40D00928C9B /* ProfileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContentView.swift; sourceTree = "<group>"; };
 		01E65820216DE45700928C9B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		01EBF33E2151FEA100D23871 /* MapTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +153,7 @@
 			children = (
 				0141678D216321760080EDCE /* Icon.swift */,
 				01A12DE421683DB000833959 /* Filter.swift */,
+				01CF3562216F334E00B98D71 /* Profile.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -209,6 +214,14 @@
 				0177E2BA216143B10038F29A /* EditContentTableViewCell.xib */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		01CF3564216F755C00B98D71 /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				01CF3565216F759500B98D71 /* DateManager.swift */,
+			);
+			path = Time;
 			sourceTree = "<group>";
 		};
 		01E6581C216DE3BD00928C9B /* View */ = {
@@ -273,6 +286,7 @@
 		01EBF3562152815D00D23871 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				01CF3564216F755C00B98D71 /* Time */,
 				0141678C216320DE0080EDCE /* Enum */,
 				01701AEC215B39820074B0B9 /* Error */,
 				01EBF36F21546CED00D23871 /* Firebase */,
@@ -386,6 +400,7 @@
 				01EBF35321521E7200D23871 /* ShellScript */,
 				9CFC7B52CD86F93FC5A8DDFC /* [CP] Embed Pods Frameworks */,
 				449B620054695162684020E8 /* [CP] Copy Pods Resources */,
+				01E65823216EF3BC00928C9B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -459,12 +474,32 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		01E65823216EF3BC00928C9B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+				"",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 3b2b7c8d309bcd0cbae2a4e64bca36acca8940eb ccb54ccde390d078547cb57d01cc742b2509bda9fab37299bf127275e849ae76\n";
+		};
 		01EBF35321521E7200D23871 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
 			outputPaths = (
 			);
@@ -569,10 +604,12 @@
 				01EBF37321546F2600D23871 /* UIAlertController.swift in Sources */,
 				0177E2B7216143870038F29A /* EditInfoTableViewCell.swift in Sources */,
 				01701AEE215B39A00074B0B9 /* ErrorManager.swift in Sources */,
+				01CF3563216F334E00B98D71 /* Profile.swift in Sources */,
 				01701AEB215A72760074B0B9 /* TabBarColor.swift in Sources */,
 				01701B06215C88EF0074B0B9 /* ChatImageTableViewCell.swift in Sources */,
 				01EBF3442151FEA200D23871 /* LoginViewController.swift in Sources */,
 				01E6581F216DE40D00928C9B /* ProfileContentView.swift in Sources */,
+				01CF3566216F759500B98D71 /* DateManager.swift in Sources */,
 				01701AF1215BC6930074B0B9 /* ChatViewController.swift in Sources */,
 				0141678E216321760080EDCE /* Icon.swift in Sources */,
 				0177E2AE216131E30038F29A /* SettingViewController.swift in Sources */,
@@ -738,6 +775,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2Q4CQ44442;
 				INFOPLIST_FILE = MapTalk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
