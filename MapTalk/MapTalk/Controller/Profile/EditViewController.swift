@@ -16,7 +16,7 @@ class EditViewController: UIViewController {
     @IBOutlet weak var editTableView: UITableView!
     
     var userInfo = ["性別","生日","感情狀態","居住地","體型","我想尋找"]
-    var userSelected =  ["男","1993-06-06","單身","台北","臃腫","喝酒"]
+    var userSelected =  ["男","1993-06-06","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
     
     let gender = ["男生","女生","第三性別"]
     let relationship = ["不顯示","秘密","單身","穩定交往","交往中但保有交友空間","一言難盡"]
@@ -168,7 +168,14 @@ class EditViewController: UIViewController {
             guard let userCity = value[3] as? String else { return }
             guard let userBodyType = value[4] as? String  else { return }
             guard let userSearchTarget = value[5] as? String else { return }
- 
+            
+            guard let userNickName = value[6] as? String else { return }
+            guard let userInterested = value[7] as? String else { return }
+            guard let userCountry = value[8] as? String  else { return }
+            guard let userBotheredThing = value[9] as? String else { return }
+            guard let userWantToTry = value[10] as? String  else { return }
+            guard let userIntroduce = value[11] as? String else { return }
+            
             print("*********2接回來的資料為")
             
             print(userRelationship)
@@ -181,6 +188,14 @@ class EditViewController: UIViewController {
             self.userSelected[3] = userCity
             self.userSelected[4] = userBodyType
             self.userSelected[5] = userSearchTarget
+            //上面 OK
+            self.userSelected[6] = userNickName
+            self.userSelected[7] = userInterested
+            self.userSelected[8] = userCountry
+            self.userSelected[9] = userBotheredThing
+            self.userSelected[10] = userWantToTry
+            self.userSelected[11] = userIntroduce
+
             
             self.editTableView.reloadData()
             
@@ -271,9 +286,11 @@ extension EditViewController: UITableViewDataSource{
                 as? EditUserDataTableViewCell {
                 
                 //cell.contentTextView.text = "FRANK"
-                cell.baseView.contentTextView.text = "FRANK"
                 
-                
+                cell.baseView.contentTextView.text = userSelected[6]
+                //userSelected[6] = cell.baseView.contentTextView.text
+                cell.delegate = self
+                cell.baseView.delegate = self
                 return cell
             }
             
@@ -305,8 +322,12 @@ extension EditViewController: UITableViewDataSource{
                 as? EditUserDataTableViewCell {
                 
                 //cell.contentTextView.text = "吃飯，睡覺"
-                cell.baseView.contentTextView.text = "吃飯，睡覺"
-                
+                //cell.baseView.contentTextView.text = "吃飯，睡覺"
+                //cell.baseView.contentTextView.toolbarPlaceholder = userSelected[7]
+                cell.baseView.contentTextView.text = userSelected[7]
+                //userSelected[7] = cell.baseView.contentTextView.text
+                cell.delegate = self
+                cell.baseView.delegate = self
                 return cell
             }
             
@@ -316,8 +337,11 @@ extension EditViewController: UITableViewDataSource{
                 as? EditUserDataTableViewCell {
                 
                 //cell.contentTextView.text = "台灣"
-                cell.baseView.contentTextView.text = "台灣"
-                
+                //cell.baseView.contentTextView.text = "台灣"
+                cell.baseView.contentTextView.text = userSelected[8]
+                //userSelected[8] = cell.baseView.contentTextView.text
+                cell.delegate = self
+                cell.baseView.delegate = self
                 return cell
             }
         case 4:
@@ -326,8 +350,12 @@ extension EditViewController: UITableViewDataSource{
                 as? EditUserDataTableViewCell {
                 
                 //cell.contentTextView.text = "變胖了"
-                cell.baseView.contentTextView.text = "變胖了"
+                //cell.baseView.contentTextView.text = "變胖了"
+                cell.baseView.contentTextView.text = userSelected[9]
+                //userSelected[9] = cell.baseView.contentTextView.text
                 
+                cell.delegate = self
+                cell.baseView.delegate = self
                 return cell
             }
             
@@ -337,8 +365,14 @@ extension EditViewController: UITableViewDataSource{
                 as? EditUserDataTableViewCell {
                 
                 //cell.contentTextView.text = "跳海"
-                cell.baseView.contentTextView.text = "跳海"
+                //cell.baseView.contentTextView.text = "跳海"
+                cell.baseView.contentTextView.text = userSelected[10]
                 
+                //沒用 why
+                //userSelected[10] = cell.baseView.contentTextView.text
+                
+                cell.delegate = self
+                cell.baseView.delegate = self
                 return cell
             }
             
@@ -348,7 +382,13 @@ extension EditViewController: UITableViewDataSource{
                 as? EditUserDataTableViewCell {
                 
                 //cell.contentTextView.text = "大家好 我是法克"
-                cell.baseView.contentTextView.text = "大家好 我是法克"
+                //cell.baseView.contentTextView.text = "大家好 我是法克"
+                
+                cell.baseView.contentTextView.text = userSelected[11]
+                
+                //沒用 why
+                //userSelected[11] = cell.baseView.contentTextView.text
+                
                 cell.delegate = self
                 cell.baseView.delegate = self
                 return cell
@@ -369,11 +409,65 @@ extension EditViewController: UITableViewDataSource{
         return UITableView.automaticDimension
         //return 100
     }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        //userSelected[indexPath.row] = cell.baseView.contentTextView.text
+//
+//        if let cell = tableView.dequeueReusableCell(
+//            withIdentifier: "EditUserData", for: indexPath)
+//            as? EditUserDataTableViewCell {
+//
+//           userSelected[indexPath.row] = cell.baseView.contentTextView.text
+//
+//           editTableView.reloadData()
+//        }
+//
+//    }
+
 }
 
 extension EditViewController: UITableViewDelegate{}
 
 extension EditViewController: CellDelegate {
+    
+    func editSave(textInput: String, tableViewCell: UITableViewCell) {
+        //editTableView.indexPath(for: tableViewCell)
+        
+        guard let indexPath = editTableView.indexPath(for: tableViewCell) else { return }
+        if indexPath.section == 0 {
+            print("名字列")
+            userSelected[6] = textInput
+        } else if indexPath.section == 1 {
+            print("已經做好 alert pickerView")
+        } else if indexPath.section == 2 {
+            print("興趣列")
+            userSelected[7] = textInput
+        } else if indexPath.section == 3 {
+            print("國家列")
+            userSelected[8] = textInput
+        } else if indexPath.section == 4 {
+            print("困擾列")
+            userSelected[9] = textInput
+        }  else if indexPath.section == 5 {
+            print("嘗試列")
+            userSelected[10] = textInput
+        }  else if indexPath.section == 6 {
+            print("自我介紹列")
+            userSelected[11] = textInput
+        } else {
+            print("錯誤")
+        }
+        
+        //userSelected[(indexPath?.row)!] = textInput
+        editTableView.reloadData()
+    }
+    
+    //    func editSave(textInput: String) {
+    //
+//       // userSelected[11] = cell.baseView.contentTextView.text
+//
+    //}
+    
     
     //    func updateLocalData(data: Any) {
     //
@@ -680,7 +774,7 @@ extension EditViewController: UIPickerViewDataSource {
     //设置选择框各选项的内容，继承于UIPickerViewDelegate协议
     func pickerView(_ pickerView: UIPickerView, titleForRow rowInt: Int,
                     forComponent component: Int) -> String? {
-        //少日期
+        //新增日期結束
         if selectedSender == 0 {
             return gender[rowInt]
         } else if selectedSender == 2 {

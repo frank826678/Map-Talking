@@ -12,6 +12,7 @@ protocol CellDelegate: AnyObject {
     
     //func cellButtonTapping(_ cell: UITableViewCell)
     func reszing(heightGap: CGFloat)
+    func editSave(textInput: String,tableViewCell: UITableViewCell)
     //func updateLocalData(data: Any)
 }
 
@@ -79,5 +80,13 @@ extension EditUserDataTableViewCell: UITextViewDelegate{
         self.adjustTextViewHeight()
         
     }
+    //
+    func textViewDidEndEditing(_ textView: UITextView) {
+        delegate?.editSave(textInput: textView.text, tableViewCell: self)
+    }
+    
+//    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+//        <#code#>
+//    }
     
 }
