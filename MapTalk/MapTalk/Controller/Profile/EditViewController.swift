@@ -448,10 +448,10 @@ extension EditViewController: CellDelegate {
         } else if indexPath.section == 4 {
             print("困擾列")
             userSelected[9] = textInput
-        }  else if indexPath.section == 5 {
+        } else if indexPath.section == 5 {
             print("嘗試列")
             userSelected[10] = textInput
-        }  else if indexPath.section == 6 {
+        } else if indexPath.section == 6 {
             print("自我介紹列")
             userSelected[11] = textInput
         } else {

@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Gm-XT-ToS" customClass="ProfileContentView" customModule="MapTalk" customModuleProvider="target">
                         <rect key="frame" x="10" y="10" width="394" height="132"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="輸入點什麼吧～" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2Fc-vd-9qR">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="輸入點什麼吧～" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2Fc-vd-9qR">
                                 <rect key="frame" x="15" y="5" width="374" height="122"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
