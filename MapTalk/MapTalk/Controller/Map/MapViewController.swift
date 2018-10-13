@@ -27,7 +27,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import Kingfisher
 
-
+//swiftlint:disable all
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     //20181012
@@ -528,6 +528,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             navigationUserName = userAnnotation?.name!
             friendUserId = userAnnotation?.id
             let firiendImageURL = userAnnotation?.userImage
+            //friendImageURLForCell = firiendImageURL!
+            
             //            self.showAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
             
             self.showMessageAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
@@ -569,7 +571,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //friendNameForCell = friendName
         
         friendImageURLForCell = friendImageURL
-        let bigPhotoURL = URL(string: friendImageURL + "?height=500")
+        //reload 看看
+        userInfoDetailView.userInfoDetailTableView.reloadData()
+        
+        //let bigPhotoURL = URL(string: friendImageURL + "?height=500")
+        
         
         //friendImageURLForCell = bigPhotoURL
         
@@ -659,6 +665,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.userSelected[10] = userWantToTry
             self.userSelected[11] = userIntroduce
             
+            //加上 reload
+            self.userInfoDetailView.userInfoDetailTableView.reloadData()
             self.animateViewUp()
             self.addSwipe()
             
