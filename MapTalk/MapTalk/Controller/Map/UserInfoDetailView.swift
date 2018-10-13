@@ -12,10 +12,10 @@ class UserInfoDetailView: UIView {
 
     @IBOutlet var contentView: UIView!
     
-    @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var userImage: UIImageView!
+    //@IBOutlet weak var userName: UILabel!
+    //@IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userInfoDetailTableView: UITableView!
-    @IBOutlet weak var chatButton: UIButton!
+    //@IBOutlet weak var chatButton: UIButton!
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -36,9 +36,10 @@ class UserInfoDetailView: UIView {
         super.init(coder: aDecoder)
         commonInit()
         
-        userImage.layer.cornerRadius = 60
-        userImage.clipsToBounds = true
-        userImage.layer.borderColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
+//        userImage.layer.cornerRadius = 60
+//        userImage.clipsToBounds = true
+//        userImage.layer.borderColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
+        
         //userImage.layer.borderWidth = 4
         
     }

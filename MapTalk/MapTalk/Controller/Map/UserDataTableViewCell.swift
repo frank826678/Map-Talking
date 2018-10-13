@@ -19,7 +19,11 @@ class UserDataTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        userImage.layer.cornerRadius = 50
+        userImage.clipsToBounds = true
+        userImage.layer.borderColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
+    
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

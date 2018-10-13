@@ -59,6 +59,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var userInfo = ["暱稱","性別","生日","感情狀態","居住地","體型","我想尋找","專長 興趣","喜歡的國家","自己最近的困擾","想嘗試的事情","自我介紹",]
     var userSelected =  ["男","1993-06-06","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
     
+    var friendNameForCell = "測試"
+    var friendImageURLForCell = "測試"
     //20181009
     var centerDelivery: CLLocationCoordinate2D?
     
@@ -533,7 +535,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             //搜尋 firebase
             showUserDetail(friendId: friendUserId, friendName: navigationUserName, friendImageURL: firiendImageURL)
-            
+
             //animateViewUp()
             
         } else {
@@ -562,14 +564,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         guard let friendName = friendName else { return }
         guard let friendImageURL = friendImageURL else { return }
         
+        //要顯示在 cell 上的 傳到全域去
+        
+        //friendNameForCell = friendName
+        
+        friendImageURLForCell = friendImageURL
+        let bigPhotoURL = URL(string: friendImageURL + "?height=500")
+        
+        //friendImageURLForCell = bigPhotoURL
         
         let mapTap = UITapGestureRecognizer(target: self, action: #selector(animateViewDown))
         mapView.addGestureRecognizer(mapTap)
         
-        let bigPhotoURL = URL(string: friendImageURL + "?height=500")
+        //let bigPhotoURL = URL(string: friendImageURL + "?height=500")
+        
+        //friendImageURLForCell = bigPhotoURL
+       
         //self.userInfoDetailView.reloadInputViews()
-        self.userInfoDetailView.userName.text = friendName
-        self.userInfoDetailView.userImage.kf.setImage(with: bigPhotoURL)
+        
+        //self.userInfoDetailView.userName.text = friendName
+         //let bigPhotoURL = URL(string: friendImageURL + "?height=500")
+        //self.userInfoDetailView.userImage.kf.setImage(with: bigPhotoURL)
+       
+        
         //self.userInfoDetailView.userInfoDetailTableView.dataSource = self
         //self.userInfoDetailView.userInfoDetailTableView.delegate = self
         
@@ -1083,7 +1100,7 @@ extension MapViewController: UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return 8
+            return 9
         }
         
     }
@@ -1097,7 +1114,25 @@ extension MapViewController: UITableViewDataSource {
                 withIdentifier: "UserData", for: indexPath)
                 as? UserDataTableViewCell {
                 
-                cell.userImage = 
+//                friendNameForCell = friendName
+//                friendImageURLForCell = friendImageURL
+                
+                //照片需要重改
+                let photo = friendImageURLForCell
+                let bigPhotoURL = URL(string: photo + "?height=500")
+                
+                cell.userImage.kf.setImage(with: bigPhotoURL)
+                
+                cell.userName.text = userSelected[6]
+                cell.userBirthday.text = userSelected[1]
+                cell.userGender.text = userSelected[0]
+                
+                
+                //self.userInfoDetailView.userImage.kf.setImage(with: bigPhotoURL)
+                
+              
+                
+                //cell.userImage
                 //cell.userDetailTitle.text = userInfo[indexPath.row]
                 //cell.userDetailContent.text = userSelected[indexPath.row]
                 
@@ -1111,12 +1146,33 @@ extension MapViewController: UITableViewDataSource {
             as? UserDetailTableViewCell {
             
             //cell.userDetailTitle.text = "生日"
-            //            var userInfo = ["暱稱","性別","生日","感情狀態","居住地","體型","我想尋找","專長 興趣","喜歡的國家","自己最近的困擾","想嘗試的事情","自我介紹",]
-            //            var userSelected =  ["男","1993-06-06","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
+            //            var userInfo = ["暱稱","性別","生日","感情狀態","居住地","體型5","我想尋找","專長 興趣","喜歡的國家","自己最近的困擾","想嘗試的事情","自我介紹",]
+            //            var userSelected =  ["男","1993-06-06","單身","台北","肌肉結實4","短暫浪漫","Frank Lin","吃飯，睡覺，看電影7","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
             
-            cell.userDetailTitle.text = userInfo[indexPath.row]
-            cell.userDetailContent.text = userSelected[indexPath.row]
+//            cell.userDetailTitle.text = userInfo[indexPath.row]
+//            cell.userDetailContent.text = userSelected[indexPath.row]
             
+                if indexPath.row == 0 {
+                    cell.userDetailTitle.text = userInfo[3]
+                    cell.userDetailContent.text = userSelected[2]
+                } else if indexPath.row == 1 {
+                    cell.userDetailTitle.text = userInfo[4]
+                    cell.userDetailContent.text = userSelected[3]
+                } else if indexPath.row == 2 {
+                    cell.userDetailTitle.text = userInfo[5]
+                    cell.userDetailContent.text = userSelected[4]
+                } else if indexPath.row == 3 {
+                    cell.userDetailTitle.text = userInfo[6]
+                    cell.userDetailContent.text = userSelected[5]
+                } else if indexPath.row == 4 {
+                    cell.userDetailTitle.text = userInfo[7]
+                    cell.userDetailContent.text = userSelected[7]
+                } else {
+                    cell.userDetailTitle.text = userInfo[indexPath.row + 3]
+                    cell.userDetailContent.text = userSelected[indexPath.row + 3]
+                }
+
+                
             //cell.iconImage.backgroundColor =  #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1) // FB message borderColor
             
             //原本

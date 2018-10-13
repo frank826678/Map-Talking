@@ -11,11 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserInfoDetailView" customModule="MapTalk" customModuleProvider="target">
             <connections>
-                <outlet property="chatButton" destination="yH6-tl-99G" id="pgp-et-7A7"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="JNk-nF-IBh"/>
-                <outlet property="userImage" destination="ch0-R6-w02" id="WAC-pY-2AV"/>
                 <outlet property="userInfoDetailTableView" destination="9xn-G6-5m9" id="1g1-A5-F0A"/>
-                <outlet property="userName" destination="oE4-um-7Yg" id="FmQ-uS-n38"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -23,58 +20,21 @@
             <rect key="frame" x="0.0" y="0.0" width="435" height="323"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_sticker_placeholder02" translatesAutoresizingMaskIntoConstraints="NO" id="ch0-R6-w02">
-                    <rect key="frame" x="157.5" y="10" width="120" height="120"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="120" id="POF-T8-K8V"/>
-                        <constraint firstAttribute="width" constant="120" id="hCY-9z-LRA"/>
-                    </constraints>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="猜猜我是誰～～～～～～～～" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oE4-um-7Yg">
-                    <rect key="frame" x="85" y="138" width="265" height="20"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="20" id="sP3-8Y-yOb"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9xn-G6-5m9">
-                    <rect key="frame" x="0.0" y="168" width="435" height="155"/>
+                    <rect key="frame" x="0.0" y="0.0" width="435" height="323"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yH6-tl-99G">
-                    <rect key="frame" x="375" y="20" width="40" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="40" id="4IB-7M-iaE"/>
-                        <constraint firstAttribute="height" constant="40" id="JC9-eg-Uc9"/>
-                    </constraints>
-                    <state key="normal" image="new2-chat-bubble-30"/>
-                    <connections>
-                        <action selector="chatButtonClick:" destination="-1" eventType="touchUpInside" id="FIk-2c-s2q"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="yH6-tl-99G" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="5FY-t1-NG5"/>
+                <constraint firstItem="9xn-G6-5m9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="5Gq-8k-g86"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9xn-G6-5m9" secondAttribute="trailing" id="906-bp-6ru"/>
-                <constraint firstItem="9xn-G6-5m9" firstAttribute="top" secondItem="oE4-um-7Yg" secondAttribute="bottom" constant="10" id="AM4-sC-3fF"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="9xn-G6-5m9" secondAttribute="bottom" id="BhX-NX-DjX"/>
                 <constraint firstItem="9xn-G6-5m9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Fp1-hK-E7Z"/>
-                <constraint firstItem="oE4-um-7Yg" firstAttribute="top" secondItem="ch0-R6-w02" secondAttribute="bottom" constant="8" id="KMn-ut-UE5"/>
-                <constraint firstItem="oE4-um-7Yg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="O7v-DW-uPr"/>
-                <constraint firstItem="ch0-R6-w02" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="PXg-Xv-V9V"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="yH6-tl-99G" secondAttribute="trailing" constant="20" id="V8k-gA-uea"/>
-                <constraint firstItem="ch0-R6-w02" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="bTY-zm-ROM"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="103.2" y="-106.59670164917542"/>
         </view>
     </objects>
-    <resources>
-        <image name="new2-chat-bubble-30" width="30" height="30"/>
-        <image name="profile_sticker_placeholder02" width="110" height="110"/>
-    </resources>
 </document>
