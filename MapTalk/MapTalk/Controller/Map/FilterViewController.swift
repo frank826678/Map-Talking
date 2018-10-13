@@ -412,7 +412,9 @@ class FilterViewController: UIViewController {
             
             guard let senderPhoto = value["senderPhoto"] as? String else { return }
             
-            let friendFilterData = FilterData(gender: gender,
+            guard let myselfGender = value["myselfGender"] as? Int else { return }
+                
+            let friendFilterData = FilterData(gender: gender, myselfGender: myselfGender,
                                         age: age, location: Location(latitude: userLatitude, longitude: userLongitude) ,
                                         dating: dating,
                                         datingTime: datingTime,
@@ -420,6 +422,7 @@ class FilterViewController: UIViewController {
                                         senderId: senderId,
                                         senderName: senderName,
                                         senderPhotoURL: senderPhoto)
+            //上面增加自己的性別
             
             //距離的計算
             
@@ -450,8 +453,8 @@ class FilterViewController: UIViewController {
             let in24hr = createdTime - friendFilterData.time
             
             // 測試時間 1538924236062 Your time zone: Sunday, October 7, 2018 10:57:16.062 PM GMT+08:00
-            //先用名字 到時候再加上性別 和時間 (上面的搜尋是搜尋 約會類型相同的人)
-            if senderId != userId &&  filterData.time == friendFilterData.datingTime && in24hr < 86400000  {
+            //先用名字 到時候再加上性別 和時間 (上面的搜尋是搜尋 約會類型相同的人) filterData 是自己的本地端要去搜尋的資料
+            if userId != senderId &&  filterData.time == friendFilterData.datingTime && in24hr  < 86400000 && filterData.gender == friendFilterData.myselfGender  {
             
                 self.filterNewData.append(friendFilterData)
                 

@@ -57,7 +57,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     //20181012
     var userInfo = ["暱稱","性別","生日","感情狀態","居住地","體型","我想尋找","專長 興趣","喜歡的國家","自己最近的困擾","想嘗試的事情","自我介紹",]
-    var userSelected =  ["男","1993-06-06","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
+    var userSelected =  ["男生","1993-06-06","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
     
     var friendNameForCell = "測試"
     var friendImageURLForCell = "測試"
@@ -102,7 +102,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         userInfoDetailView.userInfoDetailTableView.delegate = self
         userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "UserDetailTableViewCell", bundle: nil),forCellReuseIdentifier: "UserDetail")
         userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "UserDataTableViewCell", bundle: nil),forCellReuseIdentifier: "UserData")
-    
+        
+        // 20181013 感覺沒作用
+        addSwipe()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -386,138 +388,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         return annotationView
     }
     
-    //原本寫法 有白色的點 會擋住 但是可以跑 didselect 點擊後有事件會發生
-    //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    //
-    //        let annotation = annotation as? UserAnnotation
-    //
-    //        if annotation is MKUserLocation {
-    //            return nil
-    //        } else {
-    //            let pinIdent = "Pin"
-    //            var pinView: MKMarkerAnnotationView
-    //            if let dequeuedView = mapView.dequeueReusableAnnotationView(
-    //                withIdentifier: pinIdent) as? MKMarkerAnnotationView {
-    //                dequeuedView.annotation = annotation
-    //                pinView = dequeuedView
-    //                // 這邊不執行
-    //
-    //            } else {
-    //                // 執行這邊
-    //                pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: pinIdent)
-    //            }
-    //
-    //            //此行為改 map 的 bubble 顏色 試著把 bubble 拿掉
-    //            //pinView.markerTintColor = .clear
-    //
-    //            //pinView.markerTintColor = .groupTableViewBackground
-    //
-    //            pinView.markerTintColor = .clear
-    //            pinView.glyphTintColor = .orange
-    //
-    //            let imageView = UIImageView()
-    //
-    //            imageView.contentMode = .scaleAspectFill
-    //
-    //            imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-    //
-    //            //將 URL 轉換成圖片
-    ////            if let image = annotation?.userImage {
-    ////                imageView.sd_setImage(with: URL(string: image), completed: nil)
-    ////            } else {
-    ////                imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
-    ////            }
-    //
-    //            if let userImage = annotation?.userImage {
-    //                imageView.kf.setImage(with: URL(string: userImage))
-    //            } else {
-    //                imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
-    //            }
-    //
-    //
-    //            //設定照片圓角
-    //            imageView.clipsToBounds = true
-    //            imageView.layer.cornerRadius = 25
-    //            imageView.layer.borderColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
-    //            imageView.layer.borderWidth = 4
-    //
-    //            //增加三角形圖案
-    //            let triangle = UILabel(frame: CGRect(x: 0, y: 45, width: 50, height: 10)) // 50, 10
-    //            triangle.text = "▾"
-    //            triangle.font = UIFont.systemFont(ofSize: 24) //24
-    //            //triangle.textColor = #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1)
-    //            triangle.textColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
-    //
-    //            triangle.textAlignment = .center
-    //
-    //            pinView.addSubview(imageView)
-    //            pinView.addSubview(triangle)
-    //
-    //
-    //            let annotationLabel = UILabel(frame: CGRect(x: -40, y: -35, width: 105, height: 30))
-    //            annotationLabel.numberOfLines = 3
-    //            annotationLabel.textAlignment = .center
-    //            annotationLabel.font = UIFont(name: "Rockwell", size: 12)
-    //
-    //            //annotationLabel.text = "媽 我上地圖了 Ya"
-    //
-    //            if let message = annotation?.message {
-    //                annotationLabel.text = message
-    //            } else {
-    //                annotationLabel.text = "媽 我上地圖了 Ya"
-    //            }
-    //
-    //            annotationLabel.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
-    //            annotationLabel.layer.cornerRadius = 15
-    //            annotationLabel.clipsToBounds = true
-    //
-    //            pinView.addSubview(annotationLabel)
-    //
-    //            let annotationName = UILabel(frame: CGRect(x: -20, y: 65, width: 95, height: 25))
-    //            annotationName.numberOfLines = 3
-    //            annotationName.textAlignment = .center
-    //            annotationName.font = UIFont(name: "Rockwell", size: 12)
-    //
-    //            if let name = annotation?.name {
-    //                annotationName.text = name
-    //                annotationName.isHidden = false
-    //            } else {
-    //                annotationName.isHidden = true
-    //            }
-    //
-    //            annotationName.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.631372549, blue: 0.7921568627, alpha: 1)
-    //            annotationName.textColor = .white
-    //
-    //            annotationName.layer.cornerRadius = 15
-    //            annotationName.clipsToBounds = true
-    //            pinView.addSubview(annotationName)
-    //
-    //            //處理白色 Pin 針 錯誤。
-    //            //pinView.isHidden = true //會全部不見
-    //
-    //            mapView.view(for: annotation!)?.isHidden = true //沒作用
-    //
-    //            //yourMapView.view(for: yourAnnotation)?.isHidden = true
-    //
-    //            //annotationView.canShowCallout = NO;
-    //
-    //            //使用 image view 直接放照片應該可以解決白點問題 但是目前拿到照片的方法是從網路上 String 存回來 KF 顯示的 所以上面才用 add subView
-    //            // pinView.image = nil 失敗
-    //            //pinView.image = #imageLiteral(resourceName: "btn_like_normal") 用了一張照片 會被擋在後面 白點還是不會消失
-    //
-    //
-    //            pinView.canShowCallout = false //沒作用
-    //            //annotationView!.canShowCallout = false
-    //
-    //           // 下面這行註解掉的話，距離太近時就不會自動合併，在 icon 旁邊出現 2,3 之類的
-    //           // pinView.clusteringIdentifier = pinIdent
-    //
-    //
-    //            return pinView
-    //        }
-    //    }
-    
-    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         //新增下面這行 20181001
@@ -530,9 +400,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let firiendImageURL = userAnnotation?.userImage
             //friendImageURLForCell = firiendImageURL!
             
-            //            self.showAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
+            //            self.showAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！"
             
-            self.showMessageAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
+            //self.showMessageAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
             print("選取的人的 userID 是 \(friendUserId)")
             
             //搜尋 firebase
@@ -559,6 +429,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     //20181012
+    
+    
+    @objc func userInfoButtonClicked(sender: UIButton) {
+        
+        showMessageAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
+        
+    }
+
     
     func showUserDetail(friendId: String?, friendName: String?, friendImageURL: String?) {
         
@@ -603,7 +481,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         //userImage.kf.setImage(with: URL(string: photoSmallURL))
         //userImage.kf.setImage(with: bigPhotoURL)
-        
+        //self.addSwipe()
     }
     
     func downloadUserInfo(selectedUserId: String) {
@@ -667,6 +545,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             //加上 reload
             self.userInfoDetailView.userInfoDetailTableView.reloadData()
+            
             self.animateViewUp()
             self.addSwipe()
             
@@ -680,6 +559,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(animateViewDown))
         swipe.direction = .down
         userInfoDetailView.addGestureRecognizer(swipe)
+        
+        //20181013
+        userInfoDetailView.userInfoDetailTableView.addGestureRecognizer(swipe)
     }
     
     
@@ -1134,7 +1016,7 @@ extension MapViewController: UITableViewDataSource {
                 cell.userName.text = userSelected[6]
                 cell.userBirthday.text = userSelected[1]
                 cell.userGender.text = userSelected[0]
-                
+                cell.chatButton.addTarget(self, action: #selector(userInfoButtonClicked(sender:)), for: .touchUpInside)
                 
                 //self.userInfoDetailView.userImage.kf.setImage(with: bigPhotoURL)
                 

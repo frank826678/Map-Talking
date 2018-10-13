@@ -34,6 +34,8 @@ struct FilterData {
     
     let gender: Int
     
+    let myselfGender: Int
+    
     // swiftlint:disable identifier_name
     let age: Int
     // swiftlint:enable identifier_name

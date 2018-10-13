@@ -16,7 +16,7 @@ class EditViewController: UIViewController {
     @IBOutlet weak var editTableView: UITableView!
     
     var userInfo = ["性別","生日","感情狀態","居住地","體型","我想尋找"]
-    var userSelected =  ["男","1993-06-06","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
+    var userSelected =  ["男生","1993-06-06","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
     
     let gender = ["男生","女生","第三性別"]
     let relationship = ["不顯示","秘密","單身","穩定交往","交往中但保有交友空間","一言難盡"]
@@ -132,6 +132,23 @@ class EditViewController: UIViewController {
                 
             }
         }
+        //20181013 更新 filersearch 的條件 self 的
+        
+        //self.ref.child("FilterData").child(userId).setValue([
+        var myselfGender = 0
+        if userSelected[0] == "男生" {
+            myselfGender = 0
+        } else if userSelected[0] == "女生" {
+            myselfGender = 1
+        } else {
+            myselfGender = 2
+        }
+        
+        let childUpdates = ["/FilterData/\(userId)/myselfGender": myselfGender]
+        
+        print("自己上傳的性別是\(myselfGender)")
+        
+        self.ref.updateChildValues(childUpdates)
         
         //searchFilterData(filterData: filterAllData)
         
