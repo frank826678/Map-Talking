@@ -143,6 +143,10 @@ class EditViewController: UIViewController {
         } else {
             myselfGender = 2
         }
+        //存自己性別 filter 介面時 用 default 去讀
+        let userDefaults = UserDefaults.standard
+        
+        userDefaults.set(myselfGender, forKey: "myselfGender")
         
         let childUpdates = ["/FilterData/\(userId)/myselfGender": myselfGender]
         

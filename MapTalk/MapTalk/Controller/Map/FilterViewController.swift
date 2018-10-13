@@ -332,7 +332,14 @@ class FilterViewController: UIViewController {
 //         "location": ["lat": currentLocation.coordinate.latitude,"lon": currentLocation.coordinate.longitude],
         
         // 或是經緯度先給預設值 只要他有移動位置 就會更新他目前的位置 但是要是第一次進來直接媒合 這邊 setvalue 可能會取代掉正確的位置資訊  這邊可以試著用 update
-        // 25°2'51"N   121°31'1"E 北車
+        // 25°2'51"N   121°31'1"E 北車 "location": ["lat": 25.251,"lon": 121.311],
+        let taipeiTraonLat: Double = 25.251
+        let taipeiTraonLon: Double = 121.311
+
+        let userDefaults = UserDefaults.standard
+        
+        let myselfGender = userDefaults.value(forKey: "myselfGender")
+
         self.ref.child("FilterData").child(userId).setValue([
             "senderId": userId,
             "senderName": userName,
@@ -340,9 +347,10 @@ class FilterViewController: UIViewController {
             "time": createdTime,
             "gender": filterAllData.gender,
             "age": filterAllData.age,
-            "location": ["lat": "25.251","lon": "121.311"],
+            "location": ["lat": taipeiTraonLat,"lon": taipeiTraonLon], //value 要用 double
             "dating": filterAllData.dating,
-            "datingTime": filterAllData.time
+            "datingTime": filterAllData.time,
+            "myselfGender": myselfGender
         ]) { (error, _) in
             
             if let error = error {
@@ -379,7 +387,7 @@ class FilterViewController: UIViewController {
             
             guard let userId = Auth.auth().currentUser?.uid else { return }
             
-            
+            print("測試用20181013")
             // childChanged 不能監控自身的變化嗎？ 改了 dating 沒反應 改 datingtime 可以
             // Q2: 是否要執行過一次 才會持續的監控 childChanged
             // 應該把相同的都先抓下來 依序判斷是否相同 跳出 alert
