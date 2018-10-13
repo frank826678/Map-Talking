@@ -43,12 +43,22 @@
                                     <segue destination="sB5-QG-UJ5" kind="show" identifier="MappingPage" id="ZCr-iH-jfU"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJF-et-17h" customClass="UserInfoDetailView" customModule="MapTalk" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="666" width="375" height="1"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="0pq-rz-B9p"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="iLF-qr-FYc" firstAttribute="trailing" secondItem="BGl-Hl-Wxm" secondAttribute="trailing" constant="20" id="2BM-89-AiH"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="trailing" secondItem="iLF-qr-FYc" secondAttribute="trailing" id="CQN-uu-MTc"/>
+                            <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="pJF-et-17h" secondAttribute="bottom" id="E9y-16-dfl"/>
                             <constraint firstItem="b1k-e6-6CM" firstAttribute="top" secondItem="BGl-Hl-Wxm" secondAttribute="bottom" constant="10" id="GkA-b0-c2z"/>
+                            <constraint firstItem="pJF-et-17h" firstAttribute="leading" secondItem="W1b-SP-zxy" secondAttribute="leading" id="Mnz-yO-XNC"/>
+                            <constraint firstAttribute="trailing" secondItem="pJF-et-17h" secondAttribute="trailing" id="S34-jp-fVh"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="leading" secondItem="iLF-qr-FYc" secondAttribute="leading" id="c6E-St-DGa"/>
                             <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="b1k-e6-6CM" secondAttribute="bottom" constant="30" id="ehY-Rn-o0B"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="bottom" secondItem="iLF-qr-FYc" secondAttribute="bottom" id="gcn-9p-hk5"/>
@@ -62,6 +72,8 @@
                         <outlet property="filterButton" destination="BGl-Hl-Wxm" id="jxI-q0-XUN"/>
                         <outlet property="location" destination="b1k-e6-6CM" id="V8t-z7-VmS"/>
                         <outlet property="mapView" destination="knJ-Cf-MT3" id="R6I-XS-64A"/>
+                        <outlet property="userInfoDetailView" destination="pJF-et-17h" id="lV5-Oq-pGV"/>
+                        <outlet property="userInfoDetailViewHeightConstraints" destination="0pq-rz-B9p" id="WPl-q2-SZv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rko-14-Eoy" userLabel="First Responder" sceneMemberID="firstResponder"/>

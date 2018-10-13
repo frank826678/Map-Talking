@@ -30,6 +30,11 @@ import Kingfisher
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
+    //20181012
+    
+    @IBOutlet weak var userInfoDetailView: UserInfoDetailView!
+    @IBOutlet weak var userInfoDetailViewHeightConstraints: NSLayoutConstraint!
+    //End
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var location: UIButton!
     @IBOutlet weak var mapView: MKMapView!
@@ -49,6 +54,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     //20181003
     var friendUserId: String?
+    
+    //20181012
+    var userInfo = ["暱稱","性別","生日","感情狀態","居住地","體型","我想尋找","專長 興趣","喜歡的國家","自己最近的困擾","想嘗試的事情","自我介紹",]
+    var userSelected =  ["男","1993-06-06","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
     
     //20181009
     var centerDelivery: CLLocationCoordinate2D?
@@ -83,6 +92,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //20181008
         userDataMappingTrack()
         
+        //20181012
+        //userInfoDetailView.userName.text = "大頭大頭"
+        //profileTableView.delegate = self
+        //profileTableView.dataSource = self
+        userInfoDetailView.userInfoDetailTableView.dataSource = self
+        userInfoDetailView.userInfoDetailTableView.delegate = self
+        userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "UserDetailTableViewCell", bundle: nil),forCellReuseIdentifier: "UserDetail")
+        userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "UserDataTableViewCell", bundle: nil),forCellReuseIdentifier: "UserData")
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,31 +117,31 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let controller = segue.destination as! FilterViewController
             // swiftlint:enable force_cast
             controller.centerDeliveryFromMap = centerDelivery
-//            let tag = sender as! Int
-//            nowIndex = tag //把目前選到的ＥＤＩＴ 放到全域去準備使用
-//            let controller = segue.destination as! TextInputViewController
-//
-//            //print("壞", ObjectIdentifier(controller))
-//
-//            //controller.textInput.text = contentArray[tag]
-//            controller.textFromHomePage = contentArray[tag]
-//
-//            controller.completionHandler = { dataFromVC2 in
-//
-//                self.saveData(passData: dataFromVC2)
+            //            let tag = sender as! Int
+            //            nowIndex = tag //把目前選到的ＥＤＩＴ 放到全域去準備使用
+            //            let controller = segue.destination as! TextInputViewController
+            //
+            //            //print("壞", ObjectIdentifier(controller))
+            //
+            //            //controller.textInput.text = contentArray[tag]
+            //            controller.textFromHomePage = contentArray[tag]
+            //
+            //            controller.completionHandler = { dataFromVC2 in
+            //
+            //                self.saveData(passData: dataFromVC2)
             
-            }
-        
+        }
+            
         else {
             
-//            let controller = segue.destination as! TextInputViewController
-//            //controller.addObserver(self, forKeyPath: "infoInput", options: .new, context: nil)
-//            controller.completionHandler = { dataFromVC2 in
-//                
-//                self.saveData(passData: dataFromVC2)
-                
-            }
+            //            let controller = segue.destination as! TextInputViewController
+            //            //controller.addObserver(self, forKeyPath: "infoInput", options: .new, context: nil)
+            //            controller.completionHandler = { dataFromVC2 in
+            //
+            //                self.saveData(passData: dataFromVC2)
+            
         }
+    }
     
     
     func dataBaseLocation() {
@@ -230,10 +248,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-//    func fetchCenter(center: CLLocationCoordinate2D) {
-//
-//
-//    }
+    //    func fetchCenter(center: CLLocationCoordinate2D) {
+    //
+    //
+    //    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -507,10 +525,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             navigationUserName = userAnnotation?.name!
             friendUserId = userAnnotation?.id
+            let firiendImageURL = userAnnotation?.userImage
             //            self.showAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
             
             self.showMessageAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
             print("選取的人的 userID 是 \(friendUserId)")
+            
+            //搜尋 firebase
+            showUserDetail(friendId: friendUserId, friendName: navigationUserName, friendImageURL: firiendImageURL)
+            
+            //animateViewUp()
             
         } else {
             navigationUserName = "使用者"
@@ -522,7 +546,133 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.userAnnotation = userLocation
         }
         
+        //20181012
+        //addTap(taskCoordinate: coordinate)
+        
+        //        animateViewUp()
+        //        addSwipe()
+        
     }
+    
+    //20181012
+    
+    func showUserDetail(friendId: String?, friendName: String?, friendImageURL: String?) {
+        
+        guard let friendId = friendId else { return }
+        guard let friendName = friendName else { return }
+        guard let friendImageURL = friendImageURL else { return }
+        
+        
+        let mapTap = UITapGestureRecognizer(target: self, action: #selector(animateViewDown))
+        mapView.addGestureRecognizer(mapTap)
+        
+        let bigPhotoURL = URL(string: friendImageURL + "?height=500")
+        //self.userInfoDetailView.reloadInputViews()
+        self.userInfoDetailView.userName.text = friendName
+        self.userInfoDetailView.userImage.kf.setImage(with: bigPhotoURL)
+        //self.userInfoDetailView.userInfoDetailTableView.dataSource = self
+        //self.userInfoDetailView.userInfoDetailTableView.delegate = self
+        
+        downloadUserInfo(selectedUserId: friendId)
+        
+        //        guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
+        
+        
+        //userImage.kf.setImage(with: URL(string: photoSmallURL))
+        //userImage.kf.setImage(with: bigPhotoURL)
+        
+    }
+    
+    func downloadUserInfo(selectedUserId: String) {
+        
+        print("*********")
+        //print(userSelected)
+        //print("準備上傳的 userSelected 是\(userSelected)")
+        
+        
+        //guard let userId = Auth.auth().currentUser?.uid else { return }
+        
+        //此時的 userSelected 是 array
+        self.refference.child("UserInfo").child(selectedUserId).observeSingleEvent(of: .value, with: { (snapshot)
+            
+            in
+            
+            print("找到的資料是\(snapshot)")
+            
+            //NSDictionary
+            //var userSelected =  ["男","1993-06-06","單身","台北","臃腫","喝酒"]
+            
+            //這邊可以試著用 codable
+            guard let value = snapshot.value as? NSArray else { return }
+            print("*********1")
+            
+            print(value)
+            
+            guard let userGender = value[0] as? String else { return }
+            guard let userBirthday = value[1] as? String else { return }
+            guard let userRelationship = value[2] as? String  else { return }
+            guard let userCity = value[3] as? String else { return }
+            guard let userBodyType = value[4] as? String  else { return }
+            guard let userSearchTarget = value[5] as? String else { return }
+            
+            guard let userNickName = value[6] as? String else { return }
+            guard let userInterested = value[7] as? String else { return }
+            guard let userCountry = value[8] as? String  else { return }
+            guard let userBotheredThing = value[9] as? String else { return }
+            guard let userWantToTry = value[10] as? String  else { return }
+            guard let userIntroduce = value[11] as? String else { return }
+            
+            print("*********2接回來的資料為")
+            
+            print(userRelationship)
+            print(userSearchTarget)
+            //可以接到資料
+            
+            self.userSelected[0] = userGender
+            self.userSelected[1] = userBirthday
+            self.userSelected[2] = userRelationship
+            self.userSelected[3] = userCity
+            self.userSelected[4] = userBodyType
+            self.userSelected[5] = userSearchTarget
+            //上面 OK
+            self.userSelected[6] = userNickName
+            self.userSelected[7] = userInterested
+            self.userSelected[8] = userCountry
+            self.userSelected[9] = userBotheredThing
+            self.userSelected[10] = userWantToTry
+            self.userSelected[11] = userIntroduce
+            
+            self.animateViewUp()
+            self.addSwipe()
+            
+            //self.editTableView.reloadData()
+            
+        })
+        
+    }
+    
+    func addSwipe() {
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(animateViewDown))
+        swipe.direction = .down
+        userInfoDetailView.addGestureRecognizer(swipe)
+    }
+    
+    
+    func animateViewUp() {
+        userInfoDetailViewHeightConstraints.constant = 300
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func animateViewDown() {
+        userInfoDetailViewHeightConstraints.constant = 0
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    //END
     
     
     //    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
@@ -560,39 +710,39 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             ]]
         
         refference.updateChildValues(myLocationUpdates)
-
         
-//        let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(friendId)": ["FriendUID": "\(friendId)","FriendName": "\(friendName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
-//
-//        let friendChildUpdates = ["/UserData/\(friendId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)","FriendName": "\(myselfName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
-//
-//
-//        //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
-//        //
-//        self.refference.updateChildValues(myChildUpdates)
         
-//        self.ref.child("FilterData").child(userId).setValue([
-//            "senderId": userId,
-//            "senderName": userName,
-//            "senderPhoto": userImage,
-//            "time": createdTime,
-//            "gender": filterAllData.gender,
-//            "age": filterAllData.age,
-//            "location": filterAllData.location,
-//            "dating": filterAllData.dating,
-//            "datingTime": filterAllData.time
-//        ]) { (error, _) in
-//
-//            if let error = error {
-//
-//                print("Data could not be saved: \(error).")
-//
-//            } else {
-//
-//                print("Data saved successfully!")
-//
-//            }
-//        }
+        //        let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(friendId)": ["FriendUID": "\(friendId)","FriendName": "\(friendName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
+        //
+        //        let friendChildUpdates = ["/UserData/\(friendId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)","FriendName": "\(myselfName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
+        //
+        //
+        //        //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
+        //        //
+        //        self.refference.updateChildValues(myChildUpdates)
+        
+        //        self.ref.child("FilterData").child(userId).setValue([
+        //            "senderId": userId,
+        //            "senderName": userName,
+        //            "senderPhoto": userImage,
+        //            "time": createdTime,
+        //            "gender": filterAllData.gender,
+        //            "age": filterAllData.age,
+        //            "location": filterAllData.location,
+        //            "dating": filterAllData.dating,
+        //            "datingTime": filterAllData.time
+        //        ]) { (error, _) in
+        //
+        //            if let error = error {
+        //
+        //                print("Data could not be saved: \(error).")
+        //
+        //            } else {
+        //
+        //                print("Data saved successfully!")
+        //
+        //            }
+        //        }
         
     }
     
@@ -670,14 +820,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(friendId)": ["FriendUID": "\(friendId)","FriendName": "\(friendName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
             
             let friendChildUpdates = ["/UserData/\(friendId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)","FriendName": "\(myselfName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
-
             
-//            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
-//
+            
+            //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
+            //
             self.refference.updateChildValues(myChildUpdates)
             self.refference.updateChildValues(friendChildUpdates)
             
-
+            
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -685,9 +835,51 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         
+        //增加 alert的約束條件 調整高度
+        //        let height: NSLayoutConstraint = NSLayoutConstraint(item: alertController.view,
+        //                                                           attribute: NSLayoutConstraint.Attribute.height,
+        //                                                           relatedBy: NSLayoutConstraint.Relation.equal,
+        //                                                           toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+        //                                                           multiplier: 1, constant: self.view.frame.height * 0.80)
+        
+        //        let topConstraint : NSLayoutConstraint =  NSLayoutConstraint(item: alertController.view,
+        //                                      attribute: NSLayoutConstraint.Attribute.top,
+        //                                      relatedBy: NSLayoutConstraint.Relation.equal,
+        //                                      toItem: self.view, attribute: NSLayoutConstraint.Attribute.top,
+        //                                      multiplier: 1, constant: 140)
+        
+        //        let topConstraint : NSLayoutConstraint =  NSLayoutConstraint(item: alertController.view,
+        //                                                                    attribute: .top,
+        //                                                                    relatedBy: .equal,
+        //                                                                    toItem: self.view, attribute: .top,
+        //                                                                    multiplier: 1, constant: 140)
+        
+        //         let topConstraint : NSLayoutConstraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: sueperView, attribute: .top, multiplier: 1.0, constant: 50)
+        
+        //alertController.view.frame.origin.y += 200
+        //  alertController.view.frame.origin.y = alertController.view.frame.origin.y + 50
+        //                alertController.view.alpha = 0
+        //                alertController.view.frame.origin.y += 200
+        //            UIView.animate(withDuration: 0.4, animations: { () -> Void in
+        //                    alertController.view.alpha = 1.0;
+        //                    alertController.view.frame.origin.y -= 50
+        //                })
+        
+        
+        //alertController.view.addConstraint(topConstraint)
+        //增加 alert的約束條件 調整高度 END
         self.present(alertController, animated: true, completion: nil)
         
     }
+    
+    //    func animateView() {
+    //        alertView.alpha = 0;
+    //        self.alertView.frame.origin.y = self.alertView.frame.origin.y + 50
+    //        UIView.animate(withDuration: 0.4, animations: { () -> Void in
+    //            self.alertView.alpha = 1.0;
+    //            self.alertView.frame.origin.y = self.alertView.frame.origin.y - 50
+    //        })
+    //    }
     
     func userDataMappingTrack() {
         
@@ -706,7 +898,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             guard let friendUID = value["FriendUID"] as? String else { return }
             
             guard let friendEmail = value["Friend_Email"] as? String else { return }
-
+            
             print("userDataMappingTrack 有值變更中")
             if accept == "收到邀請中" {
                 self.showFriendInvitedAlert(title: "來自 \(friendName) 的邀請～", message: "別害羞 按下確認鍵交個新朋友吧～ ",senderId: friendUID,senderName: friendName)
@@ -743,31 +935,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             print("跳頁成功")
             
             
-//            //新增對方到 firebase 的好友列表
-//
-//            //guard let friendId =  self.friendUserId else { return }
-//
-//            guard let myselfId = Auth.auth().currentUser?.uid else { return }
-//            //guard let friendName = self.friendUserName else { return }
-//
-//            guard let myselfName = Auth.auth().currentUser?.displayName else { return }
-//
-//
-//            //refference.child("UserFriendList").child(myselfId).child(friendId).setValue([])
-//
-//            // 我媒合到 friend 在我自己的節點下 存朋友的 ID 並且 朋友的狀態為 發出邀請中
-//            // 被我媒合的到的朋友 在朋友的節點下 存下自己的 ID 並且 朋友的狀態為 收到邀請中
-//            // 朋友應該監控自己下方的節點 邀請中 如果有 要跳出 alert 提醒有人要跟你當朋友
-//
-//            let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(senderId)": ["FriendUID": "\(senderId)","FriendName": "\(senderName)","Accept": "發出邀請中","Friend_Email": "emailTest"]]
-//
-//            let friendChildUpdates = ["/UserData/\(senderId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)","FriendName": "\(myselfName)","Accept": "收到邀請中","Friend_Email": "emailTest"]]
-//
-//
-//            //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
-//            //
-//            self.refference.updateChildValues(myChildUpdates)
-//            self.refference.updateChildValues(friendChildUpdates)
+            //            //新增對方到 firebase 的好友列表
+            //
+            //            //guard let friendId =  self.friendUserId else { return }
+            //
+            //            guard let myselfId = Auth.auth().currentUser?.uid else { return }
+            //            //guard let friendName = self.friendUserName else { return }
+            //
+            //            guard let myselfName = Auth.auth().currentUser?.displayName else { return }
+            //
+            //
+            //            //refference.child("UserFriendList").child(myselfId).child(friendId).setValue([])
+            //
+            //            // 我媒合到 friend 在我自己的節點下 存朋友的 ID 並且 朋友的狀態為 發出邀請中
+            //            // 被我媒合的到的朋友 在朋友的節點下 存下自己的 ID 並且 朋友的狀態為 收到邀請中
+            //            // 朋友應該監控自己下方的節點 邀請中 如果有 要跳出 alert 提醒有人要跟你當朋友
+            //
+            //            let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(senderId)": ["FriendUID": "\(senderId)",
+            //"FriendName": "\(senderName)","Accept": "發出邀請中","Friend_Email": "emailTest"]]
+            //
+            //            let friendChildUpdates = ["/UserData/\(senderId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)",
+            //"FriendName": "\(myselfName)","Accept": "收到邀請中","Friend_Email": "emailTest"]]
+            //
+            //
+            //            //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
+            //            //
+            //            self.refference.updateChildValues(myChildUpdates)
+            //            self.refference.updateChildValues(friendChildUpdates)
             
             
         }
@@ -800,7 +994,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 let childUpdates = ["/location/\(userId)/message": userStatus]
                 
                 self.refference.updateChildValues(childUpdates)
-
+                
             }
         })
         
@@ -876,3 +1070,86 @@ extension NSNotification.Name {
     static let myselfLocation = NSNotification.Name("Location")
     
 }
+
+extension MapViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //return 11
+        //return userInfo.count
+        if section == 0 {
+            return 1
+        } else {
+            return 8
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        switch indexPath.section {
+        
+        case 0:
+            if let cell = tableView.dequeueReusableCell(
+                withIdentifier: "UserData", for: indexPath)
+                as? UserDataTableViewCell {
+                
+                cell.userImage = 
+                //cell.userDetailTitle.text = userInfo[indexPath.row]
+                //cell.userDetailContent.text = userSelected[indexPath.row]
+                
+                
+                return cell
+            }
+        case 1:
+            
+            if let cell = tableView.dequeueReusableCell(
+            withIdentifier: "UserDetail", for: indexPath)
+            as? UserDetailTableViewCell {
+            
+            //cell.userDetailTitle.text = "生日"
+            //            var userInfo = ["暱稱","性別","生日","感情狀態","居住地","體型","我想尋找","專長 興趣","喜歡的國家","自己最近的困擾","想嘗試的事情","自我介紹",]
+            //            var userSelected =  ["男","1993-06-06","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
+            
+            cell.userDetailTitle.text = userInfo[indexPath.row]
+            cell.userDetailContent.text = userSelected[indexPath.row]
+            
+            //cell.iconImage.backgroundColor =  #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1) // FB message borderColor
+            
+            //原本
+            //cell.iconImage.image = UIImage(named: iconImageArray[indexPath.row])
+            //原本 END
+            
+            //            cell.iconImage.image = UIImage.setIconTemplate(iconName: iconImageArray[indexPath.row])
+            //
+            //
+            //            cell.selectedBackgroundView?.backgroundColor = UIColor.orange
+            
+            //            cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
+            //
+            
+            return cell
+            }
+
+        default:
+            return  UITableViewCell()
+        }
+        
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+        //return 100
+    }
+    
+}
+
+extension MapViewController: UITableViewDelegate {
+    
+}
+// swiftlint:disable file_length
+//swiftlint:disable all
