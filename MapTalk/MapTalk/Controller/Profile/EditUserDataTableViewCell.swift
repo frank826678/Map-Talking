@@ -68,7 +68,8 @@ extension EditUserDataTableViewCell: UITextViewDelegate{
             
             baseView.contentTextView.frame.size.height = newSize.height
             baseView.frame.size.height += heightGap
-            
+            //20181014 
+            baseView.setNeedsLayout()
             delegate?.reszing(heightGap: heightGap)
             
         }
@@ -80,7 +81,8 @@ extension EditUserDataTableViewCell: UITextViewDelegate{
         self.adjustTextViewHeight()
         
     }
-    //
+    
+    //編輯中無法存檔 一定要點一下空白處
     func textViewDidEndEditing(_ textView: UITextView) {
         delegate?.editSave(textInput: textView.text, tableViewCell: self)
     }
