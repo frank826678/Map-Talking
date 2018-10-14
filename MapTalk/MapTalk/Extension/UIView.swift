@@ -25,38 +25,40 @@ extension UIView {
         self.layer.borderColor = borderColor
     }
     
-//    func shadowSetup(
-//        cgSize: CGSize = CGSize(width: 1, height: 1),
-//        shadowRadius: CGFloat = 4,
-//        shadowOpacity: Float = 0.2
-//        ) {
-//        
-//        self.layer.shadowOffset = cgSize
-//        self.layer.shadowRadius = shadowRadius
-//        self.layer.shadowColor = UIColor.black.cgColor
-//        self.layer.shadowOpacity = shadowOpacity
-//        
-//    }
-//    
-//    func addDashdeBorderLayer(color: UIColor, lineWidth width: CGFloat) {
-//        
-//        let shapeLayer = CAShapeLayer()
-//        let size = self.frame.size
-//        
-//        let shapeRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-//        
-//        shapeLayer.bounds = shapeRect
-//        shapeLayer.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
-//        shapeLayer.fillColor = UIColor.clear.cgColor
-//        shapeLayer.strokeColor = color.cgColor
-//        shapeLayer.lineWidth = width
-//        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
-//        
-//        shapeLayer.lineDashPattern = [20, 10]
-//        let path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 0)
-//        shapeLayer.path = path.cgPath
-//        self.layer.addSublayer(shapeLayer)
-//        
-//    }
+    //常用的參數可以給預設值 想要有自己的就輸入值
+    func shadowSetup(
+        cgSize: CGSize = CGSize(width: 1, height: 1),
+        shadowRadius: CGFloat = 4,
+        shadowOpacity: Float = 0.2
+        ) {
+        
+        self.layer.shadowOffset = cgSize
+        self.layer.shadowRadius = shadowRadius
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = shadowOpacity
+        
+    }
+    
+    //邊框切虛線用
+    func addDashdeBorderLayer(color: UIColor, lineWidth width: CGFloat) {
+        
+        let shapeLayer = CAShapeLayer()
+        let size = self.frame.size
+        
+        let shapeRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        
+        shapeLayer.bounds = shapeRect
+        shapeLayer.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = color.cgColor
+        shapeLayer.lineWidth = width
+        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
+        
+        shapeLayer.lineDashPattern = [20, 10]
+        let path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 0)
+        shapeLayer.path = path.cgPath
+        self.layer.addSublayer(shapeLayer)
+        
+    }
     
 }

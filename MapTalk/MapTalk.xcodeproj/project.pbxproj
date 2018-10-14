@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0106CC3021734EDD009A80C4 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106CC2F21734EDD009A80C4 /* UITextView.swift */; };
 		0141678E216321760080EDCE /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141678D216321760080EDCE /* Icon.swift */; };
 		01416790216323520080EDCE /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141678F216323520080EDCE /* UIImage.swift */; };
 		016A51352159DCBA00AB2745 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A51342159DCBA00AB2745 /* TabBarViewController.swift */; };
@@ -76,6 +77,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0106CC2F21734EDD009A80C4 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		0141678D216321760080EDCE /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		0141678F216323520080EDCE /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		016A51342159DCBA00AB2745 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 				01EBF37221546F2600D23871 /* UIAlertController.swift */,
 				0141678F216323520080EDCE /* UIImage.swift */,
 				01E65820216DE45700928C9B /* UIView.swift */,
+				0106CC2F21734EDD009A80C4 /* UITextView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -634,6 +637,7 @@
 				01A624962171B363009CD507 /* UserDataTableViewCell.swift in Sources */,
 				01CF3566216F759500B98D71 /* DateManager.swift in Sources */,
 				01701AF1215BC6930074B0B9 /* ChatViewController.swift in Sources */,
+				0106CC3021734EDD009A80C4 /* UITextView.swift in Sources */,
 				0141678E216321760080EDCE /* Icon.swift in Sources */,
 				0177E2AE216131E30038F29A /* SettingViewController.swift in Sources */,
 				01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */,

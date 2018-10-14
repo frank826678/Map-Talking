@@ -22,7 +22,10 @@ class UserDataTableViewCell: UITableViewCell {
         
         userImage.layer.cornerRadius = 50
         userImage.clipsToBounds = true
+        userImage.layer.borderWidth = 4
         userImage.layer.borderColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
+        //userImage.layer.opacity = 0.5
+        
     
     }
 

@@ -699,6 +699,10 @@ extension FilterViewController: UICollectionViewDataSource{
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        //取消點選時的動作
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         print("******請看這******")

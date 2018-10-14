@@ -14,7 +14,10 @@ import FirebaseAuth
 class EditViewController: UIViewController {
     
     @IBOutlet weak var editTableView: UITableView!
-    
+    //20181014
+    var expandingCellHeight: CGFloat = 200
+    let expandingIndexRow = 0
+    //END
     var userInfo = ["性別","生日","感情狀態","居住地","體型","我想尋找"]
     var userSelected =  ["男生","1993-06-06","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
     
@@ -427,13 +430,24 @@ extension EditViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //自我介紹列讓系統偵測  原本是全部都 automaticDimension
-        if indexPath.section == 2 || indexPath.section == 3 || indexPath.section == 4 || indexPath.section == 5  {
+        
         return 80
-        }    //return 100
-        else {
-            return UITableView.automaticDimension
-        }
+        //return self.view.frame.width * (53 / 375)
+        
+//        if indexPath.row == expandingIndexRow {
+//            return expandingCellHeight
+//        } else {
+//            return 100
+//        }
+
+        
+        //自我介紹列讓系統偵測  原本是全部都 automaticDimension
+//        if indexPath.section == 2 || indexPath.section == 3 || indexPath.section == 4 || indexPath.section == 5  {
+//        return 80
+//        }    //return 100
+//        else {
+           // return UITableView.automaticDimension
+        //}
     }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -455,7 +469,27 @@ extension EditViewController: UITableViewDataSource{
 extension EditViewController: UITableViewDelegate{}
 
 extension EditViewController: CellDelegate {
+   
+    /*
+    func updated(height: CGFloat) {
+        expandingCellHeight = height
+        
+        // Disabling animations gives us our desired behaviour
+        UIView.setAnimationsEnabled(false)
+        /* These will causes table cell heights to be recaluclated,
+         without reloading the entire cell */
+        editTableView.beginUpdates()
+        editTableView.endUpdates()
+        // Re-enable animations
+        UIView.setAnimationsEnabled(true)
+        
+        let indexPath = IndexPath(row: expandingIndexRow, section: 0)
+        
+        editTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+
+    }
     
+    */
     func editSave(textInput: String, tableViewCell: UITableViewCell) {
         //editTableView.indexPath(for: tableViewCell)
         
@@ -534,10 +568,22 @@ extension EditViewController: CellDelegate {
     //    }
     
     func reszing(heightGap: CGFloat) {
+       // UIView.setAnimationsEnabled(false)
         
+        //old
         editTableView.contentInset.bottom += heightGap
         editTableView.contentOffset.y += heightGap
+        //END
         
+//        editTableView.beginUpdates()
+//        editTableView.endUpdates()
+//
+//        UIView.setAnimationsEnabled(true)
+//
+//        let indexPath = IndexPath(row: expandingIndexRow, section: 0)
+//
+//        editTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+
     }
     
     //    func cellButtonTapping(_ cell: UITableViewCell) {

@@ -55,34 +55,34 @@ class UserInfoDetailView: UIView {
     }
     
     //設定陰影
-    func shadowSetup(
-        cgSize: CGSize = CGSize(width: 1, height: 1),
-        shadowRadius: CGFloat = 4,
-        shadowOpacity: Float = 0.2
-        ) {
-        
-        self.layer.shadowOffset = cgSize
-        self.layer.shadowRadius = shadowRadius
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOpacity = shadowOpacity
-        
-    }
+//    func shadowSetup(
+//        cgSize: CGSize = CGSize(width: 1, height: 1),
+//        shadowRadius: CGFloat = 4,
+//        shadowOpacity: Float = 0.2
+//        ) {
+//
+//        self.layer.shadowOffset = cgSize
+//        self.layer.shadowRadius = shadowRadius
+//        self.layer.shadowColor = UIColor.black.cgColor
+//        self.layer.shadowOpacity = shadowOpacity
+//
+//    }
     
-    private func setCellShadow() {
-        
-        // 要 masksToBounds，不然圓角不會出來
-        
-        self.contentView.layer.cornerRadius = 2.0
-        self.contentView.layer.borderWidth = 1.0
-        self.contentView.layer.borderColor = UIColor.clear.cgColor
-        self.contentView.layer.masksToBounds = true
-        
-        self.layer.shadowOffset = CGSize(width: 4, height: 4)
-        self.layer.shadowRadius = 4.0
-        self.layer.shadowOpacity = 0.5
-        self.layer.masksToBounds = false
-        
-    }
+//    private func setCellShadow() {
+//        
+//        // 要 masksToBounds，不然圓角不會出來
+//        
+//        self.contentView.layer.cornerRadius = 2.0
+//        self.contentView.layer.borderWidth = 1.0
+//        self.contentView.layer.borderColor = UIColor.clear.cgColor
+//        self.contentView.layer.masksToBounds = true
+//        
+//        self.layer.shadowOffset = CGSize(width: 4, height: 4)
+//        self.layer.shadowRadius = 4.0
+//        self.layer.shadowOpacity = 0.5
+//        self.layer.masksToBounds = false
+//        
+//    }
 
     
 }
