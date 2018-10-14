@@ -427,8 +427,13 @@ extension EditViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-        //return 100
+        //自我介紹列讓系統偵測  原本是全部都 automaticDimension
+        if indexPath.section == 2 || indexPath.section == 3 || indexPath.section == 4 || indexPath.section == 5  {
+        return 80
+        }    //return 100
+        else {
+            return UITableView.automaticDimension
+        }
     }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
