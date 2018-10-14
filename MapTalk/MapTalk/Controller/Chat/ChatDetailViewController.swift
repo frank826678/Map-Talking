@@ -144,7 +144,12 @@ class ChatDetailViewController: UIViewController {
             self, selector: #selector(photoSelectorShowing), name: .close, object: nil
         )
     }
-
+    
+    func sendPersonalChannelToPhotoVC() {
+        
+        NotificationCenter.default.post(name: .sendPersonalChannel, object: friendChannel)
+        //NotificationCenter.default.post(name: .close, object: nil)
+    }
     
     //NEW
     private func setChannel(friendUserId: String) {
@@ -165,6 +170,8 @@ class ChatDetailViewController: UIViewController {
         guard let myselfIdAndFriendId = channel else { return }
         friendChannel = myselfIdAndFriendId
         
+        //20181014 照片
+        sendPersonalChannelToPhotoVC()
     }
     
     private func setupChat(friendUserId: String) {
@@ -198,7 +205,7 @@ class ChatDetailViewController: UIViewController {
             guard let value = snapshot.value as? NSDictionary else {
                 
                 print("找不到原始資料，創建新頻道")
-                
+                //送出的第一句話
                 let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).childByAutoId().key
                 self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).child(messageKey).setValue([
                     "content": " Hello World~~~~ ",
@@ -435,8 +442,22 @@ class ChatDetailViewController: UIViewController {
     @IBAction func photoButtonPressed(_ sender: UIButton) {
         
         photoSelectorShowing()
+        // 20181014加上傳送頻道
+        //self.performSegue(withIdentifier: "GoPhotoVC", sender: friendChannel)
     }
-    
+        // 20181014加上傳送頻道
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//        // swiftlint:disable force_cast
+//        let sendChannel = sender as! String
+//        let controller = segue.destination as! PhotoViewController
+//
+//        // swiftlint:enable force_cast
+//
+//        controller.friendChannel = sendChannel
+//
+//    }
+
     @objc func photoSelectorShowing() {
         
         photoBtn.isSelected = !photoBtn.isSelected

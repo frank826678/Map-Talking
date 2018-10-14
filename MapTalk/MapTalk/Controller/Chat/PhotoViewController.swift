@@ -25,6 +25,9 @@ class PhotoViewController: UIViewController {
     
     var photos: [PHAsset] = []
     
+    //20181014 照片
+    var friendChannel: String = "測試33"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +37,40 @@ class PhotoViewController: UIViewController {
         setBackground()
         
         getPhotos()
-
+        
+        //20181014 照片 OK
+        NotificationCenter.default.addObserver(self, selector: #selector (getDataFromChatDetail(_:)), name: .sendPersonalChannel, object: nil)
+        
+    }
+    
+    //20181014 照片
+    @objc func getDataFromChatDetail(_ noti: Notification) {
+        
+        guard let friendChannelFromChatDetail = noti.object as? String else {
+            print("no channel")
+            return  }
+        
+        friendChannel = friendChannelFromChatDetail
+        
+        print("***朋友頻道\(friendChannel)")
+//        currentCenter?.latitude = center.latitude
+//        currentCenter?.longitude = center.longitude
+        
+        //        guard let text = noti.object as? String else { return print("no text") }
+        //
+        //        if noti.name == .add {
+        //
+        //            toDoListItem.append(text)
+        //
+        //        } else {
+        //
+        //            guard let indexPath = indexPath else { return print("no index") }
+        //            toDoListItem[indexPath.row] = text
+        //
+        //        }
+        //
+        //        tableView.reloadData()
+        
     }
     
     func setBackground() {
@@ -149,6 +185,8 @@ class PhotoViewController: UIViewController {
         
         let chatroomKey = "publicChannel"
         
+        print("***朋友頻道\(friendChannel)")
+        
         // swiftlint:disable identifier_name
         let ref = Database.database().reference()
         // swiftlint:enable identifier_name
@@ -220,5 +258,6 @@ extension PhotoViewController: UICollectionViewDelegate {}
 extension NSNotification.Name {
     
     static let close = NSNotification.Name("CLOSE_PHOTO_SELECTOR")
-    
+    static let sendPersonalChannel = NSNotification.Name("SEND_PERSONAL_CHANNEL")
+
 }

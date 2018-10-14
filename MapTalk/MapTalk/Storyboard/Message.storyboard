@@ -148,7 +148,7 @@
                                     <constraint firstAttribute="height" constant="155" id="Gpa-pH-Dd6"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="wcr-uL-Kq6" kind="embed" id="U9Z-mz-GwD"/>
+                                    <segue destination="wcr-uL-Kq6" kind="embed" identifier="GoPhotoVC" id="U9Z-mz-GwD"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZo-8l-7i1">
