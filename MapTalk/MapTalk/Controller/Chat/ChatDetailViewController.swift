@@ -43,7 +43,10 @@ class ChatDetailViewController: UIViewController {
     
     //201801005
     var friendInfo: [FriendInfo] = []
-    
+    //20181014
+    //var friendNewInfo: FriendNewInfo = FriendNewInfo(friendName: "測試11", friendImageUrl: "測試12", friendUID: "測試13", friendChannel: "測試13")
+    //20181014 END
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,11 +148,11 @@ class ChatDetailViewController: UIViewController {
         )
     }
     
-    func sendPersonalChannelToPhotoVC() {
-        
-        NotificationCenter.default.post(name: .sendPersonalChannel, object: friendChannel)
-        //NotificationCenter.default.post(name: .close, object: nil)
-    }
+//    func sendPersonalChannelToPhotoVC() {
+//
+//        NotificationCenter.default.post(name: .sendPersonalChannel, object: friendChannel)
+//
+//    }
     
     //NEW
     private func setChannel(friendUserId: String) {
@@ -171,7 +174,7 @@ class ChatDetailViewController: UIViewController {
         friendChannel = myselfIdAndFriendId
         
         //20181014 照片
-        sendPersonalChannelToPhotoVC()
+        //sendPersonalChannelToPhotoVC()
     }
     
     private func setupChat(friendUserId: String) {
@@ -425,7 +428,12 @@ class ChatDetailViewController: UIViewController {
             let friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
             
             self.friendInfo.append(friendInfo)
+            //20181014 傳送發送照片的詳細資料 channel 已經變更好的來自全域變數
+            var friendNewInfo: FriendNewInfo = FriendNewInfo(friendName: friendName, friendImageUrl: friendImageUrl, friendUID: friendUserId, friendChannel: self.friendChannel)
             
+            NotificationCenter.default.post(name: .sendPersonalChannel, object: friendNewInfo)
+            
+            print("friendNewInfo\(friendNewInfo)")
             
             //試著加入到同一個 array
             //            let friendDataArray = freindData(info: friendInfo, message: nil)

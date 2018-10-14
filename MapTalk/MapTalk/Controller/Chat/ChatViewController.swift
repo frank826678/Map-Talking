@@ -260,7 +260,7 @@ class ChatViewController: UIViewController {
             guard let friendImageUrl = value["FBPhotoSmallURL"] as? String  else { return }
             
             let friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
-            
+
             self.friendInfo.append(friendInfo)
             
             

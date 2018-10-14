@@ -27,6 +27,7 @@ class PhotoViewController: UIViewController {
     
     //20181014 照片
     var friendChannel: String = "測試33"
+    var friendNewInfo: FriendNewInfo = FriendNewInfo(friendName: "測試11", friendImageUrl: "測試12", friendUID: "測試13", friendChannel: "測試13")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,37 +41,26 @@ class PhotoViewController: UIViewController {
         
         //20181014 照片 OK
         NotificationCenter.default.addObserver(self, selector: #selector (getDataFromChatDetail(_:)), name: .sendPersonalChannel, object: nil)
-        
+        //nil 可是資料可以過來 anObject：這是設定是否接收特定的物件的通知。如設定nil，則就是不論哪個物件傳送的通知都收，若有設定物件，則只收這物件所發出的通知。
     }
     
     //20181014 照片
     @objc func getDataFromChatDetail(_ noti: Notification) {
         
-        guard let friendChannelFromChatDetail = noti.object as? String else {
-            print("no channel")
-            return  }
-        
-        friendChannel = friendChannelFromChatDetail
-        
-        print("***朋友頻道\(friendChannel)")
-//        currentCenter?.latitude = center.latitude
-//        currentCenter?.longitude = center.longitude
-        
-        //        guard let text = noti.object as? String else { return print("no text") }
-        //
-        //        if noti.name == .add {
-        //
-        //            toDoListItem.append(text)
-        //
-        //        } else {
-        //
-        //            guard let indexPath = indexPath else { return print("no index") }
-        //            toDoListItem[indexPath.row] = text
-        //
-        //        }
-        //
-        //        tableView.reloadData()
-        
+        guard let friendChannelFromChatDetail = noti.object as? FriendNewInfo else {
+                        print("no channel")
+                        return  }
+
+        friendNewInfo = friendChannelFromChatDetail
+        print("***朋友頻道\(friendNewInfo)")
+//        guard let friendChannelFromChatDetail = noti.object as? String else {
+//            print("no channel")
+//            return  }
+//
+//        friendChannel = friendChannelFromChatDetail
+//
+//        print("***朋友頻道\(friendChannel)")
+
     }
     
     func setBackground() {
@@ -183,23 +173,29 @@ class PhotoViewController: UIViewController {
         
         let createdTime = Date().millisecondsSince1970
         
-        let chatroomKey = "publicChannel"
-        
+        //let chatroomKey = "publicChannel"
+       
         print("***朋友頻道\(friendChannel)")
         
         // swiftlint:disable identifier_name
         let ref = Database.database().reference()
         // swiftlint:enable identifier_name
         
-        let messageKey = ref.child(chatroomKey).childByAutoId().key
+        let channel = friendNewInfo.friendChannel
+        let messageKey = ref.child("chatroom").child("PersonalChannel").child(channel).childByAutoId().key
         
-        ref.child("chatroom").child(chatroomKey).child(messageKey)
-            .setValue([
+       // let messageKey = ref.child(chatroomKey).childByAutoId().key
+        
+        ref.child("chatroom").child("PersonalChannel").child(channel).child(messageKey).setValue([
                 "imageUrl": imageUrl,
                 "senderId": userId,
                 "senderName": userName,
                 "senderPhoto": userImage,
-                "time": createdTime
+                "time": createdTime,
+                "content": "傳送了一張照片",
+                "friendName": friendNewInfo.friendName,
+                "friendImageUrl": friendNewInfo.friendImageUrl,
+                "friendUID": friendNewInfo.friendUID
             ]) { (error, _) in
                 
                 if let error = error {

@@ -60,3 +60,17 @@ struct NewMessage {
     let friendUID: String?
     
 }
+
+//201801014
+struct FriendNewInfo {
+    
+    let friendName: String
+    
+    let friendImageUrl: String
+    
+    let friendUID: String
+    
+    let friendChannel: String
+
+}
+
