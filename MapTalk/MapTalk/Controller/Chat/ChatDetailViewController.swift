@@ -59,7 +59,8 @@ class ChatDetailViewController: UIViewController {
         ref = Database.database().reference()
         
         setBackground()
-        
+        //20181014 照片
+        addObservers()
         
         
         //getMessages()
@@ -134,6 +135,16 @@ class ChatDetailViewController: UIViewController {
         chatDetailTableView.register(UINib(nibName: "ChatImageOwnerTableViewCell", bundle: nil),
                                      forCellReuseIdentifier: "ChatImageOwner")
     }
+    
+    //20181014 照片
+    
+    func addObservers() {
+        
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(photoSelectorShowing), name: .close, object: nil
+        )
+    }
+
     
     //NEW
     private func setChannel(friendUserId: String) {
