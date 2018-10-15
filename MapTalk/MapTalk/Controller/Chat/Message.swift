@@ -57,7 +57,7 @@ struct NewMessage {
     
     let friendImageUrl: String?
     
-    let friendUID: String?
+    let friendUID: String
     
 }
 

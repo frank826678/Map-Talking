@@ -227,7 +227,7 @@ extension PhotoViewController: UICollectionViewDataSource {
         }
         
         cell.photoImage.image = convertImageFromAsset(asset: photos[indexPath.row])
-        
+      
         return cell
     }
     

@@ -328,9 +328,7 @@ class ChatViewController: UIViewController {
     //let chatroomKey = "publicChannel"
     //每個 channel 都要讀取 讀最後一筆
     
-    
     func getNewFriendMessage(friendId: String) {
-        
         
         var channel :String = "Nothing"
         
@@ -343,11 +341,7 @@ class ChatViewController: UIViewController {
         } else {
             channel = "\(friendId)_\(myselfId)"
         }
-        
-        
         ref.child("chatroom").child("PersonalChannel").child(channel).queryOrdered(byChild: "time").queryLimited(toLast: 1).observe(.childAdded) { (snapshot) in
-            
-            
             
             guard let value = snapshot.value as? NSDictionary else { return }
             
@@ -357,7 +351,7 @@ class ChatViewController: UIViewController {
             
             guard let time = value["time"] as? Int else { return }
             
-            var content = value["content"] as? String
+            let content = value["content"] as? String
             
             let senderPhoto = value["senderPhoto"] as? String
             
@@ -367,7 +361,7 @@ class ChatViewController: UIViewController {
             
             let friendNameURL = value["friendImageUrl"] as? String
             
-            let friendUID = value["friendUID"] as? String
+            guard let friendUID = value["friendUID"] as? String else { return }
             
             let message = NewMessage(
                 content: content,
@@ -386,16 +380,9 @@ class ChatViewController: UIViewController {
                 
                 for (index, user) in self.newMessage.enumerated() where user.friendUID == message.friendUID {
                     
-                    
                     self.newMessage[index].content = message.content
                     
                     self.chatTableView.reloadData()
-                    
-                    //                self.locations[index].latitude = userLocations.latitude
-                    //
-                    //                self.locations[index].longitude = userLocations.longitude
-                    //
-                    //                self.locations[index].message = userLocations.message
                     
                     return //跳出 整個 getNewFriendMessage 的 func
                 }
@@ -403,32 +390,16 @@ class ChatViewController: UIViewController {
             } else {
                 
                     //不確定判斷式正確不正確
-                for (index, user) in self.newMessage.enumerated() where user.friendUID == message.senderId {
-                    
+                for (index, user) in self.newMessage.enumerated() where user.senderId == message.senderId {
                     
                     self.newMessage[index].content = message.content
                     
                     self.chatTableView.reloadData()
                     
-                    //                self.locations[index].latitude = userLocations.latitude
-                    //
-                    //                self.locations[index].longitude = userLocations.longitude
-                    //
-                    //                self.locations[index].message = userLocations.message
-                    
                     return
                 }
-
                 
             }
-            
-
-            
-            //            if message.friendName ==  {
-            //
-            //            } else {
-            //
-            //            }
             
             self.newMessage.append(message)
             
@@ -454,10 +425,7 @@ class ChatViewController: UIViewController {
 
 extension ChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return  friendsList.count
-        //OK
-        //return friendInfo.count
-        
+
         //OK 可以顯示最後一行
         //return messages.count
         
@@ -494,7 +462,6 @@ extension ChatViewController: UITableViewDataSource {
             {
                 cell.userName.text = newMessage[indexPath.row].friendName
                 
-                
                 if let photoString = newMessage[indexPath.row].friendImageUrl
                 {
                     cell.userImage.kf.setImage(with: URL(string: photoString))
@@ -507,7 +474,6 @@ extension ChatViewController: UITableViewDataSource {
             } else {
                 
                 cell.userName.text = newMessage[indexPath.row].senderName
-                
                 
                 if let photoString = newMessage[indexPath.row].senderPhoto
                 {
@@ -532,6 +498,8 @@ extension ChatViewController: UITableViewDataSource {
             //
             //            cell.userMessage.text = newMessage[indexPath.row].content
             
+            //點擊 cell 後 不反灰
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
             //OK 原本 done
             
@@ -540,7 +508,6 @@ extension ChatViewController: UITableViewDataSource {
         return UITableViewCell()
     }
 }
-
 
 extension ChatViewController: UITableViewDelegate {
     
@@ -568,19 +535,13 @@ extension ChatViewController: UITableViewDelegate {
         
         //controller.article = articles[indexPath.row]
         if newMessage[indexPath.row].senderId ==  myselfUID
-        {
-            controller.friendUserId = self.newMessage[indexPath.row].friendUID
-            
+        { controller.friendUserId = self.newMessage[indexPath.row].friendUID
         } else {
-            
             controller.friendUserId = self.newMessage[indexPath.row].senderId
-            
         }
         
         self.show(controller, sender: nil)
         print("跳頁成功")
         
-        
     }
-    
 }

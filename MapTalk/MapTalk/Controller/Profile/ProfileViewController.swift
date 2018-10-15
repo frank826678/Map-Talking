@@ -316,7 +316,9 @@ extension ProfileViewController: UITableViewDataSource{
             cell.iconImage.image = UIImage.setIconTemplate(iconName: iconImageArray[indexPath.row])
             
             
-            cell.selectedBackgroundView?.backgroundColor = UIColor.orange
+            //cell.selectedBackgroundView?.backgroundColor = UIColor.orange
+            
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             //            cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
             //
