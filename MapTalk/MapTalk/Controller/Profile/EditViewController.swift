@@ -313,8 +313,8 @@ extension EditViewController: UITableViewDataSource{
                 
                 cell.baseView.contentTextView.text = userSelected[6]
                 //userSelected[6] = cell.baseView.contentTextView.text
-                cell.delegate = self
-                cell.baseView.delegate = self
+//                cell.delegate = self
+//                cell.baseView.delegate = self
                 return cell
             }
             
@@ -350,8 +350,8 @@ extension EditViewController: UITableViewDataSource{
                 //cell.baseView.contentTextView.toolbarPlaceholder = userSelected[7]
                 cell.baseView.contentTextView.text = userSelected[7]
                 //userSelected[7] = cell.baseView.contentTextView.text
-                cell.delegate = self
-                cell.baseView.delegate = self
+//                cell.delegate = self
+//                cell.baseView.delegate = self
                 return cell
             }
             
@@ -364,8 +364,8 @@ extension EditViewController: UITableViewDataSource{
                 //cell.baseView.contentTextView.text = "台灣"
                 cell.baseView.contentTextView.text = userSelected[8]
                 //userSelected[8] = cell.baseView.contentTextView.text
-                cell.delegate = self
-                cell.baseView.delegate = self
+//                cell.delegate = self
+//                cell.baseView.delegate = self
                 return cell
             }
         case 4:
@@ -378,8 +378,8 @@ extension EditViewController: UITableViewDataSource{
                 cell.baseView.contentTextView.text = userSelected[9]
                 //userSelected[9] = cell.baseView.contentTextView.text
                 
-                cell.delegate = self
-                cell.baseView.delegate = self
+//                cell.delegate = self
+//                cell.baseView.delegate = self
                 return cell
             }
             
@@ -395,8 +395,8 @@ extension EditViewController: UITableViewDataSource{
                 //沒用 why
                 //userSelected[10] = cell.baseView.contentTextView.text
                 
-                cell.delegate = self
-                cell.baseView.delegate = self
+//                cell.delegate = self
+//                cell.baseView.delegate = self
                 return cell
             }
             
@@ -432,7 +432,7 @@ extension EditViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //目前 EditUserDataTableViewCell 沒有拉 限制高度
         
-        return 80
+//        return 80
         //return self.view.frame.width * (53 / 375)
         
 //        if indexPath.row == expandingIndexRow {
@@ -448,6 +448,12 @@ extension EditViewController: UITableViewDataSource{
 //        else {
 //            return UITableView.automaticDimension
 //        }
+        
+        if indexPath.section == 1 {
+            return 60
+        } else {
+            return UITableView.automaticDimension
+        }
         
     }
     

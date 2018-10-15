@@ -19,14 +19,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4NG-Zr-0ee">
-                        <rect key="frame" x="30" y="17" width="40" height="40"/>
+                        <rect key="frame" x="130" y="25" width="30" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="8b8-lA-YtH"/>
-                            <constraint firstAttribute="width" constant="40" id="oV9-js-U0B"/>
+                            <constraint firstAttribute="height" constant="30" id="8b8-lA-YtH"/>
+                            <constraint firstAttribute="width" constant="30" id="oV9-js-U0B"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOa-aU-dSF">
-                        <rect key="frame" x="90" y="17" width="255" height="50"/>
+                        <rect key="frame" x="180" y="17" width="165" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="LgB-SI-UkF"/>
                         </constraints>
@@ -38,10 +38,10 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="qOa-aU-dSF" secondAttribute="bottom" constant="10" id="Hbh-DV-ixZ"/>
                     <constraint firstItem="qOa-aU-dSF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="NOn-en-2jj"/>
-                    <constraint firstItem="4NG-Zr-0ee" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="NnV-ac-j22"/>
+                    <constraint firstItem="4NG-Zr-0ee" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="130" id="NnV-ac-j22"/>
                     <constraint firstItem="qOa-aU-dSF" firstAttribute="leading" secondItem="4NG-Zr-0ee" secondAttribute="trailing" constant="20" id="UTC-Ub-PhS"/>
                     <constraint firstAttribute="bottom" secondItem="4NG-Zr-0ee" secondAttribute="bottom" constant="10" id="WCz-D9-JZr"/>
-                    <constraint firstItem="4NG-Zr-0ee" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="Wrp-hx-kb5"/>
+                    <constraint firstItem="4NG-Zr-0ee" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="Wrp-hx-kb5"/>
                     <constraint firstAttribute="trailing" secondItem="qOa-aU-dSF" secondAttribute="trailing" constant="30" id="ax1-lV-4YB"/>
                 </constraints>
             </tableViewCellContentView>

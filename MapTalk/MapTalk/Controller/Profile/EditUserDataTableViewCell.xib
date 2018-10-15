@@ -11,29 +11,32 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="163" id="twp-kw-I4c" customClass="EditUserDataTableViewCell" customModule="MapTalk" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="163"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="twp-kw-I4c" customClass="EditUserDataTableViewCell" customModule="MapTalk" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="twp-kw-I4c" id="s34-bG-UFA">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="162.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="69.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Gm-XT-ToS" customClass="ProfileContentView" customModule="MapTalk" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="162.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="69.5"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="輸入點什麼吧～" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2Fc-vd-9qR">
-                                <rect key="frame" x="15" y="5" width="394" height="152.5"/>
+                                <rect key="frame" x="15" y="5" width="394" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Pqo-TL-WdD"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="2Fc-vd-9qR" secondAttribute="bottom" constant="5" id="Lk3-Qj-ljL"/>
                             <constraint firstItem="2Fc-vd-9qR" firstAttribute="leading" secondItem="6Gm-XT-ToS" secondAttribute="leading" constant="15" id="Rq3-Si-JRi"/>
                             <constraint firstItem="2Fc-vd-9qR" firstAttribute="top" secondItem="6Gm-XT-ToS" secondAttribute="top" constant="5" id="T8O-XE-f7O"/>
                             <constraint firstAttribute="trailing" secondItem="2Fc-vd-9qR" secondAttribute="trailing" constant="5" id="ia3-Re-gyH"/>
+                            <constraint firstAttribute="bottom" secondItem="2Fc-vd-9qR" secondAttribute="bottom" constant="4.5" id="ko9-pL-Dwe"/>
                         </constraints>
                         <connections>
                             <outlet property="contentTextView" destination="2Fc-vd-9qR" id="4XQ-Bv-t8h"/>
@@ -51,7 +54,7 @@
             <connections>
                 <outlet property="baseView" destination="6Gm-XT-ToS" id="p2e-LT-jle"/>
             </connections>
-            <point key="canvasLocation" x="168" y="171.36431784107947"/>
+            <point key="canvasLocation" x="168" y="129.53523238380811"/>
         </tableViewCell>
     </objects>
 </document>
