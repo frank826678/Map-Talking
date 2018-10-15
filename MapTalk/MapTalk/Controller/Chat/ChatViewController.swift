@@ -11,7 +11,6 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 
-
 // 模擬機測試會有一句話顯示兩次的問題 要做外面可以顯示對方的最後一筆資料 並且可以按照順序排
 
 class ChatViewController: UIViewController {
@@ -39,8 +38,6 @@ class ChatViewController: UIViewController {
     
     let dispatchGroup = DispatchGroup()
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setImage()
@@ -60,15 +57,12 @@ class ChatViewController: UIViewController {
         
         //simpleQueues()
         
-        
         guard let myselfId = Auth.auth().currentUser?.uid else { return }
         
         myselfUID = myselfId
         
         //change tabbar page 有作用 但是顏色沒變過去
         //tabBarController?.selectedIndex = 2
-        
-                
         
     }
     
@@ -122,12 +116,6 @@ class ChatViewController: UIViewController {
         //userName.text = userDisplayName
         
     }
-    
-    //    func getFriendList() {
-    //
-    //
-    //
-    //    }
     
     func simpleQueues() {
         
@@ -458,6 +446,7 @@ extension ChatViewController: UITableViewDataSource {
             //            } else {
             //                cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
             //            }
+            
             if  newMessage[indexPath.row].senderId == myselfUID
             {
                 cell.userName.text = newMessage[indexPath.row].friendName
