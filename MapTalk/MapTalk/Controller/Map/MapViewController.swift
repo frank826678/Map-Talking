@@ -547,6 +547,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //加上 reload
             self.userInfoDetailView.userInfoDetailTableView.reloadData()
             
+            //若是 tableView 不會有作用
             self.animateViewUp()
             self.addSwipe()
             

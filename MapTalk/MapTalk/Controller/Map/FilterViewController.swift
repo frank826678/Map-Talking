@@ -217,6 +217,9 @@ class FilterViewController: UIViewController {
     }
     
     @objc func addTapped() {
+        
+        getFilterData()
+
         print("點擊了按下 Save 的按鈕")
     }
     
@@ -490,14 +493,6 @@ class FilterViewController: UIViewController {
 //                    print("選取的人的 userID 是 \(self.friendUserId)")
             
         } //)
-        
-    }
-    
-    
-    
-    @IBAction func saveButtonClick(_ sender: UIButton) {
-        
-        getFilterData()
         
     }
     

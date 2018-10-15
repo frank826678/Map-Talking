@@ -215,7 +215,7 @@ class ChatDetailViewController: UIViewController {
             
             print("頻道已存在")
             //讀取上次聊天資料
-            //20181014
+            //20181014 註解掉解決 detail 介面有兩行重複的留言
             //self.getPersonalMessages(channel:  myselfIdAndFriendId)
             
         }

@@ -158,14 +158,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kIE-LC-7az">
                                 <rect key="frame" x="0.0" y="621" width="375" height="46"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2q-rM-Grp">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2q-rM-Grp">
                                         <rect key="frame" x="15" y="12" width="22" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="H0x-Vy-J34"/>
                                             <constraint firstAttribute="width" constant="22" id="lfb-S5-ga8"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="chat_photo_normal"/>
-                                        <state key="selected" image="chat_photo_selected"/>
+                                        <state key="selected" image="chat_photo_normal"/>
                                         <connections>
                                             <action selector="photoButtonPressed:" destination="SQY-I5-Abe" eventType="touchUpInside" id="hOW-SE-j6x"/>
                                         </connections>
@@ -411,7 +411,6 @@
         <image name="btn_like_selected" width="20" height="20"/>
         <image name="btn_send" width="30" height="30"/>
         <image name="chat_photo_normal" width="150" height="168"/>
-        <image name="chat_photo_selected" width="130" height="146"/>
         <image name="chat_x" width="50" height="50"/>
         <image name="new2-microphone-50" width="50" height="50"/>
         <image name="new2_search-50-2" width="50" height="50"/>

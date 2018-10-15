@@ -81,7 +81,9 @@ class ChatViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //getFriendLastMessage()
-        
+        //20181014
+        //getFriendList()
+    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
