@@ -11,6 +11,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 import MapKit //為了拿到 CLLocationCoordinate2D
+import NotificationBannerSwift
 
 class FilterViewController: UIViewController {
     
@@ -397,7 +398,8 @@ class FilterViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        
+        let banner = StatusBarNotificationBanner(title: "累死我了", style: .success)
+        banner.show()
     }
     
     func getFilterData() {

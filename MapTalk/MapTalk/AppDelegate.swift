@@ -10,8 +10,8 @@ import UIKit
 import FBSDKLoginKit
 import FBSDKCoreKit
 import Firebase
-import GoogleMaps
-import GooglePlaces
+//import GoogleMaps
+//import GooglePlaces
 import IQKeyboardManagerSwift
 import Fabric
 import Crashlytics
@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         FirebaseApp.configure()
         
-        GMSServices.provideAPIKey("AIzaSyDUQVZIOfdopcNAHEgv0mJY3VlEYtAaLOc")
+        //GMSServices.provideAPIKey("AIzaSyDUQVZIOfdopcNAHEgv0mJY3VlEYtAaLOc")
         
         // OLD GMSPlacesClient.provideAPIKey("AIzaSyDDFveJ8LPRLCJKfmQqU-rBlbY7MPXYoUw")
         

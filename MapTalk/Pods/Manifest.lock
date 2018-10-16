@@ -58,13 +58,6 @@ PODS:
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
-  - GoogleMaps (2.7.0):
-    - GoogleMaps/Maps (= 2.7.0)
-  - GoogleMaps/Base (2.7.0)
-  - GoogleMaps/Maps (2.7.0):
-    - GoogleMaps/Base
-  - GooglePlaces (2.7.0):
-    - GoogleMaps/Base (= 2.7.0)
   - GoogleUtilities/AppDelegateSwizzler (5.2.3):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -85,12 +78,17 @@ PODS:
   - IQKeyboardManagerSwift (6.1.1)
   - Kingfisher (4.9.0)
   - leveldb-library (1.20)
+  - MarqueeLabel/Swift (3.1.6)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - NotificationBannerSwift (1.6.3):
+    - MarqueeLabel/Swift
+    - SnapKit (~> 4.0)
   - RAMAnimatedTabBarController (3.5.0)
+  - SnapKit (4.0.0)
   - SwiftLint (0.27.0)
 
 DEPENDENCIES:
@@ -101,10 +99,9 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
-  - GoogleMaps
-  - GooglePlaces
   - IQKeyboardManagerSwift
   - Kingfisher (~> 4.0)
+  - NotificationBannerSwift
   - RAMAnimatedTabBarController
   - SwiftLint
 
@@ -124,15 +121,16 @@ SPEC REPOS:
     - FirebaseInstanceID
     - FirebaseStorage
     - GoogleAppMeasurement
-    - GoogleMaps
-    - GooglePlaces
     - GoogleUtilities
     - GTMSessionFetcher
     - IQKeyboardManagerSwift
     - Kingfisher
     - leveldb-library
+    - MarqueeLabel
     - nanopb
+    - NotificationBannerSwift
     - RAMAnimatedTabBarController
+    - SnapKit
     - SwiftLint
 
 SPEC CHECKSUMS:
@@ -150,17 +148,18 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: ea5af6920d0a4a29b40459d055bebe4a6c1333c4
   FirebaseStorage: 43f823b96b72a08539eba21a7de043348a69d4c6
   GoogleAppMeasurement: f7507b39b70ad0bd80b3d81518b2f43868974307
-  GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
-  GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
   GoogleUtilities: 6f681e27050c5e130325e89fa0316dfca826f954
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
   Kingfisher: 64539b51826b778206daa6ed815d12653caa69dd
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  MarqueeLabel: 0c41f08ef5773e29c0f71064a8fa788a2fd8b365
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NotificationBannerSwift: b231e4c3244848ef300e1c53ce027b9756b9b06f
   RAMAnimatedTabBarController: 7e259e89b669c7bc833a6441c7d8fbfd6580f473
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 
-PODFILE CHECKSUM: 892ff054969b1542339431aed9185808db5e4b23
+PODFILE CHECKSUM: 3e672f7510ab81f0deccc39c02b89fabaa143dc2
 
 COCOAPODS: 1.5.3
