@@ -24,7 +24,11 @@ class FilterViewController: UIViewController {
     
     @IBOutlet weak var ageSegment: UISegmentedControl!
     
-    @IBOutlet weak var locationSegment: UISegmentedControl!
+//    @IBOutlet weak var locationSegment: UISegmentedControl!
+    
+    @IBOutlet weak var locationSlider: UISlider!
+    @IBOutlet weak var locationSliderValue: UILabel!
+      let step: Float = 1
     
     // swiftlint:disable identifier_name
     var ref: DatabaseReference!
@@ -187,8 +191,36 @@ class FilterViewController: UIViewController {
 //            currentLocation = locManager.location
 //
 //        }
+        setLocationSlider()
 
     }
+    
+    func setLocationSlider() {
+        
+        locationSlider.minimumValue = 1
+        locationSlider.maximumValue = 100
+        //locationSlider.value = 30
+        locationSlider.setValue(30,animated:true)
+        
+        // UISlider 是否可以在變動時同步執行動作
+        // 設定 false 時 則是滑動完後才會執行動作
+        locationSlider.isContinuous = true
+        locationSlider.addTarget(self,action:#selector(sliderDidchange(_:)), for:UIControl.Event.valueChanged)
+        
+    }
+    
+    @objc func sliderDidchange(_ slider:UISlider){
+        
+        let roundedStepValue = round(slider.value / step) * step
+        slider.value = roundedStepValue
+        
+        //locationSliderValue.text = String(Int(slider.value))
+        locationSliderValue.text = " \(Int(slider.value)) 公里 "
+        print(slider.value)
+        
+    }
+    
+
     
     @objc func getDataFrom(_ noti: Notification) {
         
@@ -271,26 +303,26 @@ class FilterViewController: UIViewController {
     }
     
     
-    @IBAction func locationChanged(_ sender: UISegmentedControl) {
-        
-        switch locationSegment.selectedSegmentIndex
-        {
-        case 0:
-            print("3 KM")
-            
-        case 1:
-            print("15 KM")
-            
-        case 2:
-            print("30 KM")
-            
-        default:
-            
-            print("距離")
-            break;
-        }
-        
-    }
+//    @IBAction func locationChanged(_ sender: UISegmentedControl) {
+//
+//        switch locationSegment.selectedSegmentIndex
+//        {
+//        case 0:
+//            print("3 KM")
+//
+//        case 1:
+//            print("15 KM")
+//
+//        case 2:
+//            print("30 KM")
+//
+//        default:
+//
+//            print("距離")
+//            break;
+//        }
+//
+//    }
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -311,7 +343,7 @@ class FilterViewController: UIViewController {
         //有可能沒按到約會類型和時間範圍 要給預設值或是設定?
         guard let filterAllData: Filter = Filter(gender: genderSegment.selectedSegmentIndex,
                                                  age: ageSegment.selectedSegmentIndex,
-                                                 location: locationSegment.selectedSegmentIndex,
+                                                 location: Int(locationSlider!.value),
                                                  dating: datingNumber,
                                                  time: timeNumber)    else { return }
         
