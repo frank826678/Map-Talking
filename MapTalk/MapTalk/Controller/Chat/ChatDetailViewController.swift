@@ -189,7 +189,8 @@ class ChatDetailViewController: UIViewController {
                 
                 print("找不到原始資料，創建新頻道")
                 //送出的第一句話
-                let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).childByAutoId().key
+                guard let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).childByAutoId().key else { return }
+
                 self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).child(messageKey).setValue([
                     "content": " Hello World~~~~ ",
                     "senderId": myselfId,
@@ -308,7 +309,7 @@ class ChatDetailViewController: UIViewController {
         
         //20181005 End
         
-        let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(friendChannel).childByAutoId().key
+        guard let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(friendChannel).childByAutoId().key else { return }
         self.ref.child("chatroom").child("PersonalChannel").child(friendChannel).child(messageKey).setValue([
             "content": text,
             "senderId": userId,

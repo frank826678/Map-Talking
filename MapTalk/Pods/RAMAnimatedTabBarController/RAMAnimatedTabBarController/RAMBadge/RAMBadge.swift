@@ -93,8 +93,8 @@ open class RAMBadge: UILabel {
 
         // create constraints
         let top = NSLayoutConstraint(item: self,
-                                     attribute: NSLayoutConstraint.Attribute.top,
-                                     relatedBy: NSLayoutConstraint.Relation.equal,
+                                           attribute: NSLayoutConstraint.Attribute.top,
+                                           relatedBy: NSLayoutConstraint.Relation.equal,
                                            toItem: onView,
                                            attribute: NSLayoutConstraint.Attribute.top,
                                            multiplier: 1,
@@ -103,8 +103,8 @@ open class RAMBadge: UILabel {
         topConstraint = top
 
         let centerX = NSLayoutConstraint(item: self,
-                                         attribute: NSLayoutConstraint.Attribute.centerX,
-                                         relatedBy: NSLayoutConstraint.Relation.equal,
+                                               attribute: NSLayoutConstraint.Attribute.centerX,
+                                               relatedBy: NSLayoutConstraint.Relation.equal,
                                                toItem: onView,
                                                attribute: NSLayoutConstraint.Attribute.centerX,
                                                multiplier: 1,

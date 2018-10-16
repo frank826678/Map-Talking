@@ -182,7 +182,7 @@ class PhotoViewController: UIViewController {
         // swiftlint:enable identifier_name
         
         let channel = friendNewInfo.friendChannel
-        let messageKey = ref.child("chatroom").child("PersonalChannel").child(channel).childByAutoId().key
+        guard let messageKey = ref.child("chatroom").child("PersonalChannel").child(channel).childByAutoId().key else { return }
         
        // let messageKey = ref.child(chatroomKey).childByAutoId().key
         

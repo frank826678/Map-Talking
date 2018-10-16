@@ -15,6 +15,7 @@ target 'MapTalk' do
   pod 'Firebase/Auth'
   pod 'Kingfisher', '~> 4.0'
   pod 'RAMAnimatedTabBarController'
+
   pod 'IQKeyboardManagerSwift'
   pod 'Fabric'
   pod 'Crashlytics'

@@ -255,6 +255,8 @@ open class RAMAnimatedTabBarController: UITabBarController {
 
     var lineLeadingConstraint: NSLayoutConstraint?
     var bottomLine: UIView?
+    var arrBottomAnchor:[NSLayoutConstraint] = []
+    var arrViews:[UIView] = []
     
     // MARK: life circle
 
@@ -265,6 +267,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
 
     fileprivate func initializeContainers() {
         
+
         containers.values.forEach { $0.removeFromSuperview() }
         containers = createViewContainers()
 
@@ -273,6 +276,34 @@ open class RAMAnimatedTabBarController: UITabBarController {
         }
     }
 
+    override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { (transitionCoordinatorContext) -> Void in
+            let orient = UIApplication.shared.statusBarOrientation
+            
+            for (index, var layoutAnchor) in self.arrBottomAnchor.enumerated() {
+                
+                layoutAnchor.isActive = false
+                
+                switch orient {
+                case .portrait:
+                    layoutAnchor = self.arrViews[index].bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor)
+                case .landscapeLeft,.landscapeRight :
+                    layoutAnchor = self.arrViews[index].bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.bottomAnchor)
+                default:
+                    print("Anything But Portrait")
+                }
+                
+                self.arrBottomAnchor[index] = layoutAnchor
+                self.arrBottomAnchor[index].isActive = true
+            }
+            self.view.updateConstraints()
+            
+        }, completion: { (transitionCoordinatorContext) -> Void in
+            //refresh view once rotation is completed not in will transition as it returns incorrect frame size.Refresh here
+        })
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+    
     // MARK: create methods
 
     fileprivate func createCustomIcons(_ containers: [String: UIView]) {
@@ -328,7 +359,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
                 textLabel.alpha = 0.5
             }
             item.iconView = (icon: icon, textLabel: textLabel)
-
+            
             if 0 == index { // selected first elemet
                 item.selectedState()
                 container.backgroundColor = (items as [RAMAnimatedTabBarItem])[index].bgSelectedColor
@@ -392,9 +423,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
 
     fileprivate func createViewContainers() -> [String: UIView] {
         
-        guard let items = tabBar.items, items.count > 0 else {
-            return [:]
-        }
+        guard let items = tabBar.items, items.count > 0 else { return [:] }
 
         var containersDict: [String: UIView] = [:]
         
@@ -416,7 +445,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
                                                           options: NSLayoutConstraint.FormatOptions.directionLeftToRight,
                                                           metrics: nil,
                                                           views: (containersDict as [String: AnyObject]))
-        }else{
+        } else {
             constranints = NSLayoutConstraint.constraints(withVisualFormat: formatString,
                                                           options: NSLayoutConstraint.FormatOptions.directionRightToLeft,
                                                           metrics: nil,
@@ -437,9 +466,18 @@ open class RAMAnimatedTabBarController: UITabBarController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(RAMAnimatedTabBarController.tapHandler(_:)))
         tapGesture.numberOfTouchesRequired = 1
         viewContainer.addGestureRecognizer(tapGesture)
-
+        arrViews.append(viewContainer)
+        
         // add constrains
-        viewContainer.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
+        if UIDevice.current.orientation.isLandscape {
+            let bottomAnchor = viewContainer.bottomAnchor.constraint(equalTo: bottomLayoutGuide.bottomAnchor)
+            self.arrBottomAnchor.append(bottomAnchor)
+            bottomAnchor.isActive = true
+        } else {
+            let bottomAnchor = viewContainer.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor)
+            self.arrBottomAnchor.append(bottomAnchor)
+            bottomAnchor.isActive = true
+        }
 
         let constH = NSLayoutConstraint(item: viewContainer,
                                         attribute: NSLayoutConstraint.Attribute.height,
