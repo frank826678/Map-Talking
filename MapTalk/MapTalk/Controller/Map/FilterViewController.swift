@@ -22,10 +22,14 @@ class FilterViewController: UIViewController {
     
     @IBOutlet weak var genderSegment: UISegmentedControl!
     
-    @IBOutlet weak var ageSegment: UISegmentedControl!
+//    @IBOutlet weak var ageSegment: UISegmentedControl!
     
 //    @IBOutlet weak var locationSegment: UISegmentedControl!
     
+    @IBOutlet weak var maxAgeSlider: UISlider!
+    @IBOutlet weak var minAgeSlider: UISlider!
+    @IBOutlet weak var maxAgeSliderValue: UILabel!
+    @IBOutlet weak var minAgeSliderValue: UILabel!
     @IBOutlet weak var locationSlider: UISlider!
     @IBOutlet weak var locationSliderValue: UILabel!
       let step: Float = 1
@@ -191,8 +195,73 @@ class FilterViewController: UIViewController {
 //            currentLocation = locManager.location
 //
 //        }
+        
+        setAgeSlider()
         setLocationSlider()
 
+    }
+    
+    func setAgeSlider() {
+        //minAgeSlider
+        //max
+        minAgeSlider.minimumValue = 18
+        minAgeSlider.maximumValue = 65
+        //minAgeSlider.minimumValue = 0
+        
+        //locationSlider.value = 30
+        //minAgeSlider.setValue(18,animated:true)
+        
+        minAgeSlider.tintColor = UIColor.lightGray
+        minAgeSlider.maximumTrackTintColor = maxAgeSlider.tintColor
+        
+        maxAgeSlider.minimumValue = 18
+        maxAgeSlider.maximumValue = 65
+        maxAgeSlider.minimumValue = 0
+
+        
+        // UISlider 是否可以在變動時同步執行動作
+        // 設定 false 時 則是滑動完後才會執行動作
+
+        
+        minAgeSlider.isContinuous = true
+        minAgeSlider.addTarget(self,action:#selector(minAgeSliderDidchange(_:)), for:UIControl.Event.valueChanged)
+        
+        maxAgeSlider.isContinuous = true
+        maxAgeSlider.addTarget(self,action:#selector(maxAgeSliderDidchange(_:)), for:UIControl.Event.valueChanged)
+        
+        
+    }
+    
+    @objc func minAgeSliderDidchange(_ slider:UISlider) {
+        
+        let roundedStepValue = round(slider.value / step) * step
+        slider.value = roundedStepValue
+        
+//        minAgeSlider.maximumValue = maxAgeSlider.value
+//        maxAgeSlider.minimumValue = minAgeSlider.value
+        
+        
+        minAgeSlider.maximumValue = maxAgeSlider.value
+
+        //locationSliderValue.text = String(Int(slider.value))
+        minAgeSliderValue.text = "\(Int(minAgeSlider.value))"
+        print(slider.value)
+        
+    }
+    
+    @objc func maxAgeSliderDidchange(_ slider:UISlider) {
+        
+        let roundedStepValue = round(slider.value / step) * step
+        slider.value = roundedStepValue
+        
+//        minAgeSlider.maximumValue = maxAgeSlider.value
+//        maxAgeSlider.minimumValue = minAgeSlider.value
+        maxAgeSlider.minimumValue = minAgeSlider.value
+        
+        //locationSliderValue.text = String(Int(slider.value))
+        maxAgeSliderValue.text = " \(Int(maxAgeSlider.value))"
+        print(slider.value)
+        
     }
     
     func setLocationSlider() {
@@ -205,11 +274,11 @@ class FilterViewController: UIViewController {
         // UISlider 是否可以在變動時同步執行動作
         // 設定 false 時 則是滑動完後才會執行動作
         locationSlider.isContinuous = true
-        locationSlider.addTarget(self,action:#selector(sliderDidchange(_:)), for:UIControl.Event.valueChanged)
+        locationSlider.addTarget(self,action:#selector(locationSliderDidchange(_:)), for:UIControl.Event.valueChanged)
         
     }
     
-    @objc func sliderDidchange(_ slider:UISlider){
+    @objc func locationSliderDidchange(_ slider:UISlider){
         
         let roundedStepValue = round(slider.value / step) * step
         slider.value = roundedStepValue
@@ -281,26 +350,26 @@ class FilterViewController: UIViewController {
     }
     
     
-    @IBAction func ageChanged(_ sender: UISegmentedControl) {
-        switch ageSegment.selectedSegmentIndex
-        {
-        case 0:
-            print("18 - 25")
-            
-        case 1:
-            print("26 - 35")
-            
-        case 2:
-            print("36 以上")
-            
-        default:
-            
-            
-            print("年齡")
-            break;
-        }
-        
-    }
+//    @IBAction func ageChanged(_ sender: UISegmentedControl) {
+//        switch ageSegment.selectedSegmentIndex
+//        {
+//        case 0:
+//            print("18 - 25")
+//
+//        case 1:
+//            print("26 - 35")
+//
+//        case 2:
+//            print("36 以上")
+//
+//        default:
+//
+//
+//            print("年齡")
+//            break;
+//        }
+//
+//    }
     
     
 //    @IBAction func locationChanged(_ sender: UISegmentedControl) {
@@ -342,8 +411,8 @@ class FilterViewController: UIViewController {
         
         //有可能沒按到約會類型和時間範圍 要給預設值或是設定?
         guard let filterAllData: Filter = Filter(gender: genderSegment.selectedSegmentIndex,
-                                                 age: ageSegment.selectedSegmentIndex,
-                                                 location: Int(locationSlider!.value),
+                                                 age: Int(minAgeSlider.value),
+                                                 location: Int(locationSlider.value),
                                                  dating: datingNumber,
                                                  time: timeNumber)    else { return }
         
