@@ -60,6 +60,7 @@
                     <navigationItem key="navigationItem" id="LUm-p2-Efs"/>
                     <connections>
                         <outlet property="chatTableView" destination="pxe-G1-XtW" id="do1-gK-g8x"/>
+                        <outlet property="searchBar" destination="Lt9-hx-7Zp" id="VD4-nF-V5s"/>
                         <outlet property="userImage" destination="BFs-zt-WQf" id="RDX-pl-bp5"/>
                         <segue destination="SQY-I5-Abe" kind="show" identifier="ChatDetailViewController" id="xHD-3P-eh6"/>
                     </connections>

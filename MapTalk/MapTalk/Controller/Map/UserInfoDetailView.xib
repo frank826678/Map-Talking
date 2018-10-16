@@ -21,13 +21,18 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9xn-G6-5m9">
-                    <rect key="frame" x="0.0" y="0.0" width="435" height="323"/>
+                    <rect key="frame" x="0.0" y="50" width="435" height="273"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jo9-ny-5Id">
+                    <rect key="frame" x="144" y="0.0" width="119" height="91"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="9xn-G6-5m9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="5Gq-8k-g86"/>
+                <constraint firstItem="9xn-G6-5m9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="50" id="5Gq-8k-g86"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9xn-G6-5m9" secondAttribute="trailing" id="906-bp-6ru"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="9xn-G6-5m9" secondAttribute="bottom" id="BhX-NX-DjX"/>
                 <constraint firstItem="9xn-G6-5m9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Fp1-hK-E7Z"/>

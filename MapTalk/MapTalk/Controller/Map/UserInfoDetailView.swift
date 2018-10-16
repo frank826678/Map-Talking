@@ -45,6 +45,8 @@ class UserInfoDetailView: UIView {
     }
     
     private func commonInit() {
+        self.backgroundColor = UIColor.clear
+        
         Bundle.main.loadNibNamed("UserInfoDetailView", owner: self, options: nil)
         addSubview(contentView)
         

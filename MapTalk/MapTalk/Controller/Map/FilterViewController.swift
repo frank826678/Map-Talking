@@ -834,7 +834,8 @@ extension FilterViewController: UICollectionViewDataSource{
                
                 
             cell?.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-                
+            cell?.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            cell?.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 //selectedCell.iconBackgroundView.backgroundColor =  #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
                 
                 print("相同")
@@ -847,6 +848,8 @@ extension FilterViewController: UICollectionViewDataSource{
                 //collectionView.cellForItem(at: selectedDateIcon1)?.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 
                 cell?.iconBackgroundView.backgroundColor = UIColor.clear
+                cell?.iconImage.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                cell?.iconName.textColor =  #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
             }
             
             
@@ -866,8 +869,8 @@ extension FilterViewController: UICollectionViewDataSource{
                 
                 //selectedCell.iconBackgroundView.backgroundColor =  #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
                 cell?.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-                
-                
+                cell?.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                cell?.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 print("相同")
                 
                 
@@ -878,7 +881,8 @@ extension FilterViewController: UICollectionViewDataSource{
                 //collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 
                  cell?.iconBackgroundView.backgroundColor = UIColor.clear
-                
+                 cell?.iconImage.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                 cell?.iconName.textColor =  #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
                 //selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             }
         }
@@ -895,6 +899,9 @@ extension FilterViewController: UICollectionViewDataSource{
             //OK
             //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
             selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+            selectedCell.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            selectedCell.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+
             //END
             
             //            let selectedCell:UICollectionViewCell = myCollectionView.cellForItemAtIndexPath(indexPath)!
@@ -913,6 +920,8 @@ extension FilterViewController: UICollectionViewDataSource{
             //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
             
              selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+             selectedCell.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+             selectedCell.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             #warning ("TODO: 儲存他按了哪一個")
         }
         

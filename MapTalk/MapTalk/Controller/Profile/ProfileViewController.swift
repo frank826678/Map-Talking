@@ -57,6 +57,7 @@ class ProfileViewController: UIViewController {
         //取消 tableView 虛線
         profileTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
 
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
