@@ -11,12 +11,18 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 
+//swiftlint:disable all
+
 class EditViewController: UIViewController {
     
     @IBOutlet weak var editTableView: UITableView!
     //20181014
     var expandingCellHeight: CGFloat = 200
     let expandingIndexRow = 0
+    //END
+    
+    //20181015
+    var isEdit = false
     //END
     var userInfo = ["性別","生日","感情狀態","居住地","體型","我想尋找"]
     var userSelected =  ["男生","1993-06-06","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
@@ -32,6 +38,8 @@ class EditViewController: UIViewController {
     
     var pickerView:UIPickerView!
     var datePicker: UIDatePicker!
+    
+    var cell: EditUserDataTableViewCell?
     
     let fullScreenSize = UIScreen.main.bounds.size
     // personInfo: PersonalInfo = PersonalInfo()
@@ -53,12 +61,12 @@ class EditViewController: UIViewController {
         editTableView.delegate = self
         editTableView.dataSource = self
         
-        editTableView.register(UINib(nibName: "EditUserDataTableViewCell", bundle: nil),
+        editTableView.register(UINib(nibName: "EditUserContentTableViewCell", bundle: nil),
                                forCellReuseIdentifier: "EditUserData")
         editTableView.register(UINib(nibName: "EditContentTableViewCell", bundle: nil),
                                forCellReuseIdentifier: "EditContent")
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveClicked))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editClicked))
         
         ref = Database.database().reference() //重要 沒有會 nil
         
@@ -66,38 +74,62 @@ class EditViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         
-        self.navigationController?.navigationBar.topItem?.title = "     編輯資料"
+        self.navigationController?.navigationBar.topItem?.title = "     個人資料"
         
+    }
+    
+    @objc func editClicked() {
+        print("點擊了按下 Edit 的按鈕")
+        isEdit = true
+        editTableView.reloadData()
+        self.navigationController?.navigationBar.topItem?.title = "     編輯資料"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveClicked))
         
     }
     
     @objc func saveClicked() {
         print("點擊了按下 Save 的按鈕")
+        isEdit = false
+        editTableView.reloadData()
+        self.navigationController?.navigationBar.topItem?.title = "     個人資料"
+        
         //上傳到 firebase
         uploadUserInfo()
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editClicked))
+        
+    }
+    
+    func disableAllInput() {
+        
     }
     
     func uploadUserInfo() {
-//        //let value = genderChanged.(value)
-//        //let title = genderChanged
-//        print(genderSegment.selectedSegmentIndex)
-//        
-//        //應該要有個地方 存自己的年紀性別和經緯度來算距離
-//        guard let datingNumber = datingNumber else { return }
-//        guard let timeNumber = timeNumber else { return }
-//        
-//        //有可能沒按到約會類型和時間範圍 要給預設值或是設定?
-//        guard let filterAllData: Filter = Filter(gender: genderSegment.selectedSegmentIndex,
-//                                                 age: ageSegment.selectedSegmentIndex,
-//                                                 location: locationSegment.selectedSegmentIndex,
-//                                                 dating: datingNumber,
-//                                                 time: timeNumber)    else { return }
-//        
-//        print("filterALLData 是 \(filterAllData)")
+        //        //let value = genderChanged.(value)
+        //        //let title = genderChanged
+        //        print(genderSegment.selectedSegmentIndex)
+        //
+        //        //應該要有個地方 存自己的年紀性別和經緯度來算距離
+        //        guard let datingNumber = datingNumber else { return }
+        //        guard let timeNumber = timeNumber else { return }
+        //
+        //        //有可能沒按到約會類型和時間範圍 要給預設值或是設定?
+        //        guard let filterAllData: Filter = Filter(gender: genderSegment.selectedSegmentIndex,
+        //                                                 age: ageSegment.selectedSegmentIndex,
+        //                                                 location: locationSegment.selectedSegmentIndex,
+        //                                                 dating: datingNumber,
+        //                                                 time: timeNumber)    else { return }
+        //
+        //        print("filterALLData 是 \(filterAllData)")
         print("*********")
         //print(userSelected)
         print("準備上傳的 userSelected 是\(userSelected)")
@@ -162,7 +194,7 @@ class EditViewController: UIViewController {
     }
     
     func downloadUserInfo() {
-       
+        
         print("*********")
         //print(userSelected)
         //print("準備上傳的 userSelected 是\(userSelected)")
@@ -219,14 +251,14 @@ class EditViewController: UIViewController {
             self.userSelected[9] = userBotheredThing
             self.userSelected[10] = userWantToTry
             self.userSelected[11] = userIntroduce
-
+            
             
             self.editTableView.reloadData()
             
         })
         
     }
-
+    
     
 }
 
@@ -307,14 +339,27 @@ extension EditViewController: UITableViewDataSource{
         case 0:
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: "EditUserData", for: indexPath)
-                as? EditUserDataTableViewCell {
+                as? EditUserContentTableViewCell {
                 
                 //cell.contentTextView.text = "FRANK"
                 
-                cell.baseView.contentTextView.text = userSelected[6]
+                //cell.baseView.contentTextView.text = userSelected[6]
+                //self.cell = cell
                 //userSelected[6] = cell.baseView.contentTextView.text
-//                cell.delegate = self
-//                cell.baseView.delegate = self
+                //                cell.delegate = self
+                //                cell.baseView.delegate = self
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+                if isEdit == true {
+                    cell.editContentTextView.isUserInteractionEnabled = true
+                } else {
+                    
+                    cell.editContentTextView.isUserInteractionEnabled = false
+                    
+                }
+                cell.delegate = self
+                cell.editContentTextView.text = userSelected[6]
+                //cell.editContentTextView.delegate = self
+                
                 return cell
             }
             
@@ -323,6 +368,14 @@ extension EditViewController: UITableViewDataSource{
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: "EditContent", for: indexPath)
                 as? EditContentTableViewCell {
+                
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+                
+                if isEdit == true {
+                    cell.userInfoButton.isEnabled = true
+                } else {
+                    cell.userInfoButton.isEnabled = false
+                }
                 
                 cell.userInfoButton.tag = indexPath.row
                 
@@ -343,78 +396,139 @@ extension EditViewController: UITableViewDataSource{
         case 2:
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: "EditUserData", for: indexPath)
-                as? EditUserDataTableViewCell {
+                as? EditUserContentTableViewCell {
+                
+                 cell.selectionStyle = UITableViewCell.SelectionStyle.none
                 
                 //cell.contentTextView.text = "吃飯，睡覺"
                 //cell.baseView.contentTextView.text = "吃飯，睡覺"
                 //cell.baseView.contentTextView.toolbarPlaceholder = userSelected[7]
-                cell.baseView.contentTextView.text = userSelected[7]
+                //cell.baseView.contentTextView.text = userSelected[7]
                 //userSelected[7] = cell.baseView.contentTextView.text
-//                cell.delegate = self
-//                cell.baseView.delegate = self
+                //                cell.delegate = self
+                //                cell.baseView.delegate = self
+                if isEdit == true {
+                    cell.editContentTextView.isUserInteractionEnabled = true
+                } else {
+                    
+                    cell.editContentTextView.isUserInteractionEnabled = false
+                    
+                }
+                cell.delegate = self
+                cell.editContentTextView.text = userSelected[7]
                 return cell
             }
             
         case 3:
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: "EditUserData", for: indexPath)
-                as? EditUserDataTableViewCell {
+                as? EditUserContentTableViewCell {
                 
                 //cell.contentTextView.text = "台灣"
                 //cell.baseView.contentTextView.text = "台灣"
-                cell.baseView.contentTextView.text = userSelected[8]
+                //cell.baseView.contentTextView.text = userSelected[8]
                 //userSelected[8] = cell.baseView.contentTextView.text
-//                cell.delegate = self
-//                cell.baseView.delegate = self
+                //                cell.delegate = self
+                //                cell.baseView.delegate = self
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+                
+                if isEdit == true {
+                    cell.editContentTextView.isUserInteractionEnabled = true
+                } else {
+                    
+                    cell.editContentTextView.isUserInteractionEnabled = false
+                    
+                }
+                cell.delegate = self
+                cell.editContentTextView.text = userSelected[8]
+                
                 return cell
             }
         case 4:
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: "EditUserData", for: indexPath)
-                as? EditUserDataTableViewCell {
+                as? EditUserContentTableViewCell {
                 
                 //cell.contentTextView.text = "變胖了"
                 //cell.baseView.contentTextView.text = "變胖了"
-                cell.baseView.contentTextView.text = userSelected[9]
+                //cell.baseView.contentTextView.text = userSelected[9]
                 //userSelected[9] = cell.baseView.contentTextView.text
                 
-//                cell.delegate = self
-//                cell.baseView.delegate = self
+                //                cell.delegate = self
+                //                cell.baseView.delegate = self
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+                
+                if isEdit == true {
+                    cell.editContentTextView.isUserInteractionEnabled = true
+                } else {
+                    
+                    cell.editContentTextView.isUserInteractionEnabled = false
+                    
+                }
+                cell.delegate = self
+                cell.editContentTextView.text = userSelected[9]
+                
                 return cell
             }
             
         case 5:
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: "EditUserData", for: indexPath)
-                as? EditUserDataTableViewCell {
+                as? EditUserContentTableViewCell {
                 
                 //cell.contentTextView.text = "跳海"
                 //cell.baseView.contentTextView.text = "跳海"
-                cell.baseView.contentTextView.text = userSelected[10]
+                //cell.baseView.contentTextView.text = userSelected[10]
                 
                 //沒用 why
                 //userSelected[10] = cell.baseView.contentTextView.text
                 
-//                cell.delegate = self
-//                cell.baseView.delegate = self
+                //                cell.delegate = self
+                //                cell.baseView.delegate = self
+                
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+                
+                if isEdit == true {
+                    cell.editContentTextView.isUserInteractionEnabled = true
+                } else {
+                    
+                    cell.editContentTextView.isUserInteractionEnabled = false
+                    
+                }
+                cell.delegate = self
+                cell.editContentTextView.text = userSelected[10]
+                
                 return cell
             }
             
         case 6:
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: "EditUserData", for: indexPath)
-                as? EditUserDataTableViewCell {
+                as? EditUserContentTableViewCell {
                 
                 //cell.contentTextView.text = "大家好 我是法克"
                 //cell.baseView.contentTextView.text = "大家好 我是法克"
                 
-                cell.baseView.contentTextView.text = userSelected[11]
+                //cell.baseView.contentTextView.text = userSelected[11]
                 
                 //沒用 why
                 //userSelected[11] = cell.baseView.contentTextView.text
                 
+                //                cell.delegate = self
+                //                cell.baseView.delegate = self
+                
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+                
+                if isEdit == true {
+                    cell.editContentTextView.isUserInteractionEnabled = true
+                } else {
+                    
+                    cell.editContentTextView.isUserInteractionEnabled = false
+                    
+                }
                 cell.delegate = self
-                cell.baseView.delegate = self
+                cell.editContentTextView.text = userSelected[11]
+                
                 return cell
             }
             
@@ -432,22 +546,22 @@ extension EditViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //目前 EditUserDataTableViewCell 沒有拉 限制高度
         
-//        return 80
+        //        return 80
         //return self.view.frame.width * (53 / 375)
         
-//        if indexPath.row == expandingIndexRow {
-//            return expandingCellHeight
-//        } else {
-//            return 100
-//        }
-
+        //        if indexPath.row == expandingIndexRow {
+        //            return expandingCellHeight
+        //        } else {
+        //            return 100
+        //        }
+        
         //自我介紹列讓系統偵測  原本是全部都 automaticDimension
-//        if indexPath.section == 2 || indexPath.section == 3 || indexPath.section == 4 || indexPath.section == 5  {
-//        return 80
-//        }    //return 100
-//        else {
-//            return UITableView.automaticDimension
-//        }
+        //        if indexPath.section == 2 || indexPath.section == 3 || indexPath.section == 4 || indexPath.section == 5  {
+        //        return 80
+        //        }    //return 100
+        //        else {
+        //            return UITableView.automaticDimension
+        //        }
         
         if indexPath.section == 1 {
             return 60
@@ -457,201 +571,201 @@ extension EditViewController: UITableViewDataSource{
         
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        //userSelected[indexPath.row] = cell.baseView.contentTextView.text
-//
-//        if let cell = tableView.dequeueReusableCell(
-//            withIdentifier: "EditUserData", for: indexPath)
-//            as? EditUserDataTableViewCell {
-//
-//           userSelected[indexPath.row] = cell.baseView.contentTextView.text
-//
-//           editTableView.reloadData()
-//        }
-//
-//    }
-
+    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //        //userSelected[indexPath.row] = cell.baseView.contentTextView.text
+    //
+    //        if let cell = tableView.dequeueReusableCell(
+    //            withIdentifier: "EditUserData", for: indexPath)
+    //            as? EditUserDataTableViewCell {
+    //
+    //           userSelected[indexPath.row] = cell.baseView.contentTextView.text
+    //
+    //           editTableView.reloadData()
+    //        }
+    //
+    //    }
+    
 }
 
 extension EditViewController: UITableViewDelegate{}
 
-extension EditViewController: CellDelegate {
-   
-    /*
-    func updated(height: CGFloat) {
-        expandingCellHeight = height
-        
-        // Disabling animations gives us our desired behaviour
-        UIView.setAnimationsEnabled(false)
-        /* These will causes table cell heights to be recaluclated,
-         without reloading the entire cell */
-        editTableView.beginUpdates()
-        editTableView.endUpdates()
-        // Re-enable animations
-        UIView.setAnimationsEnabled(true)
-        
-        let indexPath = IndexPath(row: expandingIndexRow, section: 0)
-        
-        editTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
-
-    }
-    
-    */
-    func editSave(textInput: String, tableViewCell: UITableViewCell) {
-        //editTableView.indexPath(for: tableViewCell)
-        
-        guard let indexPath = editTableView.indexPath(for: tableViewCell) else { return }
-        if indexPath.section == 0 {
-            print("名字列")
-            userSelected[6] = textInput
-        } else if indexPath.section == 1 {
-            print("已經做好 alert pickerView")
-        } else if indexPath.section == 2 {
-            print("興趣列")
-            userSelected[7] = textInput
-        } else if indexPath.section == 3 {
-            print("國家列")
-            userSelected[8] = textInput
-        } else if indexPath.section == 4 {
-            print("困擾列")
-            userSelected[9] = textInput
-        } else if indexPath.section == 5 {
-            print("嘗試列")
-            userSelected[10] = textInput
-        } else if indexPath.section == 6 {
-            print("自我介紹列")
-            userSelected[11] = textInput
-        } else {
-            print("錯誤")
-        }
-        
-        //userSelected[(indexPath?.row)!] = textInput
-        editTableView.reloadData()
-    }
-    
-    //    func editSave(textInput: String) {
-    //
-//       // userSelected[11] = cell.baseView.contentTextView.text
+//extension EditViewController: CellDelegate {
 //
-    //}
-    
-    
-    //    func updateLocalData(data: Any) {
-    //
-    //        guard let text = data as? String else {
-    //
-    //            return
-    //        }
-    //
-    //        guard let currentUser =  Auth.auth().currentUser else {
-    //
-    //            return
-    //
-    //        }
-    //
-    //        #warning ("改view")
-    //
-    //        guard let sectionIndex = allData.firstIndex(where: {$0.dataType == .previousComments(comments.count)}) else {
-    //
-    //            return
-    //        }
-    //
-    //        comments.append(
-    //            CommentModel(
-    //                postDate: Date(),
-    //                user: UserModel.groupMember(
-    //                    image: "currentUser.photoURL",
-    //                    name: currentUser.displayName!
-    //                ),
-    //                comment: text
-    //            )
-    //        )
-    //
-    //        allData[sectionIndex] = DataType(
-    //            dataType: .previousComments(comments.count),
-    //            data: comments)
-    //
-    //        self.tableView.reloadData()
-    //    }
-    
-    func reszing(heightGap: CGFloat) {
-       // UIView.setAnimationsEnabled(false)
-        
-        //old
-        editTableView.contentInset.bottom += heightGap
-        editTableView.contentOffset.y += heightGap
-        //END
-        
+//    /*
+//    func updated(height: CGFloat) {
+//        expandingCellHeight = height
+//
+//        // Disabling animations gives us our desired behaviour
+//        UIView.setAnimationsEnabled(false)
+//        /* These will causes table cell heights to be recaluclated,
+//         without reloading the entire cell */
 //        editTableView.beginUpdates()
 //        editTableView.endUpdates()
-//
+//        // Re-enable animations
 //        UIView.setAnimationsEnabled(true)
 //
 //        let indexPath = IndexPath(row: expandingIndexRow, section: 0)
 //
 //        editTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
-
-    }
-    
-    //    func cellButtonTapping(_ cell: UITableViewCell) {
-    //
-    //        guard let currentUser =  Auth.auth().currentUser else {
-    //
-    //            return
-    //
-    //        }
-    //
-    //        #warning ("update 這邊 order 的 data")
-    //
-    //        guard let sectionIndex = allData.firstIndex(where: {$0.dataType == .productItems(products.count)}) else {
-    //
-    //            return
-    //        }
-    //
-    //        for (index) in products.indices {
-    //
-    //            guard let cell = tableView.cellForRow(
-    //                at: IndexPath(row: index, section: sectionIndex)
-    //                ) as? ProductItemTableViewCell else {
-    //
-    //                    return
-    //            }
-    //
-    //            products[index].numberOfItem -= order[index].numberOfItem
-    //            order[index].numberOfItem = 0
-    //
-    //            cell.updateView(product: products[index])
-    //
-    //        }
-    //
-    //        #warning ("更新 firebase 的資料後重新 fetch")
-    //        joinMember.append(
-    //            UserModel(
-    //                userImage: currentUser.photoURL!.absoluteString,
-    //                userName: currentUser.displayName!,
-    //                numberOfEvaluation: 2,
-    //                buyNumber: 3,
-    //                averageEvaluation: 5.0
-    //            )
-    //        )
-    //
-    //        let banner = NotificationBanner(title: "加團成功", subtitle: "詳細資訊請到歷史紀錄區查詢", style: .success)
-    //        banner.show()
-    //
-    //        #warning ("加團失敗的警告")
-    //
-    //        guard let index = allData.firstIndex(where: {$0.dataType == .joinGroup}),
-    //            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: index)) as? JoinGroupTableViewCell else {
-    //
-    //                return
-    //        }
-    //
-    //        cell.collectionView.reloadData()
-    //
-    //        tableView.reloadData()
-    //    }
-    
-}
+//
+//    }
+//
+//    */
+//    func editSave(textInput: String, tableViewCell: UITableViewCell) {
+//        //editTableView.indexPath(for: tableViewCell)
+//
+//        guard let indexPath = editTableView.indexPath(for: tableViewCell) else { return }
+//        if indexPath.section == 0 {
+//            print("名字列")
+//            userSelected[6] = textInput
+//        } else if indexPath.section == 1 {
+//            print("已經做好 alert pickerView")
+//        } else if indexPath.section == 2 {
+//            print("興趣列")
+//            userSelected[7] = textInput
+//        } else if indexPath.section == 3 {
+//            print("國家列")
+//            userSelected[8] = textInput
+//        } else if indexPath.section == 4 {
+//            print("困擾列")
+//            userSelected[9] = textInput
+//        } else if indexPath.section == 5 {
+//            print("嘗試列")
+//            userSelected[10] = textInput
+//        } else if indexPath.section == 6 {
+//            print("自我介紹列")
+//            userSelected[11] = textInput
+//        } else {
+//            print("錯誤")
+//        }
+//
+//        //userSelected[(indexPath?.row)!] = textInput
+//        editTableView.reloadData()
+//    }
+//
+//    //    func editSave(textInput: String) {
+//    //
+////       // userSelected[11] = cell.baseView.contentTextView.text
+////
+//    //}
+//
+//
+//    //    func updateLocalData(data: Any) {
+//    //
+//    //        guard let text = data as? String else {
+//    //
+//    //            return
+//    //        }
+//    //
+//    //        guard let currentUser =  Auth.auth().currentUser else {
+//    //
+//    //            return
+//    //
+//    //        }
+//    //
+//    //        #warning ("改view")
+//    //
+//    //        guard let sectionIndex = allData.firstIndex(where: {$0.dataType == .previousComments(comments.count)}) else {
+//    //
+//    //            return
+//    //        }
+//    //
+//    //        comments.append(
+//    //            CommentModel(
+//    //                postDate: Date(),
+//    //                user: UserModel.groupMember(
+//    //                    image: "currentUser.photoURL",
+//    //                    name: currentUser.displayName!
+//    //                ),
+//    //                comment: text
+//    //            )
+//    //        )
+//    //
+//    //        allData[sectionIndex] = DataType(
+//    //            dataType: .previousComments(comments.count),
+//    //            data: comments)
+//    //
+//    //        self.tableView.reloadData()
+//    //    }
+//
+//    func reszing(heightGap: CGFloat) {
+//       // UIView.setAnimationsEnabled(false)
+//
+//        //old
+//        editTableView.contentInset.bottom += heightGap
+//        editTableView.contentOffset.y += heightGap
+//        //END
+//
+////        editTableView.beginUpdates()
+////        editTableView.endUpdates()
+////
+////        UIView.setAnimationsEnabled(true)
+////
+////        let indexPath = IndexPath(row: expandingIndexRow, section: 0)
+////
+////        editTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+//
+//    }
+//
+//    //    func cellButtonTapping(_ cell: UITableViewCell) {
+//    //
+//    //        guard let currentUser =  Auth.auth().currentUser else {
+//    //
+//    //            return
+//    //
+//    //        }
+//    //
+//    //        #warning ("update 這邊 order 的 data")
+//    //
+//    //        guard let sectionIndex = allData.firstIndex(where: {$0.dataType == .productItems(products.count)}) else {
+//    //
+//    //            return
+//    //        }
+//    //
+//    //        for (index) in products.indices {
+//    //
+//    //            guard let cell = tableView.cellForRow(
+//    //                at: IndexPath(row: index, section: sectionIndex)
+//    //                ) as? ProductItemTableViewCell else {
+//    //
+//    //                    return
+//    //            }
+//    //
+//    //            products[index].numberOfItem -= order[index].numberOfItem
+//    //            order[index].numberOfItem = 0
+//    //
+//    //            cell.updateView(product: products[index])
+//    //
+//    //        }
+//    //
+//    //        #warning ("更新 firebase 的資料後重新 fetch")
+//    //        joinMember.append(
+//    //            UserModel(
+//    //                userImage: currentUser.photoURL!.absoluteString,
+//    //                userName: currentUser.displayName!,
+//    //                numberOfEvaluation: 2,
+//    //                buyNumber: 3,
+//    //                averageEvaluation: 5.0
+//    //            )
+//    //        )
+//    //
+//    //        let banner = NotificationBanner(title: "加團成功", subtitle: "詳細資訊請到歷史紀錄區查詢", style: .success)
+//    //        banner.show()
+//    //
+//    //        #warning ("加團失敗的警告")
+//    //
+//    //        guard let index = allData.firstIndex(where: {$0.dataType == .joinGroup}),
+//    //            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: index)) as? JoinGroupTableViewCell else {
+//    //
+//    //                return
+//    //        }
+//    //
+//    //        cell.collectionView.reloadData()
+//    //
+//    //        tableView.reloadData()
+//    //    }
+//
+//}
 
 extension EditViewController: UIPickerViewDataSource {
     
@@ -774,21 +888,21 @@ extension EditViewController: UIPickerViewDataSource {
         alertController.addAction(UIAlertAction(title: "確定", style: UIAlertAction.Style.default){
             (alertAction)->Void in
             
-                print("確定送出為\(self.pickerView.selectedRow(inComponent: 0))的 row")
-                let rowInt = self.pickerView.selectedRow(inComponent: 0)
+            print("確定送出為\(self.pickerView.selectedRow(inComponent: 0))的 row")
+            let rowInt = self.pickerView.selectedRow(inComponent: 0)
             
             //var userSelected =  ["男","1993-06-06","單身","台北","臃腫","喝酒"]
             
             if self.selectedSender == 0 {
-               
+                
                 self.userSelected[0] = self.gender[rowInt]
                 
             } else if self.selectedSender == 2 {
                 
                 self.userSelected[2] = self.relationship[rowInt]
-            
+                
             } else if self.selectedSender == 3 {
-               
+                
                 self.userSelected[3] = self.city[rowInt]
                 
             } else if self.selectedSender == 4 {
@@ -797,7 +911,7 @@ extension EditViewController: UIPickerViewDataSource {
                 
             } else if self.selectedSender == 5 {
                 
-                             self.userSelected[5] = self.searchTarget[rowInt]
+                self.userSelected[5] = self.searchTarget[rowInt]
                 
             }
             
@@ -805,12 +919,12 @@ extension EditViewController: UIPickerViewDataSource {
             
             print("目前的 userSelected 是\(self.userSelected)")
             //print("date select:" + String(self.pickerView.selectedRow(inComponent: 0)+1))
-//            personInfo?.gender = gender[rowInt]
-//                    personInfo?.relationship = relationship[rowInt]
-//                    personInfo?.city = city[rowInt]
-//                    personInfo?.bodyType = bodyType[rowInt]
-//
-//                    personInfo?.searchTarget = searchTarget[rowInt]
+            //            personInfo?.gender = gender[rowInt]
+            //                    personInfo?.relationship = relationship[rowInt]
+            //                    personInfo?.city = city[rowInt]
+            //                    personInfo?.bodyType = bodyType[rowInt]
+            //
+            //                    personInfo?.searchTarget = searchTarget[rowInt]
         })
         
         alertController.addAction(UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel, handler:nil))
@@ -887,29 +1001,29 @@ extension EditViewController: UIPickerViewDataSource {
         // 將改變的結果印出來
         //personInfo = PersonalInfo()
         
-//        if selectedSender == 0 {
-//
-//        } else if selectedSender == 2 {
-//            return relationship[rowInt]
-//        } else if selectedSender == 3 {
-//            return city[rowInt]
-//        } else if selectedSender == 4 {
-//            return bodyType[rowInt]
-//        } else if selectedSender == 5 {
-//            return searchTarget[rowInt]
-//        }
+        //        if selectedSender == 0 {
+        //
+        //        } else if selectedSender == 2 {
+        //            return relationship[rowInt]
+        //        } else if selectedSender == 3 {
+        //            return city[rowInt]
+        //        } else if selectedSender == 4 {
+        //            return bodyType[rowInt]
+        //        } else if selectedSender == 5 {
+        //            return searchTarget[rowInt]
+        //        }
         
-//        personInfo = PersonalInfo(gender: gender[rowInt], relationship: relationship[rowInt], city: city[rowInt]
-//            , bodyType: bodyType[rowInt], searchTarget: searchTarget[rowInt])
-//
-//
-//        personInfo?.gender = gender[rowInt]
-//        personInfo?.relationship = relationship[rowInt]
-//        personInfo?.city = city[rowInt]
-//        personInfo?.bodyType = bodyType[rowInt]
-//
-//        personInfo?.searchTarget = searchTarget[rowInt]
-       
+        //        personInfo = PersonalInfo(gender: gender[rowInt], relationship: relationship[rowInt], city: city[rowInt]
+        //            , bodyType: bodyType[rowInt], searchTarget: searchTarget[rowInt])
+        //
+        //
+        //        personInfo?.gender = gender[rowInt]
+        //        personInfo?.relationship = relationship[rowInt]
+        //        personInfo?.city = city[rowInt]
+        //        personInfo?.bodyType = bodyType[rowInt]
+        //
+        //        personInfo?.searchTarget = searchTarget[rowInt]
+        
         //
         
         //        let gender: String
@@ -929,3 +1043,38 @@ extension EditViewController: UIPickerViewDataSource {
 }
 
 extension EditViewController: UIPickerViewDelegate {}
+
+extension EditViewController: CellDelegate2 {
+    
+    func editSave(textInput: String, tableViewCell: UITableViewCell) {
+        guard let indexPath = editTableView.indexPath(for: tableViewCell) else { return }
+        if indexPath.section == 0 {
+            print("名字列")
+            userSelected[6] = textInput
+            print("新版的\(userSelected[6])")
+        }else if indexPath.section == 1 {
+            print("已經做好 alert pickerView")
+        } else if indexPath.section == 2 {
+            print("興趣列")
+            userSelected[7] = textInput
+        } else if indexPath.section == 3 {
+            print("國家列")
+            userSelected[8] = textInput
+        } else if indexPath.section == 4 {
+            print("困擾列")
+            userSelected[9] = textInput
+        } else if indexPath.section == 5 {
+            print("嘗試列")
+            userSelected[10] = textInput
+        } else if indexPath.section == 6 {
+            print("自我介紹列")
+            userSelected[11] = textInput
+        } else {
+            print("錯誤")
+        }
+        
+        //editTableView.reloadData() 鍵盤會縮回去 
+        
+    }
+}
+//swiftlint:disable all

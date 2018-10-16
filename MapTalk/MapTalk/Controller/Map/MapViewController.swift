@@ -34,6 +34,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     @IBOutlet weak var userInfoDetailView: UserInfoDetailView!
     @IBOutlet weak var userInfoDetailViewHeightConstraints: NSLayoutConstraint!
+    @IBOutlet weak var userInfoDetailViewBottomConstraints: NSLayoutConstraint!
+    
     //End
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var location: UIButton!
@@ -564,18 +566,36 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         //20181013
         userInfoDetailView.userInfoDetailTableView.addGestureRecognizer(swipe)
+       
     }
     
     
     func animateViewUp() {
-        userInfoDetailViewHeightConstraints.constant = 300
+        //userInfoDetailViewHeightConstraints.constant = 400
+        userInfoDetailViewBottomConstraints.constant = -50
+        //self.tabBarController?.tabBar.layer.zPosition = -1
+        
+        
+        //self.tabBarController?.tabBar.isHidden = true
+        
+        let animatedTabBar = self.tabBarController as! TabBarViewController
+        animatedTabBar.animationTabBarHidden(true)
+        //沒用
+        //animatedTabBar.bottomLineColor = UIColor.red
+    
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
     }
     
     @objc func animateViewDown() {
-        userInfoDetailViewHeightConstraints.constant = 0
+        //userInfoDetailViewHeightConstraints.constant = 0
+        userInfoDetailViewBottomConstraints.constant = 500
+        //20181016
+//        self.tabBarController?.tabBar.isHidden = false
+       let animatedTabBar = self.tabBarController as! TabBarViewController
+       animatedTabBar.animationTabBarHidden(false)
+
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }

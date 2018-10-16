@@ -54,7 +54,9 @@ class ProfileViewController: UIViewController {
         storyHighlightsTextField.delegate = self
         
         ref = Database.database().reference() //重要 沒有會 nil
-        
+        //取消 tableView 虛線
+        profileTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,7 +140,7 @@ extension ProfileViewController: UITableViewDataSource{
             //cell.selectedBackgroundView?.backgroundColor = UIColor.orange
             
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
-            
+            //tableView.separatorStyle = UITableViewCellSeparatorStyleNone
             //            cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
             //
             

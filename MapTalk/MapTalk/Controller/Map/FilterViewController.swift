@@ -695,31 +695,57 @@ extension FilterViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        //取消點選時的動作
+        //取消點選時的動作 要有兩個 collectionView 才能用
+        
+//        if indexPath.section == 0 {
+//
+//            let cellToDeselect: FilterCollectionViewCell = (collectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell)!
+//            cellToDeselect.iconBackgroundView.backgroundColor = UIColor.clear
+//        } else if indexPath.section == 1 {
+//
+//            let cellToDeselect: FilterCollectionViewCell = (collectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell)!
+//            cellToDeselect.iconBackgroundView.backgroundColor = UIColor.clear
+//        }
+       
+    
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         print("******請看這******")
         
-        let selectedCell:UICollectionViewCell = collectionView.cellForItem(at: indexPath)!
+        let selectedCell: FilterCollectionViewCell = (collectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell)!
+
+        
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCollectionViewCell", for: indexPath) as? FilterCollectionViewCell
         
         //selectedCell.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         if  indexPath.section == 0 {
-            
+            let cell = collectionView.cellForItem(at: selectedDateIcon1)
+                as? FilterCollectionViewCell
             if selectedDateIcon1 == indexPath {
                 
                 // selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-                collectionView.cellForItem(at: selectedDateIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
+                //OK
+                //collectionView.cellForItem(at: selectedDateIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
+                
+               
+                
+            cell?.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                
+                //selectedCell.iconBackgroundView.backgroundColor =  #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
                 
                 print("相同")
                 
             } else {
                 
                 //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-                collectionView.cellForItem(at: selectedDateIcon1)?.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 
+                //OK
+                //collectionView.cellForItem(at: selectedDateIcon1)?.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                
+                cell?.iconBackgroundView.backgroundColor = UIColor.clear
             }
             
             
@@ -727,10 +753,19 @@ extension FilterViewController: UICollectionViewDataSource{
         }
         if   indexPath.section == 1 {
             
+            let cell = collectionView.cellForItem(at: selectedTimeIcon1)
+                as? FilterCollectionViewCell
+            
             if selectedTimeIcon1 == indexPath {
                 
                 // selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-                collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
+               
+                //collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
+               
+                
+                //selectedCell.iconBackgroundView.backgroundColor =  #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                cell?.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                
                 
                 print("相同")
                 
@@ -738,8 +773,12 @@ extension FilterViewController: UICollectionViewDataSource{
             } else {
                 
                 //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-                collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 
+                //collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                
+                 cell?.iconBackgroundView.backgroundColor = UIColor.clear
+                
+                //selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             }
         }
         
@@ -752,7 +791,10 @@ extension FilterViewController: UICollectionViewDataSource{
             #warning ("TODO: 點擊後變色 且只能點一個 點了其中一個其他的就不能點 或者再把原本的取消才能再點下一個，或是點擊後再點其他的 本來的會消失 只顯示另外ㄧ個")
             //let selectedCell:UICollectionViewCell = collectionView.cellForItem(at: indexPath)!
             
-            selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
+            //OK
+            //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
+            selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+            //END
             
             //            let selectedCell:UICollectionViewCell = myCollectionView.cellForItemAtIndexPath(indexPath)!
             //            selectedCell.contentView.backgroundColor = UIColor(red: 102/256, green: 255/256, blue: 255/256, alpha: 0.66)
@@ -767,8 +809,9 @@ extension FilterViewController: UICollectionViewDataSource{
             
             selectedTimeIcon1 = indexPath
             timeNumber = indexPath.item
-            selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
+            //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
             
+             selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
             #warning ("TODO: 儲存他按了哪一個")
         }
         

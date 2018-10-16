@@ -37,7 +37,9 @@ class EditUserDataTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         baseView.contentTextView.delegate = self
-
+        
+        //試著解決字超出問題 //
+        baseView.contentTextView.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -37,6 +37,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ubn-2V-fSR">
+                        <rect key="frame" x="17" y="5" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="olR-RK-SKM"/>
+                            <constraint firstAttribute="height" constant="60" id="wQs-Ma-Ll1"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <constraints>
@@ -47,11 +54,14 @@
                 <constraint firstItem="coF-Wp-FWL" firstAttribute="top" secondItem="8L9-SI-md0" secondAttribute="bottom" constant="10" id="Rgd-pb-Na6"/>
                 <constraint firstAttribute="bottom" secondItem="U9S-6e-zLo" secondAttribute="bottom" id="TJp-Ih-hVe"/>
                 <constraint firstItem="U9S-6e-zLo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ZCj-5Z-IeI"/>
+                <constraint firstItem="Ubn-2V-fSR" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="ctT-Ti-sYP"/>
                 <constraint firstItem="coF-Wp-FWL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="jfz-1A-Gce"/>
+                <constraint firstItem="Ubn-2V-fSR" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="tXe-Ua-hJr"/>
                 <constraint firstAttribute="trailing" secondItem="U9S-6e-zLo" secondAttribute="trailing" id="wpB-5J-4l5"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
+                <outlet property="iconBackgroundView" destination="Ubn-2V-fSR" id="I8a-a1-lbD"/>
                 <outlet property="iconImage" destination="8L9-SI-md0" id="Ad7-br-P15"/>
                 <outlet property="iconName" destination="coF-Wp-FWL" id="ovG-yb-tNM"/>
             </connections>

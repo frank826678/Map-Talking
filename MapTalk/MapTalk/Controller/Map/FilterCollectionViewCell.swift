@@ -13,6 +13,7 @@ class FilterCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var iconName: UILabel!
     
     @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var iconBackgroundView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,7 +28,7 @@ class FilterCollectionViewCell: UICollectionViewCell {
         iconImage.tintColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
         iconImage.contentMode = .scaleAspectFit
         iconName.textColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
-        
+        iconBackgroundView.layer.cornerRadius = 30
         //目前12張照片 icon 是用 程式碼控制 template
         //目前12張照片 icon 是用 storyboard 的 renderAs 改成 template
     }
