@@ -13,6 +13,7 @@ import FirebaseAuth
 import MapKit //為了拿到 CLLocationCoordinate2D
 import NotificationBannerSwift
 
+//swiftlint:disable all
 class FilterViewController: UIViewController {
     
     //@IBOutlet weak var datingTypeCollectionView: UICollectionView!
@@ -199,9 +200,24 @@ class FilterViewController: UIViewController {
         
         setAgeSlider()
         setLocationSlider()
+        detectUserInfo()
 
     }
     
+    func detectUserInfo() {
+
+        let userDefaults = UserDefaults.standard
+        
+        let myselfGender = userDefaults.value(forKey: "myselfGender")
+        
+        if myselfGender == nil {
+            BaseNotificationBanner.warningBanner(subtitle: "請先到個人資料頁填寫資訊")
+
+        } else {
+             //BaseNotificationBanner.sucessBanner(subtitle: "請選擇想媒合的條件～")
+        }
+        
+    }
     func setAgeSlider() {
         //minAgeSlider
         //max
@@ -398,8 +414,8 @@ class FilterViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        let banner = StatusBarNotificationBanner(title: "累死我了", style: .success)
-        banner.show()
+//        let banner = StatusBarNotificationBanner(title: "累死我了", style: .success)
+//        banner.show()
     }
     
     func getFilterData() {
@@ -466,6 +482,9 @@ class FilterViewController: UIViewController {
             } else {
                 
                 print("Data saved successfully!")
+                BaseNotificationBanner.sucessBanner(subtitle: "上傳資料成功～稍後將顯示結果")
+                //self.dismiss(animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
                 
             }
         }
@@ -990,3 +1009,4 @@ extension FilterViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
+//swiftlint:disable all

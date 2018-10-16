@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import NotificationBannerSwift
 
 //swiftlint:disable all
 
@@ -160,11 +161,17 @@ class EditViewController: UIViewController {
             if let error = error {
                 
                 print("Data could not be saved: \(error).")
-                
+                //BaseNotificationBanner.warningBanner(subtitle: "上傳失敗")
+                BaseNotificationBanner.warningBanner(subtitle: "上傳失敗")
+
             } else {
                 
                 print("Data saved successfully!")
+                BaseNotificationBanner.sucessBanner(subtitle: "上傳成功")
                 
+//                let banner = StatusBarNotificationBanner(title: "上傳成功", style: .success)
+//                banner.show()
+
             }
         }
         //20181013 更新 filersearch 的條件 self 的

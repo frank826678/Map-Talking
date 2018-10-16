@@ -438,7 +438,6 @@ extension ChatViewController: UITableViewDataSource {
         }
         }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(
@@ -447,8 +446,6 @@ extension ChatViewController: UITableViewDataSource {
             
             // OK 可以顯示最後一行
             // cell.userMessage.text = messages[indexPath.row].content
-            
-            
             
             //cell.userMessage.text = "要吃飯了沒？？？"
             //cell.userMessage.text = messages[indexPath.row].content
@@ -501,9 +498,7 @@ extension ChatViewController: UITableViewDataSource {
                 cell.userName.text = result[indexPath.row].friendName
                 
             }
-            
-
-            
+        
             //END
             // OK 原本
             //            cell.userName.text = newMessage[indexPath.row].friendName
@@ -596,7 +591,14 @@ extension ChatViewController: UISearchBarDelegate {
 //                if(arrr.friendName?.lowercased().contains(searchText.lowercased()))! {
 //        if(arrr.friendName?.lowercased(with: <#T##Locale?#>)) {
                 
-                self.result.append(arrr)
+                guard let friendName = arrr.friendName else { return }
+                let friendResult = friendName.contains(searchText)
+                if friendResult == true {
+                    self.result.append(arrr)
+                } else {
+                    print("名字不同")
+                }
+                
                 //}
             }
         }
