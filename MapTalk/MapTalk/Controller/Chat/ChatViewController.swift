@@ -495,8 +495,34 @@ extension ChatViewController: UITableViewDataSource {
                 
             } else {
                 
-                cell.userName.text = result[indexPath.row].friendName
-                
+                //cell.userName.text = result[indexPath.row].friendName
+                if  result[indexPath.row].senderId == myselfUID
+                {
+                    cell.userName.text = result[indexPath.row].friendName
+                    
+                    if let photoString = result[indexPath.row].friendImageUrl
+                    {
+                        cell.userImage.kf.setImage(with: URL(string: photoString))
+                    } else {
+                        cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+                    }
+                    
+                    cell.userMessage.text = result[indexPath.row].content
+                    
+                } else {
+                    
+                    cell.userName.text = result[indexPath.row].senderName
+                    
+                    if let photoString = result[indexPath.row].senderPhoto
+                    {
+                        cell.userImage.kf.setImage(with: URL(string: photoString))
+                    } else {
+                        cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+                    }
+                    
+                    cell.userMessage.text = result[indexPath.row].content
+                    
+                }
             }
         
             //END
@@ -580,10 +606,14 @@ extension ChatViewController: UISearchBarDelegate {
             searchStatus = false
         } else {
             
+            // for arrr in self.newMessage {
+            
+            //arr.friendName
+            
             // 匹配用户输入的前缀，不区分大小写
             self.result = []
             searchStatus = true
-            for arrr in self.newMessage {
+            for index in 0...self.newMessage.count-1 {
                 
                 //arr.friendName
                 //if arr.friendName.lowercaseString.hasPrefix(searchText.lowercaseString) {
@@ -591,13 +621,56 @@ extension ChatViewController: UISearchBarDelegate {
 //                if(arrr.friendName?.lowercased().contains(searchText.lowercased()))! {
 //        if(arrr.friendName?.lowercased(with: <#T##Locale?#>)) {
                 
-                guard let friendName = arrr.friendName else { return }
-                let friendResult = friendName.contains(searchText)
-                if friendResult == true {
-                    self.result.append(arrr)
+                
+                
+                //guard let friendName = arrr.friendName else { return }
+                
+                //if friendName == ""
+                
+                if  newMessage[index].senderId == myselfUID
+                {
+                    guard let friendName = newMessage[index].friendName else { return }
+                    let friendResult = friendName.contains(searchText)
+                    if friendResult == true {
+                        self.result.append(newMessage[index])
+                    } else {
+                        print("名字不同")
+                    }
+
+                    
+                    //cell.userName.text = newMessage[index].friendName
+//                    cell.userName.text = newMessage[index]
+//
+//                    if let photoString = newMessage[indexPath.row].friendImageUrl
+//                    {
+//                        cell.userImage.kf.setImage(with: URL(string: photoString))
+//                    } else {
+//                        cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+//                    }
+//
+//                    cell.userMessage.text = newMessage[indexPath.row].content
+                    
                 } else {
-                    print("名字不同")
+                    
+                    let friendName = newMessage[index].senderName
+                    let friendResult = friendName.contains(searchText)
+                    if friendResult == true {
+                        self.result.append(newMessage[index])
+                    } else {
+                        print("名字不同")
+                    }
+
+                    
                 }
+                
+                
+                //OK
+//                let friendResult = friendName.contains(searchText)
+//                if friendResult == true {
+//                    self.result.append(arrr)
+//                } else {
+//                    print("名字不同")
+//                }
                 
                 //}
             }
