@@ -396,6 +396,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //           self.showAlert(title: "新增\(navigationUserName!) 為好友？", message: "認識一下吧！")
         
         //第一次進來 userAnnotation 點擊進來是 nil
+        
+        if let userLocation = view.annotation as? UserAnnotation {
+            self.userAnnotation = userLocation
+        }
+        
         if self.userAnnotation != nil {
             
             navigationUserName = userAnnotation?.name!
@@ -415,12 +420,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
         } else {
             navigationUserName = "使用者"
-        }
-        
-        
-        
-        if let userLocation = view.annotation as? UserAnnotation {
-            self.userAnnotation = userLocation
         }
         
         //20181012
