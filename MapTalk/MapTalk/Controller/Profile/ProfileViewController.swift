@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileTableView: UITableView!
     @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userImageShadowView: UIView!
     
     @IBOutlet weak var userName: UILabel!
     
@@ -56,8 +57,8 @@ class ProfileViewController: UIViewController {
         ref = Database.database().reference() //重要 沒有會 nil
         //取消 tableView 虛線
         profileTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-
-
+        
+        setStoryHighlightsTextField()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,15 +67,56 @@ class ProfileViewController: UIViewController {
         
     }
     
+    func setStoryHighlightsTextField() {
+        
+        storyHighlightsTextField.borderStyle = UITextField.BorderStyle.none
+        storyHighlightsTextField.layer.borderWidth = 2
+        storyHighlightsTextField.layer.borderColor = #colorLiteral(red: 0.4588235294, green: 0.6078431373, blue: 1, alpha: 1)
+        storyHighlightsTextField.layer.cornerRadius = 30
+        //storyHighlightsTextField.frame.width/2
+        //iconBackgroundView.frame.width/2
+        
+    }
+    
     
     func setImage() {
         
         userImage.layer.cornerRadius = 60
         userImage.clipsToBounds = true //沒這行的話 圖片還是方方正正的
-        userImage.layer.borderColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
-        userImage.layer.borderWidth = 4
-
         
+        //userImageShadowView.
+        userImageShadowView.layer.cornerRadius = 65
+        userImageShadowView.layer.shadowRadius = 20
+        userImageShadowView.clipsToBounds = false
+        userImageShadowView.layer.shadowColor = UIColor.gray.cgColor
+        userImageShadowView.layer.shadowOpacity = 0.6
+        userImageShadowView.layer.shadowOffset = CGSize.zero
+        //userImageShadowView.layer.shadowPath = UIBezierPath(roundedRect: userImageShadowView.bounds, cornerRadius: 65).cgPath
+
+//        userImageShadowView.layer.shadowOffset = CGSize(width: 4, height: 4)
+
+        //        userImage.layer.borderColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
+//        userImage.layer.borderWidth = 4
+        
+        //userImage.shadowSetup(cgSize: CGSize(width: 5, height: 5), shadowRadius: 5, shadowOpacity: 0.5)
+        
+//        let outerView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+//        outerView.clipsToBounds = false
+//        outerView.layer.shadowColor = UIColor.black.cgColor
+//        outerView.layer.shadowOpacity = 1
+//        outerView.layer.shadowOffset = CGSize.zero
+//        outerView.layer.shadowRadius = 10
+//        outerView.layer.shadowPath = UIBezierPath(roundedRect: outerView.bounds, cornerRadius: 60).cgPath
+        
+//        let myImage = UIImageView(frame: outerView.bounds)
+//        myImage.clipsToBounds = true
+//        myImage.layer.cornerRadius = 10
+        
+       // outerView.addSubview(userImage)
+        
+        
+        //userImage.layer.masksToBounds = false
+        //120
         //profileTableView.backgroundView?.backgroundColor = #colorLiteral(red: 0.08870747934, green: 0.8215307774, blue: 1, alpha: 0.8)
         
         guard let userDisplayName = Auth.auth().currentUser?.displayName else { return }

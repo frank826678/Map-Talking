@@ -329,19 +329,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         annotationView?.addSubview(imageView)
         
         //設定照片陰影
-        let shadowView = UIView()
         
-        shadowView.contentMode = .scaleAspectFill
-        //let blurEffect = UIBlurEffect(style: .light)
-        //let blurEffectView = UIVisualEffectView(effect: blurEffect)
-
-        shadowView.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
-        shadowView.clipsToBounds = true
-        shadowView.layer.cornerRadius = 27.5
-        shadowView.layer.borderColor = #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5)
-        shadowView.layer.borderWidth = 4
+//        let shadowView = UIView()
+//
+//        shadowView.contentMode = .scaleAspectFill
+//        //let blurEffect = UIBlurEffect(style: .light)
+//        //let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//
+//        shadowView.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
+//        shadowView.clipsToBounds = true
+//        shadowView.layer.cornerRadius = 27.5
+//        shadowView.layer.borderColor = #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5)
+//        shadowView.layer.borderWidth = 4
+//
+//        annotationView?.addSubview(shadowView)
         
-        annotationView?.addSubview(shadowView)
         //增加三角形圖案
         //OK
         
@@ -363,7 +365,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let annotationLabel = UILabel(frame: CGRect(x: -40, y: -35, width: 105, height: 30))
         annotationLabel.numberOfLines = 3
         annotationLabel.textAlignment = .center
-        annotationLabel.font = UIFont(name: "Rockwell", size: 12)
+        annotationLabel.font = UIFont(name: "Monaco", size: 9)
+        
+        //annotationLabel.font = UIFont(name: "Rockwell", size: 12)
         
         if let message = userAnnotation?.message {
             annotationLabel.text = message
@@ -371,7 +375,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             annotationLabel.text = "媽 我上地圖了 Ya"
         }
         
-        annotationLabel.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+        ///annotationLabel.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+        annotationLabel.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
         annotationLabel.layer.cornerRadius = 15
         annotationLabel.clipsToBounds = true
         
@@ -569,6 +574,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.userSelected[10] = userWantToTry
             self.userSelected[11] = userIntroduce
             
+            //NEW 20181017
+            let photo = self.friendImageURLForCell
+            let bigPhotoURL = URL(string: photo + "?height=500")
+            self.userInfoDetailView.userImage.kf.setImage(with: bigPhotoURL)
+            
+            // cell.userImage.kf.setImage(with: bigPhotoURL)
+            
             //加上 reload
             self.userInfoDetailView.userInfoDetailTableView.reloadData()
             
@@ -613,7 +625,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     @objc func animateViewDown() {
         //userInfoDetailViewHeightConstraints.constant = 0
-        userInfoDetailViewBottomConstraints.constant = 560
+        userInfoDetailViewBottomConstraints.constant = 600
         
         //20181016
 //        self.tabBarController?.tabBar.isHidden = false
@@ -1054,8 +1066,8 @@ extension MapViewController: UITableViewDataSource {
 //                friendImageURLForCell = friendImageURL
                 
                 //照片需要重改
-                let photo = friendImageURLForCell
-                let bigPhotoURL = URL(string: photo + "?height=500")
+                //let photo = friendImageURLForCell
+                //let bigPhotoURL = URL(string: photo + "?height=500")
                 
                // cell.userImage.kf.setImage(with: bigPhotoURL)
                 
@@ -1072,15 +1084,30 @@ extension MapViewController: UITableViewDataSource {
                 //cell.userDetailTitle.text = userInfo[indexPath.row]
                 //cell.userDetailContent.text = userSelected[indexPath.row]
                 
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
                 
                 return cell
             }
         case 1:
             
             if let cell = tableView.dequeueReusableCell(
-            withIdentifier: "UserDetail", for: indexPath)
-            as? NewUserDetailTableViewCell {
-            
+                withIdentifier: "UserDetail", for: indexPath)
+                as? NewUserDetailTableViewCell {
+                
+                if indexPath.row == 0 {
+                    cell.contentTitleLabel.text = userInfo[3]
+                    cell.contentInfoLabel.text = userSelected[2]
+                    cell.iconBackground.backgroundColor = #colorLiteral(red: 1, green: 0.4588235294, blue: 0.5176470588, alpha: 1)
+                } else if indexPath.row == 1 {
+                    cell.contentTitleLabel.text = userInfo[4]
+                    cell.contentInfoLabel.text = userSelected[3]
+                    cell.iconBackground.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.8235294118, blue: 1, alpha: 1)
+                } else if indexPath.row == 2 {
+                    cell.contentTitleLabel.text = userInfo[7]
+                    cell.contentInfoLabel.text = userSelected[7]
+                    cell.iconBackground.backgroundColor = #colorLiteral(red: 0.9647058824, green: 1, blue: 0.4588235294, alpha: 1)
+                }
+                
             //cell.userDetailTitle.text = "生日"
             //            var userInfo = ["暱稱","性別","生日","感情狀態","居住地","體型5","我想尋找","專長 興趣","喜歡的國家","自己最近的困擾","想嘗試的事情","自我介紹",]
             //            var userSelected =  ["男","1993-06-06","單身","台北","肌肉結實4","短暫浪漫","Frank Lin","吃飯，睡覺，看電影7","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
@@ -1126,6 +1153,8 @@ extension MapViewController: UITableViewDataSource {
             //            cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
             //
             
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            
             return cell
             }
             
@@ -1133,6 +1162,12 @@ extension MapViewController: UITableViewDataSource {
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: "UserIntroduce", for: indexPath)
                 as? NewIntroduceTableViewCell {
+                cell.introduceLabel.text = userSelected[11]
+                cell.wantToTryLabel.text = userSelected[10]
+                cell.introduceTitleBackground.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+                
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+                
                 return cell
             }
 

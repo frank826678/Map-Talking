@@ -12,6 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserInfoDetailView" customModule="MapTalk" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="JNk-nF-IBh"/>
+                <outlet property="userImage" destination="g2h-tZ-AP4" id="AhM-bK-cM7"/>
+                <outlet property="userImageShadowView" destination="DTA-vs-WO0" id="6SE-Ct-9gF"/>
                 <outlet property="userInfoDetailTableView" destination="9xn-G6-5m9" id="1g1-A5-F0A"/>
             </connections>
         </placeholder>
@@ -35,7 +37,7 @@
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="g2h-tZ-AP4" secondAttribute="bottom" constant="5" id="3CM-B0-cPV"/>
                         <constraint firstItem="g2h-tZ-AP4" firstAttribute="leading" secondItem="DTA-vs-WO0" secondAttribute="leading" constant="5" id="Mft-XF-NMW"/>

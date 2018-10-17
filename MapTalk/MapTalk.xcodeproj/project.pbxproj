@@ -52,6 +52,8 @@
 		018B82D12177012E004F8FC3 /* NewUserDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018B82CF2177012E004F8FC3 /* NewUserDetailTableViewCell.xib */; };
 		018B82D421770535004F8FC3 /* NewIntroduceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B82D221770535004F8FC3 /* NewIntroduceTableViewCell.swift */; };
 		018B82D521770535004F8FC3 /* NewIntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018B82D321770535004F8FC3 /* NewIntroduceTableViewCell.xib */; };
+		018B82D72177413C004F8FC3 /* frankUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B82D62177413C004F8FC3 /* frankUIImageView.swift */; };
+		018B82D921776873004F8FC3 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B82D821776873004F8FC3 /* CALayer.swift */; };
 		01A12DE521683DB000833959 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A12DE421683DB000833959 /* Filter.swift */; };
 		01A12DE8216DC05B00833959 /* EditUserDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A12DE6216DC05B00833959 /* EditUserDataTableViewCell.swift */; };
 		01A12DE9216DC05B00833959 /* EditUserDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A12DE7216DC05B00833959 /* EditUserDataTableViewCell.xib */; };
@@ -129,6 +131,8 @@
 		018B82CF2177012E004F8FC3 /* NewUserDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewUserDetailTableViewCell.xib; sourceTree = "<group>"; };
 		018B82D221770535004F8FC3 /* NewIntroduceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIntroduceTableViewCell.swift; sourceTree = "<group>"; };
 		018B82D321770535004F8FC3 /* NewIntroduceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewIntroduceTableViewCell.xib; sourceTree = "<group>"; };
+		018B82D62177413C004F8FC3 /* frankUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = frankUIImageView.swift; sourceTree = "<group>"; };
+		018B82D821776873004F8FC3 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		01A12DE421683DB000833959 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		01A12DE6216DC05B00833959 /* EditUserDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserDataTableViewCell.swift; sourceTree = "<group>"; };
 		01A12DE7216DC05B00833959 /* EditUserDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditUserDataTableViewCell.xib; sourceTree = "<group>"; };
@@ -370,11 +374,13 @@
 			isa = PBXGroup;
 			children = (
 				01EBF3642153462100D23871 /* UIStoryboard.swift */,
+				018B82D821776873004F8FC3 /* CALayer.swift */,
 				01EBF37221546F2600D23871 /* UIAlertController.swift */,
 				0141678F216323520080EDCE /* UIImage.swift */,
 				01E65820216DE45700928C9B /* UIView.swift */,
 				0106CC2F21734EDD009A80C4 /* UITextView.swift */,
 				0106CC352176246F009A80C4 /* BaseNotificationBanner.swift */,
+				018B82D62177413C004F8FC3 /* frankUIImageView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -626,6 +632,7 @@
 				01FEB5E92157A86E00D57B47 /* UserLocation.swift in Sources */,
 				0177E2AC216131B50038F29A /* ADCoinViewController.swift in Sources */,
 				0177E2A52160D3CA0038F29A /* FilterCollectionViewCell.swift in Sources */,
+				018B82D921776873004F8FC3 /* CALayer.swift in Sources */,
 				01EBF3592152824000D23871 /* FacebookManager.swift in Sources */,
 				01701B03215C7F5F0074B0B9 /* PhotoViewController.swift in Sources */,
 				0177E29C215FCB590038F29A /* ProfileViewController.swift in Sources */,
@@ -647,6 +654,7 @@
 				0106CC3021734EDD009A80C4 /* UITextView.swift in Sources */,
 				0141678E216321760080EDCE /* Icon.swift in Sources */,
 				0177E2AE216131E30038F29A /* SettingViewController.swift in Sources */,
+				018B82D72177413C004F8FC3 /* frankUIImageView.swift in Sources */,
 				01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */,
 				01701AF4215BC6BE0074B0B9 /* ChatTableViewCell.swift in Sources */,
 				01A12DE521683DB000833959 /* Filter.swift in Sources */,
@@ -814,7 +822,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2Q4CQ44442;
+				ENABLE_BITCODE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				INFOPLIST_FILE = MapTalk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -832,8 +843,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2Q4CQ44442;
+				ENABLE_BITCODE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				INFOPLIST_FILE = MapTalk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

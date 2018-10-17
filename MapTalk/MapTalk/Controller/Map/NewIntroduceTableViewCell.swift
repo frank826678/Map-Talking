@@ -10,6 +10,12 @@ import UIKit
 
 class NewIntroduceTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var introduceBackground: UIView!
+    @IBOutlet weak var introduceTitleBackground: UIView!
+    
+    @IBOutlet weak var introduceLabel: UILabel!
+    
+    @IBOutlet weak var wantToTryLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

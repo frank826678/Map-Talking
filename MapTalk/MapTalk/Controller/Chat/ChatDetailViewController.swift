@@ -288,50 +288,54 @@ class ChatDetailViewController: UIViewController {
     @IBAction func send(_ sender: Any) {
         
         guard let text = messageTxt.text else { return }
-        
-        guard let userId = Auth.auth().currentUser?.uid else { return }
-        
-        guard let userName = Auth.auth().currentUser?.displayName else { return }
-        
-        guard let userImage = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
-        
-        let createdTime = Date().millisecondsSince1970
-        
-        //friendInfo
-        
-//        guard let friendName = value["FBName"] as? String else { return }
-//
-//        guard let friendMmageUrl = value["FBPhotoSmallURL"] as? String  else { return }
-        
-        //20181005 Start
-        let friendName = friendInfo[0].friendName
-        let friendNameURL =  friendInfo[0].friendImageUrl
-        
-        //20181005 End
-        
-        guard let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(friendChannel).childByAutoId().key else { return }
-        self.ref.child("chatroom").child("PersonalChannel").child(friendChannel).child(messageKey).setValue([
-            "content": text,
-            "senderId": userId,
-            "senderName": userName,
-            "senderPhoto": userImage,
-            "time": createdTime,
-            "friendName": friendName,
-            "friendImageUrl": friendNameURL,
-            "friendUID": friendUserId,
-        ]) { (error, _) in
+        if text != "" {
+            guard let userId = Auth.auth().currentUser?.uid else { return }
             
-            if let error = error {
-                
-                print("Data could not be saved: \(error).")
-                
-            } else {
-                
-                print("Data saved successfully!")
-                
-                self.messageTxt.text = ""
+            guard let userName = Auth.auth().currentUser?.displayName else { return }
+            
+            guard let userImage = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
+            
+            let createdTime = Date().millisecondsSince1970
+            
+            //friendInfo
+            
+            //        guard let friendName = value["FBName"] as? String else { return }
+            //
+            //        guard let friendMmageUrl = value["FBPhotoSmallURL"] as? String  else { return }
+            
+            //20181005 Start
+            let friendName = friendInfo[0].friendName
+            let friendNameURL =  friendInfo[0].friendImageUrl
+            
+            //20181005 End
+            
+            guard let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(friendChannel).childByAutoId().key else { return }
+            self.ref.child("chatroom").child("PersonalChannel").child(friendChannel).child(messageKey).setValue([
+                "content": text,
+                "senderId": userId,
+                "senderName": userName,
+                "senderPhoto": userImage,
+                "time": createdTime,
+                "friendName": friendName,
+                "friendImageUrl": friendNameURL,
+                "friendUID": friendUserId,
+                ]) { (error, _) in
+                    
+                    if let error = error {
+                        
+                        print("Data could not be saved: \(error).")
+                        
+                    } else {
+                        
+                        print("Data saved successfully!")
+                        
+                        self.messageTxt.text = ""
+                    }
             }
+        } else {
+            print("沒輸入東西")
         }
+
     }
     
     func getFriendInfo(friendUserId: String) {

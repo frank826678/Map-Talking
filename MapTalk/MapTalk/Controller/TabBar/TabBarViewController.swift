@@ -103,7 +103,20 @@ class TabBarViewController: RAMAnimatedTabBarController {
         super.viewDidLoad()
         
         setupTab()
+        //20181016
+        //change tabbar page 有作用 但是顏色沒變過去
+        //寫在這沒用 寫去 chatVC 的 viewDidLoad()
+        //tabBarController?.selectedIndex = 2
         
+        
+        //frankTabBar.selectedItem = 1
+        //RAMAnimatedTabBarItem.selectedState(1)
+       
+        //let controller = tab.controller()
+        
+        
+        
+        //RAMAnimatedTabBarItem.selectedState(1)
         //20181005
         
 //        let controller = tab.controller()

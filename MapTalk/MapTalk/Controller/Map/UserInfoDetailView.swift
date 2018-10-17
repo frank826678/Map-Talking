@@ -15,6 +15,8 @@ class UserInfoDetailView: UIView {
     //@IBOutlet weak var userName: UILabel!
     //@IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userInfoDetailTableView: UITableView!
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userImageShadowView: UIView!
     //@IBOutlet weak var chatButton: UIButton!
     
     /*
@@ -54,6 +56,21 @@ class UserInfoDetailView: UIView {
         //contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
         contentView.fixInView(self)
+        setImage()
+    }
+    
+    func setImage() {
+        
+        userImage.layer.cornerRadius = 50
+        userImage.clipsToBounds = true //沒這行的話 圖片還是方方正正的
+        
+        //userImageShadowView.
+        userImageShadowView.layer.cornerRadius = 55
+        userImageShadowView.layer.shadowRadius = 15
+        userImageShadowView.clipsToBounds = false
+        userImageShadowView.layer.shadowColor = UIColor.gray.cgColor
+        userImageShadowView.layer.shadowOpacity = 0.6
+        userImageShadowView.layer.shadowOffset = CGSize.zero
     }
     
     //設定陰影
