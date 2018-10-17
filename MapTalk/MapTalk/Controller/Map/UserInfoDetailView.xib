@@ -21,16 +21,38 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9xn-G6-5m9">
-                    <rect key="frame" x="0.0" y="50" width="435" height="273"/>
+                    <rect key="frame" x="0.0" y="60" width="435" height="263"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DTA-vs-WO0">
+                    <rect key="frame" x="40" y="5" width="110" height="110"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g2h-tZ-AP4">
+                            <rect key="frame" x="5" y="5" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="8CY-lb-2GT"/>
+                                <constraint firstAttribute="width" constant="100" id="UHY-DK-het"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="g2h-tZ-AP4" secondAttribute="bottom" constant="5" id="3CM-B0-cPV"/>
+                        <constraint firstItem="g2h-tZ-AP4" firstAttribute="leading" secondItem="DTA-vs-WO0" secondAttribute="leading" constant="5" id="Mft-XF-NMW"/>
+                        <constraint firstAttribute="height" constant="110" id="rVj-5H-ZjC"/>
+                        <constraint firstAttribute="trailing" secondItem="g2h-tZ-AP4" secondAttribute="trailing" constant="5" id="tPf-XJ-v4O"/>
+                        <constraint firstAttribute="width" constant="110" id="xBa-PM-Tkn"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="9xn-G6-5m9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="50" id="5Gq-8k-g86"/>
+                <constraint firstItem="DTA-vs-WO0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="0gS-Ym-MiV"/>
+                <constraint firstItem="9xn-G6-5m9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="60" id="5Gq-8k-g86"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9xn-G6-5m9" secondAttribute="trailing" id="906-bp-6ru"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="9xn-G6-5m9" secondAttribute="bottom" id="BhX-NX-DjX"/>
                 <constraint firstItem="9xn-G6-5m9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Fp1-hK-E7Z"/>
+                <constraint firstItem="9xn-G6-5m9" firstAttribute="top" secondItem="DTA-vs-WO0" secondAttribute="bottom" constant="-55" id="HzG-w5-PQI"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

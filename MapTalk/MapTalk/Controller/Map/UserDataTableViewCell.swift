@@ -10,7 +10,7 @@ import UIKit
 
 class UserDataTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var userImage: UIImageView!
+    //@IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var chatButton: UIButton!
     
     @IBOutlet weak var userName: UILabel!
@@ -20,10 +20,11 @@ class UserDataTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        userImage.layer.cornerRadius = 50
-        userImage.clipsToBounds = true
-        userImage.layer.borderWidth = 4
-        userImage.layer.borderColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
+//        userImage.layer.cornerRadius = 50
+//        userImage.clipsToBounds = true
+//        userImage.layer.borderWidth = 4
+//        userImage.layer.borderColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
+        
         //userImage.layer.opacity = 0.5
         
     

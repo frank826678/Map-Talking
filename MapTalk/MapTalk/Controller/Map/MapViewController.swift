@@ -102,8 +102,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //profileTableView.dataSource = self
         userInfoDetailView.userInfoDetailTableView.dataSource = self
         userInfoDetailView.userInfoDetailTableView.delegate = self
-        userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "UserDetailTableViewCell", bundle: nil),forCellReuseIdentifier: "UserDetail")
+        userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "NewUserDetailTableViewCell", bundle: nil),forCellReuseIdentifier: "UserDetail")
         userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "UserDataTableViewCell", bundle: nil),forCellReuseIdentifier: "UserData")
+        userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "NewIntroduceTableViewCell", bundle: nil),forCellReuseIdentifier: "UserIntroduce")
         
         // 20181013 感覺沒作用
         addSwipe()
@@ -303,7 +304,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let userAnnotation = annotation as? UserAnnotation
         
         //新增 20181002 重要 點擊後可以執行 didselect
-        annotationView?.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        annotationView?.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
         //annotationView?.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
         
         
@@ -322,21 +323,40 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //設定照片圓角
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 25
-        imageView.layer.borderColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
+        imageView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         imageView.layer.borderWidth = 4
         
-        //增加三角形圖案
-        let triangle = UILabel(frame: CGRect(x: 0, y: 45, width: 50, height: 10)) // 50, 10
-        triangle.text = "▾"
-        triangle.font = UIFont.systemFont(ofSize: 24) //24
-        //triangle.textColor = #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1)
-        triangle.textColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
-        
-        triangle.textAlignment = .center
-        
-        //annotationView?.image = imageView.image
         annotationView?.addSubview(imageView)
-        annotationView?.addSubview(triangle)
+        
+        //設定照片陰影
+        let shadowView = UIView()
+        
+        shadowView.contentMode = .scaleAspectFill
+        //let blurEffect = UIBlurEffect(style: .light)
+        //let blurEffectView = UIVisualEffectView(effect: blurEffect)
+
+        shadowView.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
+        shadowView.clipsToBounds = true
+        shadowView.layer.cornerRadius = 27.5
+        shadowView.layer.borderColor = #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5)
+        shadowView.layer.borderWidth = 4
+        
+        annotationView?.addSubview(shadowView)
+        //增加三角形圖案
+        //OK
+        
+//        let triangle = UILabel(frame: CGRect(x: 0, y: 45, width: 50, height: 10)) // 50, 10
+//        triangle.text = "▾"
+//        triangle.font = UIFont.systemFont(ofSize: 24) //24
+//        triangle.textColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
+//
+//        triangle.textAlignment = .center
+//        annotationView?.addSubview(triangle)
+        
+        //END
+
+        //triangle.textColor = #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1)
+        //annotationView?.image = imageView.image
         
         //annotationView?.annotation?.subtitle = "Test"
         
@@ -357,6 +377,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         annotationView?.addSubview(annotationLabel)
         
+        //OK
+        /*
         let annotationName = UILabel(frame: CGRect(x: -20, y: 65, width: 95, height: 25))
         annotationName.numberOfLines = 3
         annotationName.textAlignment = .center
@@ -375,6 +397,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         annotationName.layer.cornerRadius = 15
         annotationName.clipsToBounds = true
         annotationView?.addSubview(annotationName)
+        */
+        //END 20181017
         
         // 下面這行改了 白點消失 變成純愛心
         //annotationView?.image = #imageLiteral(resourceName: "btn_like_normal")
@@ -571,7 +595,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func animateViewUp() {
         //userInfoDetailViewHeightConstraints.constant = 400
-        userInfoDetailViewBottomConstraints.constant = -50
+        userInfoDetailViewBottomConstraints.constant = 10 //有 tabbar 高度 tabbar 有隱藏
         //self.tabBarController?.tabBar.layer.zPosition = -1
         
         
@@ -589,7 +613,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     @objc func animateViewDown() {
         //userInfoDetailViewHeightConstraints.constant = 0
-        userInfoDetailViewBottomConstraints.constant = 500
+        userInfoDetailViewBottomConstraints.constant = 560
+        
         //20181016
 //        self.tabBarController?.tabBar.isHidden = false
        let animatedTabBar = self.tabBarController as! TabBarViewController
@@ -1002,16 +1027,16 @@ extension NSNotification.Name {
 extension MapViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return 11
         //return userInfo.count
-        if section == 0 {
-            return 1
+        if section == 1 {
+            return 3
         } else {
-            return 9
+            return 1
         }
         
     }
@@ -1032,10 +1057,10 @@ extension MapViewController: UITableViewDataSource {
                 let photo = friendImageURLForCell
                 let bigPhotoURL = URL(string: photo + "?height=500")
                 
-                cell.userImage.kf.setImage(with: bigPhotoURL)
+               // cell.userImage.kf.setImage(with: bigPhotoURL)
                 
                 cell.userName.text = userSelected[6]
-                cell.userBirthday.text = userSelected[1]
+                cell.userBirthday.text = "來到地球的日子：\(userSelected[1])"
                 cell.userGender.text = userSelected[0]
                 cell.chatButton.addTarget(self, action: #selector(userInfoButtonClicked(sender:)), for: .touchUpInside)
                 
@@ -1054,7 +1079,7 @@ extension MapViewController: UITableViewDataSource {
             
             if let cell = tableView.dequeueReusableCell(
             withIdentifier: "UserDetail", for: indexPath)
-            as? UserDetailTableViewCell {
+            as? NewUserDetailTableViewCell {
             
             //cell.userDetailTitle.text = "生日"
             //            var userInfo = ["暱稱","性別","生日","感情狀態","居住地","體型5","我想尋找","專長 興趣","喜歡的國家","自己最近的困擾","想嘗試的事情","自我介紹",]
@@ -1062,27 +1087,30 @@ extension MapViewController: UITableViewDataSource {
             
 //            cell.userDetailTitle.text = userInfo[indexPath.row]
 //            cell.userDetailContent.text = userSelected[indexPath.row]
-            
-                if indexPath.row == 0 {
-                    cell.userDetailTitle.text = userInfo[3]
-                    cell.userDetailContent.text = userSelected[2]
-                } else if indexPath.row == 1 {
-                    cell.userDetailTitle.text = userInfo[4]
-                    cell.userDetailContent.text = userSelected[3]
-                } else if indexPath.row == 2 {
-                    cell.userDetailTitle.text = userInfo[5]
-                    cell.userDetailContent.text = userSelected[4]
-                } else if indexPath.row == 3 {
-                    cell.userDetailTitle.text = userInfo[6]
-                    cell.userDetailContent.text = userSelected[5]
-                } else if indexPath.row == 4 {
-                    cell.userDetailTitle.text = userInfo[7]
-                    cell.userDetailContent.text = userSelected[7]
-                } else {
-                    cell.userDetailTitle.text = userInfo[indexPath.row + 3]
-                    cell.userDetailContent.text = userSelected[indexPath.row + 3]
-                }
-
+                
+                //OK 20181017
+                
+//                if indexPath.row == 0 {
+//                    cell.userDetailTitle.text = userInfo[3]
+//                    cell.userDetailContent.text = userSelected[2]
+//                } else if indexPath.row == 1 {
+//                    cell.userDetailTitle.text = userInfo[4]
+//                    cell.userDetailContent.text = userSelected[3]
+//                } else if indexPath.row == 2 {
+//                    cell.userDetailTitle.text = userInfo[5]
+//                    cell.userDetailContent.text = userSelected[4]
+//                } else if indexPath.row == 3 {
+//                    cell.userDetailTitle.text = userInfo[6]
+//                    cell.userDetailContent.text = userSelected[5]
+//                } else if indexPath.row == 4 {
+//                    cell.userDetailTitle.text = userInfo[7]
+//                    cell.userDetailContent.text = userSelected[7]
+//                } else {
+//                    cell.userDetailTitle.text = userInfo[indexPath.row + 3]
+//                    cell.userDetailContent.text = userSelected[indexPath.row + 3]
+//                }
+                
+                //END 20181017
                 
             //cell.iconImage.backgroundColor =  #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1) // FB message borderColor
             
@@ -1099,6 +1127,13 @@ extension MapViewController: UITableViewDataSource {
             //
             
             return cell
+            }
+            
+        case 2:
+            if let cell = tableView.dequeueReusableCell(
+                withIdentifier: "UserIntroduce", for: indexPath)
+                as? NewIntroduceTableViewCell {
+                return cell
             }
 
         default:
