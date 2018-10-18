@@ -166,25 +166,39 @@ class LoginViewController: UIViewController {
     }
     
     func getUserInfo(token: String) {
-        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, picture.type(large)"]).start(completionHandler: { (connection, result, error) in
+        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"]).start(completionHandler: { (connection, result, error) in
+            
+//            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, picture.type(large)"]).start(completionHandler: { (connection, result, error) in
+            //guard let 改成 let
             
             if error == nil {
                 if let info = result as? [String: Any] {
                     print("info: \(info)")
-                    guard let fbID = info["id"] as? String else { return }
-                    guard let fbName = info["name"] as? String else { return }
+                    //old
+                    
+//                    guard let fbID = info["id"] as? String else { return }
+//                    guard let fbName = info["name"] as? String else { return }
+//                    guard let userId = Auth.auth().currentUser?.uid else { return }
+//                    guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
+
+                    //OLD END
                     //guard let fbEmail = info["email"] as? String else { return }
 //                  guard let fbPhoto = info["picture"] as? [String: Any] else { return }
 //                    guard let photoData = fbPhoto["data"] as? [String: Any] else { return }
 //                    guard let photoURL = photoData["url"] as? String else { return }
-                    guard let userId = Auth.auth().currentUser?.uid else { return }
-                    guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
 
                     //self.uploadImagePic(url: URL(string: photoURL)!)
                     
                     //self.fbUserDefault.set(token, forKey: "token")
                     
-                    self.refference.child("UserData").child(userId).setValue([
+                     let fbID = info["id"] as? String
+                     let fbName = info["name"] as? String
+                    guard let userId = Auth.auth().currentUser?.uid else { return }
+                    guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
+
+                    
+                    //20181018 改成 updatevalue setValue
+                    self.refference.child("UserData").child(userId).updateChildValues([
                         "FBID": fbID,
                         "FBName": fbName,
                         "FBPhotoSmallURL": photoSmallURL,

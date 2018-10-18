@@ -83,14 +83,24 @@ class ProfileViewController: UIViewController {
         
         userImage.layer.cornerRadius = 60
         userImage.clipsToBounds = true //沒這行的話 圖片還是方方正正的
+        // shadowRadius = blur / 2.0
+        //userImageShadowView.ok
+//        userImageShadowView.layer.cornerRadius = 65
+//
+//        userImageShadowView.clipsToBounds = false
+//        userImageShadowView.layer.shadowRadius = 20 //20
+//
+//        userImageShadowView.layer.shadowColor = UIColor.gray.cgColor
+//        userImageShadowView.layer.shadowOpacity = 0.6
+//        userImageShadowView.layer.shadowOffset = CGSize.zero
+         //userImageShadowView. END
         
-        //userImageShadowView.
-        userImageShadowView.layer.cornerRadius = 65
-        userImageShadowView.layer.shadowRadius = 20
+        //userImageShadowView.layer.cornerRadius = 65
+    
         userImageShadowView.clipsToBounds = false
-        userImageShadowView.layer.shadowColor = UIColor.gray.cgColor
-        userImageShadowView.layer.shadowOpacity = 0.6
-        userImageShadowView.layer.shadowOffset = CGSize.zero
+        userImageShadowView.layer.applySketchShadow(color: UIColor.red, alpha: 0.5, x: 0, y: 0, blur: 10, spread: 10,corner: 65)
+
+        //
         //userImageShadowView.layer.shadowPath = UIBezierPath(roundedRect: userImageShadowView.bounds, cornerRadius: 65).cgPath
 
 //        userImageShadowView.layer.shadowOffset = CGSize(width: 4, height: 4)

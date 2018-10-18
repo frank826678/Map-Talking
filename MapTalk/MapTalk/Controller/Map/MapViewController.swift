@@ -362,11 +362,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         //annotationView?.annotation?.subtitle = "Test"
         
-        let annotationLabel = UILabel(frame: CGRect(x: -40, y: -35, width: 105, height: 30))
+        let annotationLabel = UILabel(frame: CGRect(x: -40, y: -35, width: 140, height: 30))
         annotationLabel.numberOfLines = 3
         annotationLabel.textAlignment = .center
-        annotationLabel.font = UIFont(name: "Monaco", size: 9)
-        
+        annotationLabel.font = UIFont(name: "Monaco", size: 12)
+        annotationLabel.font = annotationLabel.font.withSize(14)
         //annotationLabel.font = UIFont(name: "Rockwell", size: 12)
         
         if let message = userAnnotation?.message {

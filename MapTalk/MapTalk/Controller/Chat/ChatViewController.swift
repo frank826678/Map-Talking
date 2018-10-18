@@ -388,7 +388,9 @@ class ChatViewController: UIViewController {
             } else {
                 
                     //不確定判斷式正確不正確
-                for (index, user) in self.newMessage.enumerated() where user.senderId == message.senderId {
+                for (index, user) in self.newMessage.enumerated()
+                    where user.senderId == message.senderId
+                        || user.friendUID == message.senderId {
                     
                     self.newMessage[index].content = message.content
                     

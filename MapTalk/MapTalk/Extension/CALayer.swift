@@ -16,8 +16,11 @@ extension CALayer {
         x: CGFloat = 0,
         y: CGFloat = 2,
         blur: CGFloat = 4,
-        spread: CGFloat = 0)
-    {
+        spread: CGFloat = 0,
+        corner: CGFloat = 60
+    ) {
+        cornerRadius = corner
+        //clipsToBounds = false
         shadowColor = color.cgColor
         shadowOpacity = alpha
         shadowOffset = CGSize(width: x, height: y)
@@ -25,9 +28,16 @@ extension CALayer {
         if spread == 0 {
             shadowPath = nil
         } else {
-            let dx = -spread
-            let rect = bounds.insetBy(dx: dx, dy: dx)
-            shadowPath = UIBezierPath(rect: rect).cgPath
+            
+            let center = CGPoint(x: x + bounds.width / 2.0, y: y + bounds.height / 2.0)
+            
+            shadowPath = UIBezierPath(
+                arcCenter: center,
+                radius: corner,
+                startAngle: CGFloat(0),
+                endAngle: CGFloat.pi * 2.0,
+                clockwise: true
+            ).cgPath
         }
     }
 }
