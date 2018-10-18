@@ -32,6 +32,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     //20181012
     
+    @IBOutlet weak var mapBackgroundView: UIView!
     @IBOutlet weak var userInfoDetailView: UserInfoDetailView!
     @IBOutlet weak var userInfoDetailViewHeightConstraints: NSLayoutConstraint!
     @IBOutlet weak var userInfoDetailViewBottomConstraints: NSLayoutConstraint!
@@ -100,6 +101,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //userInfoDetailView.userName.text = "大頭大頭"
         //profileTableView.delegate = self
         //profileTableView.dataSource = self
+        
+        //取消 tableView 虛線
+        userInfoDetailView.userInfoDetailTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        
         userInfoDetailView.userInfoDetailTableView.dataSource = self
         userInfoDetailView.userInfoDetailTableView.delegate = self
         userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "NewUserDetailTableViewCell", bundle: nil),forCellReuseIdentifier: "UserDetail")
@@ -108,6 +113,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         // 20181013 感覺沒作用
         addSwipe()
+        mapBackgroundView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -599,6 +605,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         swipe.direction = .down
         userInfoDetailView.addGestureRecognizer(swipe)
         
+//        let tap = UISwipeGestureRecognizer(target: self, action: #selector(animateViewDown))
+//        tap.direction = .
+        let singleFinger = UITapGestureRecognizer(
+            target:self,
+            action:#selector(animateViewDown))
+        //singleFinger.numberOfTapsRequired = 1
+            
+        mapBackgroundView.addGestureRecognizer(singleFinger)
+        
         //20181013
         userInfoDetailView.userInfoDetailTableView.addGestureRecognizer(swipe)
        
@@ -621,10 +636,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
+        mapBackgroundView.isHidden = false
+        
     }
     
     @objc func animateViewDown() {
         //userInfoDetailViewHeightConstraints.constant = 0
+        
         userInfoDetailViewBottomConstraints.constant = 600
         
         //20181016
@@ -635,6 +653,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
+        mapBackgroundView.isHidden = true
     }
     
     //END

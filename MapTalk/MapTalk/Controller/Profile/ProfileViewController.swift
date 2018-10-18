@@ -98,7 +98,8 @@ class ProfileViewController: UIViewController {
         //userImageShadowView.layer.cornerRadius = 65
     
         userImageShadowView.clipsToBounds = false
-        userImageShadowView.layer.applySketchShadow(color: UIColor.red, alpha: 0.5, x: 0, y: 0, blur: 10, spread: 10,corner: 65)
+        userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 1, x: 0, y: 0, blur: 10, spread: 10,corner: 65)
+        
 
         //
         //userImageShadowView.layer.shadowPath = UIBezierPath(roundedRect: userImageShadowView.bounds, cornerRadius: 65).cgPath

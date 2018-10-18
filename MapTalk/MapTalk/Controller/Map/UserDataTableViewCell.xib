@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,14 +28,6 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPL-z2-B4e">
-                        <rect key="frame" x="375" y="10" width="40" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="Kew-wJ-fgF"/>
-                            <constraint firstAttribute="width" constant="40" id="sRz-Gx-hre"/>
-                        </constraints>
-                        <state key="normal" image="new2-chat-bubble-30"/>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frank Lin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7x6-C5-3mp">
                         <rect key="frame" x="30" y="80" width="83.5" height="22"/>
                         <constraints>
@@ -53,17 +46,25 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPL-z2-B4e">
+                        <rect key="frame" x="190.5" y="25" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="Kew-wJ-fgF"/>
+                            <constraint firstAttribute="width" constant="40" id="sRz-Gx-hre"/>
+                        </constraints>
+                        <state key="normal" image="new2-chat-bubble-30"/>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="BPL-z2-B4e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="FsZ-hZ-r5y"/>
                     <constraint firstItem="7x6-C5-3mp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="80" id="O4S-kV-iAh"/>
-                    <constraint firstAttribute="trailing" secondItem="BPL-z2-B4e" secondAttribute="trailing" constant="12" id="Uzj-z7-I3t"/>
                     <constraint firstItem="7x6-C5-3mp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="Yb6-JD-qoj"/>
+                    <constraint firstItem="BPL-z2-B4e" firstAttribute="leading" secondItem="mAd-47-9VF" secondAttribute="trailing" constant="10" id="aCW-gb-LmX"/>
                     <constraint firstItem="mAd-47-9VF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="80" id="glZ-VD-gLJ"/>
                     <constraint firstItem="mAd-47-9VF" firstAttribute="leading" secondItem="7x6-C5-3mp" secondAttribute="trailing" constant="25" id="i13-aJ-ULO"/>
                     <constraint firstAttribute="bottom" secondItem="sjb-91-WJ8" secondAttribute="bottom" constant="20.5" id="jJs-0N-ihA"/>
                     <constraint firstItem="sjb-91-WJ8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="oMP-Dt-6Dx"/>
                     <constraint firstItem="sjb-91-WJ8" firstAttribute="top" secondItem="7x6-C5-3mp" secondAttribute="bottom" constant="20" id="oYW-JM-9r3"/>
-                    <constraint firstItem="BPL-z2-B4e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="uzX-hl-CKn"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
