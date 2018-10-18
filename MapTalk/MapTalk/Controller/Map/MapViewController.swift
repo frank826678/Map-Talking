@@ -605,13 +605,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         swipe.direction = .down
         userInfoDetailView.addGestureRecognizer(swipe)
         
-//        let tap = UISwipeGestureRecognizer(target: self, action: #selector(animateViewDown))
-//        tap.direction = .
         let singleFinger = UITapGestureRecognizer(
             target:self,
             action:#selector(animateViewDown))
         //singleFinger.numberOfTapsRequired = 1
-            
+        
         mapBackgroundView.addGestureRecognizer(singleFinger)
         
         //20181013
