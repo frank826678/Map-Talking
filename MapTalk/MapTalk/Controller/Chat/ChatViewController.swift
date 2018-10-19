@@ -55,8 +55,9 @@ class ChatViewController: UIViewController {
                                forCellReuseIdentifier: "Chat")
         //讀取好友清單
         ref = Database.database().reference() //重要 沒有會 nil
+        //20181019 OK 搬到 will appear 希望能即時顯示
+//        getFriendList()
         
-        getFriendList()
         //getFriendLastMessage()
         
         //simpleQueues()
@@ -87,7 +88,8 @@ class ChatViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
-        
+        getFriendList()
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -268,7 +270,7 @@ class ChatViewController: UIViewController {
             guard let friendImageUrl = value["FBPhotoSmallURL"] as? String  else { return }
             
             let friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
-
+            
             self.friendInfo.append(friendInfo)
             
             
@@ -384,7 +386,7 @@ class ChatViewController: UIViewController {
             //要判斷是不是相同的人 相同的取代最後一行對話 不相同的再往上加
             if  message.senderId == self.myselfUID {
                 
-                for (index, user) in self.newMessage.enumerated() where user.friendUID == message.friendUID {
+                for (index, user) in self.newMessage.enumerated() where user.friendUID == message.friendUID || user.friendUID == message.senderId  {
                     
                     self.newMessage[index].content = message.content
                     
