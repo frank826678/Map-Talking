@@ -27,8 +27,8 @@ class ProfileViewController: UIViewController {
     
     //var iconImageArray: [String] = ["new3-pencil-50","new3-cheap-2-50","new3-settings-50-2","new3-new-post-50"]
     
-    var iconNameArray: [String] = ["個人資料","聯絡我們"]
-    var iconImageArray: [String] = ["new3-pencil-50","new3-new-post-50"]
+    var iconNameArray: [String] = ["個人資料","聯絡我們","登出裝置"]
+    var iconImageArray: [String] = ["new3-pencil-50","new3-new-post-50","new4-logout-100"]
 
     
     // swiftlint:disable identifier_name
@@ -98,7 +98,7 @@ class ProfileViewController: UIViewController {
         //userImageShadowView.layer.cornerRadius = 65
     
         userImageShadowView.clipsToBounds = false
-        userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 1, x: 0, y: 0, blur: 10, spread: 10,corner: 65)
+        userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
         
 
         //
@@ -164,7 +164,7 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

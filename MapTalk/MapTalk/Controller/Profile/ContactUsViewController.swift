@@ -18,8 +18,9 @@ class ContactUsViewController: UIViewController {
         //navigationController?.title = "聯絡我們"
 //        self.navigationController?.navigationBar.topItem?.title = "Your Title"
         
-        self.view.backgroundColor = .clear
-        self.view.backgroundColor = #colorLiteral(red: 0.3098039216, green: 0.8588235294, blue: 0.9921568627, alpha: 1)
+        //self.view.backgroundColor = .clear
+        //self.view.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+          self.view.backgroundColor = UIColor.white
 
     }
     

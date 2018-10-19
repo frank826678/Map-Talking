@@ -20,6 +20,8 @@ target 'MapTalk' do
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'NotificationBannerSwift'
+  pod 'KeychainAccess'
+
 
 #  pod 'GoogleMaps'
 #  pod 'GooglePlaces'

@@ -103,6 +103,17 @@ class TabBarViewController: RAMAnimatedTabBarController {
         super.viewDidLoad()
         
         setupTab()
+        
+//        // swiftlint:disable force_cast
+//        let ramTBC = self.window!.rootViewController as! TabBarViewController
+//        
+//        // swiftlint:enable force_cast
+//        
+//        
+//        ramTBC.selectedIndex = 1
+//        
+//        ramTBC.setSelectIndex(from: 0, to: 1)
+        
         //20181016
         //change tabbar page 有作用 但是顏色沒變過去
         //寫在這沒用 寫去 chatVC 的 viewDidLoad()

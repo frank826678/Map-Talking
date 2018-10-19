@@ -67,7 +67,15 @@ class ChatViewController: UIViewController {
         
         //change tabbar page 有作用 但是顏色沒變過去
         //tabBarController?.selectedIndex = 2
-       
+        
+        
+        // swiftlint:disable force_cast
+        let ramTBC = tabBarController as! TabBarViewController
+        // swiftlint:enable force_cast
+        
+        ramTBC.selectedIndex = 1
+        ramTBC.setSelectIndex(from: 0, to: 1)
+        
         //取消 tableView 虛線
         chatTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         //20181016 searchbar

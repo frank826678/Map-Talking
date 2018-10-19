@@ -80,6 +80,7 @@ PODS:
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.0)
   - IQKeyboardManagerSwift (6.2.0)
+  - KeychainAccess (3.1.2)
   - Kingfisher (4.10.0)
   - leveldb-library (1.20)
   - MarqueeLabel/Swift (3.2.0)
@@ -104,6 +105,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - IQKeyboardManagerSwift
+  - KeychainAccess
   - Kingfisher (~> 4.0)
   - NotificationBannerSwift
   - RAMAnimatedTabBarController
@@ -128,6 +130,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMSessionFetcher
     - IQKeyboardManagerSwift
+    - KeychainAccess
     - Kingfisher
     - leveldb-library
     - MarqueeLabel
@@ -155,6 +158,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 82f04aeff8426309dbdbc75f6c8accd1e584a5da
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
+  KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
   Kingfisher: 43c4b802d8b5256cf1f4379e9cd10b329be6d3e2
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   MarqueeLabel: 440a502b91a9179bd98f9fff00ba1150650a1c0e
@@ -164,6 +168,6 @@ SPEC CHECKSUMS:
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 
-PODFILE CHECKSUM: eeb635eceae3e905f3dedb4f92c4d7165f4c0e30
+PODFILE CHECKSUM: 2849dd5dcfd3422e15dd38eff19095efe1357674
 
 COCOAPODS: 1.5.3

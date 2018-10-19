@@ -14,6 +14,8 @@ import FBSDKLoginKit
 //import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
+//20181018
+import KeychainAccess
 
 var refference: DatabaseReference!
 
@@ -65,9 +67,12 @@ struct FirebaseManager {
             
             let user = firebaseResult.user
             let userInfo = UserInfo(userName: user.displayName!, userPicUrl: user.photoURL!)
+            //OLD OK
+            //UserDefaults.standard.set(user.uid, forKey: FirebaseType.uuid.rawValue)
             
-            UserDefaults.standard.set(user.uid, forKey: FirebaseType.uuid.rawValue)
-            
+            let keychain = Keychain(service: "com.frank.MapTalk")
+            keychain[FirebaseType.uuid.rawValue] = user.uid
+
             sucess(userInfo)
             
         }

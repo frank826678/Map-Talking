@@ -432,6 +432,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         //第一次進來 userAnnotation 點擊進來是 nil
         
+        print("QQQQQQQQ")
+        
         if let userLocation = view.annotation as? UserAnnotation {
             self.userAnnotation = userLocation
         }
@@ -448,7 +450,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //self.showMessageAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
             print("選取的人的 userID 是 \(friendUserId)")
             
-            //搜尋 firebase
+            //搜尋 firebase 20181019
             showUserDetail(friendId: friendUserId, friendName: navigationUserName, friendImageURL: firiendImageURL)
 
             //animateViewUp()
@@ -456,7 +458,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         } else {
             navigationUserName = "使用者"
         }
-        
+       
+        //20181019 可以連點兩次
+        mapView.deselectAnnotation(view.annotation, animated: true)
         //20181012
         //addTap(taskCoordinate: coordinate)
         
@@ -494,8 +498,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         //friendImageURLForCell = bigPhotoURL
         
-        let mapTap = UITapGestureRecognizer(target: self, action: #selector(animateViewDown))
-        mapView.addGestureRecognizer(mapTap)
+//20181019
+//        let mapTap = UITapGestureRecognizer(target: self, action: #selector(animateViewDown))
+//        mapView.addGestureRecognizer(mapTap)
+        
         
         //let bigPhotoURL = URL(string: friendImageURL + "?height=500")
         
@@ -614,6 +620,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         //20181013
         userInfoDetailView.userInfoDetailTableView.addGestureRecognizer(swipe)
+        
+//        let viewBackgroundTap = UITapGestureRecognizer(target: self, action: #selector(animateViewDown))
+//        mapBackgroundView.addGestureRecognizer(viewBackgroundTap)
        
     }
     

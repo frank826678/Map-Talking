@@ -11,7 +11,7 @@ import FBSDKLoginKit
 import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
-
+import KeychainAccess
 
 class LoginViewController: UIViewController {
     
@@ -283,6 +283,16 @@ class LoginViewController: UIViewController {
 //        facebookLoginBot.layer.borderColor = UIColor.lightGray.cgColor
         
         
+    }
+    //20181018準備新增按鈕
+    @IBAction func anonymousLogin(_ sender: UIButton) {
+        
+        let keychain = Keychain(service: "com.frank.MapTalk")
+        keychain["anonymous"] = "anonymous"
+        
+        //AppDelegate.shared.switchMainPage()
+        AppDelegate.shared.switchToMainStoryBoard()
+
     }
     
 }

@@ -15,6 +15,7 @@ import Firebase
 import IQKeyboardManagerSwift
 import Fabric
 import Crashlytics
+import KeychainAccess
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -56,16 +57,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 
         
-        //switch page
-        if UserDefaults.standard.value(forKey: FirebaseType.uuid.rawValue) != nil {
+        //switch page //OLD OK
+//        if UserDefaults.standard.value(forKey: FirebaseType.uuid.rawValue) != nil {
+//
+//            switchToMainStoryBoard()
+//
+//        } else {
+//            switchToLoginStoryBoard()
+//
+//        }
+        
+        //20181018
+        let keychain = Keychain(service: "com.frank.MapTalk")
+        
+        guard keychain[FirebaseType.uuid.rawValue] != nil || keychain["anonymous"] == "anonymous" else {
             
-            switchToMainStoryBoard()
-            
-        } else {
+            //switchLogIn()
             switchToLoginStoryBoard()
-            
+            return true
         }
-
+        
+        switchToMainStoryBoard()
+        
         Fabric.with([Crashlytics.self])
         return true
     }
@@ -133,6 +146,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         window?.rootViewController = UIStoryboard.mainStoryboard().instantiateInitialViewController()
+        
+//        // swiftlint:disable force_cast
+//        let ramTBC = self.window!.rootViewController as! TabBarViewController
+//
+//        // swiftlint:enable force_cast
+//
+//        
+//        ramTBC.selectedIndex = 1
+//        
+//        ramTBC.setSelectIndex(from: 0, to: 1)
         
        // 沒用 window?.rootViewController?.tabBarController?.selectedIndex = 1
         

@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,27 +19,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jUE-au-VAW">
-                                <rect key="frame" x="122.5" y="114" width="130" height="130"/>
+                                <rect key="frame" x="127.5" y="114" width="120" height="120"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frank_FB_origin" translatesAutoresizingMaskIntoConstraints="NO" id="hLD-Pf-W6k">
-                                        <rect key="frame" x="5" y="5" width="120" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="65p-le-liS"/>
                                             <constraint firstAttribute="height" constant="120" id="bdQ-XI-bwU"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="3jR-ts-CnV"/>
-                                    <constraint firstAttribute="width" constant="130" id="Ian-eZ-Rnf"/>
-                                    <constraint firstAttribute="bottom" secondItem="hLD-Pf-W6k" secondAttribute="bottom" constant="5" id="g4p-4G-3dV"/>
-                                    <constraint firstItem="hLD-Pf-W6k" firstAttribute="top" secondItem="jUE-au-VAW" secondAttribute="top" constant="5" id="gw1-wh-bta"/>
+                                    <constraint firstAttribute="height" constant="120" id="3jR-ts-CnV"/>
+                                    <constraint firstAttribute="width" constant="120" id="Ian-eZ-Rnf"/>
+                                    <constraint firstAttribute="bottom" secondItem="hLD-Pf-W6k" secondAttribute="bottom" id="g4p-4G-3dV"/>
+                                    <constraint firstItem="hLD-Pf-W6k" firstAttribute="top" secondItem="jUE-au-VAW" secondAttribute="top" id="gw1-wh-bta"/>
                                     <constraint firstItem="hLD-Pf-W6k" firstAttribute="centerX" secondItem="jUE-au-VAW" secondAttribute="centerX" id="jGr-XC-QES"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frank Lin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCF-ut-ww4">
-                                <rect key="frame" x="149.5" y="259" width="76" height="40"/>
+                                <rect key="frame" x="149.5" y="249" width="76" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="snb-KB-63h"/>
                                 </constraints>
@@ -47,7 +47,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="此時此刻的您，在想些什麼呢？" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Dx-9V-YAm">
-                                <rect key="frame" x="40" y="309" width="295" height="60"/>
+                                <rect key="frame" x="40" y="299" width="295" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="yXN-4g-Vsi"/>
                                 </constraints>
@@ -56,7 +56,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DZn-hv-FMN">
-                                <rect key="frame" x="0.0" y="389" width="375" height="278"/>
+                                <rect key="frame" x="0.0" y="379" width="375" height="288"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -393,12 +393,12 @@
         <scene sceneID="tdh-el-K9m">
             <objects>
                 <viewController id="pnO-qN-jpc" customClass="ContactUsViewController" customModule="MapTalk" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="EsL-3i-BJS">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="EsL-3i-BJS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="軟體版本： V 1.1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yI0-7g-dsS">
-                                <rect key="frame" x="0.0" y="334" width="375" height="54"/>
+                                <rect key="frame" x="0.0" y="304" width="375" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="9a1-NP-ctT"/>
                                 </constraints>
@@ -406,14 +406,15 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen Shot 2018-09-19 at 5.57.45 PM" translatesAutoresizingMaskIntoConstraints="NO" id="g8t-m2-dt6">
-                                <rect key="frame" x="50" y="94" width="275" height="200"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mapping Talk icon" translatesAutoresizingMaskIntoConstraints="NO" id="g8t-m2-dt6">
+                                <rect key="frame" x="112.5" y="114" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="otE-YB-Gqj"/>
+                                    <constraint firstAttribute="width" constant="150" id="2lZ-Bl-mhs"/>
+                                    <constraint firstAttribute="height" constant="150" id="otE-YB-Gqj"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更新日期：2018 / 10 /01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuC-HB-qdR">
-                                <rect key="frame" x="85" y="408" width="205.5" height="54"/>
+                                <rect key="frame" x="85" y="378" width="205.5" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="G2F-wB-M9T"/>
                                 </constraints>
@@ -422,7 +423,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者姓名：Frank Lin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uzk-vg-TwO">
-                                <rect key="frame" x="100.5" y="482" width="174.5" height="54"/>
+                                <rect key="frame" x="100.5" y="452" width="174.5" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="rzx-sy-jLG"/>
                                 </constraints>
@@ -431,7 +432,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者信箱：frank826678@gmail.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDB-DX-yMq">
-                                <rect key="frame" x="31.5" y="556" width="312.5" height="54"/>
+                                <rect key="frame" x="31.5" y="526" width="312.5" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="fBn-Od-1WT"/>
                                 </constraints>
@@ -442,15 +443,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="g8t-m2-dt6" firstAttribute="top" secondItem="8gO-w1-Izv" secondAttribute="top" constant="30" id="0NT-hH-UT1"/>
-                            <constraint firstItem="g8t-m2-dt6" firstAttribute="leading" secondItem="8gO-w1-Izv" secondAttribute="leading" constant="50" id="63S-7u-EBF"/>
-                            <constraint firstItem="g8t-m2-dt6" firstAttribute="centerX" secondItem="EsL-3i-BJS" secondAttribute="centerX" id="7sU-XD-xqe"/>
+                            <constraint firstItem="g8t-m2-dt6" firstAttribute="top" secondItem="8gO-w1-Izv" secondAttribute="top" constant="50" id="0NT-hH-UT1"/>
                             <constraint firstItem="Uzk-vg-TwO" firstAttribute="top" secondItem="VuC-HB-qdR" secondAttribute="bottom" constant="20" id="Ft8-7X-lea"/>
                             <constraint firstItem="yI0-7g-dsS" firstAttribute="leading" secondItem="8gO-w1-Izv" secondAttribute="leading" id="JvC-uy-rAV"/>
-                            <constraint firstItem="8gO-w1-Izv" firstAttribute="trailing" secondItem="g8t-m2-dt6" secondAttribute="trailing" constant="50" id="KxR-ab-ueg"/>
                             <constraint firstItem="yI0-7g-dsS" firstAttribute="top" secondItem="g8t-m2-dt6" secondAttribute="bottom" constant="40" id="Td7-na-7ez"/>
                             <constraint firstItem="Uzk-vg-TwO" firstAttribute="centerX" secondItem="EsL-3i-BJS" secondAttribute="centerX" id="XjY-M5-5md"/>
                             <constraint firstItem="DDB-DX-yMq" firstAttribute="top" secondItem="Uzk-vg-TwO" secondAttribute="bottom" constant="20" id="cm8-kb-cmh"/>
+                            <constraint firstItem="g8t-m2-dt6" firstAttribute="centerX" secondItem="EsL-3i-BJS" secondAttribute="centerX" id="hvw-aK-zg2"/>
                             <constraint firstItem="VuC-HB-qdR" firstAttribute="top" secondItem="yI0-7g-dsS" secondAttribute="bottom" constant="20" id="jGz-V1-PyP"/>
                             <constraint firstItem="DDB-DX-yMq" firstAttribute="centerX" secondItem="EsL-3i-BJS" secondAttribute="centerX" id="mwR-32-iKw"/>
                             <constraint firstItem="VuC-HB-qdR" firstAttribute="centerX" secondItem="EsL-3i-BJS" secondAttribute="centerX" id="qPS-7G-g9h"/>
@@ -466,7 +465,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Screen Shot 2018-09-19 at 5.57.45 PM" width="826" height="776"/>
+        <image name="Mapping Talk icon" width="1024" height="1024"/>
         <image name="coin-cash-in-hand-50" width="50" height="50"/>
         <image name="coin-coin-bag-100" width="100" height="100"/>
         <image name="frank_FB_origin" width="1536" height="1536"/>
