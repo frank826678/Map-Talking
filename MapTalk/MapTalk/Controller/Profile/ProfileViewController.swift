@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import KeychainAccess
+
 
 class ProfileViewController: UIViewController {
     
@@ -223,7 +225,47 @@ extension ProfileViewController: UITableViewDataSource{
             )
         
         }
+        else if indexPath.row == 2 {
         
+            print("點了登出裝置")
+            logOut()
+        }
+
+        
+    }
+    
+    func logOut() {
+        let alert = UIAlertController(title: "登出", message: "您是否要登出帳號？", preferredStyle: UIAlertController.Style.alert)
+        
+        let action = UIAlertAction(title: "確認", style: .default) { (_) in
+            
+            let keychain = Keychain(service: "com.frank.MapTalk")
+            
+            do  {
+                
+                try keychain.remove(FirebaseType.uuid.rawValue)
+                
+                try Auth.auth().signOut()
+                
+                AppDelegate.shared.switchToLoginStoryBoard()
+                print("登出成功")
+                
+            } catch {
+                print("登出失敗，請確認網路")
+                //BaseNotificationBanner.warningBanner(subtitle: "登出失敗，請確認網路")
+                return
+            }
+            
+            
+        }
+        
+        let cancel = UIAlertAction(title: "取消", style: .cancel)
+        
+        alert.addAction(cancel)
+        
+        alert.addAction(action)
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

@@ -15,8 +15,10 @@ import KeychainAccess
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var loginIcon: UIImageView!
     @IBOutlet weak var logingButtonShape: UIButton!
     
+    @IBOutlet weak var anoymousLoginButtonShape: UIButton!
     private let manager = FacebookManager()
     private let firebaseManager = FirebaseManager()
     
@@ -57,7 +59,9 @@ class LoginViewController: UIViewController {
                 // 有 weak self 所以 當沒人 keep 住他時，因為 ARC 0，消失後會 nil。
                 
                 self?.signInFirebase(token: token)
-                self?.getUserInfo(token: token)
+                
+                //20181019
+                //self?.getUserInfo(token: token)
 
                 //這裡有 signInFirebase 下面 firebase login 可以刪掉
                 
@@ -140,7 +144,7 @@ class LoginViewController: UIViewController {
         
         firebaseManager.logInFirebase(
             token: token,
-            sucess: { (userInfo) in
+            sucess: { (_) in
                 
                 DispatchQueue.main.async {
                    AppDelegate.shared.switchToMainStoryBoard()
@@ -165,6 +169,8 @@ class LoginViewController: UIViewController {
         
     }
     
+    //20181019
+    /*
     func getUserInfo(token: String) {
         FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"]).start(completionHandler: { (connection, result, error) in
             
@@ -220,7 +226,10 @@ class LoginViewController: UIViewController {
             }
         })
     }
-    
+       */
+      //20181019END
+ 
+ 
     func uploadImagePic(
         url: URL
         ) {
@@ -274,6 +283,11 @@ class LoginViewController: UIViewController {
         
         //美化字體
         logingButtonShape.layer.cornerRadius = 25
+        anoymousLoginButtonShape.layer.cornerRadius = 25
+        
+        loginIcon.layer.cornerRadius = 90
+
+        
 //        entryContent.layer.shadowOffset = CGSize(width: 0, height: 2)
 //        entryContent.layer.shadowOpacity = 1
 //        entryContent.layer.shadowRadius = 5

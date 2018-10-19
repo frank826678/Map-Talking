@@ -70,14 +70,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //20181018
         let keychain = Keychain(service: "com.frank.MapTalk")
         
-        guard keychain[FirebaseType.uuid.rawValue] != nil || keychain["anonymous"] == "anonymous" else {
-            
-            //switchLogIn()
+        if  keychain[FirebaseType.uuid.rawValue] != nil {
+            switchToMainStoryBoard()
+            //switchToLoginStoryBoard()
+
+        } else {
             switchToLoginStoryBoard()
-            return true
         }
         
-        switchToMainStoryBoard()
+//        guard keychain[FirebaseType.uuid.rawValue] != nil || keychain["anonymous"] == "anonymous" else {
+//
+//            //switchLogIn()
+//            switchToLoginStoryBoard()
+//            return true
+//        }
+        
+        //switchToMainStoryBoard()
         
         Fabric.with([Crashlytics.self])
         return true
