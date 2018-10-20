@@ -203,6 +203,7 @@ class ChatViewController: UIViewController {
                 
                 print(allFriends)
                 
+                //20181019 下面已經直接把值傳入 應該不需要這個 array 了
                 self.friendsList.append(allFriends)
                 //這裡有每個朋友的 UID , UID 比較重要 為結構的外層第一筆 （名字 這時候去請求
                 print("allFriends資料結束")
@@ -223,115 +224,115 @@ class ChatViewController: UIViewController {
     }
     
     //待修
-    func getFriendLastMessage(friendId: String) {
-        
-        var channel :String = "Nothing"
-        
-        guard let myselfId = Auth.auth().currentUser?.uid else { return }
-        
-        //            for index in 0 ... friendsList.count-1 {
-        //
-        //                let friendId = friendsList[index]
-        //
-        //                if myselfId > friendId {
-        //                    channel = "\(myselfId)_\(friendId)"
-        //                } else {
-        //                    channel = "\(friendId)_\(myselfId)"
-        //                }
-        
-        
-        
-        let friendId = friendId
-        
-        if myselfId > friendId {
-            channel = "\(myselfId)_\(friendId)"
-        } else {
-            channel = "\(friendId)_\(myselfId)"
-        }
-        
-        //channel = "sgo1OooTVwbZ2PinrIY81YXN8Gl2_H6jIdMSaFydwRkuZGMGPneHZ3xf1"
-        //        self.ref.child("UserData").queryEqual(toValue: friendId).observeSingleEvent(of: .value, with: { (snapshot)
-        
-        self.ref.child("UserData/\(friendId)").observeSingleEvent(of: .value, with: { (snapshot)
-            
-            //用 UID 去找是誰 到 UserData 去找
-            
-            in
-            
-            print("找到的資料是\(snapshot)")
-            
-            //            let a = snapshot.value as! NSDictionary
-            //            print("奇怪東西\(a)")
-            
-            guard let value = snapshot.value as? NSDictionary else { return }
-            
-            guard let friendName = value["FBName"] as? String else { return }
-            
-            guard let friendImageUrl = value["FBPhotoSmallURL"] as? String  else { return }
-            
-            let friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
-            
-            self.friendInfo.append(friendInfo)
-            
-            
-            //試著加入到同一個 array
-            //            let friendDataArray = freindData(info: friendInfo, message: nil)
-            //            self.friendDataArray.append(<#T##newElement: freindData##freindData#>)
-            
-            //old 可以
-            print("＊＊＊＊朋友的資料")
-            print(self.friendInfo)
-            self.chatTableView.reloadData()
-            
-        })
-        
-        //可以找到最後一筆資料
-        ref.child("chatroom").child("PersonalChannel").child(channel).queryOrdered(byChild: "time").queryLimited(toLast: 1).observe(.childAdded) { (snapshot) in
-            
-            
-            
-            guard let value = snapshot.value as? NSDictionary else { return }
-            
-            guard let senderId = value["senderId"] as? String else { return }
-            
-            guard let senderName = value["senderName"] as? String else { return }
-            
-            guard let time = value["time"] as? Int else { return }
-            
-            let content = value["content"] as? String
-            
-            let senderPhoto = value["senderPhoto"] as? String
-            
-            let imageUrl = value["imageUrl"] as? String
-            
-            let message = Message(
-                content: content,
-                senderId: senderId,
-                senderName: senderName,
-                senderPhoto: senderPhoto,
-                time: time,
-                imageUrl: imageUrl
-            )
-            
-            self.messages.append(message)
-            
-            print("_____")
-            print(self.messages)
-            
-            self.chatTableView.reloadData()
-            
-            //                        self.chatTableView.beginUpdates()
-            //
-            //                        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-            //
-            //                        self.chatTableView.insertRows(at: [indexPath], with: .automatic)
-            //
-            //                        self.chatTableView.endUpdates()
-            //
-            //                        self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-        }
-        
-    }
+//    func getFriendLastMessage(friendId: String) {
+//
+//        var channel :String = "Nothing"
+//
+//        guard let myselfId = Auth.auth().currentUser?.uid else { return }
+//
+//        //            for index in 0 ... friendsList.count-1 {
+//        //
+//        //                let friendId = friendsList[index]
+//        //
+//        //                if myselfId > friendId {
+//        //                    channel = "\(myselfId)_\(friendId)"
+//        //                } else {
+//        //                    channel = "\(friendId)_\(myselfId)"
+//        //                }
+//
+//
+//
+//        let friendId = friendId
+//
+//        if myselfId > friendId {
+//            channel = "\(myselfId)_\(friendId)"
+//        } else {
+//            channel = "\(friendId)_\(myselfId)"
+//        }
+//
+//        //channel = "sgo1OooTVwbZ2PinrIY81YXN8Gl2_H6jIdMSaFydwRkuZGMGPneHZ3xf1"
+//        //        self.ref.child("UserData").queryEqual(toValue: friendId).observeSingleEvent(of: .value, with: { (snapshot)
+//
+//        self.ref.child("UserData/\(friendId)").observeSingleEvent(of: .value, with: { (snapshot)
+//
+//            //用 UID 去找是誰 到 UserData 去找
+//
+//            in
+//
+//            print("找到的資料是\(snapshot)")
+//
+//            //            let a = snapshot.value as! NSDictionary
+//            //            print("奇怪東西\(a)")
+//
+//            guard let value = snapshot.value as? NSDictionary else { return }
+//
+//            guard let friendName = value["FBName"] as? String else { return }
+//
+//            guard let friendImageUrl = value["FBPhotoSmallURL"] as? String  else { return }
+//
+//            let friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
+//
+//            self.friendInfo.append(friendInfo)
+//
+//
+//            //試著加入到同一個 array
+//            //            let friendDataArray = freindData(info: friendInfo, message: nil)
+//            //            self.friendDataArray.append(<#T##newElement: freindData##freindData#>)
+//
+//            //old 可以
+//            print("＊＊＊＊朋友的資料")
+//            print(self.friendInfo)
+//            self.chatTableView.reloadData()
+//
+//        })
+//
+//        //可以找到最後一筆資料
+//        ref.child("chatroom").child("PersonalChannel").child(channel).queryOrdered(byChild: "time").queryLimited(toLast: 1).observe(.childAdded) { (snapshot) in
+//
+//
+//
+//            guard let value = snapshot.value as? NSDictionary else { return }
+//
+//            guard let senderId = value["senderId"] as? String else { return }
+//
+//            guard let senderName = value["senderName"] as? String else { return }
+//
+//            guard let time = value["time"] as? Int else { return }
+//
+//            let content = value["content"] as? String
+//
+//            let senderPhoto = value["senderPhoto"] as? String
+//
+//            let imageUrl = value["imageUrl"] as? String
+//
+//            let message = Message(
+//                content: content,
+//                senderId: senderId,
+//                senderName: senderName,
+//                senderPhoto: senderPhoto,
+//                time: time,
+//                imageUrl: imageUrl
+//            )
+//
+//            self.messages.append(message)
+//
+//            print("_____")
+//            print(self.messages)
+//
+//            self.chatTableView.reloadData()
+//
+//            //                        self.chatTableView.beginUpdates()
+//            //
+//            //                        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+//            //
+//            //                        self.chatTableView.insertRows(at: [indexPath], with: .automatic)
+//            //
+//            //                        self.chatTableView.endUpdates()
+//            //
+//            //                        self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+//        }
+//
+//    }
     
     //let chatroomKey = "publicChannel"
     //每個 channel 都要讀取 讀最後一筆

@@ -46,7 +46,10 @@ class ChatDetailViewController: UIViewController {
     //20181014
     //var friendNewInfo: FriendNewInfo = FriendNewInfo(friendName: "測試11", friendImageUrl: "測試12", friendUID: "測試13", friendChannel: "測試13")
     //20181014 END
-
+    
+    //20181019
+    var bigImageURL: String?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +96,14 @@ class ChatDetailViewController: UIViewController {
         
         //20181005
         getFriendInfo(friendUserId: friendUserId)
+        //20181020
+        //        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.handleLongPress(_:)))
+        
+        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(animateViewUp))
+        lpgr.minimumPressDuration = 1
+        chatDetailTableView.addGestureRecognizer(lpgr)
+        
+        
     }
     
     // MARK: - Action
@@ -128,11 +139,11 @@ class ChatDetailViewController: UIViewController {
         )
     }
     
-//    func sendPersonalChannelToPhotoVC() {
-//
-//        NotificationCenter.default.post(name: .sendPersonalChannel, object: friendChannel)
-//
-//    }
+    //    func sendPersonalChannelToPhotoVC() {
+    //
+    //        NotificationCenter.default.post(name: .sendPersonalChannel, object: friendChannel)
+    //
+    //    }
     
     //NEW
     private func setChannel(friendUserId: String) {
@@ -190,7 +201,7 @@ class ChatDetailViewController: UIViewController {
                 print("找不到原始資料，創建新頻道")
                 //送出的第一句話
                 guard let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).childByAutoId().key else { return }
-
+                
                 self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).child(messageKey).setValue([
                     "content": " Hello World~~~~ ",
                     "senderId": myselfId,
@@ -335,7 +346,7 @@ class ChatDetailViewController: UIViewController {
         } else {
             print("沒輸入東西")
         }
-
+        
     }
     
     func getFriendInfo(friendUserId: String) {
@@ -383,19 +394,19 @@ class ChatDetailViewController: UIViewController {
         // 20181014加上傳送頻道
         //self.performSegue(withIdentifier: "GoPhotoVC", sender: friendChannel)
     }
-        // 20181014加上傳送頻道
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//        // swiftlint:disable force_cast
-//        let sendChannel = sender as! String
-//        let controller = segue.destination as! PhotoViewController
-//
-//        // swiftlint:enable force_cast
-//
-//        controller.friendChannel = sendChannel
-//
-//    }
-
+    // 20181014加上傳送頻道
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //
+    //        // swiftlint:disable force_cast
+    //        let sendChannel = sender as! String
+    //        let controller = segue.destination as! PhotoViewController
+    //
+    //        // swiftlint:enable force_cast
+    //
+    //        controller.friendChannel = sendChannel
+    //
+    //    }
+    
     @objc func photoSelectorShowing() {
         
         photoBtn.isSelected = !photoBtn.isSelected
@@ -440,6 +451,15 @@ extension ChatDetailViewController: UITableViewDataSource {
                     as? ChatImageOwnerTableViewCell {
                     
                     cell.messageImageView.kf.setImage(with: URL(string: imageUrl))
+                    //加手勢看看
+                    //bigImageURL = imageUrl
+                    
+                    let singleFinger = UITapGestureRecognizer(
+                        target:self,
+                        action:#selector(animateViewUp))
+                    //singleFinger.numberOfTapsRequired = 1
+                    cell.messageImageView.isUserInteractionEnabled = true
+                    cell.messageImageView.addGestureRecognizer(singleFinger)
                     
                     return cell
                 }
@@ -470,6 +490,12 @@ extension ChatDetailViewController: UITableViewDataSource {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
                     }
                     
+                    let singleFinger = UITapGestureRecognizer(
+                        target:self,
+                        action:#selector(animateViewUp))
+                    //singleFinger.numberOfTapsRequired = 1
+                    cell.messageImageView.isUserInteractionEnabled = true
+                    cell.messageImageView.addGestureRecognizer(singleFinger)
                     
                     //                    cell.messageImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
                     //
@@ -500,6 +526,179 @@ extension ChatDetailViewController: UITableViewDataSource {
         }
         
         return UITableViewCell()
+    }
+    
+    //didselect 都不執行
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let message = messages[indexPath.row]
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        
+        switch message.senderId {
+            
+        case userId:
+            
+            print("點擊了自己傳送的照片")
+            
+            let showAlert = UIAlertController(title: "Demo Alert", message: nil, preferredStyle: .alert)
+            let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
+            
+            if let userImage = message.imageUrl {
+                imageView.kf.setImage(with: URL(string: userImage))
+            } else {
+                imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+            }
+            
+            
+            //imageView.image = image // Your image here...
+            showAlert.view.addSubview(imageView)
+            
+            //            let height: NSLayoutConstraint = NSLayoutConstraint(item: showQRCodeAlert.view, attribute: .height,
+            //relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 320)
+            //            let width: NSLayoutConstraint = NSLayoutConstraint(item: showQRCodeAlert.view, attribute: .width,
+            //relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
+            
+            //            showAlert.view.addConstraint(height)
+            //            showAlert.view.addConstraint(width)
+            
+            showAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                // your actions here...
+            }))
+            self.present(showAlert, animated: true, completion: nil)
+            
+            
+            //            if let imageUrl = message.imageUrl {
+            //
+            //                if let cell = tableView.dequeueReusableCell(
+            //                    withIdentifier: "ChatImageOwner", for: indexPath)
+            //                    as? ChatImageOwnerTableViewCell {
+            //
+            //                    cell.messageImageView.kf.setImage(with: URL(string: imageUrl))
+            //
+            //                    return cell
+            //                }
+            //            }
+            
+        default:
+            print("---XX___")
+        }
+        
+        //        if indexPath.row == 0 {
+        //            //configure action when tap cell 1
+        //            print("點了個人資料")
+        //            performSegue(
+        //                withIdentifier: String(describing: EditViewController.self),
+        //                sender: indexPath
+        //            )
+        //
+        //        }
+        
+    }
+    
+//        @objc func animateViewUp(imageURL: String) {
+//
+//            //let message = messages[indexPath.row]
+//
+//            let showAlert = UIAlertController(title: "Demo Alert", message: nil, preferredStyle: .alert)
+//            let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
+//
+//            if let userImage = bigImageURL {
+//                imageView.kf.setImage(with: URL(string: userImage))
+//            } else {
+//                imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+//            }
+//
+//
+//            //imageView.image = image // Your image here...
+//            showAlert.view.addSubview(imageView)
+//
+//            //            let height: NSLayoutConstraint = NSLayoutConstraint(item: showQRCodeAlert.view, attribute: .height,
+//            //relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 320)
+//            //            let width: NSLayoutConstraint = NSLayoutConstraint(item: showQRCodeAlert.view, attribute: .width,
+//            //relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
+//
+//            //            showAlert.view.addConstraint(height)
+//            //            showAlert.view.addConstraint(width)
+//
+//            showAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+//                // your actions here...
+//            }))
+//            self.present(showAlert, animated: true, completion: nil)
+//
+//      }
+    
+    func showBigImageAlert(bigImageURLFromCell: String?) {
+        
+        let showAlert = UIAlertController(title: "Demo Alert", message: nil, preferredStyle: .alert)
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
+        
+        //        if let userImage = bigImageURL {
+        
+        
+        if let userImage = bigImageURLFromCell {
+            imageView.kf.setImage(with: URL(string: userImage))
+        } else {
+            imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+        }
+        
+        
+        //imageView.image = image // Your image here...
+        showAlert.view.addSubview(imageView)
+        
+//                    let height: NSLayoutConstraint = NSLayoutConstraint(item: backgroundView.inputView, attribute: .height,
+//        relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 320)
+//                    let width: NSLayoutConstraint = NSLayoutConstraint(item: chatDetailTableView.backgroundView, attribute: .width,
+//        relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
+//
+//                    showAlert.view.addConstraint(height)
+//                    showAlert.view.addConstraint(width)
+        
+        //加了這行會沒有 title 和 OK
+        //imageView.translatesAutoresizingMaskIntoConstraints = false
+        showAlert.view.addConstraint(NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: showAlert.view, attribute: .centerX, multiplier: 1, constant: 0))
+        showAlert.view.addConstraint(NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: showAlert.view, attribute: .centerY, multiplier: 1, constant: 0))
+        showAlert.view.addConstraint(NSLayoutConstraint(item: imageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 320.0))
+        showAlert.view.addConstraint(NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 250.0))
+        
+        
+        showAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            // your actions here...
+        }))
+        self.present(showAlert, animated: true, completion: nil)
+        
+    }
+    
+   @objc func animateViewUp(_ gesture: UILongPressGestureRecognizer){
+        if gesture.state != .began { return }
+        let tapLocation = gesture.location(in: self.chatDetailTableView)
+        if let tapIndexPath = self.chatDetailTableView.indexPathForRow(at: tapLocation) {
+            if let tappedCell = self.chatDetailTableView.cellForRow(at: tapIndexPath) as? ChatImageOwnerTableViewCell {
+                print("-----重要Row Selected")
+                let message = messages[tapIndexPath.row]
+//                guard let bigImageURLFromCell = message.imageUrl else {
+//                    print("沒拿到照片")
+//                    return }
+                let bigImageURLFromCell = message.imageUrl
+                
+                showBigImageAlert(bigImageURLFromCell: bigImageURLFromCell)
+                
+            }
+            
+            if let tappedFriendCell = self.chatDetailTableView.cellForRow(at: tapIndexPath) as? ChatImageTableViewCell {
+                print("-----重要Row Selected")
+                let message = messages[tapIndexPath.row]
+                //                guard let bigImageURLFromCell = message.imageUrl else {
+                //                    print("沒拿到照片")
+                //                    return }
+                let bigImageURLFromCell = message.imageUrl
+                
+                showBigImageAlert(bigImageURLFromCell: bigImageURLFromCell)
+                
+            }
+
+            
+        }
+    
     }
 }
 

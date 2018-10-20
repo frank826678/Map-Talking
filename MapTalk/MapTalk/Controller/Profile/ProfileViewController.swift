@@ -100,7 +100,11 @@ class ProfileViewController: UIViewController {
         //userImageShadowView.layer.cornerRadius = 65
     
         userImageShadowView.clipsToBounds = false
-        userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
+        //紅色明顯
+        //userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
+
+        //原本的 color Ok
+      userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
         
 
         //
@@ -157,6 +161,19 @@ class ProfileViewController: UIViewController {
             let childUpdates = ["/location/\(userId)/message": userStatus]
             
             ref.updateChildValues(childUpdates)
+            
+            //20181020
+            let userDefaults = UserDefaults.standard
+            
+            let myselfGender = userDefaults.value(forKey: "myselfGender")
+            
+            let userGender = ["gender": myselfGender]
+            
+            
+            let childUpdatesGender = ["/location/\(userId)/gender": userGender]
+            
+            ref.updateChildValues(childUpdatesGender)
+            
         }
         
     }

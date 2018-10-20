@@ -334,6 +334,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         annotationView?.addSubview(imageView)
         
+        imageView.layer.applySketchShadow(color: #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 20,corner: 25)
+        
         //設定照片陰影
         
 //        let shadowView = UIView()
