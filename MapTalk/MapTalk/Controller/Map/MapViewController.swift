@@ -1209,17 +1209,17 @@ extension MapViewController: UITableViewDataSource {
                     cell.contentTitleLabel.text = userInfo[3]
                     cell.contentInfoLabel.text = userSelected[2]
                     cell.iconBackground.backgroundColor = #colorLiteral(red: 1, green: 0.4588235294, blue: 0.5176470588, alpha: 1)
-                    cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
+                    //cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
                 } else if indexPath.row == 1 {
                     cell.contentTitleLabel.text = userInfo[4]
                     cell.contentInfoLabel.text = userSelected[3]
                     cell.iconBackground.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.8235294118, blue: 1, alpha: 1)
-                    cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
+                    //cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
                 } else if indexPath.row == 2 {
                     cell.contentTitleLabel.text = userInfo[7]
                     cell.contentInfoLabel.text = userSelected[7]
                     cell.iconBackground.backgroundColor = #colorLiteral(red: 0.9647058824, green: 1, blue: 0.4588235294, alpha: 1)
-                    cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
+                    //cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
                 }
                 
             //cell.userDetailTitle.text = "生日"
@@ -1266,7 +1266,7 @@ extension MapViewController: UITableViewDataSource {
             
             //            cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
             //
-            
+            cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             return cell
