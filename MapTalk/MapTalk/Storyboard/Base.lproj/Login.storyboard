@@ -18,6 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lzd-OD-1Nz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHf-t2-MUz">
                                 <rect key="frame" x="60" y="417" width="255" height="50"/>
                                 <color key="backgroundColor" red="0.12549019610000001" green="0.25882352939999997" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -31,7 +35,7 @@
                                     <action selector="loginFacebook:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NvA-BH-HGm"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mapping Talk icon" translatesAutoresizingMaskIntoConstraints="NO" id="8pH-Tu-l13">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mapping Talk-透明" translatesAutoresizingMaskIntoConstraints="NO" id="8pH-Tu-l13">
                                 <rect key="frame" x="60" y="62" width="255" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="255" id="gwN-3V-IEc"/>
@@ -52,11 +56,11 @@
                                     <constraint firstAttribute="height" constant="27" id="voH-vv-Tq5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="18"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJD-zR-FPT">
-                                <rect key="frame" x="60" y="497" width="255" height="50"/>
+                                <rect key="frame" x="60" y="487" width="255" height="50"/>
                                 <color key="backgroundColor" red="0.23921568627450979" green="0.58039215686274503" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="itH-IL-OOz"/>
@@ -70,30 +74,33 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="BRH-aq-svt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2wY-5f-YVs"/>
                             <constraint firstItem="WHf-t2-MUz" firstAttribute="top" secondItem="YUY-LW-kpe" secondAttribute="bottom" constant="40" id="4bC-Od-B8n"/>
+                            <constraint firstItem="lzd-OD-1Nz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="5wE-iE-Hml"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UJD-zR-FPT" secondAttribute="trailing" constant="60" id="8rI-on-yuk"/>
                             <constraint firstItem="UJD-zR-FPT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="9Vy-2O-KGg"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WHf-t2-MUz" secondAttribute="trailing" constant="60" id="Bo5-MB-s7Z"/>
                             <constraint firstItem="WHf-t2-MUz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HFL-KX-2DR"/>
                             <constraint firstItem="YUY-LW-kpe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HRK-ZB-Kqv"/>
                             <constraint firstAttribute="trailing" secondItem="8pH-Tu-l13" secondAttribute="trailing" constant="60" id="MeF-CF-r9y"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="WHf-t2-MUz" secondAttribute="bottom" constant="200" id="N8S-x4-drR"/>
+                            <constraint firstItem="lzd-OD-1Nz" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="Qfa-y5-dlX"/>
                             <constraint firstItem="8pH-Tu-l13" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="42" id="Tce-TJ-ug1"/>
                             <constraint firstItem="8pH-Tu-l13" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="60" id="UUP-aJ-tnG"/>
                             <constraint firstItem="YUY-LW-kpe" firstAttribute="top" secondItem="BRH-aq-svt" secondAttribute="bottom" constant="18" id="XDe-hn-vOx"/>
                             <constraint firstItem="UJD-zR-FPT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gOC-6k-0pm"/>
                             <constraint firstItem="8pH-Tu-l13" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gw2-kw-Rgh"/>
+                            <constraint firstItem="lzd-OD-1Nz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hwX-IQ-ifv"/>
                             <constraint firstItem="WHf-t2-MUz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="igO-zX-dvT"/>
-                            <constraint firstItem="UJD-zR-FPT" firstAttribute="top" secondItem="WHf-t2-MUz" secondAttribute="bottom" constant="30" id="tao-oy-1EE"/>
+                            <constraint firstAttribute="trailing" secondItem="lzd-OD-1Nz" secondAttribute="trailing" id="nE1-YF-Yjv"/>
+                            <constraint firstItem="UJD-zR-FPT" firstAttribute="top" secondItem="WHf-t2-MUz" secondAttribute="bottom" constant="20" id="tao-oy-1EE"/>
                             <constraint firstItem="BRH-aq-svt" firstAttribute="top" secondItem="8pH-Tu-l13" secondAttribute="bottom" constant="30" id="wIl-EN-O5X"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="anoymousLoginButtonShape" destination="UJD-zR-FPT" id="BbO-Kc-lKB"/>
+                        <outlet property="anonymousLoginButtonShape" destination="UJD-zR-FPT" id="RiX-RE-o0Y"/>
+                        <outlet property="backgroundView" destination="lzd-OD-1Nz" id="2fB-7N-4Mk"/>
                         <outlet property="loginIcon" destination="8pH-Tu-l13" id="vVK-bf-EfS"/>
                         <outlet property="logingButtonShape" destination="WHf-t2-MUz" id="HRg-T7-RyP"/>
                     </connections>
@@ -104,7 +111,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Mapping Talk icon" width="1024" height="1024"/>
+        <image name="Mapping Talk-透明" width="1024" height="1024"/>
         <image name="icon_facebook" width="9" height="18"/>
     </resources>
 </document>

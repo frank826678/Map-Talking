@@ -15,10 +15,11 @@ import KeychainAccess
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var loginIcon: UIImageView!
     @IBOutlet weak var logingButtonShape: UIButton!
     
-    @IBOutlet weak var anoymousLoginButtonShape: UIButton!
+    @IBOutlet weak var anonymousLoginButtonShape: UIButton!
     private let manager = FacebookManager()
     private let firebaseManager = FirebaseManager()
     
@@ -42,10 +43,11 @@ class LoginViewController: UIViewController {
         
         super.viewDidLoad()
         
+        refference = Database.database().reference()
+        
         changeStyle()
         
-         refference = Database.database().reference()
-    
+        setupLayerGradient(width: backgroundView.frame.width, height: backgroundView.frame.height)
     }
     
     @IBAction func loginFacebook(_ sender: UIButton) {
@@ -283,10 +285,12 @@ class LoginViewController: UIViewController {
         
         //美化字體
         logingButtonShape.layer.cornerRadius = 25
-        anoymousLoginButtonShape.layer.cornerRadius = 25
+        anonymousLoginButtonShape.layer.cornerRadius = 25
         
         loginIcon.layer.cornerRadius = 90
-
+        
+        //let layerGradient = CAGradientLayer()
+        
         
 //        entryContent.layer.shadowOffset = CGSize(width: 0, height: 2)
 //        entryContent.layer.shadowOpacity = 1
@@ -298,6 +302,37 @@ class LoginViewController: UIViewController {
         
         
     }
+    
+    func setupLayerGradient(width: CGFloat, height: CGFloat) {
+        
+        let layerGradient = CAGradientLayer()
+        
+        layerGradient.colors = [#colorLiteral(red: 0.1764705882, green: 0.7647058824, blue: 0.9960784314, alpha: 1) , #colorLiteral(red: 0.07058823529, green: 0.4431372549, blue: 1, alpha: 1) ]
+        
+//        layerGradient.colors = [
+//            UIColor(red: 70/255.0, green: 95/255.0, blue: 222/255.0, alpha: 0.9).cgColor,
+//            UIColor(red: 235/255.0, green: 121/255.0, blue: 243/255.0, alpha: 0.9).cgColor
+//        ]
+        
+        layerGradient.colors = [
+            UIColor(red:0.18, green:0.76, blue:1.00, alpha:1.0).cgColor,
+            UIColor(red:0.07, green:0.44, blue:1.00, alpha:1.0).cgColor
+        ]
+        
+//        cgcolorArray = [UIColor(hex: 0x200020).CGColor,]
+//        #2dc3fe
+//        #1271ff
+
+        
+        layerGradient.startPoint = CGPoint(x: 0, y: 0.5)
+        layerGradient.endPoint = CGPoint(x: 1, y: 0.5)
+        layerGradient.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        
+        self.backgroundView.layer.addSublayer(layerGradient)
+    
+        //self.layer.addSublayer(layerGradient)
+    }
+    
     //20181018準備新增按鈕
     @IBAction func anonymousLogin(_ sender: UIButton) {
         
