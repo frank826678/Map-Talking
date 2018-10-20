@@ -15,6 +15,7 @@ import FirebaseAuth
 
 class ChatViewController: UIViewController {
     
+    @IBOutlet weak var hintLabel: UILabel!
     @IBOutlet weak var chatTableView: UITableView!
     
     @IBOutlet weak var userImage: UIImageView!
@@ -41,9 +42,40 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     var result: [NewMessage] = []
     var searchStatus = false
+    //20181020 偵測網路
+    
+    var reachability = Reachability(hostName: "www.apple.com")
+    
+    func checkInternetFunction() -> Bool {
+        if reachability?.currentReachabilityStatus().rawValue == 0 {
+            print("no internet connected.")
+            return false
+        }else {
+            print("internet connected successfully.")
+            return true
+        }
+    }
+    
+    func downloadData() {
+        if checkInternetFunction() == false {
+
+            hintLabel.text = "請打開行動網路或 WI-FI"
+            hintLabel.isHidden = false
+            
+        }else {
+            
+             hintLabel.isHidden = true
+            
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //偵測網路
+        downloadData()
+        
         setImage()
         
         // Do any additional setup after loading the view.
@@ -82,7 +114,8 @@ class ChatViewController: UIViewController {
         //20181016 searchbar
         searchBar.delegate = self
         //self.result = self.newMessage
-
+        
+        hintLabel.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -442,7 +475,23 @@ extension ChatViewController: UITableViewDataSource {
         //OK 可以顯示最後一行
         //return messages.count
         
-        //20181006 NEW
+        //20181020 NEW
+        if checkInternetFunction() == false {
+            hintLabel.isHidden = false
+            hintLabel.text = "請打開行動網路或 WI-FI"
+        }else {
+            
+            if newMessage.count == 0 {
+                print("顯示空值畫面")
+                hintLabel.isHidden = false
+                hintLabel.text = "到地圖上認識一些新朋友吧！"
+            } else {
+                print("已有對話紀錄")
+                hintLabel.isHidden = true
+            }
+            //hintLabel.isHidden = true
+        }
+        
         if searchStatus == false {
             
         return newMessage.count

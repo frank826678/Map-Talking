@@ -30,6 +30,55 @@ import Kingfisher
 //swiftlint:disable all
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
+    //20181020 偵測網路
+    
+    func noInternetAlert() {
+        let alert = UIAlertController(title: "無法連接網路", message: "請確認是否連上網路？", preferredStyle: UIAlertController.Style.alert)
+        
+        let action = UIAlertAction(title: "確認", style: .default) { (_) in
+            print("按下確認鍵 請前往打開網路")
+        }
+        
+        let cancel = UIAlertAction(title: "取消", style: .cancel)
+        
+        alert.addAction(cancel)
+        
+        alert.addAction(action)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    var reachability = Reachability(hostName: "www.apple.com")
+    
+    func checkInternetFunction() -> Bool {
+        if reachability?.currentReachabilityStatus().rawValue == 0 {
+            print("no internet connected.")
+            return false
+        }else {
+            print("internet connected successfully.")
+            return true
+        }
+    }
+    
+    func downloadData() {
+        if checkInternetFunction() == false {
+            
+            //            internetLabel1.isHidden = false
+            //            internetLabel2.isHidden = false
+            //hintLabel.text = "請打開行動網路或 WI-FI"
+            //hintLabel.isHidden = false
+            noInternetAlert()
+            
+        }else {
+            
+            print("成功連接網路")
+            //hintLabel.isHidden = true
+            //            internetLabel1.isHidden = true
+            //            internetLabel2.isHidden = true
+            
+        }
+    }
+    
     //20181012
     
     @IBOutlet weak var mapBackgroundView: UIView!
@@ -69,6 +118,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //偵測網路
+        downloadData()
+        
         mapView.delegate = self
         //        map.showsUserLocation = true
         
@@ -165,7 +217,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             guard let longitude = location["lon"] as? Double else { return }
             guard let userName = location["userName"] as? String else { return }
             guard let userImage = location["userImage"] as? String else { return }
-            
+                
             var messageInput = "媽 我上地圖了 Ya"
             if let message = value["message"] as? NSDictionary {
                 
@@ -173,8 +225,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 messageInput = text
             }
+            var genderInput = 0
+            if let gender = value["gender"] as? NSDictionary {
+                
+                guard let gender = gender["gender"] as? Int else { return }
+                
+                genderInput = gender
+            }
             
-            let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput)
+            let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput)
             
             self.mapView.addAnnotation(userlocations.userAnnotation)
             
@@ -220,7 +279,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 messageInput = text
             }
             
-            let userLocations = Locations(latitude: latitude, longitude: longtitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput)
+            var genderInput = 0
+            if let gender = value["gender"] as? NSDictionary {
+                
+                guard let gender = gender["gender"] as? Int else { return }
+                
+                genderInput = gender
+            }
+
+            
+            let userLocations = Locations(latitude: latitude, longitude: longtitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput)
             
             for (index, user) in self.locations.enumerated() where user.id == userLocations.id {
                 
@@ -334,7 +402,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         annotationView?.addSubview(imageView)
         
-        imageView.layer.applySketchShadow(color: #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 20,corner: 25)
+        //20181020 沒用 要加 view
+        //imageView.layer.applySketchShadow(color: #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 20,corner: 25)
         
         //設定照片陰影
         
@@ -384,7 +453,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         ///annotationLabel.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
-        annotationLabel.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+        if let gender = userAnnotation?.gender {
+            if gender == 1 {
+            
+            annotationLabel.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.2392156863, blue: 0.368627451, alpha: 1)
+                
+            } else {
+                annotationLabel.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+            }
+        } else {
+            annotationLabel.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+        }
+        
+        //annotationLabel.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+        
         annotationLabel.layer.cornerRadius = 15
         annotationLabel.clipsToBounds = true
         

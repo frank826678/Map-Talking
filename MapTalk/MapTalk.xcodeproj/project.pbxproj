@@ -11,6 +11,7 @@
 		0106CC332174A2EE009A80C4 /* EditUserContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106CC312174A2EE009A80C4 /* EditUserContentTableViewCell.swift */; };
 		0106CC342174A2EE009A80C4 /* EditUserContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0106CC322174A2EE009A80C4 /* EditUserContentTableViewCell.xib */; };
 		0106CC362176246F009A80C4 /* BaseNotificationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106CC352176246F009A80C4 /* BaseNotificationBanner.swift */; };
+		0131F7D4217B04CF001896C4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0131F7D2217B04CE001896C4 /* Reachability.m */; };
 		0141678E216321760080EDCE /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141678D216321760080EDCE /* Icon.swift */; };
 		01416790216323520080EDCE /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141678F216323520080EDCE /* UIImage.swift */; };
 		016A51352159DCBA00AB2745 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A51342159DCBA00AB2745 /* TabBarViewController.swift */; };
@@ -90,6 +91,9 @@
 		0106CC312174A2EE009A80C4 /* EditUserContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserContentTableViewCell.swift; sourceTree = "<group>"; };
 		0106CC322174A2EE009A80C4 /* EditUserContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditUserContentTableViewCell.xib; sourceTree = "<group>"; };
 		0106CC352176246F009A80C4 /* BaseNotificationBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNotificationBanner.swift; sourceTree = "<group>"; };
+		0131F7D1217B04CC001896C4 /* MapTalk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MapTalk-Bridging-Header.h"; sourceTree = "<group>"; };
+		0131F7D2217B04CE001896C4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		0131F7D3217B04CE001896C4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		0141678D216321760080EDCE /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		0141678F216323520080EDCE /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		016A51342159DCBA00AB2745 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -313,6 +317,9 @@
 				01EBF34A2151FEA500D23871 /* LaunchScreen.storyboard */,
 				01EBF34D2151FEA500D23871 /* Info.plist */,
 				01EBF35E21533C1800D23871 /* GoogleService-Info.plist */,
+				0131F7D3217B04CE001896C4 /* Reachability.h */,
+				0131F7D2217B04CE001896C4 /* Reachability.m */,
+				0131F7D1217B04CC001896C4 /* MapTalk-Bridging-Header.h */,
 			);
 			path = MapTalk;
 			sourceTree = "<group>";
@@ -470,6 +477,7 @@
 				TargetAttributes = {
 					01EBF33D2151FEA100D23871 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -641,6 +649,7 @@
 				01701B0D215C8A280074B0B9 /* Message.swift in Sources */,
 				01701AFC215C5DEB0074B0B9 /* ChatOwnerTableViewCell.swift in Sources */,
 				01EBF37321546F2600D23871 /* UIAlertController.swift in Sources */,
+				0131F7D4217B04CF001896C4 /* Reachability.m in Sources */,
 				0177E2B7216143870038F29A /* EditInfoTableViewCell.swift in Sources */,
 				01A6248F21708CAA009CD507 /* UserInfoDetailView.swift in Sources */,
 				01701AEE215B39A00074B0B9 /* ErrorManager.swift in Sources */,
@@ -821,6 +830,7 @@
 			baseConfigurationReference = BD2347F9D8128DEC7896CE1E /* Pods-MapTalk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2Q4CQ44442;
@@ -834,6 +844,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.frank.MapTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MapTalk/MapTalk-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -844,6 +856,7 @@
 			baseConfigurationReference = E6AB68BB4748EF35DB152280 /* Pods-MapTalk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2Q4CQ44442;
@@ -857,6 +870,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.frank.MapTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MapTalk/MapTalk-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
