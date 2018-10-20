@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var loginIcon: UIImageView!
     @IBOutlet weak var logingButtonShape: UIButton!
+    let fullScreenSize = UIScreen.main.bounds.size
     
     @IBOutlet weak var anonymousLoginButtonShape: UIButton!
     private let manager = FacebookManager()
@@ -46,8 +47,12 @@ class LoginViewController: UIViewController {
         refference = Database.database().reference()
         
         changeStyle()
+           //邊緣都會跑掉 why?
+//        setupLayerGradient(width: backgroundView.frame.width, height: backgroundView.frame.height)
         
-        setupLayerGradient(width: backgroundView.frame.width, height: backgroundView.frame.height)
+        setupLayerGradient(width: fullScreenSize.width, height: fullScreenSize.height)
+
+        
     }
     
     @IBAction func loginFacebook(_ sender: UIButton) {
@@ -307,25 +312,29 @@ class LoginViewController: UIViewController {
         
         let layerGradient = CAGradientLayer()
         
-        layerGradient.colors = [#colorLiteral(red: 0.1764705882, green: 0.7647058824, blue: 0.9960784314, alpha: 1) , #colorLiteral(red: 0.07058823529, green: 0.4431372549, blue: 1, alpha: 1) ]
+        //layerGradient.colors = [#colorLiteral(red: 0.1764705882, green: 0.7647058824, blue: 0.9960784314, alpha: 1) , #colorLiteral(red: 0.07058823529, green: 0.4431372549, blue: 1, alpha: 1) ]
         
 //        layerGradient.colors = [
 //            UIColor(red: 70/255.0, green: 95/255.0, blue: 222/255.0, alpha: 0.9).cgColor,
 //            UIColor(red: 235/255.0, green: 121/255.0, blue: 243/255.0, alpha: 0.9).cgColor
 //        ]
         
+        //OK 重藍到清藍
         layerGradient.colors = [
-            UIColor(red:0.18, green:0.76, blue:1.00, alpha:1.0).cgColor,
-            UIColor(red:0.07, green:0.44, blue:1.00, alpha:1.0).cgColor
+            UIColor(red:0.07, green:0.44, blue:1.00, alpha:1.0).cgColor,
+            UIColor(red:0.18, green:0.76, blue:1.00, alpha:1.0).cgColor
         ]
         
-//        cgcolorArray = [UIColor(hex: 0x200020).CGColor,]
-//        #2dc3fe
-//        #1271ff
+//        layerGradient.colors = [UIColor(hex: 0x1271ff).CGColor,UIColor(hex: 0x2dc3fe).CGColor]
+        //#2dc3fe 淡藍
+        //#1271ff 重藍 UIColor(red:0.07, green:0.44, blue:1.00, alpha:1.0)
 
         
-        layerGradient.startPoint = CGPoint(x: 0, y: 0.5)
-        layerGradient.endPoint = CGPoint(x: 1, y: 0.5)
+        //layerGradient.startPoint = CGPoint(x: 0, y: 0.5)
+        //layerGradient.endPoint = CGPoint(x: 1, y: 0.5)
+        layerGradient.startPoint = CGPoint(x: 0.5, y: 0)
+        layerGradient.endPoint = CGPoint(x: 0.5, y: 1)
+
         layerGradient.frame = CGRect(x: 0, y: 0, width: width, height: height)
         
         self.backgroundView.layer.addSublayer(layerGradient)
