@@ -540,7 +540,7 @@ extension ChatDetailViewController: UITableViewDataSource {
             
             print("點擊了自己傳送的照片")
             
-            let showAlert = UIAlertController(title: "Demo Alert", message: nil, preferredStyle: .alert)
+            let showAlert = UIAlertController(title: "Picture~", message: nil, preferredStyle: .alert)
             let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
             
             if let userImage = message.imageUrl {
@@ -629,7 +629,7 @@ extension ChatDetailViewController: UITableViewDataSource {
     
     func showBigImageAlert(bigImageURLFromCell: String?) {
         
-        let showAlert = UIAlertController(title: "Demo Alert", message: nil, preferredStyle: .alert)
+        let showAlert = UIAlertController(title: "Picture", message: nil, preferredStyle: .alert)
         let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
         
         //        if let userImage = bigImageURL {

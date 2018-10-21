@@ -382,10 +382,37 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         annotationView?.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
         //annotationView?.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
         
+        //設定照片陰影
         
+        let shadowView = UIView()
+        
+        shadowView.contentMode = .scaleAspectFit
+        //let blurEffect = UIBlurEffect(style: .light)
+        //let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        
+        shadowView.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
+        //shadowView.layer.applySketchShadow(color: UIColor.red, alpha: 1, x: 0, y: 0, blur: 10, spread: 40, corner: 30,center: (annotationView?.center)!)
+        //角度修正
+        //shadowView.layer.applySketchShadow(color: UIColor.red, alpha: 1, x: -5, y: -5, blur: 10, spread: 40, corner: 30)
+        
+        shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 1), alpha: 1, x: -5, y: -5, blur: 15, spread: 15, corner: 30)
+        
+        //userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
+        
+        
+        //shadowView.clipsToBounds = true
+        //shadowView.layer.cornerRadius = 27.5
+        //shadowView.layer.borderColor = #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5)
+        //shadowView.layer.borderWidth = 4
+        
+        annotationView?.addSubview(shadowView)
+
+        
+        // 設定頭像
         let imageView = UIImageView()
         
-        imageView.contentMode = .scaleAspectFill
+        //imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         
         imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         
@@ -405,22 +432,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         //20181020 沒用 要加 view
         //imageView.layer.applySketchShadow(color: #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 20,corner: 25)
-        
-        //設定照片陰影
-        
-//        let shadowView = UIView()
-//
-//        shadowView.contentMode = .scaleAspectFill
-//        //let blurEffect = UIBlurEffect(style: .light)
-//        //let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//
-//        shadowView.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
-//        shadowView.clipsToBounds = true
-//        shadowView.layer.cornerRadius = 27.5
-//        shadowView.layer.borderColor = #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5)
-//        shadowView.layer.borderWidth = 4
-//
-//        annotationView?.addSubview(shadowView)
         
         //增加三角形圖案
         //OK
@@ -1092,13 +1103,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func setButtonTemplateImage() {
-        var templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
-        filterButton.setImage(templateImage, for: .normal)
+//        var templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
+//        filterButton.setImage(templateImage, for: .normal)
+//
+//        templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
+//        filterButton.setImage(templateImage, for: .selected)
+        //20191021 新 icon
         
-        templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
-        filterButton.setImage(templateImage, for: .selected)
+        var mappingIcon = #imageLiteral(resourceName: "heart-mapping").withRenderingMode(.alwaysTemplate)
         
-        setButtonColor(with: #colorLiteral(red: 0.137254902, green: 0.462745098, blue: 0.8980392157, alpha: 1)) //顏色已經挑選完成 是根據定位的按鈕的藍色
+        var locationIcon = #imageLiteral(resourceName: "geo_fence").withRenderingMode(.alwaysTemplate)
+        
+        filterButton.setImage(mappingIcon, for: .normal)
+        location.setImage(locationIcon, for: .normal)
+        setButtonColor(with: #colorLiteral(red: 0.137254902, green: 0.462745098, blue: 0.8980392157, alpha: 1)) //顏色已經挑選完成 是根據定位的按鈕的藍色 刷色
         
     }
     
@@ -1107,7 +1125,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         filterButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) // 按鈕的背景
         
-        filterButton.imageView?.tintColor = color
+        filterButton.imageView?.tintColor = #colorLiteral(red: 1, green: 0.1803921569, blue: 0.3333333333, alpha: 1) //刷色 不要 color 改紅色
+        location.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        location.imageView?.tintColor = color
         //        playButton.imageView?.tintColor = color
         //
         //        rewindButton.imageView?.tintColor = color

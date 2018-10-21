@@ -62,14 +62,25 @@ private enum Tab {
         
         switch self {
             
+             case .chat: return #imageLiteral(resourceName: "speech_buble")
+            
+             case .map: return #imageLiteral(resourceName: "map_marker")
+            
+             case .profile: return #imageLiteral(resourceName: "user_male")
+
+            
+            //1 speech_buble
+            //2 map_marker
+            //3 user_male
+            
             //case .article: return #imageLiteral(resourceName: "tab_main_normal")
-            
-        case .chat: return #imageLiteral(resourceName: "new2-chat-bubble-30")
+        // OLD OK
+       // case .chat: return #imageLiteral(resourceName: "new2-chat-bubble-30")
 
-        case .map: return #imageLiteral(resourceName: "new2-europe-30")
+       // case .map: return #imageLiteral(resourceName: "new2-europe-30")
 
-        case .profile: return #imageLiteral(resourceName: "new2-male-user-30")
-            
+       // case .profile: return #imageLiteral(resourceName: "new2-male-user-30")
+       // OLD END
             //case .arView: return #imageLiteral(resourceName: "arTab")
             
         }
@@ -81,14 +92,23 @@ private enum Tab {
             
             //        case .article: return #imageLiteral(resourceName: "tab_main_normal").withRenderingMode(.alwaysTemplate)
         //
+        // case .arView: return #imageLiteral(resourceName: "arTab").withRenderingMode(.alwaysTemplate)
             
-        case .chat: return #imageLiteral(resourceName: "new2-chat-bubble-30").withRenderingMode(.alwaysTemplate)
-
-        case .map: return #imageLiteral(resourceName: "new2-europe-30").withRenderingMode(.alwaysTemplate)
-
-        case .profile: return #imageLiteral(resourceName: "new2-male-user-30").withRenderingMode(.alwaysTemplate)
+            //OLD OK
+//        case .chat: return #imageLiteral(resourceName: "new2-chat-bubble-30").withRenderingMode(.alwaysTemplate)
+//
+//        case .map: return #imageLiteral(resourceName: "new2-europe-30").withRenderingMode(.alwaysTemplate)
+//
+//        case .profile: return #imageLiteral(resourceName: "new2-male-user-30").withRenderingMode(.alwaysTemplate)
+            //OLD END
             
-            // case .arView: return #imageLiteral(resourceName: "arTab").withRenderingMode(.alwaysTemplate)
+        case .chat: return #imageLiteral(resourceName: "speech_buble").withRenderingMode(.alwaysTemplate)
+
+        case .map: return #imageLiteral(resourceName: "map_marker").withRenderingMode(.alwaysTemplate)
+
+        case .profile: return #imageLiteral(resourceName: "user_male").withRenderingMode(.alwaysTemplate)
+            
+            
         }
     }
 }
@@ -150,16 +170,13 @@ class TabBarViewController: RAMAnimatedTabBarController {
 //        tabFrame.size.height = 80
 //        tabFrame.origin.y = self.view.frame.size.height - 80
 //        self.frankTabBar.frame = tabFrame
-
         
 //        var tabFrame: CGRect = self.tabBar.frame
 //        tabFrame.size.height = 80
 //        tabFrame.origin.y = self.view.frame.size.height - 80
 //        self.tabBar.frame = tabFrame
         
-        
         //let layerGradient = CAGradientLayer()
-        
         
         //let tabs: [Tab] = [.article, .discover, .arView,  .chat, .profile]
         
@@ -183,6 +200,7 @@ class TabBarViewController: RAMAnimatedTabBarController {
             
             let animation = RAMBounceAnimation()
             //animation.iconSelectedColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+            
             animation.iconSelectedColor = #colorLiteral(red: 0.1019607843, green: 0.4509803922, blue: 0.9098039216, alpha: 1)
             item.animation = animation
             

@@ -26,11 +26,11 @@ class EditViewController: UIViewController {
     var isEdit = false
     //END
     var userInfo = ["性別","生日","感情狀態","居住地","體型","我想尋找"]
-    var userSelected =  ["男生","1990-01-01","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
+    var userSelected =  ["請選擇性別","請選擇生日","單身","台北","肌肉結實","短暫浪漫","請輸入您的暱稱","吃飯，睡覺，看電影","台灣/美國/英國/日本","變胖了想要多運動","想找人一起玩高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友。請在此輸入一些想對大家說的話吧～"]
     
     //var userSelected =  ["男生","1990-01-01","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
     
-    let gender = ["男生","女生","第三性別"]
+    let gender = ["男生","女生","其他"]
     let relationship = ["不顯示","秘密","單身","穩定交往","交往中但保有交友空間","一言難盡"]
     let city = ["基隆市","台北市","新北市","桃園縣","新竹市","新竹縣","苗栗縣","台中市","彰化縣","南投縣","雲林縣","嘉義市","嘉義縣","台南市","高雄市","屏東縣","台東縣","花蓮縣","宜蘭縣","澎湖縣","金門縣","連江縣"]
     
@@ -291,15 +291,15 @@ extension EditViewController: UITableViewDataSource{
     
     // 設置每個 section 的 title 為一個 UIView
     // 如果實作了這個方法 會蓋過單純設置文字的 section title
-    private func tableView(tableView: UITableView,
-                           viewForHeaderInSection section: Int) -> UIView? {
-        return UIView()
-    }
+//    private func tableView(tableView: UITableView,
+//                           viewForHeaderInSection section: Int) -> UIView? {
+//        return UIView()
+//    }
     
     // 設置 section header 的高度
     private func tableView(tableView: UITableView,
                            heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return 80
     }
     
     // 每個 section 的標題
@@ -329,8 +329,8 @@ extension EditViewController: UITableViewDataSource{
             
         } else if section == 5 {
             
-            title = "想嘗試的事情"
-            
+            title = "想找人嘗試的事情"
+            //想嘗試的事情
         } else {
             
             title = "自我介紹"

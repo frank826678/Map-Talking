@@ -105,6 +105,8 @@ class ProfileViewController: UIViewController {
 
         //原本的 color Ok
       userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
+        //userImageShadowView.layer.applySketchShadow(color: UIColor.red, alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
+        
         
 
         //

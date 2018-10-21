@@ -18,6 +18,7 @@ extension CALayer {
         blur: CGFloat = 4,
         spread: CGFloat = 0,
         corner: CGFloat = 60
+        //center: CGPoint = CGPoint(x: 30, y: 30)  //加 center
     ) {
         cornerRadius = corner
         //clipsToBounds = false
@@ -29,7 +30,9 @@ extension CALayer {
             shadowPath = nil
         } else {
             
-            let center = CGPoint(x: x + bounds.width / 2.0, y: y + bounds.height / 2.0)
+            //let center = CGPoint(x: x + bounds.width / 2.0, y: y + bounds.height / 2.0)
+            //let center = CGPoint(x: (x + bounds.width) / 2.0, y: (y + bounds.height) / 2.0)
+            let center = CGPoint(x: (frame.width) / 2.0, y: (frame.height) / 2.0)
             
             shadowPath = UIBezierPath(
                 arcCenter: center,

@@ -21,7 +21,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jUE-au-VAW">
                                 <rect key="frame" x="127.5" y="114" width="120" height="120"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frank_FB_origin" translatesAutoresizingMaskIntoConstraints="NO" id="hLD-Pf-W6k">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_sticker_placeholder02" translatesAutoresizingMaskIntoConstraints="NO" id="hLD-Pf-W6k">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="65p-le-liS"/>
@@ -37,8 +37,8 @@
                                     <constraint firstItem="hLD-Pf-W6k" firstAttribute="centerX" secondItem="jUE-au-VAW" secondAttribute="centerX" id="jGr-XC-QES"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frank Lin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCF-ut-ww4">
-                                <rect key="frame" x="149.5" y="249" width="76" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請登入即可顯示姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCF-ut-ww4">
+                                <rect key="frame" x="111" y="249" width="153" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="snb-KB-63h"/>
                                 </constraints>
@@ -393,7 +393,7 @@
         <scene sceneID="tdh-el-K9m">
             <objects>
                 <viewController id="pnO-qN-jpc" customClass="ContactUsViewController" customModule="MapTalk" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="EsL-3i-BJS">
+                    <view key="view" contentMode="scaleToFill" id="EsL-3i-BJS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -468,6 +468,6 @@
         <image name="Mapping Talk icon" width="1024" height="1024"/>
         <image name="coin-cash-in-hand-50" width="50" height="50"/>
         <image name="coin-coin-bag-100" width="100" height="100"/>
-        <image name="frank_FB_origin" width="1536" height="1536"/>
+        <image name="profile_sticker_placeholder02" width="110" height="110"/>
     </resources>
 </document>
