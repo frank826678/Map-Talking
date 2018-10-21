@@ -9,6 +9,14 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="NotoSans-Bold.ttf">
+            <string>NotoSans-Bold</string>
+        </array>
+        <array key="NotoSans-Regular.ttf">
+            <string>NotoSans-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -22,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHf-t2-MUz">
-                                <rect key="frame" x="60" y="417" width="255" height="50"/>
+                                <rect key="frame" x="60" y="407" width="255" height="50"/>
                                 <color key="backgroundColor" red="0.12549019610000001" green="0.25882352939999997" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="s2L-Oh-Qx1"/>
@@ -42,7 +50,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mapping Talk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRH-aq-svt">
-                                <rect key="frame" x="84.5" y="272" width="206.5" height="60"/>
+                                <rect key="frame" x="84.5" y="262" width="206.5" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Tx3-Ou-kJg"/>
                                 </constraints>
@@ -50,7 +58,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flirt and meet new people" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YUY-LW-kpe">
-                                <rect key="frame" x="83" y="350" width="209" height="27"/>
+                                <rect key="frame" x="83" y="340" width="209" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="voH-vv-Tq5"/>
                                 </constraints>
@@ -59,7 +67,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJD-zR-FPT">
-                                <rect key="frame" x="60" y="487" width="255" height="50"/>
+                                <rect key="frame" x="60" y="477" width="255" height="50"/>
                                 <color key="backgroundColor" red="0.23921568627450979" green="0.58039215686274503" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="itH-IL-OOz"/>
@@ -70,6 +78,15 @@
                                 <connections>
                                     <action selector="anonymousLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mvl-rP-KSq"/>
                                     <action selector="loginFacebook:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U7v-0D-LpK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0UC-b1-VGK">
+                                <rect key="frame" x="57" y="557" width="261" height="30"/>
+                                <state key="normal" title="註冊即表示您已同意服務及隱私權條款">
+                                    <color key="titleColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="aWo-s4-0o7" kind="show" id="DGs-An-zVy"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -86,14 +103,17 @@
                             <constraint firstItem="lzd-OD-1Nz" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="Qfa-y5-dlX"/>
                             <constraint firstItem="8pH-Tu-l13" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="42" id="Tce-TJ-ug1"/>
                             <constraint firstItem="8pH-Tu-l13" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="60" id="UUP-aJ-tnG"/>
+                            <constraint firstItem="0UC-b1-VGK" firstAttribute="top" secondItem="UJD-zR-FPT" secondAttribute="bottom" constant="30" id="UYe-ms-JNA"/>
+                            <constraint firstItem="WHf-t2-MUz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="bottom" constant="-260" id="WW3-fH-SFM"/>
                             <constraint firstItem="YUY-LW-kpe" firstAttribute="top" secondItem="BRH-aq-svt" secondAttribute="bottom" constant="18" id="XDe-hn-vOx"/>
                             <constraint firstItem="UJD-zR-FPT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gOC-6k-0pm"/>
                             <constraint firstItem="8pH-Tu-l13" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gw2-kw-Rgh"/>
                             <constraint firstItem="lzd-OD-1Nz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hwX-IQ-ifv"/>
                             <constraint firstItem="WHf-t2-MUz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="igO-zX-dvT"/>
+                            <constraint firstItem="0UC-b1-VGK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="j9I-7n-gct"/>
                             <constraint firstAttribute="trailing" secondItem="lzd-OD-1Nz" secondAttribute="trailing" id="nE1-YF-Yjv"/>
                             <constraint firstItem="UJD-zR-FPT" firstAttribute="top" secondItem="WHf-t2-MUz" secondAttribute="bottom" constant="20" id="tao-oy-1EE"/>
-                            <constraint firstItem="BRH-aq-svt" firstAttribute="top" secondItem="8pH-Tu-l13" secondAttribute="bottom" constant="30" id="wIl-EN-O5X"/>
+                            <constraint firstItem="BRH-aq-svt" firstAttribute="top" secondItem="8pH-Tu-l13" secondAttribute="bottom" constant="20" id="wIl-EN-O5X"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -108,9 +128,100 @@
             </objects>
             <point key="canvasLocation" x="40.799999999999997" y="25.637181409295355"/>
         </scene>
+        <!--Agreement View Controller-->
+        <scene sceneID="RdM-QL-aSJ">
+            <objects>
+                <viewController id="aWo-s4-0o7" customClass="AgreementViewController" customModule="MapTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hr4-jc-ljR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2o-xm-H3M">
+                                <rect key="frame" x="0.0" y="20" width="375" height="150"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsu-qm-Pve">
+                                        <rect key="frame" x="10" y="58" width="87" height="32"/>
+                                        <fontDescription key="fontDescription" name="NotoSans-Regular" family="Noto Sans" pointSize="17"/>
+                                        <state key="normal" title="1. 服務條款"/>
+                                        <connections>
+                                            <action selector="goToEULAWeb:" destination="aWo-s4-0o7" eventType="touchUpInside" id="dFK-D2-W5Z"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OAs-NJ-SBz">
+                                        <rect key="frame" x="10" y="102" width="106" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="2. 隱私權規範"/>
+                                        <connections>
+                                            <action selector="goToPrivicyWeb:" destination="aWo-s4-0o7" eventType="touchUpInside" id="gjV-jx-fL9"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mapping Talk 使用規則" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WiU-Iy-6gf">
+                                        <rect key="frame" x="64.5" y="5" width="246" height="25"/>
+                                        <fontDescription key="fontDescription" name="NotoSans-Bold" family="Noto Sans" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="WiU-Iy-6gf" firstAttribute="bottom" secondItem="U2o-xm-H3M" secondAttribute="bottom" multiplier="0.2" id="5Fi-wG-aba"/>
+                                    <constraint firstItem="OAs-NJ-SBz" firstAttribute="bottom" secondItem="U2o-xm-H3M" secondAttribute="bottom" multiplier="0.9" id="9Zc-Zq-arR"/>
+                                    <constraint firstItem="dsu-qm-Pve" firstAttribute="bottom" secondItem="U2o-xm-H3M" secondAttribute="bottom" multiplier="0.6" id="Z8w-iq-Lfs"/>
+                                    <constraint firstItem="WiU-Iy-6gf" firstAttribute="top" secondItem="U2o-xm-H3M" secondAttribute="top" constant="5" id="bbo-Lc-1Kk"/>
+                                    <constraint firstItem="WiU-Iy-6gf" firstAttribute="centerX" secondItem="U2o-xm-H3M" secondAttribute="centerX" id="h9h-8U-QPB"/>
+                                    <constraint firstItem="OAs-NJ-SBz" firstAttribute="leading" secondItem="dsu-qm-Pve" secondAttribute="leading" id="i8C-kQ-Osc"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgG-Wq-2Mz">
+                                <rect key="frame" x="10" y="22.5" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="lgG-Wq-2Mz" secondAttribute="height" multiplier="1:1" id="Q2m-E2-J54"/>
+                                </constraints>
+                                <color key="tintColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <state key="normal" image="btn_back"/>
+                                <connections>
+                                    <action selector="backToLoginPage:" destination="aWo-s4-0o7" eventType="touchUpInside" id="bMy-bg-LjS"/>
+                                </connections>
+                            </button>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXl-WT-39n">
+                                <rect key="frame" x="0.0" y="170" width="375" height="497"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="KXl-WT-39n" firstAttribute="top" secondItem="U2o-xm-H3M" secondAttribute="bottom" id="4VT-6s-ydT"/>
+                            <constraint firstItem="lgG-Wq-2Mz" firstAttribute="centerY" secondItem="WiU-Iy-6gf" secondAttribute="centerY" id="CGF-Yh-dht"/>
+                            <constraint firstItem="U2o-xm-H3M" firstAttribute="height" secondItem="hr4-jc-ljR" secondAttribute="height" multiplier="150:667" id="CiG-CT-Jsj"/>
+                            <constraint firstItem="b9I-b3-DmS" firstAttribute="bottom" secondItem="KXl-WT-39n" secondAttribute="bottom" id="D8V-ng-SUC"/>
+                            <constraint firstItem="lgG-Wq-2Mz" firstAttribute="width" secondItem="hr4-jc-ljR" secondAttribute="height" multiplier="30:667" id="EKu-Rd-khb"/>
+                            <constraint firstItem="b9I-b3-DmS" firstAttribute="trailing" secondItem="U2o-xm-H3M" secondAttribute="trailing" id="OMV-Eq-Xzq"/>
+                            <constraint firstItem="lgG-Wq-2Mz" firstAttribute="leading" secondItem="b9I-b3-DmS" secondAttribute="leading" constant="10" id="SE0-rO-Ewn"/>
+                            <constraint firstItem="U2o-xm-H3M" firstAttribute="top" secondItem="b9I-b3-DmS" secondAttribute="top" id="ejb-U5-gRS"/>
+                            <constraint firstItem="U2o-xm-H3M" firstAttribute="leading" secondItem="b9I-b3-DmS" secondAttribute="leading" id="myn-CK-flW"/>
+                            <constraint firstItem="dsu-qm-Pve" firstAttribute="leading" secondItem="lgG-Wq-2Mz" secondAttribute="leading" id="q6N-sc-b3b"/>
+                            <constraint firstItem="b9I-b3-DmS" firstAttribute="trailing" secondItem="KXl-WT-39n" secondAttribute="trailing" id="qnw-dn-gnO"/>
+                            <constraint firstItem="KXl-WT-39n" firstAttribute="top" secondItem="U2o-xm-H3M" secondAttribute="bottom" id="xYN-3C-qpc"/>
+                            <constraint firstItem="KXl-WT-39n" firstAttribute="leading" secondItem="b9I-b3-DmS" secondAttribute="leading" id="yka-3l-yYv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="b9I-b3-DmS"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="KXl-WT-39n" id="tyg-aj-KWa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZiA-g3-GCl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="887" y="26"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Mapping Talk-透明" width="1024" height="1024"/>
+        <image name="btn_back" width="34" height="34"/>
         <image name="icon_facebook" width="9" height="18"/>
     </resources>
 </document>

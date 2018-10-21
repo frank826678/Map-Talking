@@ -94,6 +94,7 @@ PODS:
     - SnapKit (~> 4.0.1)
   - RAMAnimatedTabBarController (4.0.1)
   - SnapKit (4.0.1)
+  - SVProgressHUD (2.2.5)
   - SwiftLint (0.27.0)
 
 DEPENDENCIES:
@@ -109,6 +110,7 @@ DEPENDENCIES:
   - Kingfisher (~> 4.0)
   - NotificationBannerSwift
   - RAMAnimatedTabBarController
+  - SVProgressHUD
   - SwiftLint
 
 SPEC REPOS:
@@ -138,6 +140,7 @@ SPEC REPOS:
     - NotificationBannerSwift
     - RAMAnimatedTabBarController
     - SnapKit
+    - SVProgressHUD
     - SwiftLint
 
 SPEC CHECKSUMS:
@@ -166,8 +169,9 @@ SPEC CHECKSUMS:
   NotificationBannerSwift: c9f4bc868d78df975ed59c0b2fccdbbe0e863efe
   RAMAnimatedTabBarController: 677d6f7ec7e88b1089486f4db49b0a5067e8ad1c
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 
-PODFILE CHECKSUM: 2849dd5dcfd3422e15dd38eff19095efe1357674
+PODFILE CHECKSUM: 082011b6bd94a7ee8304c978637861bf92121013
 
 COCOAPODS: 1.5.3

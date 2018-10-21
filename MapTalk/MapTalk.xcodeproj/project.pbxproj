@@ -12,6 +12,7 @@
 		0106CC342174A2EE009A80C4 /* EditUserContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0106CC322174A2EE009A80C4 /* EditUserContentTableViewCell.xib */; };
 		0106CC362176246F009A80C4 /* BaseNotificationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106CC352176246F009A80C4 /* BaseNotificationBanner.swift */; };
 		0131F7D4217B04CF001896C4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0131F7D2217B04CE001896C4 /* Reachability.m */; };
+		0131F7D9217CACFE001896C4 /* AgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0131F7D8217CACFE001896C4 /* AgreementViewController.swift */; };
 		0141678E216321760080EDCE /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141678D216321760080EDCE /* Icon.swift */; };
 		01416790216323520080EDCE /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141678F216323520080EDCE /* UIImage.swift */; };
 		016A51352159DCBA00AB2745 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A51342159DCBA00AB2745 /* TabBarViewController.swift */; };
@@ -94,6 +95,7 @@
 		0131F7D1217B04CC001896C4 /* MapTalk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MapTalk-Bridging-Header.h"; sourceTree = "<group>"; };
 		0131F7D2217B04CE001896C4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		0131F7D3217B04CE001896C4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		0131F7D8217CACFE001896C4 /* AgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementViewController.swift; sourceTree = "<group>"; };
 		0141678D216321760080EDCE /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		0141678F216323520080EDCE /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		016A51342159DCBA00AB2745 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0131F7D5217CAC58001896C4 /* Agreement */ = {
+			isa = PBXGroup;
+			children = (
+				0131F7D8217CACFE001896C4 /* AgreementViewController.swift */,
+			);
+			path = Agreement;
+			sourceTree = "<group>";
+		};
 		0141678C216320DE0080EDCE /* Enum */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +357,7 @@
 		01EBF3602153439E00D23871 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0131F7D5217CAC58001896C4 /* Agreement */,
 				0177E29A215FCB1D0038F29A /* Profile */,
 				01701AEF215BBE3E0074B0B9 /* Chat */,
 				016A51332159DC2400AB2745 /* TabBar */,
@@ -582,6 +593,7 @@
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -599,6 +611,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMAnimatedTabBarController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -672,6 +685,7 @@
 				0172DA2121679A3000A50E1D /* FilterHeaderCollectionViewCell.swift in Sources */,
 				0177E2A22160CA630038F29A /* FilterViewController.swift in Sources */,
 				01A624922170D1E9009CD507 /* UserDetailTableViewCell.swift in Sources */,
+				0131F7D9217CACFE001896C4 /* AgreementViewController.swift in Sources */,
 				018B82D02177012E004F8FC3 /* NewUserDetailTableViewCell.swift in Sources */,
 				01701B0A215C89140074B0B9 /* ChatImageOwnerTableViewCell.swift in Sources */,
 				01A12DE8216DC05B00833959 /* EditUserDataTableViewCell.swift in Sources */,
