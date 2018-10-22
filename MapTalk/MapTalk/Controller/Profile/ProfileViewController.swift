@@ -205,7 +205,12 @@ extension ProfileViewController: UITableViewDataSource{
             //原本 END
             
             cell.iconImage.image = UIImage.setIconTemplate(iconName: iconImageArray[indexPath.row])
+            //pencilBtn.addTarget(self, action: "pencilBtnPressed", for: UIControl.Event.touchUpInside)
+            cell.iconButton.tag = indexPath.row
+            cell.iconButton.addTarget(self, action: #selector(iconBtnClicked(sender:)), for: .touchUpInside)
             
+            //cell.iconButton.addTarget(self, action: "iconBtnPressed", for: UIControl.Event.touchUpInside)
+
             //cell.selectedBackgroundView?.backgroundColor = UIColor.orange
             
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
@@ -220,8 +225,37 @@ extension ProfileViewController: UITableViewDataSource{
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if indexPath.row == 0 {
+//            //configure action when tap cell 1
+//            print("點了個人資料")
+//            performSegue(
+//                withIdentifier: String(describing: EditViewController.self),
+//                sender: indexPath
+//            )
+//
+//        } else if indexPath.row == 1 {
+//            //configure action when tap cell 1
+//            print("點了聯絡我們")
+//            performSegue(
+//                withIdentifier: String(describing: ContactUsViewController.self),
+//                sender: indexPath
+//            )
+//
+//        }
+//        else if indexPath.row == 2 {
+//
+//            print("點了登出裝置")
+//            logOut()
+//        }
+//
+//    }
+    
+    @objc func iconBtnClicked(sender: UIButton) {
+        
+        let indexPath = sender.tag
+        
+        if indexPath == 0 {
             //configure action when tap cell 1
             print("點了個人資料")
             performSegue(
@@ -229,21 +263,20 @@ extension ProfileViewController: UITableViewDataSource{
                 sender: indexPath
             )
             
-        } else if indexPath.row == 1 {
+        } else if indexPath == 1 {
             //configure action when tap cell 1
             print("點了聯絡我們")
             performSegue(
                 withIdentifier: String(describing: ContactUsViewController.self),
                 sender: indexPath
             )
-        
+            
         }
-        else if indexPath.row == 2 {
-        
+        else if indexPath == 2 {
+            
             print("點了登出裝置")
             logOut()
         }
-
     }
     
     func logOut() {

@@ -13,6 +13,7 @@ class ProfileTableViewCell: UITableViewCell {
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var iconName: UILabel!
     
+    @IBOutlet weak var iconButton: UIButton!
     @IBOutlet weak var iconBackgroundView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()

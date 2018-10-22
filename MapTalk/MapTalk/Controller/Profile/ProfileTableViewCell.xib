@@ -38,11 +38,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lri-bt-1eC">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="4NG-Zr-0ee" firstAttribute="centerY" secondItem="7nr-xY-oBk" secondAttribute="centerY" id="3D4-Zf-bMl"/>
+                            <constraint firstAttribute="bottom" secondItem="lri-bt-1eC" secondAttribute="bottom" id="8EX-sJ-BiW"/>
                             <constraint firstItem="4NG-Zr-0ee" firstAttribute="leading" secondItem="7nr-xY-oBk" secondAttribute="leading" constant="30" id="GaQ-Pw-JJ6"/>
                             <constraint firstAttribute="width" constant="200" id="TA2-dy-9ua"/>
+                            <constraint firstAttribute="trailing" secondItem="lri-bt-1eC" secondAttribute="trailing" id="WGd-8a-cbi"/>
+                            <constraint firstItem="lri-bt-1eC" firstAttribute="top" secondItem="7nr-xY-oBk" secondAttribute="top" id="cb4-Zo-nw1"/>
+                            <constraint firstItem="lri-bt-1eC" firstAttribute="leading" secondItem="7nr-xY-oBk" secondAttribute="leading" id="fXk-hE-jly"/>
                             <constraint firstItem="qOa-aU-dSF" firstAttribute="leading" secondItem="4NG-Zr-0ee" secondAttribute="trailing" constant="20" id="fou-s2-7Gy"/>
                             <constraint firstAttribute="height" constant="50" id="l0K-ex-AeW"/>
                             <constraint firstItem="qOa-aU-dSF" firstAttribute="top" secondItem="7nr-xY-oBk" secondAttribute="top" constant="10" id="oUh-dc-fOy"/>
@@ -59,6 +66,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="iconBackgroundView" destination="7nr-xY-oBk" id="eUo-9h-0nJ"/>
+                <outlet property="iconButton" destination="lri-bt-1eC" id="qDB-Ht-itl"/>
                 <outlet property="iconImage" destination="4NG-Zr-0ee" id="GoT-wd-lLb"/>
                 <outlet property="iconName" destination="qOa-aU-dSF" id="GGv-3g-47C"/>
             </connections>
