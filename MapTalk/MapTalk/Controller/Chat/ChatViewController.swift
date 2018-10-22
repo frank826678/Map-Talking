@@ -244,7 +244,18 @@ class ChatViewController: UIViewController {
                 //OK
                 //self.getFriendLastMessage(friendId: allFriends)
                 
+                //封鎖功能 20181022
+                let userDefaults = UserDefaults.standard
+                
+                guard userDefaults.value(forKey: allFriends) == nil else {
+                    
+                    print("此用戶被封鎖了ChatVC \(allFriends)")
+                    return
+                    
+                }
+                
                 //20181006
+                
                 self.getNewFriendMessage(friendId: allFriends)
             }
             

@@ -103,7 +103,6 @@ class ChatDetailViewController: UIViewController {
         lpgr.minimumPressDuration = 1
         chatDetailTableView.addGestureRecognizer(lpgr)
         
-        
     }
     
     // MARK: - Action
@@ -350,6 +349,16 @@ class ChatDetailViewController: UIViewController {
     }
     
     func getFriendInfo(friendUserId: String) {
+        
+        //封鎖功能 20181022
+        let userDefaults = UserDefaults.standard
+        
+        guard userDefaults.value(forKey: friendUserId) == nil else {
+            
+            print("此用戶被封鎖了ChatDetailVC\(friendUserId)")
+            return
+            
+        }
         
         self.ref.child("UserData/\(friendUserId)").observeSingleEvent(of: .value, with: { (snapshot)
             

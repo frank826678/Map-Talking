@@ -233,7 +233,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 genderInput = gender
             }
+            //確認是否被封鎖過 snapshot.key = ID
+            //封鎖功能 20181022
+            let userDefaults = UserDefaults.standard
             
+            guard userDefaults.value(forKey: snapshot.key) == nil else {
+                
+                print("此用戶被封鎖了MapVC \(snapshot.key)")
+                return
+                
+            }
+
             let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput)
             
             self.mapView.addAnnotation(userlocations.userAnnotation)
@@ -287,7 +297,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 genderInput = gender
             }
-
+            
+            //確認是否被封鎖過 snapshot.key = ID
+            //封鎖功能 20181022
+            let userDefaults = UserDefaults.standard
+            
+            guard userDefaults.value(forKey: snapshot.key) == nil else {
+                
+                print("此用戶被封鎖了MapVC \(snapshot.key)")
+                return
+                
+            }
             
             let userLocations = Locations(latitude: latitude, longitude: longtitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput)
             
@@ -395,7 +415,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //角度修正
         //shadowView.layer.applySketchShadow(color: UIColor.red, alpha: 1, x: -5, y: -5, blur: 10, spread: 40, corner: 30)
         
-        shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 1), alpha: 1, x: -5, y: -5, blur: 15, spread: 15, corner: 30)
+        shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 1), alpha: 0.5, x: -5, y: -5, blur: 10, spread: 5, corner: 30)
         
         //userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
         
@@ -530,7 +550,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         //第一次進來 userAnnotation 點擊進來是 nil
         
-        print("QQQQQQQQ")
+        //print("QQQQQQQQ")
         
         if let userLocation = view.annotation as? UserAnnotation {
             self.userAnnotation = userLocation
@@ -583,7 +603,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             let reportController = UIAlertController(title: "確定檢舉？", message: "我們確認後會在 24 小時內進行處理", preferredStyle: .alert)
             
-            let okAction = UIAlertAction(title: "確定", style: .destructive, handler: nil)
+            let okAction = UIAlertAction(title: "確定", style: .destructive) { (action) in
+            
+                //把封鎖的人加到 userdefault 每次資料回來去問 用 uuid
+                guard let blockID = self.friendUserId else { return }
+                print("把使用者\(blockID) 加到 封鎖清單")
+                let userDefaults = UserDefaults.standard
+                
+                userDefaults.set("block", forKey: blockID)
+                
+            }
             
             let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
             reportController.addAction(cancelAction)
@@ -1230,6 +1259,14 @@ extension MapViewController: UITableViewDataSource {
                 cell.userBirthday.text = "來到地球的日子：\(userSelected[1])"
                 cell.userGender.text = userSelected[0]
                 cell.chatButton.addTarget(self, action: #selector(userInfoButtonClicked(sender:)), for: .touchUpInside)
+                
+                //可以改用 userdefault
+                guard let myselfId = Auth.auth().currentUser?.uid else { return UITableViewCell() }
+                if myselfId == friendUserId {
+                    cell.moreButton.isHidden = true
+                } else {
+                    cell.moreButton.isHidden = false
+                }
                 cell.moreButton.addTarget(self, action: #selector(self.showReportAlert), for: .touchUpInside)
 
                 

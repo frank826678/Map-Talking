@@ -267,7 +267,10 @@ extension ProfileViewController: UITableViewDataSource{
                 try Auth.auth().signOut()
                 
                 AppDelegate.shared.switchToLoginStoryBoard()
-                print("登出成功")
+                
+                self.resetDefaults()
+                
+                print("登出成功及清空 user")
                 
             } catch {
                 print("登出失敗，請確認網路")
@@ -286,6 +289,15 @@ extension ProfileViewController: UITableViewDataSource{
         
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func resetDefaults() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { keys in
+            defaults.removeObject(forKey: keys)
+        }
+    }
+    
 }
 
 extension ProfileViewController: UITableViewDelegate {}

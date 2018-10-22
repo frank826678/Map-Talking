@@ -296,10 +296,16 @@ extension EditViewController: UITableViewDataSource{
 //        return UIView()
 //    }
     
-    // 設置 section header 的高度
-    private func tableView(tableView: UITableView,
-                           heightForHeaderInSection section: Int) -> CGFloat {
-        return 80
+    // 設置 section header 的高度 刪除 private
+//    func tableView(tableView: UITableView,
+//                           heightForHeaderInSection section: Int) -> CGFloat {
+//        return 140
+//    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 50
+
     }
     
     // 每個 section 的標題
