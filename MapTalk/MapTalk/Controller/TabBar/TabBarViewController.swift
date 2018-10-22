@@ -124,6 +124,8 @@ class TabBarViewController: RAMAnimatedTabBarController {
         
         setupTab()
         
+        //20181022
+        self.tabBarController?.tabBar.isTranslucent = false
 //        // swiftlint:disable force_cast
 //        let ramTBC = self.window!.rootViewController as! TabBarViewController
 //        

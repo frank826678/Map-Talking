@@ -642,14 +642,22 @@ extension ChatViewController: UITableViewDelegate {
         guard let controller = UIStoryboard.chatStoryboard().instantiateViewController(
             withIdentifier: String(describing: ChatDetailViewController.self)
             ) as? ChatDetailViewController else { return }
-        
+        if searchStatus == false {
+            
         //controller.article = articles[indexPath.row]
         if newMessage[indexPath.row].senderId ==  myselfUID
         { controller.friendUserId = self.newMessage[indexPath.row].friendUID
         } else {
             controller.friendUserId = self.newMessage[indexPath.row].senderId
         }
-        
+        } else {
+            if result[indexPath.row].senderId ==  myselfUID
+            { controller.friendUserId = self.result[indexPath.row].friendUID
+            } else {
+                controller.friendUserId = self.result[indexPath.row].senderId
+            }
+
+        }
         self.show(controller, sender: nil)
         print("跳頁成功")
         

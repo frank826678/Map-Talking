@@ -28,7 +28,7 @@ class ContactUsViewController: UIViewController {
         
         setupLayerGradient(width: fullScreenSize.width, height: fullScreenSize.height)
         
-
+        self.tabBarController?.tabBar.isTranslucent = false
 
     }
     
