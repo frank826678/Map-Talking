@@ -221,14 +221,6 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJW-ZZ-24Z">
-                                        <rect key="frame" x="48" y="12" width="26" height="22"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="26" id="6w8-Zb-mB6"/>
-                                            <constraint firstAttribute="height" constant="22" id="Gko-8r-FuB"/>
-                                        </constraints>
-                                        <state key="normal" image="new2-microphone-50"/>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -236,11 +228,9 @@
                                     <constraint firstItem="CPI-cd-1Dp" firstAttribute="top" secondItem="kIE-LC-7az" secondAttribute="top" constant="10" id="6Q5-6Y-6Gp"/>
                                     <constraint firstAttribute="trailing" secondItem="5Up-lJ-tFJ" secondAttribute="trailing" constant="40" id="E3z-2P-qgy"/>
                                     <constraint firstItem="M2q-rM-Grp" firstAttribute="leading" secondItem="kIE-LC-7az" secondAttribute="leading" constant="15" id="b5B-Jp-Py0"/>
-                                    <constraint firstItem="bJW-ZZ-24Z" firstAttribute="leading" secondItem="M2q-rM-Grp" secondAttribute="trailing" constant="11" id="bau-s9-N2P"/>
                                     <constraint firstItem="M2q-rM-Grp" firstAttribute="centerY" secondItem="kIE-LC-7az" secondAttribute="centerY" id="c35-he-rXl"/>
-                                    <constraint firstAttribute="bottom" secondItem="bJW-ZZ-24Z" secondAttribute="bottom" constant="12" id="hnJ-e6-eEO"/>
                                     <constraint firstItem="5Up-lJ-tFJ" firstAttribute="top" secondItem="kIE-LC-7az" secondAttribute="top" constant="5" id="hqL-95-cfu"/>
-                                    <constraint firstItem="5Up-lJ-tFJ" firstAttribute="leading" secondItem="bJW-ZZ-24Z" secondAttribute="trailing" constant="10" id="nNh-ga-LPj"/>
+                                    <constraint firstItem="5Up-lJ-tFJ" firstAttribute="leading" secondItem="M2q-rM-Grp" secondAttribute="trailing" constant="47" id="kUx-3e-ncK"/>
                                     <constraint firstAttribute="trailing" secondItem="CPI-cd-1Dp" secondAttribute="trailing" constant="10" id="rbI-VV-oK1"/>
                                     <constraint firstAttribute="height" constant="46" id="zwz-Ik-kA5"/>
                                 </constraints>
@@ -348,8 +338,8 @@
                                     <constraint firstItem="kbR-Fh-TdJ" firstAttribute="leading" secondItem="eMb-E2-Tjh" secondAttribute="leading" id="Z0v-C5-KWG"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photos &amp; Videos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVU-Rc-UQd">
-                                <rect key="frame" x="10" y="15" width="164" height="28"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photos~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVU-Rc-UQd">
+                                <rect key="frame" x="10" y="15" width="84" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -423,7 +413,6 @@
         <image name="btn_send" width="30" height="30"/>
         <image name="chat_photo_normal" width="150" height="168"/>
         <image name="chat_x" width="50" height="50"/>
-        <image name="new2-microphone-50" width="50" height="50"/>
         <image name="new2_search-50-2" width="50" height="50"/>
     </resources>
 </document>

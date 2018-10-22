@@ -6,21 +6,6 @@
 //  Copyright © 2018 Frank. All rights reserved.
 //
 
-//import UIKit
-//import GoogleMaps
-//
-//class MapViewController: UIViewController {
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//
-//    }
-//
-//
-//
-//}
-
 import UIKit
 import MapKit
 import FirebaseDatabase
@@ -119,6 +104,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tabBarController?.tabBar.isTranslucent = true
         //偵測網路
         downloadData()
         
@@ -135,7 +122,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         userName = Auth.auth().currentUser?.displayName
         
         locationManager.delegate = self
+        //kCLLocationAccuracyKilometer
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
@@ -319,10 +308,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 self.locations[index].message = userLocations.message
                 
-                for index in 0..<self.locations.count {
-                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
-                    self.mapView.addAnnotation(self.locations[index].userAnnotation)
-                }
+                self.mapView.removeAnnotation(self.locations[index].userAnnotation)
+                self.mapView.addAnnotation(self.locations[index].userAnnotation)
+                
+//                for index in 0..<self.locations.count {
+//                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
+//                    self.mapView.addAnnotation(self.locations[index].userAnnotation)
+//                }
+                
+//                for index in 0..<self.locations.count {
+//                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
+//                    self.mapView.addAnnotation(self.locations[index].userAnnotation)
+//                }
+
                 
                 return
             }
@@ -410,12 +408,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //let blurEffect = UIBlurEffect(style: .light)
         //let blurEffectView = UIVisualEffectView(effect: blurEffect)
         
-        shadowView.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
+        shadowView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         //shadowView.layer.applySketchShadow(color: UIColor.red, alpha: 1, x: 0, y: 0, blur: 10, spread: 40, corner: 30,center: (annotationView?.center)!)
         //角度修正
         //shadowView.layer.applySketchShadow(color: UIColor.red, alpha: 1, x: -5, y: -5, blur: 10, spread: 40, corner: 30)
-        
-        shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 1), alpha: 0.5, x: -5, y: -5, blur: 10, spread: 5, corner: 30)
+        //B7B7B7 改透明度 0.6
+        shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5980040668), alpha: 0.3, x: 0, y: 0, blur: 10, spread: 10, corner: 25)
         
         //userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
         

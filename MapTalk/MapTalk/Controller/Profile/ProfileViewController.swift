@@ -12,7 +12,6 @@ import FirebaseDatabase
 import FirebaseAuth
 import KeychainAccess
 
-
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileTableView: UITableView!
@@ -32,7 +31,6 @@ class ProfileViewController: UIViewController {
     var iconNameArray: [String] = ["個人資料","聯絡我們","登出裝置"]
     var iconImageArray: [String] = ["new3-pencil-50","new3-new-post-50","new4-logout-100"]
 
-    
     // swiftlint:disable identifier_name
     var ref: DatabaseReference!
     // swiftlint:enable identifier_name
@@ -80,7 +78,6 @@ class ProfileViewController: UIViewController {
         
     }
     
-    
     func setImage() {
         
         userImage.layer.cornerRadius = 60
@@ -104,9 +101,9 @@ class ProfileViewController: UIViewController {
         //userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
 
         //原本的 color Ok
-      userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
+        //BEBEBE
+      userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 1, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
         //userImageShadowView.layer.applySketchShadow(color: UIColor.red, alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
-        
         
 
         //
@@ -132,7 +129,6 @@ class ProfileViewController: UIViewController {
 //        myImage.layer.cornerRadius = 10
         
        // outerView.addSubview(userImage)
-        
         
         //userImage.layer.masksToBounds = false
         //120
@@ -182,7 +178,6 @@ class ProfileViewController: UIViewController {
     
 }
 
-
 extension ProfileViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
@@ -210,7 +205,6 @@ extension ProfileViewController: UITableViewDataSource{
             //原本 END
             
             cell.iconImage.image = UIImage.setIconTemplate(iconName: iconImageArray[indexPath.row])
-            
             
             //cell.selectedBackgroundView?.backgroundColor = UIColor.orange
             
@@ -250,7 +244,6 @@ extension ProfileViewController: UITableViewDataSource{
             logOut()
         }
 
-        
     }
     
     func logOut() {
@@ -278,7 +271,6 @@ extension ProfileViewController: UITableViewDataSource{
                 return
             }
             
-            
         }
         
         let cancel = UIAlertAction(title: "取消", style: .cancel)
@@ -303,4 +295,3 @@ extension ProfileViewController: UITableViewDataSource{
 extension ProfileViewController: UITableViewDelegate {}
 
 extension ProfileViewController: UITextFieldDelegate {}
-

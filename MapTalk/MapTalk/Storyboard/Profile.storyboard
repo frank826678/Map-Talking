@@ -401,10 +401,11 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="軟體版本： V 1.1.1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yI0-7g-dsS">
-                                <rect key="frame" x="50" y="324" width="305" height="54"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="軟體版本：V 1.1.1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yI0-7g-dsS">
+                                <rect key="frame" x="87.5" y="324" width="200" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="9a1-NP-ctT"/>
+                                    <constraint firstAttribute="height" constant="40" id="9a1-NP-ctT"/>
+                                    <constraint firstAttribute="width" constant="200" id="lYH-4c-Xxz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -418,27 +419,29 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更新日期：2018/10/20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuC-HB-qdR">
-                                <rect key="frame" x="50" y="398" width="305" height="54"/>
+                                <rect key="frame" x="87.5" y="374" width="200" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="G2F-wB-M9T"/>
+                                    <constraint firstAttribute="height" constant="40" id="G2F-wB-M9T"/>
+                                    <constraint firstAttribute="width" constant="200" id="R2F-vC-MuK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者姓名：Frank Lin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uzk-vg-TwO">
-                                <rect key="frame" x="50" y="472" width="305" height="54"/>
+                                <rect key="frame" x="87.5" y="424" width="200" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="rzx-sy-jLG"/>
+                                    <constraint firstAttribute="width" constant="200" id="gsg-d1-9IE"/>
+                                    <constraint firstAttribute="height" constant="40" id="rzx-sy-jLG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者信箱：frank826678@gmail.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDB-DX-yMq">
-                                <rect key="frame" x="50" y="546" width="320" height="54"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者信箱：frank826678@gmail.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="DDB-DX-yMq">
+                                <rect key="frame" x="47.5" y="474" width="280.5" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="fBn-Od-1WT"/>
+                                    <constraint firstAttribute="height" constant="40" id="fBn-Od-1WT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -447,24 +450,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="DDB-DX-yMq" firstAttribute="leading" secondItem="EsL-3i-BJS" secondAttribute="leading" constant="50" id="32E-ra-Tlm"/>
-                            <constraint firstItem="Uzk-vg-TwO" firstAttribute="top" secondItem="VuC-HB-qdR" secondAttribute="bottom" constant="20" id="Ft8-7X-lea"/>
-                            <constraint firstAttribute="trailing" secondItem="VuC-HB-qdR" secondAttribute="trailing" constant="20" id="Gjq-tZ-H07"/>
+                            <constraint firstItem="Uzk-vg-TwO" firstAttribute="top" secondItem="VuC-HB-qdR" secondAttribute="bottom" constant="10" id="Ft8-7X-lea"/>
+                            <constraint firstItem="Uzk-vg-TwO" firstAttribute="centerX" secondItem="EsL-3i-BJS" secondAttribute="centerX" id="K3q-Ze-Ka8"/>
                             <constraint firstAttribute="trailing" secondItem="Lu1-Wu-2zF" secondAttribute="trailing" id="KBl-4T-qOs"/>
-                            <constraint firstItem="yI0-7g-dsS" firstAttribute="leading" secondItem="EsL-3i-BJS" secondAttribute="leading" constant="50" id="N8j-ah-5bZ"/>
-                            <constraint firstItem="Uzk-vg-TwO" firstAttribute="leading" secondItem="EsL-3i-BJS" secondAttribute="leading" constant="50" id="SoU-uP-mG5"/>
                             <constraint firstItem="yI0-7g-dsS" firstAttribute="top" secondItem="g8t-m2-dt6" secondAttribute="bottom" constant="40" id="Td7-na-7ez"/>
-                            <constraint firstAttribute="trailing" secondItem="Uzk-vg-TwO" secondAttribute="trailing" constant="20" id="UsQ-QL-6IX"/>
                             <constraint firstItem="Lu1-Wu-2zF" firstAttribute="top" secondItem="8gO-w1-Izv" secondAttribute="top" id="WCK-S8-88X"/>
-                            <constraint firstItem="VuC-HB-qdR" firstAttribute="leading" secondItem="EsL-3i-BJS" secondAttribute="leading" constant="50" id="XZa-8D-CLM"/>
                             <constraint firstItem="Lu1-Wu-2zF" firstAttribute="leading" secondItem="EsL-3i-BJS" secondAttribute="leading" id="ZRB-gL-7Id"/>
                             <constraint firstItem="Lu1-Wu-2zF" firstAttribute="bottom" secondItem="EsL-3i-BJS" secondAttribute="bottomMargin" id="ciR-Wb-Cdh"/>
-                            <constraint firstItem="DDB-DX-yMq" firstAttribute="top" secondItem="Uzk-vg-TwO" secondAttribute="bottom" constant="20" id="cm8-kb-cmh"/>
+                            <constraint firstItem="DDB-DX-yMq" firstAttribute="top" secondItem="Uzk-vg-TwO" secondAttribute="bottom" constant="10" id="cm8-kb-cmh"/>
                             <constraint firstItem="g8t-m2-dt6" firstAttribute="centerX" secondItem="EsL-3i-BJS" secondAttribute="centerX" id="hvw-aK-zg2"/>
-                            <constraint firstItem="VuC-HB-qdR" firstAttribute="top" secondItem="yI0-7g-dsS" secondAttribute="bottom" constant="20" id="jGz-V1-PyP"/>
+                            <constraint firstItem="VuC-HB-qdR" firstAttribute="top" secondItem="yI0-7g-dsS" secondAttribute="bottom" constant="10" id="jGz-V1-PyP"/>
                             <constraint firstItem="g8t-m2-dt6" firstAttribute="top" secondItem="8gO-w1-Izv" secondAttribute="top" constant="40" id="mSY-74-v7v"/>
-                            <constraint firstAttribute="trailing" secondItem="DDB-DX-yMq" secondAttribute="trailing" constant="5" id="toe-lQ-lUy"/>
-                            <constraint firstAttribute="trailing" secondItem="yI0-7g-dsS" secondAttribute="trailing" constant="20" id="w0O-ip-Lwi"/>
+                            <constraint firstItem="VuC-HB-qdR" firstAttribute="centerX" secondItem="EsL-3i-BJS" secondAttribute="centerX" id="ome-ZQ-a6f"/>
+                            <constraint firstItem="yI0-7g-dsS" firstAttribute="centerX" secondItem="EsL-3i-BJS" secondAttribute="centerX" id="yKm-2r-aZ5"/>
+                            <constraint firstItem="DDB-DX-yMq" firstAttribute="centerX" secondItem="EsL-3i-BJS" secondAttribute="centerX" id="zY2-gY-qNw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8gO-w1-Izv"/>
                     </view>
