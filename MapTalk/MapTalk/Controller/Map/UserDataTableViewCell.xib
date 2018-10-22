@@ -54,22 +54,33 @@
                         </constraints>
                         <state key="normal" image="new2-chat-bubble-30"/>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8s-Va-cMt">
+                        <rect key="frame" x="367" y="10" width="50" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="cNh-dy-hYt"/>
+                            <constraint firstAttribute="width" constant="50" id="hj9-i4-oDj"/>
+                        </constraints>
+                        <state key="normal" image="btn_more"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="BPL-z2-B4e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="FsZ-hZ-r5y"/>
                     <constraint firstItem="7x6-C5-3mp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="80" id="O4S-kV-iAh"/>
                     <constraint firstItem="7x6-C5-3mp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="Yb6-JD-qoj"/>
                     <constraint firstItem="BPL-z2-B4e" firstAttribute="leading" secondItem="mAd-47-9VF" secondAttribute="trailing" constant="10" id="aCW-gb-LmX"/>
+                    <constraint firstItem="V8s-Va-cMt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="d0e-f4-u26"/>
                     <constraint firstItem="mAd-47-9VF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="80" id="glZ-VD-gLJ"/>
                     <constraint firstItem="mAd-47-9VF" firstAttribute="leading" secondItem="7x6-C5-3mp" secondAttribute="trailing" constant="25" id="i13-aJ-ULO"/>
                     <constraint firstAttribute="bottom" secondItem="sjb-91-WJ8" secondAttribute="bottom" constant="20.5" id="jJs-0N-ihA"/>
                     <constraint firstItem="sjb-91-WJ8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="oMP-Dt-6Dx"/>
                     <constraint firstItem="sjb-91-WJ8" firstAttribute="top" secondItem="7x6-C5-3mp" secondAttribute="bottom" constant="20" id="oYW-JM-9r3"/>
+                    <constraint firstAttribute="trailing" secondItem="V8s-Va-cMt" secondAttribute="trailing" constant="10" id="p84-uX-3zt"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="chatButton" destination="BPL-z2-B4e" id="to8-Kz-Xmv"/>
+                <outlet property="moreButton" destination="V8s-Va-cMt" id="X4Y-aM-V8L"/>
                 <outlet property="userBirthday" destination="sjb-91-WJ8" id="fBN-Qo-GCC"/>
                 <outlet property="userGender" destination="mAd-47-9VF" id="FUp-JD-Ow5"/>
                 <outlet property="userName" destination="7x6-C5-3mp" id="HDb-u3-IKk"/>
@@ -78,6 +89,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="btn_more" width="18" height="4"/>
         <image name="new2-chat-bubble-30" width="30" height="30"/>
     </resources>
 </document>

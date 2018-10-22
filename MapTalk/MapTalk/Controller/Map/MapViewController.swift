@@ -575,6 +575,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         showMessageAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
         
     }
+    
+    @objc func showReportAlert() {
+        let personAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let reportAction = UIAlertAction(title: "檢舉用戶", style: .destructive) { (void) in
+            
+            let reportController = UIAlertController(title: "確定檢舉？", message: "我們確認後會在 24 小時內進行處理", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "確定", style: .destructive, handler: nil)
+            
+            let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
+            reportController.addAction(cancelAction)
+            reportController.addAction(okAction)
+            self.present(reportController, animated: true, completion: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        personAlertController.addAction(reportAction)
+        personAlertController.addAction(cancelAction)
+        self.present(personAlertController, animated: true, completion: nil)
+    }
 
     
     func showUserDetail(friendId: String?, friendName: String?, friendImageURL: String?) {
@@ -1208,6 +1230,8 @@ extension MapViewController: UITableViewDataSource {
                 cell.userBirthday.text = "來到地球的日子：\(userSelected[1])"
                 cell.userGender.text = userSelected[0]
                 cell.chatButton.addTarget(self, action: #selector(userInfoButtonClicked(sender:)), for: .touchUpInside)
+                cell.moreButton.addTarget(self, action: #selector(self.showReportAlert), for: .touchUpInside)
+
                 
                 //self.userInfoDetailView.userImage.kf.setImage(with: bigPhotoURL)
                 

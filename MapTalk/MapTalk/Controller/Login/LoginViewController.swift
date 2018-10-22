@@ -52,7 +52,6 @@ class LoginViewController: UIViewController {
         
         setupLayerGradient(width: fullScreenSize.width, height: fullScreenSize.height)
 
-        
     }
     
     @IBAction func loginFacebook(_ sender: UIButton) {
@@ -319,10 +318,10 @@ class LoginViewController: UIViewController {
 //            UIColor(red: 235/255.0, green: 121/255.0, blue: 243/255.0, alpha: 0.9).cgColor
 //        ]
         
-        //OK 重藍到清藍
+        //OK 重藍到清藍 alpha 1 - 0.5
         layerGradient.colors = [
-            UIColor(red:0.07, green:0.44, blue:1.00, alpha:1.0).cgColor,
-            UIColor(red:0.18, green:0.76, blue:1.00, alpha:1.0).cgColor
+            UIColor(red:0.07, green:0.44, blue:1.00, alpha:0.6).cgColor,
+            UIColor(red:0.18, green:0.76, blue:1.00, alpha:0.8).cgColor
         ]
         
 //        layerGradient.colors = [UIColor(hex: 0x1271ff).CGColor,UIColor(hex: 0x2dc3fe).CGColor]

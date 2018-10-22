@@ -13,6 +13,7 @@ class UserDataTableViewCell: UITableViewCell {
     //@IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var chatButton: UIButton!
     
+    @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userBirthday: UILabel!
     @IBOutlet weak var userGender: UILabel!
