@@ -105,7 +105,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tabBarController?.tabBar.isTranslucent = true
+//        self.tabBarController?.tabBar.isTranslucent = true
         //偵測網路
         downloadData()
         
@@ -797,7 +797,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @objc func animateViewDown() {
         //userInfoDetailViewHeightConstraints.constant = 0
         
-        userInfoDetailViewBottomConstraints.constant = 600
+        userInfoDetailViewBottomConstraints.constant = 800
         
         //20181016
 //        self.tabBarController?.tabBar.isHidden = false

@@ -11,6 +11,8 @@
 		0106CC332174A2EE009A80C4 /* EditUserContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106CC312174A2EE009A80C4 /* EditUserContentTableViewCell.swift */; };
 		0106CC342174A2EE009A80C4 /* EditUserContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0106CC322174A2EE009A80C4 /* EditUserContentTableViewCell.xib */; };
 		0106CC362176246F009A80C4 /* BaseNotificationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106CC352176246F009A80C4 /* BaseNotificationBanner.swift */; };
+		01223054217EE0FA00FC203D /* PersonalInformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01223052217EE0FA00FC203D /* PersonalInformationTableViewCell.swift */; };
+		01223055217EE0FA00FC203D /* PersonalInformationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01223053217EE0FA00FC203D /* PersonalInformationTableViewCell.xib */; };
 		0131F7D4217B04CF001896C4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0131F7D2217B04CE001896C4 /* Reachability.m */; };
 		0131F7D9217CACFE001896C4 /* AgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0131F7D8217CACFE001896C4 /* AgreementViewController.swift */; };
 		0141678E216321760080EDCE /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141678D216321760080EDCE /* Icon.swift */; };
@@ -92,6 +94,8 @@
 		0106CC312174A2EE009A80C4 /* EditUserContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserContentTableViewCell.swift; sourceTree = "<group>"; };
 		0106CC322174A2EE009A80C4 /* EditUserContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditUserContentTableViewCell.xib; sourceTree = "<group>"; };
 		0106CC352176246F009A80C4 /* BaseNotificationBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNotificationBanner.swift; sourceTree = "<group>"; };
+		01223052217EE0FA00FC203D /* PersonalInformationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationTableViewCell.swift; sourceTree = "<group>"; };
+		01223053217EE0FA00FC203D /* PersonalInformationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalInformationTableViewCell.xib; sourceTree = "<group>"; };
 		0131F7D1217B04CC001896C4 /* MapTalk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MapTalk-Bridging-Header.h"; sourceTree = "<group>"; };
 		0131F7D2217B04CE001896C4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		0131F7D3217B04CE001896C4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 				0177E2B6216143870038F29A /* EditInfoTableViewCell.xib */,
 				0177E2B9216143B10038F29A /* EditContentTableViewCell.swift */,
 				0177E2BA216143B10038F29A /* EditContentTableViewCell.xib */,
+				01223052217EE0FA00FC203D /* PersonalInformationTableViewCell.swift */,
+				01223053217EE0FA00FC203D /* PersonalInformationTableViewCell.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -527,6 +533,7 @@
 				01EBF3672153483F00D23871 /* Main.storyboard in Resources */,
 				016A513A2159F54F00AB2745 /* Profile.storyboard in Resources */,
 				01701AF9215C5C4E0074B0B9 /* ChatDetailTableViewCell.xib in Resources */,
+				01223055217EE0FA00FC203D /* PersonalInformationTableViewCell.xib in Resources */,
 				01EBF35F21533C1900D23871 /* GoogleService-Info.plist in Resources */,
 				01EBF3492151FEA500D23871 /* Assets.xcassets in Resources */,
 				018B82D12177012E004F8FC3 /* NewUserDetailTableViewCell.xib in Resources */,
@@ -695,6 +702,7 @@
 				01E65821216DE45700928C9B /* UIView.swift in Sources */,
 				01701AFF215C7E1B0074B0B9 /* ChatDetailViewController.swift in Sources */,
 				01416790216323520080EDCE /* UIImage.swift in Sources */,
+				01223054217EE0FA00FC203D /* PersonalInformationTableViewCell.swift in Sources */,
 				0177E2BB216143B10038F29A /* EditContentTableViewCell.swift in Sources */,
 				01701AF8215C5C4E0074B0B9 /* ChatDetailTableViewCell.swift in Sources */,
 				01EBF36E215357B000D23871 /* MapViewController.swift in Sources */,
@@ -861,7 +869,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "MapTalk/MapTalk-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -886,7 +894,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MapTalk/MapTalk-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

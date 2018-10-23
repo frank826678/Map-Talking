@@ -48,7 +48,7 @@
                                 <color key="backgroundColor" red="0.45098039215686275" green="0.6470588235294118" blue="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJF-et-17h" customClass="UserInfoDetailView" customModule="MapTalk" customModuleProvider="target">
-                                <rect key="frame" x="10" y="707" width="355" height="560"/>
+                                <rect key="frame" x="10" y="907" width="355" height="560"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -62,7 +62,7 @@
                             <constraint firstItem="pJF-et-17h" firstAttribute="leading" secondItem="W1b-SP-zxy" secondAttribute="leading" constant="10" id="Mnz-yO-XNC"/>
                             <constraint firstAttribute="trailing" secondItem="pJF-et-17h" secondAttribute="trailing" constant="10" id="S34-jp-fVh"/>
                             <constraint firstItem="pyg-yo-Gt0" firstAttribute="leading" secondItem="iLF-qr-FYc" secondAttribute="leading" id="SVd-SB-KFe"/>
-                            <constraint firstItem="pJF-et-17h" firstAttribute="bottom" secondItem="iLF-qr-FYc" secondAttribute="bottom" constant="600" id="VuX-6B-PY0"/>
+                            <constraint firstItem="pJF-et-17h" firstAttribute="bottom" secondItem="iLF-qr-FYc" secondAttribute="bottom" constant="800" id="VuX-6B-PY0"/>
                             <constraint firstItem="pyg-yo-Gt0" firstAttribute="trailing" secondItem="iLF-qr-FYc" secondAttribute="trailing" id="Wcv-cg-cgp"/>
                             <constraint firstItem="knJ-Cf-MT3" firstAttribute="leading" secondItem="iLF-qr-FYc" secondAttribute="leading" id="c6E-St-DGa"/>
                             <constraint firstItem="iLF-qr-FYc" firstAttribute="bottom" secondItem="b1k-e6-6CM" secondAttribute="bottom" constant="30" id="ehY-Rn-o0B"/>

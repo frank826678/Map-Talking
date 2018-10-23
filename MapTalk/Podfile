@@ -22,13 +22,4 @@ target 'MapTalk' do
   pod 'KeychainAccess'
   pod 'SVProgressHUD'
 
-
-
-#  pod 'GoogleMaps'
-#  pod 'GooglePlaces'
-#  pod 'SDWebImage'
-#  pod 'RAMAnimatedTabBarController'
-#  pod 'FBSDKCoreKit'
-#  pod 'FacebookCore'
-#  pod 'FacebookLogin'
 end
