@@ -429,23 +429,27 @@ class ChatViewController: UIViewController {
             )
             
             //要判斷是不是相同的人 相同的取代最後一行對話 不相同的再往上加
+            
             if  message.senderId == self.myselfUID {
-                
-                for (index, user) in self.newMessage.enumerated() where user.friendUID == message.friendUID || user.friendUID == message.senderId  {
-                    
+
+                for (index, user) in self.newMessage.enumerated() where user.friendUID == message.friendUID || user.senderId == message.friendUID  {
+
+                    //user.friendUID == message.friendUID || user.senderId == message.friendUID  {
+
+                    // || user.friendUID == message.senderId
                     self.newMessage[index].content = message.content
-                    
+
                     self.chatTableView.reloadData()
-                    
+
                     return //跳出 整個 getNewFriendMessage 的 func
                 }
-                
+
             } else {
                 
                     //不確定判斷式正確不正確
                 for (index, user) in self.newMessage.enumerated()
-                    where user.senderId == message.senderId
-                        || user.friendUID == message.friendUID {
+                    where user.friendUID == message.senderId
+                        || user.senderId == message.senderId {
                             
                     //user.friendUID == message.senderId
                     self.newMessage[index].content = message.content
@@ -491,7 +495,7 @@ extension ChatViewController: UITableViewDataSource {
         if checkInternetFunction() == false {
             hintLabel.isHidden = false
             hintLabel.text = "請打開行動網路或 WI-FI"
-        }else {
+        } else {
             
             if newMessage.count == 0 {
                 print("顯示空值畫面")

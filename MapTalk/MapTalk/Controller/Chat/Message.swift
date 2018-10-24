@@ -35,7 +35,7 @@ struct FriendInfo {
 struct FreindData {
     
     let info: FriendInfo
-    let message:  Message
+    let message: Message
     
 }
 
@@ -73,4 +73,3 @@ struct FriendNewInfo {
     let friendChannel: String
 
 }
-
