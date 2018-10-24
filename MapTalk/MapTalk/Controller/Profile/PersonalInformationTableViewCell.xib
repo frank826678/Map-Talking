@@ -47,7 +47,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.83921568627450982" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.83921568629999999" green="0.83921568629999999" blue="0.83921568629999999" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="J23-RI-hbV" secondAttribute="trailing" constant="20" id="Ael-kA-suT"/>
                     <constraint firstItem="J23-RI-hbV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="WrL-oy-uP8"/>
@@ -58,6 +58,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="contentTextView" destination="M1Z-Bw-oEo" id="te8-3Y-x0E"/>
+                <outlet property="contentTextViewTopConstraint" destination="FRN-Je-6CE" id="uSc-4A-eCN"/>
                 <outlet property="titleLabel" destination="5KZ-d3-Knu" id="9Hu-8d-jSk"/>
             </connections>
             <point key="canvasLocation" x="138.40000000000001" y="154.72263868065968"/>

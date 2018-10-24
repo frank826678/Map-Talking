@@ -87,6 +87,10 @@ class EditViewController: UIViewController {
         
         downloadUserInfo()
         
+        editTableView.allowsSelection = false
+        
+        //let tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -393,23 +397,26 @@ extension EditViewController: UITableViewDataSource{
             
         case 0:
             if let cell = tableView.dequeueReusableCell(
-                withIdentifier: "NickName", for: indexPath)
-                as? NickNameTableViewCell {
+                withIdentifier: "PersonalInformation", for: indexPath)
+                as? PersonalInformationTableViewCell {
                 
-                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+//                if let cell = tableView.dequeueReusableCell(
+//                    withIdentifier: "NickName", for: indexPath)
+//                    as? NickNameTableViewCell {
                 
-//                if isEdit == true {
-//                    cell.editContentTextView.isUserInteractionEnabled = true
-//                } else {
-//
-//                    cell.editContentTextView.isUserInteractionEnabled = false
-//
-//                }
-//                cell.delegate = self
-//                cell.editContentTextView.text = userSelected[6]
-//                //cell.editContentTextView.delegate = self
-
+                //cell.selectionStyle = UITableViewCell.SelectionStyle.none
+                
+                if isEdit == true {
+                    cell.contentTextView.isUserInteractionEnabled = true
+                } else {
+                    cell.contentTextView.isUserInteractionEnabled = false
+                }
+                
+                cell.titleLabel.isHidden = true
+                cell.contentTextViewTopConstraint.constant = -30
                 cell.contentTextView.text = userSelected[6]
+
+                cell.delegate = self
                 
                 return cell
             }
@@ -461,10 +468,12 @@ extension EditViewController: UITableViewDataSource{
 //                cell.delegate = self
 //                cell.editContentTextView.text = userSelected[10]
                 
+                cell.titleLabel.isHidden = false
+                cell.contentTextViewTopConstraint.constant = 5
                 cell.titleLabel.text = infoTitle[indexPath.row]
     
                 cell.contentTextView.text = userSelected[indexPath.row + 7 ]
-                
+           
                 cell.delegate = self
                 
                 return cell
@@ -532,7 +541,7 @@ extension EditViewController: UITableViewDataSource{
         //            return UITableView.automaticDimension
         //        }
         
-        if indexPath.section == 1 {
+        if indexPath.section == 1 || indexPath.section == 0 {
             return 60
         } else {
             return UITableView.automaticDimension

@@ -451,16 +451,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //20181020 沒用 要加 view
         //imageView.layer.applySketchShadow(color: #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 20,corner: 25)
         
-        //增加三角形圖案
-        //OK
-        
-//        let triangle = UILabel(frame: CGRect(x: 0, y: 45, width: 50, height: 10)) // 50, 10
-//        triangle.text = "▾"
-//        triangle.font = UIFont.systemFont(ofSize: 24) //24
-//        triangle.textColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
-//
-//        triangle.textAlignment = .center
-//        annotationView?.addSubview(triangle)
         
         //END
 
@@ -475,7 +465,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         annotationLabel.font = UIFont(name: "Monaco", size: 12)
         annotationLabel.font = annotationLabel.font.withSize(14)
         annotationLabel.textColor = UIColor.white
+        
+        //        增加三角形圖案
+        //        OK
+        //
+        let triangle = UILabel(frame: CGRect(x: -20, y: -10, width: 50, height: 10)) // 50, 10
+        triangle.text = "▾"
+        triangle.font = UIFont.systemFont(ofSize: 24) //24
+        //triangle.textColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
+        
+        triangle.textAlignment = .center
 
+        
         //annotationLabel.font = UIFont(name: "Rockwell", size: 12)
         
         if let message = userAnnotation?.message {
@@ -489,12 +490,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             if gender == 1 {
             
             annotationLabel.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.2392156863, blue: 0.368627451, alpha: 1)
-                
+                triangle.textColor = #colorLiteral(red: 0.9607843137, green: 0.2392156863, blue: 0.368627451, alpha: 1)
+
+
             } else {
                 annotationLabel.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+                triangle.textColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+
             }
         } else {
             annotationLabel.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+            triangle.textColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+            
+
         }
         
         //annotationLabel.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
@@ -503,7 +511,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         annotationLabel.clipsToBounds = true
         
         annotationView?.addSubview(annotationLabel)
+        annotationView?.addSubview(triangle)
         
+
         //OK
         /*
         let annotationName = UILabel(frame: CGRect(x: -20, y: 65, width: 95, height: 25))

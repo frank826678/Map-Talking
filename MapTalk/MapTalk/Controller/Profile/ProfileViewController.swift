@@ -59,6 +59,7 @@ class ProfileViewController: UIViewController {
         profileTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         setStoryHighlightsTextField()
+        profileTableView.allowsSelection = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -213,7 +214,8 @@ extension ProfileViewController: UITableViewDataSource{
 
             //cell.selectedBackgroundView?.backgroundColor = UIColor.orange
             
-            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            //cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            
             //tableView.separatorStyle = UITableViewCellSeparatorStyleNone
             //            cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
             //

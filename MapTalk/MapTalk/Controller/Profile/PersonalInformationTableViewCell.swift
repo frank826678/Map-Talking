@@ -19,6 +19,7 @@ class PersonalInformationTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentTextView: UITextView!
     
+    @IBOutlet weak var contentTextViewTopConstraint: NSLayoutConstraint!
     weak var delegate: PersonalInformationCellDelegate?
     
     override func awakeFromNib() {
