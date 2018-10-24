@@ -13,6 +13,8 @@
 		0106CC362176246F009A80C4 /* BaseNotificationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106CC352176246F009A80C4 /* BaseNotificationBanner.swift */; };
 		01223054217EE0FA00FC203D /* PersonalInformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01223052217EE0FA00FC203D /* PersonalInformationTableViewCell.swift */; };
 		01223055217EE0FA00FC203D /* PersonalInformationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01223053217EE0FA00FC203D /* PersonalInformationTableViewCell.xib */; };
+		01223058217F196000FC203D /* NickNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01223056217F196000FC203D /* NickNameTableViewCell.swift */; };
+		01223059217F196000FC203D /* NickNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01223057217F196000FC203D /* NickNameTableViewCell.xib */; };
 		0131F7D4217B04CF001896C4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0131F7D2217B04CE001896C4 /* Reachability.m */; };
 		0131F7D9217CACFE001896C4 /* AgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0131F7D8217CACFE001896C4 /* AgreementViewController.swift */; };
 		0141678E216321760080EDCE /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141678D216321760080EDCE /* Icon.swift */; };
@@ -96,6 +98,8 @@
 		0106CC352176246F009A80C4 /* BaseNotificationBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNotificationBanner.swift; sourceTree = "<group>"; };
 		01223052217EE0FA00FC203D /* PersonalInformationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationTableViewCell.swift; sourceTree = "<group>"; };
 		01223053217EE0FA00FC203D /* PersonalInformationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalInformationTableViewCell.xib; sourceTree = "<group>"; };
+		01223056217F196000FC203D /* NickNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameTableViewCell.swift; sourceTree = "<group>"; };
+		01223057217F196000FC203D /* NickNameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NickNameTableViewCell.xib; sourceTree = "<group>"; };
 		0131F7D1217B04CC001896C4 /* MapTalk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MapTalk-Bridging-Header.h"; sourceTree = "<group>"; };
 		0131F7D2217B04CE001896C4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		0131F7D3217B04CE001896C4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -262,6 +266,8 @@
 				01A12DE7216DC05B00833959 /* EditUserDataTableViewCell.xib */,
 				0177E2B5216143870038F29A /* EditInfoTableViewCell.swift */,
 				0177E2B6216143870038F29A /* EditInfoTableViewCell.xib */,
+				01223056217F196000FC203D /* NickNameTableViewCell.swift */,
+				01223057217F196000FC203D /* NickNameTableViewCell.xib */,
 				0177E2B9216143B10038F29A /* EditContentTableViewCell.swift */,
 				0177E2BA216143B10038F29A /* EditContentTableViewCell.xib */,
 				01223052217EE0FA00FC203D /* PersonalInformationTableViewCell.swift */,
@@ -535,6 +541,7 @@
 				01701AF9215C5C4E0074B0B9 /* ChatDetailTableViewCell.xib in Resources */,
 				01223055217EE0FA00FC203D /* PersonalInformationTableViewCell.xib in Resources */,
 				01EBF35F21533C1900D23871 /* GoogleService-Info.plist in Resources */,
+				01223059217F196000FC203D /* NickNameTableViewCell.xib in Resources */,
 				01EBF3492151FEA500D23871 /* Assets.xcassets in Resources */,
 				018B82D12177012E004F8FC3 /* NewUserDetailTableViewCell.xib in Resources */,
 				01A624932170D1E9009CD507 /* UserDetailTableViewCell.xib in Resources */,
@@ -672,6 +679,7 @@
 				0131F7D4217B04CF001896C4 /* Reachability.m in Sources */,
 				0177E2B7216143870038F29A /* EditInfoTableViewCell.swift in Sources */,
 				01A6248F21708CAA009CD507 /* UserInfoDetailView.swift in Sources */,
+				01223058217F196000FC203D /* NickNameTableViewCell.swift in Sources */,
 				01701AEE215B39A00074B0B9 /* ErrorManager.swift in Sources */,
 				01CF3563216F334E00B98D71 /* Profile.swift in Sources */,
 				01701AEB215A72760074B0B9 /* TabBarColor.swift in Sources */,

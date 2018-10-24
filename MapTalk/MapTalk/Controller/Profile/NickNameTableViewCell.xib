@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="lJd-52-Kgl" customClass="NickNameTableViewCell" customModule="MapTalk" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lJd-52-Kgl" id="24i-SQ-KHk">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3dM-yf-T6y">
+                        <rect key="frame" x="20" y="5" width="335" height="54.5"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="請輸入您的名字" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vgL-RN-w49">
+                                <rect key="frame" x="50" y="8" width="280" height="38.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vgL-RN-w49" secondAttribute="trailing" constant="5" id="BoN-od-5Ql"/>
+                            <constraint firstAttribute="height" constant="54.5" id="Lp9-UL-0JQ"/>
+                            <constraint firstItem="vgL-RN-w49" firstAttribute="top" secondItem="3dM-yf-T6y" secondAttribute="top" constant="8" id="MPh-hk-dn1"/>
+                            <constraint firstItem="vgL-RN-w49" firstAttribute="leading" secondItem="3dM-yf-T6y" secondAttribute="leading" constant="50" id="QHR-Kt-ocu"/>
+                            <constraint firstAttribute="bottom" secondItem="vgL-RN-w49" secondAttribute="bottom" constant="8" id="ivt-34-Q8g"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.83921568629999999" green="0.83921568629999999" blue="0.83921568629999999" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="3dM-yf-T6y" firstAttribute="leading" secondItem="24i-SQ-KHk" secondAttribute="leading" constant="20" id="EfM-N2-HV3"/>
+                    <constraint firstItem="3dM-yf-T6y" firstAttribute="top" secondItem="24i-SQ-KHk" secondAttribute="top" constant="5" id="HOg-Kd-gSP"/>
+                    <constraint firstAttribute="bottom" secondItem="3dM-yf-T6y" secondAttribute="bottom" constant="10" id="ZKu-Ce-TeH"/>
+                    <constraint firstAttribute="trailing" secondItem="3dM-yf-T6y" secondAttribute="trailing" constant="20" id="y73-Xp-XOL"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="Ng2-vG-BiZ"/>
+            <connections>
+                <outlet property="contentTextView" destination="vgL-RN-w49" id="XWF-iA-M2o"/>
+            </connections>
+            <point key="canvasLocation" x="118" y="92"/>
+        </tableViewCell>
+    </objects>
+</document>

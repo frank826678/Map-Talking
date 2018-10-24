@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,22 +15,22 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="Lh8-2I-Gow" customClass="EditContentTableViewCell" customModule="MapTalk" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="377" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="Lh8-2I-Gow" id="L2T-z3-nuY">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lh8-2I-Gow" id="L2T-z3-nuY">
                 <rect key="frame" x="0.0" y="0.0" width="377" height="69.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n3M-dE-Yv7">
-                        <rect key="frame" x="10" y="10" width="357" height="40"/>
+                        <rect key="frame" x="20" y="5" width="337" height="59.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syk-pf-xmN">
-                                <rect key="frame" x="18" y="8" width="43" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="性別" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syk-pf-xmN">
+                                <rect key="frame" x="35" y="8" width="35" height="43.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ae-ib-4kc">
-                                <rect key="frame" x="309" y="8" width="30" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <rect key="frame" x="267" y="8" width="30" height="43.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="男">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
@@ -38,20 +39,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="3Ae-ib-4kc" secondAttribute="bottom" constant="8" id="11v-Ej-aYg"/>
-                            <constraint firstAttribute="height" constant="40" id="5kf-Fh-phU"/>
-                            <constraint firstItem="syk-pf-xmN" firstAttribute="leading" secondItem="n3M-dE-Yv7" secondAttribute="leading" constant="18" id="Bia-Fd-RQW"/>
+                            <constraint firstItem="syk-pf-xmN" firstAttribute="leading" secondItem="n3M-dE-Yv7" secondAttribute="leading" constant="35" id="Bia-Fd-RQW"/>
+                            <constraint firstAttribute="height" constant="59.5" id="M0P-al-Swa"/>
                             <constraint firstAttribute="bottom" secondItem="syk-pf-xmN" secondAttribute="bottom" constant="8" id="Ssn-Fo-eLj"/>
                             <constraint firstItem="3Ae-ib-4kc" firstAttribute="top" secondItem="n3M-dE-Yv7" secondAttribute="top" constant="8" id="Ux3-pG-5Lq"/>
-                            <constraint firstAttribute="trailing" secondItem="3Ae-ib-4kc" secondAttribute="trailing" constant="18" id="hew-8j-HeO"/>
+                            <constraint firstAttribute="trailing" secondItem="3Ae-ib-4kc" secondAttribute="trailing" constant="40" id="hew-8j-HeO"/>
                             <constraint firstItem="syk-pf-xmN" firstAttribute="top" secondItem="n3M-dE-Yv7" secondAttribute="top" constant="8" id="hul-pZ-WSX"/>
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="n3M-dE-Yv7" secondAttribute="bottom" constant="10" id="2WF-36-npV"/>
-                    <constraint firstItem="n3M-dE-Yv7" firstAttribute="leading" secondItem="L2T-z3-nuY" secondAttribute="leading" constant="10" id="NVA-me-0nM"/>
-                    <constraint firstAttribute="trailing" secondItem="n3M-dE-Yv7" secondAttribute="trailing" constant="10" id="WdP-FF-V8e"/>
-                    <constraint firstItem="n3M-dE-Yv7" firstAttribute="top" secondItem="L2T-z3-nuY" secondAttribute="top" constant="10" id="Z9G-60-v6Y"/>
+                    <constraint firstAttribute="bottom" secondItem="n3M-dE-Yv7" secondAttribute="bottom" constant="5" id="2WF-36-npV"/>
+                    <constraint firstItem="n3M-dE-Yv7" firstAttribute="leading" secondItem="L2T-z3-nuY" secondAttribute="leading" constant="20" id="NVA-me-0nM"/>
+                    <constraint firstAttribute="trailing" secondItem="n3M-dE-Yv7" secondAttribute="trailing" constant="20" id="WdP-FF-V8e"/>
+                    <constraint firstItem="n3M-dE-Yv7" firstAttribute="top" secondItem="L2T-z3-nuY" secondAttribute="top" constant="5" id="Z9G-60-v6Y"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="YGe-WZ-hlp"/>
