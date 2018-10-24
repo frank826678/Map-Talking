@@ -308,13 +308,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 self.locations[index].message = userLocations.message
                 
-                self.mapView.removeAnnotation(self.locations[index].userAnnotation)
-                self.mapView.addAnnotation(self.locations[index].userAnnotation)
-                
-//                for index in 0..<self.locations.count {
-//                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
-//                    self.mapView.addAnnotation(self.locations[index].userAnnotation)
-//                }
+                //self.mapView.removeAnnotation(self.locations[index].userAnnotation)
+                //self.mapView.addAnnotation(self.locations[index].userAnnotation)
                 
 //                for index in 0..<self.locations.count {
 //                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
@@ -325,10 +320,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 return
             }
             
-            self.mapView.addAnnotation(userLocations.userAnnotation)
+            //新增刪除
+            //self.mapView.removeAnnotation(userLocations.userAnnotation)
             
+            //self.mapView.addAnnotation(userLocations.userAnnotation)
             
-            self.locations.append(userLocations)
+            //self.locations.append(userLocations)
         }
     }
     
@@ -352,6 +349,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     //
     //
     //    }
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -412,8 +410,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //shadowView.layer.applySketchShadow(color: UIColor.red, alpha: 1, x: 0, y: 0, blur: 10, spread: 40, corner: 30,center: (annotationView?.center)!)
         //角度修正
         //shadowView.layer.applySketchShadow(color: UIColor.red, alpha: 1, x: -5, y: -5, blur: 10, spread: 40, corner: 30)
+        
         //B7B7B7 改透明度 0.6
-        shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5980040668), alpha: 0.3, x: 0, y: 0, blur: 10, spread: 10, corner: 25)
+        //20181024 color ok
+        //shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5980040668), alpha: 0.3, x: 0, y: 0, blur: 10, spread: 10, corner: 25)
+        
+        shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), alpha: 1, x: 0, y: 0, blur: 10, spread: 10, corner: 25)
+
         
         //userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
         
@@ -422,9 +425,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //shadowView.layer.cornerRadius = 27.5
         //shadowView.layer.borderColor = #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5)
         //shadowView.layer.borderWidth = 4
-        
-        annotationView?.addSubview(shadowView)
-
         
         // 設定頭像
         let imageView = UIImageView()
@@ -446,8 +446,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         imageView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         imageView.layer.borderWidth = 4
         
-        annotationView?.addSubview(imageView)
-        
+
         //20181020 沒用 要加 view
         //imageView.layer.applySketchShadow(color: #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 20,corner: 25)
         
@@ -510,9 +509,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         annotationLabel.layer.cornerRadius = 15
         annotationLabel.clipsToBounds = true
         
+        annotationView?.addSubview(shadowView)
+        annotationView?.addSubview(imageView)
         annotationView?.addSubview(annotationLabel)
         annotationView?.addSubview(triangle)
         
+
 
         //OK
         /*
