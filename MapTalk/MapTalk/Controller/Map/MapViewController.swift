@@ -696,9 +696,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func showReportAlert() {
         let personAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let reportAction = UIAlertAction(title: "檢舉用戶", style: .destructive) { (void) in
+        let reportAction = UIAlertAction(title: "檢舉及封鎖用戶", style: .destructive) { (void) in
             
-            let reportController = UIAlertController(title: "確定檢舉？", message: "我們確認後會在 24 小時內進行處理", preferredStyle: .alert)
+            let reportController = UIAlertController(title: "確定檢舉及封鎖此用戶？", message: "按下確認後，該用戶將立即從您的地圖中移除並封鎖，我們將在 24 小時內對該用戶再次進行審查。", preferredStyle: .alert)
             
             let okAction = UIAlertAction(title: "確定", style: .destructive) { (action) in
             
@@ -727,9 +727,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func hideMyselfAlert() {
         let personAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let reportAction = UIAlertAction(title: "是否向其他人顯示自己位置", style: .destructive) { (void) in
+        let reportAction = UIAlertAction(title: "更改自己在地圖上的狀態嗎？", style: .destructive) { (void) in
             
-            let reportController = UIAlertController(title: "更改自己在地圖上的狀態嗎？", message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態", preferredStyle: .alert)
+            let reportController = UIAlertController(title: "是否向其他人顯示自己位置", message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態", preferredStyle: .alert)
             
             guard let myselfId = Auth.auth().currentUser?.uid else { return }
 
