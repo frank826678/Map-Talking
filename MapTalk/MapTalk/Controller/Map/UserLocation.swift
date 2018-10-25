@@ -64,6 +64,7 @@ struct Locations {
     }
     
     var gender: Int?
+    var status: String?
     
     private let annotation = UserAnnotation()
     
@@ -79,6 +80,8 @@ struct Locations {
         self.annotation.title = self.name
         
         self.annotation.gender = self.gender
+        self.annotation.status = self.status
+        
         return annotation
     }
     
@@ -103,4 +106,5 @@ class UserAnnotation: MKPointAnnotation {
     var message: String?
     //20181020
     var gender: Int?
+    var status: String?
 }

@@ -259,6 +259,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 genderInput = gender
             }
+            //增加是否顯示欄位 20181025
+            var statusInput = "appear"
+            if let status = value["status"] as? NSDictionary {
+                
+                guard let status = status["status"] as? String else { return }
+                
+                statusInput = status
+            }
+
             //確認是否被封鎖過 snapshot.key = ID
             //封鎖功能 20181022
             let userDefaults = UserDefaults.standard
@@ -269,14 +278,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 return
                 
             }
+            guard let userId = Auth.auth().currentUser?.uid else { return }
+            
+            if statusInput == "disappear" && snapshot.key != userId  {
+                print("向其他用戶 隱藏 中1")
+                return
+            } else {
+                print("向其他用戶顯示中1")
+            }
 
-            let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput)
+            let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput, status: statusInput)
             
             self.mapView.addAnnotation(userlocations.userAnnotation)
             
             self.locations.append(userlocations)
             
-            guard let userId = Auth.auth().currentUser?.uid else { return }
+            //guard let userId = Auth.auth().currentUser?.uid else { return }
             if userlocations.id == userId {
                 
                 self.selfLocation = userlocations
@@ -324,6 +341,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 genderInput = gender
             }
             
+            //增加是否顯示欄位 20181025
+            var statusInput = "appear"
+            if let status = value["status"] as? NSDictionary {
+                
+                guard let status = status["status"] as? String else { return }
+                
+                statusInput = status
+            }
+
+            
             //確認是否被封鎖過 snapshot.key = ID
             //封鎖功能 20181022
             let userDefaults = UserDefaults.standard
@@ -335,7 +362,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
             }
             
-            let userLocations = Locations(latitude: latitude, longitude: longtitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput)
+            guard let userId = Auth.auth().currentUser?.uid else { return }
+            
+            if statusInput == "disappear" && snapshot.key != userId  {
+                print("向其他用戶 隱藏 中2")
+                self.removeUser(friendUserId: snapshot.key)
+                return
+            } else {
+                print("向其他用戶顯示中2")
+            }
+            
+            let userLocations = Locations(latitude: latitude, longitude: longtitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput, status: statusInput)
             
             for (index, user) in self.locations.enumerated() where user.id == userLocations.id {
                 
@@ -345,8 +382,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 self.locations[index].message = userLocations.message
                 
-                //self.mapView.removeAnnotation(self.locations[index].userAnnotation)
-                //self.mapView.addAnnotation(self.locations[index].userAnnotation)
+                self.mapView.removeAnnotation(self.locations[index].userAnnotation)
+                self.mapView.addAnnotation(self.locations[index].userAnnotation)
                 
 //                for index in 0..<self.locations.count {
 //                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
@@ -431,29 +468,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //新增 20181001
         let userAnnotation = annotation as? UserAnnotation
         
-//        if userAnnotation?.id ==
-//        userlocations
-        
-//        for (index, user) in self.locations.enumerated() where user.id == userAnnotation?.id {
-//            
-//            self.locations[index].latitude = userLocations.latitude
-//            
-//            self.locations[index].longitude = userLocations.longitude
-//            
-//            self.locations[index].message = userLocations.message
-//            
-//            //self.mapView.removeAnnotation(self.locations[index].userAnnotation)
-//            //self.mapView.addAnnotation(self.locations[index].userAnnotation)
-//            
-//            //                for index in 0..<self.locations.count {
-//            //                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
-//            //                    self.mapView.addAnnotation(self.locations[index].userAnnotation)
-//            //                }
-//            
-//            //break
-//            return
-//        }
-        
         //新增 20181002 重要 點擊後可以執行 didselect
         annotationView?.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
         //annotationView?.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
@@ -488,7 +502,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         // 設定頭像
         let imageView = UIImageView()
-        
+        //imageView.tag = 10
+        //view.viewWithTag(<#T##tag: Int##Int#>)
         //imageView.contentMode = .scaleAspectFill
         imageView.contentMode = .scaleAspectFit
         
@@ -569,7 +584,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         annotationLabel.layer.cornerRadius = 15
         annotationLabel.clipsToBounds = true
         
-        annotationView?.addSubview(shadowView)
+        //annotationView?.addSubview(shadowView)
         annotationView?.addSubview(imageView)
         annotationView?.addSubview(annotationLabel)
         annotationView?.addSubview(triangle)
@@ -666,7 +681,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
     }
     
-    @objc func showReportAlert() {
+    @objc func showMoreAlert()  {
+        
+        guard let myselfId = Auth.auth().currentUser?.uid else { return }
+        guard let friendId =  friendUserId else { return }
+        if myselfId == friendId {
+            hideMyselfAlert()
+        } else {
+            showReportAlert()
+        }
+        
+    }
+    
+    func showReportAlert() {
         let personAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let reportAction = UIAlertAction(title: "檢舉用戶", style: .destructive) { (void) in
@@ -687,6 +714,66 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
             reportController.addAction(cancelAction)
             reportController.addAction(okAction)
+            self.present(reportController, animated: true, completion: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        personAlertController.addAction(reportAction)
+        personAlertController.addAction(cancelAction)
+        self.present(personAlertController, animated: true, completion: nil)
+    }
+    
+    func hideMyselfAlert() {
+        let personAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let reportAction = UIAlertAction(title: "是否向其他人顯示自己位置", style: .destructive) { (void) in
+            
+            let reportController = UIAlertController(title: "更改自己在地圖上的狀態嗎？", message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態", preferredStyle: .alert)
+            
+            guard let myselfId = Auth.auth().currentUser?.uid else { return }
+
+            let hideAction = UIAlertAction(title: "隱藏", style: .destructive) { (action) in
+                
+                //把封鎖的人加到 userdefault 每次資料回來去問 用 uuid
+//                guard let blockID = self.friendUserId else { return }
+//                print("把使用者\(blockID) 加到 封鎖清單")
+//                let userDefaults = UserDefaults.standard
+//                self.removeUser(friendUserId: blockID)
+//                userDefaults.set("block", forKey: blockID)
+                //20181020
+               // let userDefaults = UserDefaults.standard
+                
+               // let myselfGender = userDefaults.value(forKey: "myselfGender")
+                
+                let userStatus = ["status": "disappear"]
+                
+                
+                let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
+                
+                self.refference.updateChildValues(childUpdatesStatus)
+
+                print("按下隱藏2")
+                
+            }
+            let appearAction = UIAlertAction(title: "顯示", style: .destructive) { (action) in
+                
+                let userStatus = ["status": "appear"]
+                
+                
+                let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
+                
+                self.refference.updateChildValues(childUpdatesStatus)
+
+                print("按下顯示3")
+            }
+            
+            let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
+
+            reportController.addAction(hideAction)
+            reportController.addAction(appearAction)
+            reportController.addAction(cancelAction)
+            
             self.present(reportController, animated: true, completion: nil)
         }
         
@@ -1352,14 +1439,21 @@ extension MapViewController: UITableViewDataSource {
                 cell.chatButton.addTarget(self, action: #selector(userInfoButtonClicked(sender:)), for: .touchUpInside)
                 
                 //可以改用 userdefault
-                guard let myselfId = Auth.auth().currentUser?.uid else { return UITableViewCell() }
-                if myselfId == friendUserId {
-                    cell.moreButton.isHidden = true
-                } else {
-                    cell.moreButton.isHidden = false
-                }
-                cell.moreButton.addTarget(self, action: #selector(self.showReportAlert), for: .touchUpInside)
+                cell.moreButton.addTarget(self, action: #selector(showMoreAlert), for: .touchUpInside)
 
+//                guard let myselfId = Auth.auth().currentUser?.uid else { return UITableViewCell() }
+//                guard let friendId =  friendUserId else { return UITableViewCell() }
+//                if myselfId == friendId {
+//                    //cell.moreButton.isHidden = true
+//                    cell.moreButton.addTarget(self, action: #selector(showMoreAlert), for: .touchUpInside)
+//
+//                } else {
+//                    cell.moreButton.addTarget(self, action: #selector(showMoreAlert), for: .touchUpInside)
+//
+////                    cell.moreButton.addTarget(self, action: #selector(self.showReportAlert), for: .touchUpInside)
+//                    //cell.moreButton.isHidden = false
+//                }
+                
                 
                 //self.userInfoDetailView.userImage.kf.setImage(with: bigPhotoURL)
                 
