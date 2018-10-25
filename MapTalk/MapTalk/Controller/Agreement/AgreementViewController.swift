@@ -65,7 +65,7 @@ class AgreementViewController: UIViewController {
         
         SVProgressHUD.show()
         
-        guard let url = URL(string: "https://privacypolicies.com/privacy/view/c82f8fb3e38aba20e4f0182e8c5a2fc") else {
+        guard let url = URL(string: "https://privacypolicies.com/privacy/view/c82f8fb3e38aba20e4f0182e8c5a2fc4") else {
             return
         }
         let request = URLRequest(url: url)

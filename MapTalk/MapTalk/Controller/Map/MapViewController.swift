@@ -164,6 +164,43 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // 首次使用 向使用者詢問定位自身位置權限
+        if CLLocationManager.authorizationStatus()
+            == .notDetermined {
+            // 取得定位服務授權
+            locationManager.requestWhenInUseAuthorization()
+            
+            // 開始定位自身位置
+            locationManager.startUpdatingLocation()
+        }
+            // 使用者已經拒絕定位自身位置權限
+        else if CLLocationManager.authorizationStatus()
+            == .denied {
+            // 提示可至[設定]中開啟權限
+            let alertController = UIAlertController(
+                title: "定位權限已關閉",
+                message:
+                "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟。 開啟後我們將存取您目前的地理位置資訊來顯示您的位置及媒合時的距離限制條件，且其他使用者將在地圖上看到您目前的位置。",
+                preferredStyle: .alert)
+            let okAction = UIAlertAction(
+                title: "確認", style: .default, handler:nil)
+            alertController.addAction(okAction)
+            self.present(
+                alertController,
+                animated: true, completion: nil)
+        }
+            // 使用者已經同意定位自身位置權限
+        else if CLLocationManager.authorizationStatus()
+            == .authorizedWhenInUse {
+            // 開始定位自身位置
+            locationManager.startUpdatingLocation()
+        }
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "MappingPage" {
@@ -316,7 +353,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //                    self.mapView.addAnnotation(self.locations[index].userAnnotation)
 //                }
 
-                
+                //break
                 return
             }
             
@@ -393,6 +430,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         //新增 20181001
         let userAnnotation = annotation as? UserAnnotation
+        
+//        if userAnnotation?.id ==
+//        userlocations
+        
+//        for (index, user) in self.locations.enumerated() where user.id == userAnnotation?.id {
+//            
+//            self.locations[index].latitude = userLocations.latitude
+//            
+//            self.locations[index].longitude = userLocations.longitude
+//            
+//            self.locations[index].message = userLocations.message
+//            
+//            //self.mapView.removeAnnotation(self.locations[index].userAnnotation)
+//            //self.mapView.addAnnotation(self.locations[index].userAnnotation)
+//            
+//            //                for index in 0..<self.locations.count {
+//            //                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
+//            //                    self.mapView.addAnnotation(self.locations[index].userAnnotation)
+//            //                }
+//            
+//            //break
+//            return
+//        }
         
         //新增 20181002 重要 點擊後可以執行 didselect
         annotationView?.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
@@ -619,7 +679,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 guard let blockID = self.friendUserId else { return }
                 print("把使用者\(blockID) 加到 封鎖清單")
                 let userDefaults = UserDefaults.standard
-                
+                self.removeUser(friendUserId: blockID)
                 userDefaults.set("block", forKey: blockID)
                 
             }
@@ -635,6 +695,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         personAlertController.addAction(reportAction)
         personAlertController.addAction(cancelAction)
         self.present(personAlertController, animated: true, completion: nil)
+    }
+    
+    func removeUser(friendUserId: String) {
+        
+//        let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput)
+//
+//        self.mapView.addAnnotation(userlocations.userAnnotation)
+//
+//        self.locations.append(userlocations)
+        
+        for (index, user) in locations.enumerated() where user.id == friendUserId {
+            
+            //刪除該使用者在 array 整筆資料
+          
+            self.mapView.removeAnnotation(self.locations[index].userAnnotation)
+            locations.remove(at: index)
+            print("已從 array 刪除使用者\(friendUserId)")
+            //break
+            return
+        }
+        
     }
 
     

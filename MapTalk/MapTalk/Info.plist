@@ -56,10 +56,12 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>我們需要存取您目前的地理位置資訊來顯示您的位置及媒合時的距離限制條件，且其他使用者將在地圖上看到您目前的位置。</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>地圖頁讀取位置用</string>
+	<string>我們需要存取您目前的地理位置資訊來顯示您的位置及媒合時的距離限制條件，且其他使用者將在地圖上看到您目前的位置。</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>聊天室傳送照片用</string>
+	<string>我們需要存取您的相簿資訊，同意後即可傳送照片給其他使用者。</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
