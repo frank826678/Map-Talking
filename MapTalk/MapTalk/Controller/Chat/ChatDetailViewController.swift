@@ -10,6 +10,9 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import AVFoundation
+import SVProgressHUD
+//swiftlint:disable all
 
 class ChatDetailViewController: UIViewController {
     
@@ -26,6 +29,11 @@ class ChatDetailViewController: UIViewController {
     @IBOutlet weak var photoViewConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var photoBtn: UIButton!
+    
+    //20181026 send voice record
+    var audioRecorder: AVAudioRecorder!
+    var numberOfRecords = 0
+    @IBOutlet weak var audioButton: UIButton!
     
     //新增的
     var friendName: String?
@@ -102,6 +110,9 @@ class ChatDetailViewController: UIViewController {
         let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(animateViewUp))
         lpgr.minimumPressDuration = 1
         chatDetailTableView.addGestureRecognizer(lpgr)
+        
+        //先把傳送語音功能關閉
+        audioButton.isHidden = true
         
     }
     
@@ -435,6 +446,126 @@ class ChatDetailViewController: UIViewController {
         }
     }
     
+    //傳送錄音檔開始
+    
+    func getDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = paths[0]
+        return documentDirectory
+    }
+    
+    func getAudioFileURL() -> URL {
+        return getDirectory().appendingPathComponent(".m4a")
+    }
+
+    
+    @IBAction func sendAudio(_ sender: Any) {
+//        //Check if there is an active AudioRecorder
+//        if audioRecorder == nil {
+//            numberOfRecords += 1
+//            let filename = getAudioFileURL()
+//
+//            let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+//                            AVSampleRateKey: 12000,
+//                            AVNumberOfChannelsKey: 2,
+//                            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
+//
+//            //Start recording
+//            do {
+//                audioRecorder = try AVAudioRecorder(url: filename, settings: settings)
+//                audioRecorder.delegate = self
+//                audioRecorder.record()
+//
+//                audioButton.setTitle("Stop", for: .normal)
+//            } catch {
+//                //alertsAudio(title: "Recording error", message: "Error in the audio recording.")
+//            }
+//        } else {
+//            //Stopping the recording
+//            SVProgressHUD.show()
+//
+//            audioRecorder.stop()
+//            audioRecorder = nil
+//
+//            UserDefaults.standard.set(numberOfRecords, forKey: "myNumber")
+//
+//            //messageTableView.reloadData()
+//            chatDetailTableView.reloadData()
+//
+//            audioButton.setTitle("record", for: .normal)
+//
+//            let fileUrl = getAudioFileURL()
+//            let storage = Storage.storage()
+//            let metadata = StorageMetadata()
+//
+//
+//            metadata.contentType = "audio/mp4"
+//            let refStr = (Auth.auth().currentUser?.email)! + "|" + "\(NSUUID().uuidString)" + "|" + "recording.m4a"
+//            let pathStr = "Messages/\(NSUUID().uuidString)/\(refStr)"
+//            let uploadRef = storage.reference().child(pathStr)
+//
+////            uploadRef.putData(data as Data, metadata: metaData) { (_, error) in
+////
+////                if let error = error {
+////
+////                    failure(error)
+////
+////                    return
+////
+////                } else {
+////
+////                    storageRef.child(userId).child(fileName).downloadURL(completion: { (url, error) in
+////
+////                        if let error = error {
+////
+////                            failure(error)
+////                        }
+////
+////                        if let url = url {
+////
+////                            success(url.absoluteString)
+////                        }
+////                    })
+////                }
+////            }
+//
+////            uploadRef.putData(from: fileUrl, metadata: nil) {
+////
+////            }
+//
+//            uploadRef.putFile(from: fileUrl, metadata: nil) { metadata,
+//                error in
+//                if error == nil {
+//                    print("Successfully Uploaded Audio")
+//                    SVProgressHUD.dismiss()
+//
+////                    let downloadUrl = (metadata?.downloadURL())!
+////                    print("URL: \(downloadUrl)")
+////
+//                    //completion(fileUrl)
+//                    //let messagesDB = Database.database().reference().child("Messages")
+//                    //let key = messagesDB.childByAutoId().key
+//
+//                    var messageInfoArray = refStr.components(separatedBy: "|")
+//                    let messageDict = ["Sender": messageInfoArray[0], "MessageBody": "recording-audioRecorded", "AudioURL": "\(pathStr)", "AudioID": messageInfoArray[1], "IsAudio": "\(NSUUID().uuidString)-True"]
+//
+//                    let childUpdates = ["Mensagens/\(messageInfoArray[1])": messageDict]
+//                    Database.database().reference().updateChildValues(childUpdates)
+//
+//                }
+//                else {
+//                    SVProgressHUD.dismiss()
+//                    print("UploadError \(String(describing: error?.localizedDescription))")
+//                    let alert = UIAlertController(title: "Error!!!", message: "The following error ocurred \(String(describing: error?.localizedDescription))", preferredStyle: .alert)
+//                    alert.addAction(UIKit.UIAlertAction(title: "Ok", style: .default, handler: nil))
+//                    self.present(alert, animated: true)
+//                }
+//            }
+//
+//        }
+    }
+
+    
 }
 
 extension ChatDetailViewController: UITableViewDataSource {
@@ -712,6 +843,8 @@ extension ChatDetailViewController: UITableViewDataSource {
 }
 
 extension ChatDetailViewController: UITableViewDelegate {}
+
+extension ChatDetailViewController: AVAudioRecorderDelegate {}
 
 extension Date {
     

@@ -16,6 +16,79 @@ import Kingfisher
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
      var iconImageArray: [String] = ["white-heart","road-sign","hot-air-balloon"]
+    
+    //20181028 增加 alert 告訴他我正在使用他的位置
+    var flag: Bool = false
+    var locationFlag: Bool = false
+    
+    func showLocationAlert() {
+        
+        let reportController = UIAlertController(title: "是否向其他人顯示自己位置？", message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態，需要顯示才能正常使用地圖功能。", preferredStyle: .alert)
+        
+        guard let myselfId = Auth.auth().currentUser?.uid else { return }
+        
+        let hideAction = UIAlertAction(title: "隱藏", style: .destructive) { (action) in
+            
+            //把封鎖的人加到 userdefault 每次資料回來去問 用 uuid
+            //                guard let blockID = self.friendUserId else { return }
+            //                print("把使用者\(blockID) 加到 封鎖清單")
+            //                let userDefaults = UserDefaults.standard
+            //                self.removeUser(friendUserId: blockID)
+            //                userDefaults.set("block", forKey: blockID)
+            //20181020
+            // let userDefaults = UserDefaults.standard
+            
+            // let myselfGender = userDefaults.value(forKey: "myselfGender")
+            
+            let userStatus = ["status": "disappear"]
+            
+            
+            let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
+            
+            self.refference.updateChildValues(childUpdatesStatus)
+            
+            print("按下隱藏2 MapViewController")
+            
+        }
+        let appearAction = UIAlertAction(title: "顯示", style: .default) { (action) in
+            
+            let userStatus = ["status": "appear"]
+            
+            
+            let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
+            
+            self.refference.updateChildValues(childUpdatesStatus)
+            
+            print("按下顯示3 MapViewController")
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
+        
+        reportController.addAction(appearAction)
+        reportController.addAction(hideAction)
+        reportController.addAction(cancelAction)
+        
+        self.present(reportController, animated: true, completion: nil)
+
+//            let reportController = UIAlertController(title: "是否同意顯示目前的位置到地圖上？", message: "按下確認後，該用戶將立即從您的地圖中移除並封鎖，我們將在 24 小時內對該用戶再次進行審查。", preferredStyle: .alert)
+//
+//            let okAction = UIAlertAction(title: "確定", style: .destructive) { (action) in
+//
+//                //把封鎖的人加到 userdefault 每次資料回來去問 用 uuid
+//                guard let blockID = self.friendUserId else { return }
+//                print("把使用者\(blockID) 加到 封鎖清單")
+//                let userDefaults = UserDefaults.standard
+//                self.removeUser(friendUserId: blockID)
+//                userDefaults.set("block", forKey: blockID)
+//
+//        }
+//        let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
+//        reportController.addAction(cancelAction)
+//        reportController.addAction(okAction)
+//        self.present(reportController, animated: true, completion: nil)
+        
+    }
+    
     //20181020 偵測網路
     
     func noInternetAlert() {
@@ -126,6 +199,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         locationManager.requestWhenInUseAuthorization()
+        //20181028
+        locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
         dataBaseLocation()
@@ -156,6 +231,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         // 20181013 感覺沒作用
         addSwipe()
         mapBackgroundView.isHidden = true
+        
+        //showLocationAlert()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -175,6 +252,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             // 開始定位自身位置
             locationManager.startUpdatingLocation()
+            filterButton.isHidden = false
+            location.isHidden = false
+            //showLocationAlert()
+            if locationFlag == false {
+                showLocationAlert()
+                locationFlag = true
+            } else {
+                print("已經顯示過 showLocationAlert MapVC ")
+            }
+
         }
             // 使用者已經拒絕定位自身位置權限
         else if CLLocationManager.authorizationStatus()
@@ -191,13 +278,26 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.present(
                 alertController,
                 animated: true, completion: nil)
+            filterButton.isHidden = true
+            location.isHidden = true
         }
             // 使用者已經同意定位自身位置權限
         else if CLLocationManager.authorizationStatus()
             == .authorizedWhenInUse {
             // 開始定位自身位置
             locationManager.startUpdatingLocation()
-        }
+            filterButton.isHidden = false
+            location.isHidden = false
+            //showLocationAlert()
+            
+            if locationFlag == false {
+                showLocationAlert()
+                locationFlag = true
+            } else {
+                print("已經顯示過 showLocationAlert MapVC ")
+            }
+
+            }
         
     }
     
@@ -209,6 +309,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let controller = segue.destination as! FilterViewController
             // swiftlint:enable force_cast
             controller.centerDeliveryFromMap = centerDelivery
+            controller.delegate = self
+            controller.flag = self.flag
+            //flag = false
+            
             //            let tag = sender as! Int
             //            nowIndex = tag //把目前選到的ＥＤＩＴ 放到全域去準備使用
             //            let controller = segue.destination as! TextInputViewController
@@ -382,8 +486,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 self.locations[index].message = userLocations.message
                 
+                //OK 註解掉下面兩行 不會跑 annotationfor View  所以無法直接更改到 message content ，位置會跑 但是不會一閃一閃。 不註解 可以即時更新到 messgae 但是會更新
+                //self.mapView(self.mapView, viewFor: self.locations[index].userAnnotation)
                 self.mapView.removeAnnotation(self.locations[index].userAnnotation)
                 self.mapView.addAnnotation(self.locations[index].userAnnotation)
+                
+                //OK END
                 
 //                for index in 0..<self.locations.count {
 //                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
@@ -402,6 +510,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //self.locations.append(userLocations)
         }
     }
+    
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation, _ changedAnnnotation: MKAnnotation) -> MKAnnotationView? {
+//
+//
+//
+//    }
+    
+//    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
+//        print("***是否執行")
+//    }
+//
+//    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+//        <#code#>
+//    }
     
     @IBAction func locationButtonClick(_ sender: UIButton) {
         
@@ -468,14 +590,53 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //新增 20181001
         let userAnnotation = annotation as? UserAnnotation
         
+        if annotationView?.viewWithTag(7) != nil {
+            //annotationLabel.text = userAnnotation?.message
+            print("---已經加過 view")
+            //OK
+            //(annotationView?.subviews[1] as! UIImageView).isHidden = true
+            
+            //Label
+            (annotationView?.subviews[2] as! UILabel).text = userAnnotation?.message
+
+            //sender.subviews[1] as UIImageView).hidden = false
+            
+//            annotationView?.addSubview(shadowView)
+//            annotationView?.addSubview(imageView)
+//            annotationView?.addSubview(annotationLabel)
+//            annotationView?.addSubview(triangle)
+
+            
+            return annotationView
+        } else {
+            print("尚未加過 view")
+        }
+
+        
+        annotationView?.tag = 7
         //新增 20181002 重要 點擊後可以執行 didselect
         annotationView?.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
         //annotationView?.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+        //判斷是否增加過 有的話修改 tag 的值
         
         //設定照片陰影
         
         let shadowView = UIView()
+        //shadowView.removeFromSuperview()
         
+
+        let annotationLabel = UILabel(frame: CGRect(x: -40, y: -35, width: 140, height: 30))
+        
+        //if shadowView.tag == 6 {
+//        if shadowView.viewWithTag(6) != nil {
+//            annotationLabel.text = userAnnotation?.message
+//            print("---已經加過 view")
+//            return annotationView
+//        } else {
+//            print("尚未加過 view")
+//        }
+
+        shadowView.tag = 6
         shadowView.contentMode = .scaleAspectFit
         //let blurEffect = UIBlurEffect(style: .light)
         //let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -489,7 +650,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //20181024 color ok
         //shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5980040668), alpha: 0.3, x: 0, y: 0, blur: 10, spread: 10, corner: 25)
         
-        shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), alpha: 1, x: 0, y: 0, blur: 10, spread: 10, corner: 25)
+        shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5980040668), alpha: 1, x: 0, y: 0, blur: 10, spread: 10, corner: 25)
 
         
         //userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
@@ -502,6 +663,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         // 設定頭像
         let imageView = UIImageView()
+        imageView.tag = 6
+        
         //imageView.tag = 10
         //view.viewWithTag(<#T##tag: Int##Int#>)
         //imageView.contentMode = .scaleAspectFill
@@ -533,7 +696,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         //annotationView?.annotation?.subtitle = "Test"
         
-        let annotationLabel = UILabel(frame: CGRect(x: -40, y: -35, width: 140, height: 30))
+
+        annotationLabel.tag = 6
         annotationLabel.numberOfLines = 1
         annotationLabel.textAlignment = .center
         annotationLabel.font = UIFont(name: "Monaco", size: 12)
@@ -544,6 +708,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //        OK
         //
         let triangle = UILabel(frame: CGRect(x: -20, y: -10, width: 50, height: 10)) // 50, 10
+        triangle.tag = 6
         triangle.text = "▾"
         triangle.font = UIFont.systemFont(ofSize: 24) //24
         //triangle.textColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
@@ -584,7 +749,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         annotationLabel.layer.cornerRadius = 15
         annotationLabel.clipsToBounds = true
         
-        //annotationView?.addSubview(shadowView)
+        annotationView?.addSubview(shadowView)
         annotationView?.addSubview(imageView)
         annotationView?.addSubview(annotationLabel)
         annotationView?.addSubview(triangle)
@@ -729,7 +894,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         let reportAction = UIAlertAction(title: "更改自己在地圖上的狀態嗎？", style: .destructive) { (void) in
             
-            let reportController = UIAlertController(title: "是否向其他人顯示自己位置", message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態", preferredStyle: .alert)
+            let reportController = UIAlertController(title: "是否向其他人顯示自己位置？", message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態", preferredStyle: .alert)
             
             guard let myselfId = Auth.auth().currentUser?.uid else { return }
 
@@ -756,7 +921,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 print("按下隱藏2")
                 
             }
-            let appearAction = UIAlertAction(title: "顯示", style: .destructive) { (action) in
+            let appearAction = UIAlertAction(title: "顯示", style: .default) { (action) in
                 
                 let userStatus = ["status": "appear"]
                 
@@ -770,8 +935,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
 
-            reportController.addAction(hideAction)
             reportController.addAction(appearAction)
+            reportController.addAction(hideAction)
             reportController.addAction(cancelAction)
             
             self.present(reportController, animated: true, completion: nil)
@@ -1568,6 +1733,14 @@ extension MapViewController: UITableViewDataSource {
 }
 
 extension MapViewController: UITableViewDelegate {
+    
+}
+
+extension MapViewController: sendAlertstatus {
+    func checkBool(flag: Bool) {
+        self.flag = flag
+    }
+    
     
 }
 // swiftlint:disable file_length

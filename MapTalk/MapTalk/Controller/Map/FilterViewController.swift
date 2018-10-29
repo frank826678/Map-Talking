@@ -14,8 +14,14 @@ import MapKit //為了拿到 CLLocationCoordinate2D
 import NotificationBannerSwift
 
 //swiftlint:disable all
+
+protocol sendAlertstatus: AnyObject {
+    func checkBool(flag: Bool)
+}
+
 class FilterViewController: UIViewController {
     
+    weak var delegate: sendAlertstatus?
     //@IBOutlet weak var datingTypeCollectionView: UICollectionView!
     
     //@IBOutlet weak var timeCollectionView: UICollectionView!
@@ -105,6 +111,9 @@ class FilterViewController: UIViewController {
     //
     //
     var currentCenter: CLLocationCoordinate2D?
+    
+    //20181028
+    var flag: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -201,7 +210,79 @@ class FilterViewController: UIViewController {
         setAgeSlider()
         setLocationSlider()
         detectUserInfo()
-
+        
+        //是否跳過 alert 判斷
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //showLocationAlert()
+        
+        delegate?.checkBool(flag: true)
+        
+        if flag == true {
+            print("已經跑過這個 showLocationAlert() 選項了 filterVC")
+        } else {
+            showLocationAlert()
+            //flag = true
+        }
+        
+    }
+    
+    
+    //20181028 增加 alert 告訴他我正在使用他的位置
+    
+    func showLocationAlert() {
+        
+        let reportController = UIAlertController(title: "是否向其他人顯示自己位置？", message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態，需要顯示才能正常使用媒合功能。", preferredStyle: .alert)
+        
+        guard let myselfId = Auth.auth().currentUser?.uid else { return }
+        
+        let hideAction = UIAlertAction(title: "隱藏", style: .destructive) { (action) in
+            
+            //把封鎖的人加到 userdefault 每次資料回來去問 用 uuid
+            //                guard let blockID = self.friendUserId else { return }
+            //                print("把使用者\(blockID) 加到 封鎖清單")
+            //                let userDefaults = UserDefaults.standard
+            //                self.removeUser(friendUserId: blockID)
+            //                userDefaults.set("block", forKey: blockID)
+            //20181020
+            // let userDefaults = UserDefaults.standard
+            
+            // let myselfGender = userDefaults.value(forKey: "myselfGender")
+            
+            let userStatus = ["status": "disappear"]
+            
+            
+            let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
+            
+            self.ref.updateChildValues(childUpdatesStatus)
+            
+            print("按下隱藏2 FilterVC")
+            
+        }
+        let appearAction = UIAlertAction(title: "顯示", style: .default) { (action) in
+            
+            let userStatus = ["status": "appear"]
+            
+            
+            let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
+            
+            self.ref.updateChildValues(childUpdatesStatus)
+            
+            print("按下顯示3 FilterVC")
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
+        
+        reportController.addAction(appearAction)
+        reportController.addAction(hideAction)
+        reportController.addAction(cancelAction)
+        
+        self.present(reportController, animated: true, completion: nil)
+        
     }
     
     func detectUserInfo() {

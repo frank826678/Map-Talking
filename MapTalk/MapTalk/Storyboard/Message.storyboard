@@ -221,14 +221,29 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVd-uw-KAn">
+                                        <rect key="frame" x="45" y="12" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="22" id="DMF-0w-d60"/>
+                                            <constraint firstAttribute="height" constant="22" id="hNd-cT-ROI"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="chat_plus_normal"/>
+                                        <state key="selected" image="chat_photo_normal"/>
+                                        <connections>
+                                            <action selector="photoButtonPressed:" destination="SQY-I5-Abe" eventType="touchUpInside" id="uWW-Va-MkT"/>
+                                            <action selector="sendAudio:" destination="SQY-I5-Abe" eventType="touchUpInside" id="gWJ-AM-8s6"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="5Up-lJ-tFJ" secondAttribute="bottom" constant="5" id="2Qm-mC-ScT"/>
                                     <constraint firstItem="CPI-cd-1Dp" firstAttribute="top" secondItem="kIE-LC-7az" secondAttribute="top" constant="10" id="6Q5-6Y-6Gp"/>
+                                    <constraint firstItem="dVd-uw-KAn" firstAttribute="leading" secondItem="M2q-rM-Grp" secondAttribute="trailing" constant="8" id="925-x5-ggG"/>
                                     <constraint firstAttribute="trailing" secondItem="5Up-lJ-tFJ" secondAttribute="trailing" constant="40" id="E3z-2P-qgy"/>
                                     <constraint firstItem="M2q-rM-Grp" firstAttribute="leading" secondItem="kIE-LC-7az" secondAttribute="leading" constant="15" id="b5B-Jp-Py0"/>
                                     <constraint firstItem="M2q-rM-Grp" firstAttribute="centerY" secondItem="kIE-LC-7az" secondAttribute="centerY" id="c35-he-rXl"/>
+                                    <constraint firstItem="dVd-uw-KAn" firstAttribute="top" secondItem="kIE-LC-7az" secondAttribute="top" constant="12" id="c7A-I4-Qjt"/>
                                     <constraint firstItem="5Up-lJ-tFJ" firstAttribute="top" secondItem="kIE-LC-7az" secondAttribute="top" constant="5" id="hqL-95-cfu"/>
                                     <constraint firstItem="5Up-lJ-tFJ" firstAttribute="leading" secondItem="M2q-rM-Grp" secondAttribute="trailing" constant="47" id="kUx-3e-ncK"/>
                                     <constraint firstAttribute="trailing" secondItem="CPI-cd-1Dp" secondAttribute="trailing" constant="10" id="rbI-VV-oK1"/>
@@ -261,6 +276,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Chatroom" id="L11-eU-suX"/>
                     <connections>
+                        <outlet property="audioButton" destination="dVd-uw-KAn" id="hVW-vY-uEL"/>
                         <outlet property="backgroundView" destination="kIE-LC-7az" id="9lS-gx-Q5W"/>
                         <outlet property="chatDetailTableView" destination="34h-Sg-Em3" id="jA1-xj-jCB"/>
                         <outlet property="messageBorder" destination="5Up-lJ-tFJ" id="o5g-Ur-Se3"/>
@@ -412,6 +428,7 @@
         <image name="btn_like_selected" width="20" height="20"/>
         <image name="btn_send" width="30" height="30"/>
         <image name="chat_photo_normal" width="150" height="168"/>
+        <image name="chat_plus_normal" width="50" height="50"/>
         <image name="chat_x" width="50" height="50"/>
         <image name="new2_search-50-2" width="50" height="50"/>
     </resources>
