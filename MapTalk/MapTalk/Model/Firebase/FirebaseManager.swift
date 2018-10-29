@@ -19,7 +19,6 @@ import KeychainAccess
 
 //var refference: DatabaseReference!
 
-
 struct UserInfo {
     
     var userName: String

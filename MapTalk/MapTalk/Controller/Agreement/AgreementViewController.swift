@@ -74,7 +74,6 @@ class AgreementViewController: UIViewController {
         
     }
     
-    
     @IBAction func backToLoginPage(_ sender: UIButton) {
         
         dismiss(animated: true)

@@ -8,12 +8,6 @@
 
 import Foundation
 
-//eunm Filter: String {
-//
-//    case (0,1) = "咖啡"
-//
-//}
-
 struct Filter {
     
     let gender: Int
@@ -63,19 +57,3 @@ struct Location {
     let longitude: Double
     
 }
-
-//struct Filter {
-//
-//    let gender: String
-//
-//    // swiftlint:disable identifier_name
-//    let age: String
-//    // swiftlint:enable identifier_name
-//
-//    let location: String
-//
-//    let dating: String
-//
-//    let time: String
-//
-//}

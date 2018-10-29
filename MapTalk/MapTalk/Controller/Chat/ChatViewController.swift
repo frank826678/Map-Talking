@@ -591,8 +591,7 @@ extension ChatViewController: UITableViewDataSource {
                     
                     cell.userName.text = result[indexPath.row].senderName
                     
-                    if let photoString = result[indexPath.row].senderPhoto
-                    {
+                    if let photoString = result[indexPath.row].senderPhoto {
                         cell.userImage.kf.setImage(with: URL(string: photoString))
                     } else {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")

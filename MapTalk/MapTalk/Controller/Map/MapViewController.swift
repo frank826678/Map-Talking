@@ -15,7 +15,7 @@ import Kingfisher
 //swiftlint:disable all
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
-     var iconImageArray: [String] = ["white-heart","road-sign","hot-air-balloon"]
+    var iconImageArray: [String] = ["white-heart","road-sign","hot-air-balloon"]
     
     //20181028 增加 alert 告訴他我正在使用他的位置
     var flag: Bool = false
@@ -28,17 +28,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         guard let myselfId = Auth.auth().currentUser?.uid else { return }
         
         let hideAction = UIAlertAction(title: "隱藏", style: .destructive) { (action) in
-            
-            //把封鎖的人加到 userdefault 每次資料回來去問 用 uuid
-            //                guard let blockID = self.friendUserId else { return }
-            //                print("把使用者\(blockID) 加到 封鎖清單")
-            //                let userDefaults = UserDefaults.standard
-            //                self.removeUser(friendUserId: blockID)
-            //                userDefaults.set("block", forKey: blockID)
-            //20181020
-            // let userDefaults = UserDefaults.standard
-            
-            // let myselfGender = userDefaults.value(forKey: "myselfGender")
             
             let userStatus = ["status": "disappear"]
             
@@ -69,23 +58,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         reportController.addAction(cancelAction)
         
         self.present(reportController, animated: true, completion: nil)
-
-//            let reportController = UIAlertController(title: "是否同意顯示目前的位置到地圖上？", message: "按下確認後，該用戶將立即從您的地圖中移除並封鎖，我們將在 24 小時內對該用戶再次進行審查。", preferredStyle: .alert)
-//
-//            let okAction = UIAlertAction(title: "確定", style: .destructive) { (action) in
-//
-//                //把封鎖的人加到 userdefault 每次資料回來去問 用 uuid
-//                guard let blockID = self.friendUserId else { return }
-//                print("把使用者\(blockID) 加到 封鎖清單")
-//                let userDefaults = UserDefaults.standard
-//                self.removeUser(friendUserId: blockID)
-//                userDefaults.set("block", forKey: blockID)
-//
-//        }
-//        let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
-//        reportController.addAction(cancelAction)
-//        reportController.addAction(okAction)
-//        self.present(reportController, animated: true, completion: nil)
         
     }
     
@@ -121,20 +93,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func downloadData() {
         if checkInternetFunction() == false {
-            
-            //            internetLabel1.isHidden = false
-            //            internetLabel2.isHidden = false
-            //hintLabel.text = "請打開行動網路或 WI-FI"
-            //hintLabel.isHidden = false
             noInternetAlert()
-            
-        }else {
-            
+        } else {
             print("成功連接網路")
-            //hintLabel.isHidden = true
-            //            internetLabel1.isHidden = true
-            //            internetLabel2.isHidden = true
-            
         }
     }
     
@@ -178,7 +139,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.tabBarController?.tabBar.isTranslucent = true
+        //        self.tabBarController?.tabBar.isTranslucent = true
         //偵測網路
         downloadData()
         
@@ -261,7 +222,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             } else {
                 print("已經顯示過 showLocationAlert MapVC ")
             }
-
+            
         }
             // 使用者已經拒絕定位自身位置權限
         else if CLLocationManager.authorizationStatus()
@@ -296,8 +257,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             } else {
                 print("已經顯示過 showLocationAlert MapVC ")
             }
-
-            }
+            
+        }
         
     }
     
@@ -313,29 +274,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             controller.flag = self.flag
             //flag = false
             
-            //            let tag = sender as! Int
-            //            nowIndex = tag //把目前選到的ＥＤＩＴ 放到全域去準備使用
-            //            let controller = segue.destination as! TextInputViewController
-            //
-            //            //print("壞", ObjectIdentifier(controller))
-            //
-            //            //controller.textInput.text = contentArray[tag]
-            //            controller.textFromHomePage = contentArray[tag]
-            //
-            //            controller.completionHandler = { dataFromVC2 in
-            //
-            //                self.saveData(passData: dataFromVC2)
-            
         }
             
         else {
-            
-            //            let controller = segue.destination as! TextInputViewController
-            //            //controller.addObserver(self, forKeyPath: "infoInput", options: .new, context: nil)
-            //            controller.completionHandler = { dataFromVC2 in
-            //
-            //                self.saveData(passData: dataFromVC2)
-            
+            print("segue.identifier  錯誤")
         }
     }
     
@@ -348,7 +290,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             guard let longitude = location["lon"] as? Double else { return }
             guard let userName = location["userName"] as? String else { return }
             guard let userImage = location["userImage"] as? String else { return }
-                
+            
             var messageInput = "媽 我上地圖了 Ya"
             if let message = value["message"] as? NSDictionary {
                 
@@ -371,7 +313,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 statusInput = status
             }
-
+            
             //確認是否被封鎖過 snapshot.key = ID
             //封鎖功能 20181022
             let userDefaults = UserDefaults.standard
@@ -390,7 +332,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             } else {
                 print("向其他用戶顯示中1")
             }
-
+            
             let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput, status: statusInput)
             
             self.mapView.addAnnotation(userlocations.userAnnotation)
@@ -453,7 +395,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 statusInput = status
             }
-
+            
             
             //確認是否被封鎖過 snapshot.key = ID
             //封鎖功能 20181022
@@ -493,11 +435,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 //OK END
                 
-//                for index in 0..<self.locations.count {
-//                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
-//                    self.mapView.addAnnotation(self.locations[index].userAnnotation)
-//                }
-
+                //                for index in 0..<self.locations.count {
+                //                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
+                //                    self.mapView.addAnnotation(self.locations[index].userAnnotation)
+                //                }
+                
                 //break
                 return
             }
@@ -510,20 +452,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //self.locations.append(userLocations)
         }
     }
-    
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation, _ changedAnnnotation: MKAnnotation) -> MKAnnotationView? {
-//
-//
-//
-//    }
-    
-//    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
-//        print("***是否執行")
-//    }
-//
-//    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//        <#code#>
-//    }
     
     @IBAction func locationButtonClick(_ sender: UIButton) {
         
@@ -591,27 +519,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let userAnnotation = annotation as? UserAnnotation
         
         if annotationView?.viewWithTag(7) != nil {
-            //annotationLabel.text = userAnnotation?.message
+            
             print("---已經加過 view")
             //OK
             //(annotationView?.subviews[1] as! UIImageView).isHidden = true
             
             //Label
             (annotationView?.subviews[2] as! UILabel).text = userAnnotation?.message
-
-            //sender.subviews[1] as UIImageView).hidden = false
-            
-//            annotationView?.addSubview(shadowView)
-//            annotationView?.addSubview(imageView)
-//            annotationView?.addSubview(annotationLabel)
-//            annotationView?.addSubview(triangle)
-
             
             return annotationView
         } else {
             print("尚未加過 view")
         }
-
+        
         
         annotationView?.tag = 7
         //新增 20181002 重要 點擊後可以執行 didselect
@@ -624,18 +544,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let shadowView = UIView()
         //shadowView.removeFromSuperview()
         
-
+        
         let annotationLabel = UILabel(frame: CGRect(x: -40, y: -35, width: 140, height: 30))
         
         //if shadowView.tag == 6 {
-//        if shadowView.viewWithTag(6) != nil {
-//            annotationLabel.text = userAnnotation?.message
-//            print("---已經加過 view")
-//            return annotationView
-//        } else {
-//            print("尚未加過 view")
-//        }
-
+        //        if shadowView.viewWithTag(6) != nil {
+        //            annotationLabel.text = userAnnotation?.message
+        //            print("---已經加過 view")
+        //            return annotationView
+        //        } else {
+        //            print("尚未加過 view")
+        //        }
+        
         shadowView.tag = 6
         shadowView.contentMode = .scaleAspectFit
         //let blurEffect = UIBlurEffect(style: .light)
@@ -651,7 +571,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5980040668), alpha: 0.3, x: 0, y: 0, blur: 10, spread: 10, corner: 25)
         
         shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5980040668), alpha: 1, x: 0, y: 0, blur: 10, spread: 10, corner: 25)
-
+        
         
         //userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
         
@@ -665,9 +585,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let imageView = UIImageView()
         imageView.tag = 6
         
-        //imageView.tag = 10
-        //view.viewWithTag(<#T##tag: Int##Int#>)
-        //imageView.contentMode = .scaleAspectFill
         imageView.contentMode = .scaleAspectFit
         
         imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
@@ -684,19 +601,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         imageView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         imageView.layer.borderWidth = 4
         
-
-        //20181020 沒用 要加 view
-        //imageView.layer.applySketchShadow(color: #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 20,corner: 25)
-        
-        
-        //END
-
-        //triangle.textColor = #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1)
-        //annotationView?.image = imageView.image
-        
-        //annotationView?.annotation?.subtitle = "Test"
-        
-
         annotationLabel.tag = 6
         annotationLabel.numberOfLines = 1
         annotationLabel.textAlignment = .center
@@ -714,7 +618,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //triangle.textColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
         
         triangle.textAlignment = .center
-
+        
         
         //annotationLabel.font = UIFont(name: "Rockwell", size: 12)
         
@@ -727,21 +631,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         ///annotationLabel.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
         if let gender = userAnnotation?.gender {
             if gender == 1 {
-            
-            annotationLabel.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.2392156863, blue: 0.368627451, alpha: 1)
+                
+                annotationLabel.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.2392156863, blue: 0.368627451, alpha: 1)
                 triangle.textColor = #colorLiteral(red: 0.9607843137, green: 0.2392156863, blue: 0.368627451, alpha: 1)
-
-
+                
+                
             } else {
                 annotationLabel.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
                 triangle.textColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
-
+                
             }
         } else {
             annotationLabel.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
             triangle.textColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
             
-
+            
         }
         
         //annotationLabel.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
@@ -754,29 +658,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         annotationView?.addSubview(annotationLabel)
         annotationView?.addSubview(triangle)
         
-
-
+        
+        
         //OK
         /*
-        let annotationName = UILabel(frame: CGRect(x: -20, y: 65, width: 95, height: 25))
-        annotationName.numberOfLines = 3
-        annotationName.textAlignment = .center
-        annotationName.font = UIFont(name: "Rockwell", size: 12)
-        
-        if let name = userAnnotation?.name {
-            annotationName.text = name
-            annotationName.isHidden = false
-        } else {
-            annotationName.isHidden = true
-        }
-        
-        annotationName.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.631372549, blue: 0.7921568627, alpha: 1)
-        annotationName.textColor = .white
-        
-        annotationName.layer.cornerRadius = 15
-        annotationName.clipsToBounds = true
-        annotationView?.addSubview(annotationName)
-        */
+         let annotationName = UILabel(frame: CGRect(x: -20, y: 65, width: 95, height: 25))
+         annotationName.numberOfLines = 3
+         annotationName.textAlignment = .center
+         annotationName.font = UIFont(name: "Rockwell", size: 12)
+         
+         if let name = userAnnotation?.name {
+         annotationName.text = name
+         annotationName.isHidden = false
+         } else {
+         annotationName.isHidden = true
+         }
+         
+         annotationName.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.631372549, blue: 0.7921568627, alpha: 1)
+         annotationName.textColor = .white
+         
+         annotationName.layer.cornerRadius = 15
+         annotationName.clipsToBounds = true
+         annotationView?.addSubview(annotationName)
+         */
         //END 20181017
         
         // 下面這行改了 白點消失 變成純愛心
@@ -794,13 +698,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
-        //新增下面這行 20181001
-        //           self.showAlert(title: "新增\(navigationUserName!) 為好友？", message: "認識一下吧！")
-        
-        //第一次進來 userAnnotation 點擊進來是 nil
-        
-        //print("QQQQQQQQ")
         
         if let userLocation = view.annotation as? UserAnnotation {
             self.userAnnotation = userLocation
@@ -820,13 +717,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             //搜尋 firebase 20181019
             showUserDetail(friendId: friendUserId, friendName: navigationUserName, friendImageURL: firiendImageURL)
-
+            
             //animateViewUp()
             
         } else {
             navigationUserName = "使用者"
         }
-       
+        
         //20181019 可以連點兩次
         mapView.deselectAnnotation(view.annotation, animated: true)
         //20181012
@@ -866,7 +763,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let reportController = UIAlertController(title: "確定檢舉及封鎖此用戶？", message: "按下確認後，該用戶將立即從您的地圖中移除並封鎖，我們將在 24 小時內對該用戶再次進行審查。", preferredStyle: .alert)
             
             let okAction = UIAlertAction(title: "確定", style: .destructive) { (action) in
-            
+                
                 //把封鎖的人加到 userdefault 每次資料回來去問 用 uuid
                 guard let blockID = self.friendUserId else { return }
                 print("把使用者\(blockID) 加到 封鎖清單")
@@ -897,19 +794,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let reportController = UIAlertController(title: "是否向其他人顯示自己位置？", message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態", preferredStyle: .alert)
             
             guard let myselfId = Auth.auth().currentUser?.uid else { return }
-
+            
             let hideAction = UIAlertAction(title: "隱藏", style: .destructive) { (action) in
-                
-                //把封鎖的人加到 userdefault 每次資料回來去問 用 uuid
-//                guard let blockID = self.friendUserId else { return }
-//                print("把使用者\(blockID) 加到 封鎖清單")
-//                let userDefaults = UserDefaults.standard
-//                self.removeUser(friendUserId: blockID)
-//                userDefaults.set("block", forKey: blockID)
-                //20181020
-               // let userDefaults = UserDefaults.standard
-                
-               // let myselfGender = userDefaults.value(forKey: "myselfGender")
                 
                 let userStatus = ["status": "disappear"]
                 
@@ -917,7 +803,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
                 
                 self.refference.updateChildValues(childUpdatesStatus)
-
+                
                 print("按下隱藏2")
                 
             }
@@ -929,12 +815,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
                 
                 self.refference.updateChildValues(childUpdatesStatus)
-
+                
                 print("按下顯示3")
             }
             
             let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
-
+            
             reportController.addAction(appearAction)
             reportController.addAction(hideAction)
             reportController.addAction(cancelAction)
@@ -951,16 +837,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func removeUser(friendUserId: String) {
         
-//        let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput)
-//
-//        self.mapView.addAnnotation(userlocations.userAnnotation)
-//
-//        self.locations.append(userlocations)
+        //        let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput)
+        //
+        //        self.mapView.addAnnotation(userlocations.userAnnotation)
+        //
+        //        self.locations.append(userlocations)
         
         for (index, user) in locations.enumerated() where user.id == friendUserId {
             
             //刪除該使用者在 array 整筆資料
-          
+            
             self.mapView.removeAnnotation(self.locations[index].userAnnotation)
             locations.remove(at: index)
             print("已從 array 刪除使用者\(friendUserId)")
@@ -969,7 +855,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
     }
-
+    
     
     func showUserDetail(friendId: String?, friendName: String?, friendImageURL: String?) {
         
@@ -985,38 +871,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //reload 看看
         userInfoDetailView.userInfoDetailTableView.reloadData()
         
-        //let bigPhotoURL = URL(string: friendImageURL + "?height=500")
-        
-        
-        //friendImageURLForCell = bigPhotoURL
-        
-//20181019
-//        let mapTap = UITapGestureRecognizer(target: self, action: #selector(animateViewDown))
-//        mapView.addGestureRecognizer(mapTap)
-        
-        
-        //let bigPhotoURL = URL(string: friendImageURL + "?height=500")
-        
-        //friendImageURLForCell = bigPhotoURL
-       
-        //self.userInfoDetailView.reloadInputViews()
-        
-        //self.userInfoDetailView.userName.text = friendName
-         //let bigPhotoURL = URL(string: friendImageURL + "?height=500")
-        //self.userInfoDetailView.userImage.kf.setImage(with: bigPhotoURL)
-       
-        
-        //self.userInfoDetailView.userInfoDetailTableView.dataSource = self
-        //self.userInfoDetailView.userInfoDetailTableView.delegate = self
-        
         downloadUserInfo(selectedUserId: friendId)
-        
-        //        guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
-        
-        
-        //userImage.kf.setImage(with: URL(string: photoSmallURL))
-        //userImage.kf.setImage(with: bigPhotoURL)
-        //self.addSwipe()
     }
     
     func downloadUserInfo(selectedUserId: String) {
@@ -1113,9 +968,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //20181013
         userInfoDetailView.userInfoDetailTableView.addGestureRecognizer(swipe)
         
-//        let viewBackgroundTap = UITapGestureRecognizer(target: self, action: #selector(animateViewDown))
-//        mapBackgroundView.addGestureRecognizer(viewBackgroundTap)
-       
+        //        let viewBackgroundTap = UITapGestureRecognizer(target: self, action: #selector(animateViewDown))
+        //        mapBackgroundView.addGestureRecognizer(viewBackgroundTap)
+        
     }
     
     
@@ -1131,7 +986,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         animatedTabBar.animationTabBarHidden(true)
         //沒用
         //animatedTabBar.bottomLineColor = UIColor.red
-    
+        
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
@@ -1145,10 +1000,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         userInfoDetailViewBottomConstraints.constant = 800
         
         //20181016
-//        self.tabBarController?.tabBar.isHidden = false
-       let animatedTabBar = self.tabBarController as! TabBarViewController
-       animatedTabBar.animationTabBarHidden(false)
-
+        //        self.tabBarController?.tabBar.isHidden = false
+        let animatedTabBar = self.tabBarController as! TabBarViewController
+        animatedTabBar.animationTabBarHidden(false)
+        
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
@@ -1156,23 +1011,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     //END
-    
-    
-    //    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
-    //        let test = MKClusterAnnotation(memberAnnotations: memberAnnotations)
-    //        test.title = "Emojis"
-    //        test.subtitle = nil
-    //        return test
-    //    }
-    //
-    //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    //        let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier, for: annotation)
-    //        annotationView.clusteringIdentifier = "identifier"
-    //        return annotationView
-    //    }
-    
-    
-    
+
     func saveSelfLocation(latitude: Double, longitude: Double) {
         
         #warning ("TODO: 拿大照片過來")
@@ -1193,39 +1032,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             ]]
         
         refference.updateChildValues(myLocationUpdates)
-        
-        
-        //        let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(friendId)": ["FriendUID": "\(friendId)","FriendName": "\(friendName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
-        //
-        //        let friendChildUpdates = ["/UserData/\(friendId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)","FriendName": "\(myselfName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
-        //
-        //
-        //        //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
-        //        //
-        //        self.refference.updateChildValues(myChildUpdates)
-        
-        //        self.ref.child("FilterData").child(userId).setValue([
-        //            "senderId": userId,
-        //            "senderName": userName,
-        //            "senderPhoto": userImage,
-        //            "time": createdTime,
-        //            "gender": filterAllData.gender,
-        //            "age": filterAllData.age,
-        //            "location": filterAllData.location,
-        //            "dating": filterAllData.dating,
-        //            "datingTime": filterAllData.time
-        //        ]) { (error, _) in
-        //
-        //            if let error = error {
-        //
-        //                print("Data could not be saved: \(error).")
-        //
-        //            } else {
-        //
-        //                print("Data saved successfully!")
-        //
-        //            }
-        //        }
         
     }
     
@@ -1354,15 +1160,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         self.present(alertController, animated: true, completion: nil)
         
     }
-    
-    //    func animateView() {
-    //        alertView.alpha = 0;
-    //        self.alertView.frame.origin.y = self.alertView.frame.origin.y + 50
-    //        UIView.animate(withDuration: 0.4, animations: { () -> Void in
-    //            self.alertView.alpha = 1.0;
-    //            self.alertView.frame.origin.y = self.alertView.frame.origin.y - 50
-    //        })
-    //    }
     
     func userDataMappingTrack() {
         
@@ -1499,11 +1296,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func setButtonTemplateImage() {
-//        var templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
-//        filterButton.setImage(templateImage, for: .normal)
+//                var templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
+//                filterButton.setImage(templateImage, for: .normal)
 //
-//        templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
-//        filterButton.setImage(templateImage, for: .selected)
+//                templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
+//                filterButton.setImage(templateImage, for: .selected)
         //20191021 新 icon
         
         var mappingIcon = #imageLiteral(resourceName: "heart-mapping").withRenderingMode(.alwaysTemplate)
@@ -1524,15 +1321,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterButton.imageView?.tintColor = #colorLiteral(red: 1, green: 0.1803921569, blue: 0.3333333333, alpha: 1) //刷色 不要 color 改紅色
         location.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         location.imageView?.tintColor = color
-        //        playButton.imageView?.tintColor = color
-        //
-        //        rewindButton.imageView?.tintColor = color
-        //
-        //        forwardButton.imageView?.tintColor = color
-        //
-        //        muteButton.imageView?.tintColor = color
-        //
-        //        fullScreenButton.imageView?.tintColor = color
     }
     
 }
@@ -1583,20 +1371,20 @@ extension MapViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
-        
+            
         case 0:
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: "UserData", for: indexPath)
                 as? UserDataTableViewCell {
                 
-//                friendNameForCell = friendName
-//                friendImageURLForCell = friendImageURL
+                //                friendNameForCell = friendName
+                //                friendImageURLForCell = friendImageURL
                 
                 //照片需要重改
                 //let photo = friendImageURLForCell
                 //let bigPhotoURL = URL(string: photo + "?height=500")
                 
-               // cell.userImage.kf.setImage(with: bigPhotoURL)
+                // cell.userImage.kf.setImage(with: bigPhotoURL)
                 
                 cell.userName.text = userSelected[6]
                 cell.userBirthday.text = "來到地球的日子：\(userSelected[1])"
@@ -1605,24 +1393,24 @@ extension MapViewController: UITableViewDataSource {
                 
                 //可以改用 userdefault
                 cell.moreButton.addTarget(self, action: #selector(showMoreAlert), for: .touchUpInside)
-
-//                guard let myselfId = Auth.auth().currentUser?.uid else { return UITableViewCell() }
-//                guard let friendId =  friendUserId else { return UITableViewCell() }
-//                if myselfId == friendId {
-//                    //cell.moreButton.isHidden = true
-//                    cell.moreButton.addTarget(self, action: #selector(showMoreAlert), for: .touchUpInside)
-//
-//                } else {
-//                    cell.moreButton.addTarget(self, action: #selector(showMoreAlert), for: .touchUpInside)
-//
-////                    cell.moreButton.addTarget(self, action: #selector(self.showReportAlert), for: .touchUpInside)
-//                    //cell.moreButton.isHidden = false
-//                }
+                
+                //                guard let myselfId = Auth.auth().currentUser?.uid else { return UITableViewCell() }
+                //                guard let friendId =  friendUserId else { return UITableViewCell() }
+                //                if myselfId == friendId {
+                //                    //cell.moreButton.isHidden = true
+                //                    cell.moreButton.addTarget(self, action: #selector(showMoreAlert), for: .touchUpInside)
+                //
+                //                } else {
+                //                    cell.moreButton.addTarget(self, action: #selector(showMoreAlert), for: .touchUpInside)
+                //
+                ////                    cell.moreButton.addTarget(self, action: #selector(self.showReportAlert), for: .touchUpInside)
+                //                    //cell.moreButton.isHidden = false
+                //                }
                 
                 
                 //self.userInfoDetailView.userImage.kf.setImage(with: bigPhotoURL)
                 
-              
+                
                 
                 //cell.userImage
                 //cell.userDetailTitle.text = userInfo[indexPath.row]
@@ -1637,7 +1425,7 @@ extension MapViewController: UITableViewDataSource {
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: "UserDetail", for: indexPath)
                 as? NewUserDetailTableViewCell {
-                  //cell.iconImage.image = UIImage.setIconTemplate(iconName: iconImageArray[indexPath.row])
+                //cell.iconImage.image = UIImage.setIconTemplate(iconName: iconImageArray[indexPath.row])
                 if indexPath.row == 0 {
                     cell.contentTitleLabel.text = userInfo[3]
                     cell.contentInfoLabel.text = userSelected[2]
@@ -1655,54 +1443,54 @@ extension MapViewController: UITableViewDataSource {
                     //cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
                 }
                 
-            //cell.userDetailTitle.text = "生日"
-            //            var userInfo = ["暱稱","性別","生日","感情狀態","居住地","體型5","我想尋找","專長 興趣","喜歡的國家","自己最近的困擾","想嘗試的事情","自我介紹",]
-            //            var userSelected =  ["男","1993-06-06","單身","台北","肌肉結實4","短暫浪漫","Frank Lin","吃飯，睡覺，看電影7","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
-            
-//            cell.userDetailTitle.text = userInfo[indexPath.row]
-//            cell.userDetailContent.text = userSelected[indexPath.row]
+                //cell.userDetailTitle.text = "生日"
+                //            var userInfo = ["暱稱","性別","生日","感情狀態","居住地","體型5","我想尋找","專長 興趣","喜歡的國家","自己最近的困擾","想嘗試的事情","自我介紹",]
+                //            var userSelected =  ["男","1993-06-06","單身","台北","肌肉結實4","短暫浪漫","Frank Lin","吃飯，睡覺，看電影7","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
+                
+                //            cell.userDetailTitle.text = userInfo[indexPath.row]
+                //            cell.userDetailContent.text = userSelected[indexPath.row]
                 
                 //OK 20181017
                 
-//                if indexPath.row == 0 {
-//                    cell.userDetailTitle.text = userInfo[3]
-//                    cell.userDetailContent.text = userSelected[2]
-//                } else if indexPath.row == 1 {
-//                    cell.userDetailTitle.text = userInfo[4]
-//                    cell.userDetailContent.text = userSelected[3]
-//                } else if indexPath.row == 2 {
-//                    cell.userDetailTitle.text = userInfo[5]
-//                    cell.userDetailContent.text = userSelected[4]
-//                } else if indexPath.row == 3 {
-//                    cell.userDetailTitle.text = userInfo[6]
-//                    cell.userDetailContent.text = userSelected[5]
-//                } else if indexPath.row == 4 {
-//                    cell.userDetailTitle.text = userInfo[7]
-//                    cell.userDetailContent.text = userSelected[7]
-//                } else {
-//                    cell.userDetailTitle.text = userInfo[indexPath.row + 3]
-//                    cell.userDetailContent.text = userSelected[indexPath.row + 3]
-//                }
+                //                if indexPath.row == 0 {
+                //                    cell.userDetailTitle.text = userInfo[3]
+                //                    cell.userDetailContent.text = userSelected[2]
+                //                } else if indexPath.row == 1 {
+                //                    cell.userDetailTitle.text = userInfo[4]
+                //                    cell.userDetailContent.text = userSelected[3]
+                //                } else if indexPath.row == 2 {
+                //                    cell.userDetailTitle.text = userInfo[5]
+                //                    cell.userDetailContent.text = userSelected[4]
+                //                } else if indexPath.row == 3 {
+                //                    cell.userDetailTitle.text = userInfo[6]
+                //                    cell.userDetailContent.text = userSelected[5]
+                //                } else if indexPath.row == 4 {
+                //                    cell.userDetailTitle.text = userInfo[7]
+                //                    cell.userDetailContent.text = userSelected[7]
+                //                } else {
+                //                    cell.userDetailTitle.text = userInfo[indexPath.row + 3]
+                //                    cell.userDetailContent.text = userSelected[indexPath.row + 3]
+                //                }
                 
                 //END 20181017
                 
-            //cell.iconImage.backgroundColor =  #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1) // FB message borderColor
-            
-            //原本
-            //cell.iconImage.image = UIImage(named: iconImageArray[indexPath.row])
-            //原本 END
-            
-            //            cell.iconImage.image = UIImage.setIconTemplate(iconName: iconImageArray[indexPath.row])
-            //
-            //
-            //            cell.selectedBackgroundView?.backgroundColor = UIColor.orange
-            
-            //            cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
-            //
-            cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
-            cell.selectionStyle = UITableViewCell.SelectionStyle.none
-            
-            return cell
+                //cell.iconImage.backgroundColor =  #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1) // FB message borderColor
+                
+                //原本
+                //cell.iconImage.image = UIImage(named: iconImageArray[indexPath.row])
+                //原本 END
+                
+                //            cell.iconImage.image = UIImage.setIconTemplate(iconName: iconImageArray[indexPath.row])
+                //
+                //
+                //            cell.selectedBackgroundView?.backgroundColor = UIColor.orange
+                
+                //            cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
+                //
+                cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+                
+                return cell
             }
             
         case 2:
@@ -1717,7 +1505,7 @@ extension MapViewController: UITableViewDataSource {
                 
                 return cell
             }
-
+            
         default:
             return  UITableViewCell()
         }
@@ -1732,16 +1520,13 @@ extension MapViewController: UITableViewDataSource {
     
 }
 
-extension MapViewController: UITableViewDelegate {
-    
-}
+extension MapViewController: UITableViewDelegate {}
 
 extension MapViewController: sendAlertstatus {
+    
     func checkBool(flag: Bool) {
         self.flag = flag
     }
-    
-    
 }
 // swiftlint:disable file_length
 //swiftlint:disable all

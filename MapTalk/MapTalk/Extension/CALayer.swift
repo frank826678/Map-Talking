@@ -18,10 +18,8 @@ extension CALayer {
         blur: CGFloat = 4,
         spread: CGFloat = 0,
         corner: CGFloat = 60
-        //center: CGPoint = CGPoint(x: 30, y: 30)  //加 center
-    ) {
+        ) {
         cornerRadius = corner
-        //clipsToBounds = false
         shadowColor = color.cgColor
         shadowOpacity = alpha
         shadowOffset = CGSize(width: x, height: y)
@@ -40,10 +38,10 @@ extension CALayer {
                 startAngle: CGFloat(0),
                 endAngle: CGFloat.pi * 2.0,
                 clockwise: true
-            ).cgPath
+                ).cgPath
         }
     }
-
+    
     func applySketchRectShadow(
         color: UIColor = .black,
         alpha: Float = 0.5,
@@ -64,7 +62,7 @@ extension CALayer {
             shadowPath = UIBezierPath(rect: rect).cgPath
         }
     }
-
+    
 }
 
 // swiftlint:enable identifier_name

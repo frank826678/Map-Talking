@@ -97,7 +97,6 @@ class DateManager {
         //dateFormatter.dateFormat = "EEE, d MMM yyyy"
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        
         return dateFormatter.string(from: date)
     }
     
