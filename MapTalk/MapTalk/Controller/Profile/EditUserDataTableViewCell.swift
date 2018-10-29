@@ -12,7 +12,7 @@ protocol CellDelegate: AnyObject {
     
     //func cellButtonTapping(_ cell: UITableViewCell)
     func reszing(heightGap: CGFloat)
-    func editSave(textInput: String,tableViewCell: UITableViewCell)
+    func editSave(textInput: String, tableViewCell: UITableViewCell)
     //20181014
     
     //func updated(height: CGFloat)
@@ -20,7 +20,6 @@ protocol CellDelegate: AnyObject {
     //END
     //func updateLocalData(data: Any)
 }
-
 
 class EditUserDataTableViewCell: UITableViewCell {
 
@@ -30,8 +29,6 @@ class EditUserDataTableViewCell: UITableViewCell {
     //UIView!
     
     weak var delegate: CellDelegate?
-    
-
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,11 +50,10 @@ class EditUserDataTableViewCell: UITableViewCell {
         delegate?.reszing(heightGap: heightGap)
         
     }
-
     
 }
 
-extension EditUserDataTableViewCell: UITextViewDelegate{
+extension EditUserDataTableViewCell: UITextViewDelegate {
     
     func adjustTextViewHeight() {
         

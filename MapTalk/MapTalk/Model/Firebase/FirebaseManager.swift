@@ -82,7 +82,7 @@ struct FirebaseManager {
     }
     
     func getUserInfo(token: String) {
-        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"]).start(completionHandler: { (connection, result, error) in
+        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"]).start(completionHandler: { (_, result, error) in
             
             //            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, picture.type(large)"]).start(completionHandler: { (connection, result, error) in
             //guard let 改成 let
@@ -112,7 +112,6 @@ struct FirebaseManager {
                     guard let userId = Auth.auth().currentUser?.uid else { return }
                     guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
                     
-                    
                     //20181018 改成 updatevalue setValue
                     self.refference.child("UserData").child(userId).updateChildValues([
                         "FBID": fbID,
@@ -129,7 +128,6 @@ struct FirebaseManager {
                     //                        "FBPhotoSmallURL": photoSmallURL,
                     //                        "UID": userId
                     //                        ])
-                    
                     
                     print("----存到 firebase 成功 -----")
                 }
@@ -177,7 +175,6 @@ struct FirebaseManager {
 //        }
 //    })
 //}
-
 
 //import Foundation
 //import FirebaseCore

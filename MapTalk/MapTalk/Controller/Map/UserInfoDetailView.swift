@@ -102,12 +102,11 @@ class UserInfoDetailView: UIView {
 //        self.layer.masksToBounds = false
 //        
 //    }
-
     
 }
 
 extension UIView {
-    func fixInView(_ container: UIView!) -> Void {
+    func fixInView(_ container: UIView!) {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.frame = container.frame
         container.addSubview(self)

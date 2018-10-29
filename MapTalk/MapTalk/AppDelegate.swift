@@ -55,7 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = false
         
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-
         
         //switch page //OLD OK
 //        if UserDefaults.standard.value(forKey: FirebaseType.uuid.rawValue) != nil {
@@ -168,7 +167,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // 沒用 window?.rootViewController?.tabBarController?.selectedIndex = 1
         
 //        window?.rootViewController = UIStoryboard.mapStoryboard().instantiateInitialViewController()
-
         
     }
     

@@ -15,7 +15,6 @@ class ContactUsViewController: UIViewController {
     
     @IBOutlet weak var backgroundView: UIView!
     
-    
     @IBOutlet weak var versionLabel: UILabel!
     
     @IBOutlet weak var updateLabel: UILabel!
@@ -55,7 +54,6 @@ class ContactUsViewController: UIViewController {
         self.tabBarController?.tabBar.isTranslucent = true
     }
     
-    
     @IBAction func contactButtonClicked(_ sender: UIButton) {
         sendEmail()
     }
@@ -78,8 +76,8 @@ class ContactUsViewController: UIViewController {
 //        ]
         
         layerGradient.colors = [
-            UIColor(red:188/255.0, green:229/255.0, blue:255/255.0, alpha:1).cgColor,
-            UIColor(red:219/255.0, green:234/255.0, blue:255/255.0, alpha:1).cgColor
+            UIColor(red: 188/255.0, green: 229/255.0, blue: 255/255.0, alpha: 1).cgColor,
+            UIColor(red: 219/255.0, green: 234/255.0, blue: 255/255.0, alpha: 1).cgColor
         ]
         
         //        layerGradient.colors = [UIColor(hex: 0x1271ff).CGColor,UIColor(hex: 0x2dc3fe).CGColor]

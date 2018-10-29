@@ -70,7 +70,6 @@ struct FacebookManager {
     
 }
 
-
 /*
 import Foundation
 import FBSDKLoginKit

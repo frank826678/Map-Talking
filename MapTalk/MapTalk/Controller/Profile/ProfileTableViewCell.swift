@@ -40,8 +40,6 @@ class ProfileTableViewCell: UITableViewCell {
         iconBackgroundView.layer.cornerRadius = 25
         iconBackgroundView.clipsToBounds = true
         
-
-        
         //目前12張照片 icon 是用 程式碼控制 template
         //目前12張照片 icon 是用 storyboard 的 renderAs 改成 template
     }

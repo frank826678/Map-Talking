@@ -50,7 +50,7 @@ class ChatViewController: UIViewController {
         if reachability?.currentReachabilityStatus().rawValue == 0 {
             print("no internet connected.")
             return false
-        }else {
+        } else {
             print("internet connected successfully.")
             return true
         }
@@ -62,13 +62,12 @@ class ChatViewController: UIViewController {
             hintLabel.text = "請打開行動網路或 WI-FI"
             hintLabel.isHidden = false
             
-        }else {
+        } else {
             
              hintLabel.isHidden = true
             
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,7 +99,6 @@ class ChatViewController: UIViewController {
         
         //change tabbar page 有作用 但是顏色沒變過去
         //tabBarController?.selectedIndex = 2
-        
         
         // swiftlint:disable force_cast
         let ramTBC = tabBarController as! TabBarViewController
@@ -262,7 +260,6 @@ class ChatViewController: UIViewController {
             print("----------------")
             print("所有 朋友資料 資料 \(self.friendsList)")
             
-            
         })
         
     }
@@ -383,7 +380,7 @@ class ChatViewController: UIViewController {
     
     func getNewFriendMessage(friendId: String) {
         
-        var channel :String = "Nothing"
+        var channel: String = "Nothing"
         
         guard let myselfId = Auth.auth().currentUser?.uid else { return }
         
@@ -432,7 +429,7 @@ class ChatViewController: UIViewController {
             
             if  message.senderId == self.myselfUID {
 
-                for (index, user) in self.newMessage.enumerated() where user.friendUID == message.friendUID || user.senderId == message.friendUID  {
+                for (index, user) in self.newMessage.enumerated() where user.friendUID == message.friendUID || user.senderId == message.friendUID {
 
                     //user.friendUID == message.friendUID || user.senderId == message.friendUID  {
 
@@ -543,12 +540,10 @@ extension ChatViewController: UITableViewDataSource {
             
             if searchStatus == false {
                 
-                if  newMessage[indexPath.row].senderId == myselfUID
-                {
+                if  newMessage[indexPath.row].senderId == myselfUID {
                     cell.userName.text = newMessage[indexPath.row].friendName
                     
-                    if let photoString = newMessage[indexPath.row].friendImageUrl
-                    {
+                    if let photoString = newMessage[indexPath.row].friendImageUrl {
                         cell.userImage.kf.setImage(with: URL(string: photoString))
                     } else {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
@@ -560,8 +555,7 @@ extension ChatViewController: UITableViewDataSource {
                     
                     cell.userName.text = newMessage[indexPath.row].senderName
                     
-                    if let photoString = newMessage[indexPath.row].senderPhoto
-                    {
+                    if let photoString = newMessage[indexPath.row].senderPhoto {
                         cell.userImage.kf.setImage(with: URL(string: photoString))
                     } else {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
@@ -574,12 +568,10 @@ extension ChatViewController: UITableViewDataSource {
             } else {
                 
                 //cell.userName.text = result[indexPath.row].friendName
-                if  result[indexPath.row].senderId == myselfUID
-                {
+                if  result[indexPath.row].senderId == myselfUID {
                     cell.userName.text = result[indexPath.row].friendName
                     
-                    if let photoString = result[indexPath.row].friendImageUrl
-                    {
+                    if let photoString = result[indexPath.row].friendImageUrl {
                         cell.userImage.kf.setImage(with: URL(string: photoString))
                     } else {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
@@ -618,7 +610,6 @@ extension ChatViewController: UITableViewDataSource {
             
             //
             //cell.textLabel?.text = self.result[indexPath.row]
-            
             
             //cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
             //cell.userName.text = result[indexPath.row].friendName
@@ -660,14 +651,12 @@ extension ChatViewController: UITableViewDelegate {
         if searchStatus == false {
             
         //controller.article = articles[indexPath.row]
-        if newMessage[indexPath.row].senderId ==  myselfUID
-        { controller.friendUserId = self.newMessage[indexPath.row].friendUID
+        if newMessage[indexPath.row].senderId ==  myselfUID { controller.friendUserId = self.newMessage[indexPath.row].friendUID
         } else {
             controller.friendUserId = self.newMessage[indexPath.row].senderId
         }
         } else {
-            if result[indexPath.row].senderId ==  myselfUID
-            { controller.friendUserId = self.result[indexPath.row].friendUID
+            if result[indexPath.row].senderId ==  myselfUID { controller.friendUserId = self.result[indexPath.row].friendUID
             } else {
                 controller.friendUserId = self.result[indexPath.row].senderId
             }
@@ -706,14 +695,11 @@ extension ChatViewController: UISearchBarDelegate {
 //                if(arrr.friendName?.lowercased().contains(searchText.lowercased()))! {
 //        if(arrr.friendName?.lowercased(with: <#T##Locale?#>)) {
                 
-                
-                
                 //guard let friendName = arrr.friendName else { return }
                 
                 //if friendName == ""
                 
-                if  newMessage[index].senderId == myselfUID
-                {
+                if  newMessage[index].senderId == myselfUID {
                     guard let friendName = newMessage[index].friendName else { return }
                     let friendResult = friendName.contains(searchText)
                     if friendResult == true {
@@ -721,7 +707,6 @@ extension ChatViewController: UISearchBarDelegate {
                     } else {
                         print("名字不同")
                     }
-
                     
                     //cell.userName.text = newMessage[index].friendName
 //                    cell.userName.text = newMessage[index]
@@ -744,10 +729,8 @@ extension ChatViewController: UISearchBarDelegate {
                     } else {
                         print("名字不同")
                     }
-
                     
                 }
-                
                 
                 //OK
 //                let friendResult = friendName.contains(searchText)

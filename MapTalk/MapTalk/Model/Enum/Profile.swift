@@ -21,4 +21,3 @@ struct PersonalInfo {
     var searchTarget: String
     
 }
-

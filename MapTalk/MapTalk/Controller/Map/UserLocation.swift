@@ -23,7 +23,7 @@ class UserLocation: NSObject, MKAnnotation {
     var userName: String?
     let discipline: String
     
-    init(_ latitude:CLLocationDegrees, _ longitude:CLLocationDegrees, userName: String, discipline: String) {
+    init(_ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, userName: String, discipline: String) {
         self.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
         self.userName = userName
         self.discipline = discipline

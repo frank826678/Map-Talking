@@ -28,13 +28,12 @@ class ProfileViewController: UIViewController {
     
     //var iconImageArray: [String] = ["new3-pencil-50","new3-cheap-2-50","new3-settings-50-2","new3-new-post-50"]
     
-    var iconNameArray: [String] = ["個人資料","聯絡我們","登出裝置"]
-    var iconImageArray: [String] = ["new3-pencil-50","new3-new-post-50","new4-logout-100"]
+    var iconNameArray: [String] = ["個人資料", "聯絡我們", "登出裝置"]
+    var iconImageArray: [String] = ["new3-pencil-50", "new3-new-post-50", "new4-logout-100"]
 
     // swiftlint:disable identifier_name
     var ref: DatabaseReference!
     // swiftlint:enable identifier_name
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,9 +102,8 @@ class ProfileViewController: UIViewController {
 
         //原本的 color Ok
         //BEBEBE
-      userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 1, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
+      userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 1, x: 0, y: 0, blur: 15, spread: 15, corner: 60)
         //userImageShadowView.layer.applySketchShadow(color: UIColor.red, alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
-        
 
         //
         //userImageShadowView.layer.shadowPath = UIBezierPath(roundedRect: userImageShadowView.bounds, cornerRadius: 65).cgPath
@@ -168,7 +166,6 @@ class ProfileViewController: UIViewController {
             
             let userGender = ["gender": myselfGender]
             
-            
             let childUpdatesGender = ["/location/\(userId)/gender": userGender]
             
             ref.updateChildValues(childUpdatesGender)
@@ -179,7 +176,7 @@ class ProfileViewController: UIViewController {
     
 }
 
-extension ProfileViewController: UITableViewDataSource{
+extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
@@ -273,8 +270,7 @@ extension ProfileViewController: UITableViewDataSource{
                 sender: indexPath
             )
             
-        }
-        else if indexPath == 2 {
+        } else if indexPath == 2 {
             
             print("點了登出裝置")
             logOut()
@@ -288,7 +284,7 @@ extension ProfileViewController: UITableViewDataSource{
             
             let keychain = Keychain(service: "com.frank.MapTalk")
             
-            do  {
+            do {
                 
                 try keychain.remove(FirebaseType.uuid.rawValue)
                 

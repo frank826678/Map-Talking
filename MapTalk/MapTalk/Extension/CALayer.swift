@@ -48,8 +48,7 @@ extension CALayer {
         x: CGFloat = 0,
         y: CGFloat = 2,
         blur: CGFloat = 4,
-        spread: CGFloat = 0)
-    {
+        spread: CGFloat = 0) {
         shadowColor = color.cgColor
         shadowOpacity = alpha
         shadowOffset = CGSize(width: x, height: y)

@@ -21,10 +21,8 @@ class ADCoinViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
         
         self.navigationController?.navigationBar.topItem?.title = "     獲取金幣"
-
         
     }
-
 
     /*
     // MARK: - Navigation

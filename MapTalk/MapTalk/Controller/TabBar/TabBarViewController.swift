@@ -67,7 +67,6 @@ private enum Tab {
              case .map: return #imageLiteral(resourceName: "map_marker")
             
              case .profile: return #imageLiteral(resourceName: "user_male")
-
             
             //1 speech_buble
             //2 map_marker
@@ -108,7 +107,6 @@ private enum Tab {
 
         case .profile: return #imageLiteral(resourceName: "user_male").withRenderingMode(.alwaysTemplate)
             
-            
         }
     }
 }
@@ -141,13 +139,10 @@ class TabBarViewController: RAMAnimatedTabBarController {
         //寫在這沒用 寫去 chatVC 的 viewDidLoad()
         //tabBarController?.selectedIndex = 2
         
-        
         //frankTabBar.selectedItem = 1
         //RAMAnimatedTabBarItem.selectedState(1)
        
         //let controller = tab.controller()
-        
-        
         
         //RAMAnimatedTabBarItem.selectedState(1)
         //20181005
@@ -242,7 +237,6 @@ class TabBarViewController: RAMAnimatedTabBarController {
         //tabbar 漸層
         
         //self.tabBar.setup(width: self.view.bounds.width, height: self.view.bounds.height)
-        
 
         setViewControllers(controllers, animated: false)
     }

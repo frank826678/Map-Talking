@@ -10,7 +10,7 @@ import UIKit
 
 protocol PersonalInformationCellDelegate: AnyObject {
     
-    func editSave(textInput: String,tableViewCell: UITableViewCell)
+    func editSave(textInput: String, tableViewCell: UITableViewCell)
     
 }
 

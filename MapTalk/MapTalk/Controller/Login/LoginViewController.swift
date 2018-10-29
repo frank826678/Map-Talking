@@ -29,10 +29,7 @@ class LoginViewController: UIViewController {
     var refference: DatabaseReference!
     var userPhotoComplement: ((_ data: URL) -> Void)?
     
-
-    
     let fbUserDefault: UserDefaults = UserDefaults.standard
-
     
 //    @IBAction func loginButtonAction(_ sender: UIButton) {
 //
@@ -72,7 +69,6 @@ class LoginViewController: UIViewController {
                 //這裡有 signInFirebase 下面 firebase login 可以刪掉
                 
             //    let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                
                 
               //  Auth.auth().signInAndRetrieveData(with: credential, completion: { (result, error) in
                         print("登入成功 Success")
@@ -144,7 +140,6 @@ class LoginViewController: UIViewController {
         
         */
     }
-    
     
     private func signInFirebase(token: String) {
         
@@ -235,7 +230,6 @@ class LoginViewController: UIViewController {
        */
       //20181019END
  
- 
     func uploadImagePic(
         url: URL
         ) {
@@ -275,7 +269,6 @@ class LoginViewController: UIViewController {
 //
 //    }
     
-    
 //    func loginErrorAlert(errorMessage: String?) {
 //        
 //        let alert = UIAlertController(title: "Login Failed", message: errorMessage, preferredStyle: .alert)
@@ -295,7 +288,6 @@ class LoginViewController: UIViewController {
         
         //let layerGradient = CAGradientLayer()
         
-        
 //        entryContent.layer.shadowOffset = CGSize(width: 0, height: 2)
 //        entryContent.layer.shadowOpacity = 1
 //        entryContent.layer.shadowRadius = 5
@@ -303,7 +295,6 @@ class LoginViewController: UIViewController {
 //        facebookLoginBot.layer.cornerRadius = 10
 //        facebookLoginBot.layer.borderWidth = 1
 //        facebookLoginBot.layer.borderColor = UIColor.lightGray.cgColor
-        
         
     }
     
@@ -325,15 +316,13 @@ class LoginViewController: UIViewController {
 //        ]
 
         layerGradient.colors = [
-            UIColor(red:188/255.0, green:229/255.0, blue:255/255.0, alpha:1).cgColor,
-            UIColor(red:219/255.0, green:234/255.0, blue:255/255.0, alpha:1).cgColor
+            UIColor(red: 188/255.0, green: 229/255.0, blue: 255/255.0, alpha: 1).cgColor,
+            UIColor(red: 219/255.0, green: 234/255.0, blue: 255/255.0, alpha: 1).cgColor
         ]
-
         
 //        layerGradient.colors = [UIColor(hex: 0x1271ff).CGColor,UIColor(hex: 0x2dc3fe).CGColor]
         //#2dc3fe 淡藍
         //#1271ff 重藍 UIColor(red:0.07, green:0.44, blue:1.00, alpha:1.0)
-
         
         //layerGradient.startPoint = CGPoint(x: 0, y: 0.5)
         //layerGradient.endPoint = CGPoint(x: 1, y: 0.5)

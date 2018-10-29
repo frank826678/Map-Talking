@@ -42,7 +42,6 @@ class NewUserDetailTableViewCell: UITableViewCell {
         contentBackground.layer.shadowColor = UIColor.gray.cgColor
         contentBackground.layer.shadowOpacity = 0.6
         contentBackground.layer.shadowOffset = CGSize.zero
-
         
     }
     
