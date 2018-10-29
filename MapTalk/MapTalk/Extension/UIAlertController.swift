@@ -12,13 +12,12 @@ import UIKit
 
 extension UIAlertController {
     
-    private static func alertMessage(
+    static func alertMessage(
         title: String? = "錯誤",
-        message: String,
-        preferredStyle: UIAlertController.Style? = UIAlertController.Style.alert
+        message: String
         ) -> UIAlertController {
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle!)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         
         let action = UIAlertAction(title: "確定", style: .default, handler: nil)
         
@@ -33,72 +32,86 @@ extension UIAlertController {
         
     }
     
-}
-
-/*
-extension UIAlertController {
+//    static func orderMessage(title: String, message: String) -> UIAlertController {
+//
+//        return alertMessage(title: title, message: message)
+//    }
     
-    static func alertMessage(
-        title: String? = "錯誤",
-        message: String,
-        preferredStyle: UIAlertController.Style? = UIAlertController.Style.alert
+    static func showAlert(
+        title: String?,
+        message: String?,
+        defaultOption: [String],
+        defalutCompletion: @escaping (UIAlertAction) -> Void
         ) -> UIAlertController {
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle!)
+        let alerController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
         
-        let action = UIAlertAction(title: "確定", style: .default, handler: nil)
+        let action = UIAlertAction(
+            title: "取消",
+            style: .cancel,
+            handler: nil
+        )
         
-        alert.addAction(action)
+        alerController.addAction(action)
         
-        return alert
-    }
-    
-    static func errorMessage(errorType: FBError) -> UIAlertController {
+        //action.setValue(UIColor.red, forKey: "titleTextColor")
         
-        //        if let fbError = errorType as? FBError {
-        
-        switch errorType {
+        for item in defaultOption {
             
-        case .system(let message):
+            let action = UIAlertAction(
+                title: item,
+                style: .default) { (action) in
+                    
+                    defalutCompletion(action)
+                    
+            }
             
-            return alertMessage(message: message)
-            
-        case .unrecognized(let message):
-            
-            return alertMessage(message: message)
-            
-        case .permissionDeclined:
-            
-            return alertMessage(message: "請允許開放存取 Facebook 個人資料")
-            
-        case .cancelled:
-            
-            return alertMessage(message: "用戶取消登入")
+            alerController.addAction(action)
             
         }
         
-        //                if let firebaseError = errorType as? FirebaseError {
-        //
-        //                    switch firebaseError {
-        //
-        //                    case .system(let message):
-        //
-        //                        return alertMessage(message: message)
-        //
-        //                    case .unrecognized(let message):
-        //
-        //                        return alertMessage(message: message)
-        //
-        //                    }
-        //
-        //            }
-        //
-        //
-        //        }
-        //
-        //        return UIAlertController()
+        return alerController
+    }
+    static func showActionSheet(
+        defaultOption: [String],
+        defalutCompletion: @escaping (UIAlertAction) -> Void
+        ) -> UIAlertController {
+        
+        let alerController = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        
+        let action = UIAlertAction(
+            title: "取消",
+            style: .cancel,
+            handler: nil
+        )
+        
+        alerController.addAction(action)
+        
+        //action.setValue(UIColor.red, forKey: "titleTextColor")
+        
+        for item in defaultOption {
+            
+            let action = UIAlertAction(
+                title: item,
+                style: .default) { (action) in
+                    
+                    defalutCompletion(action)
+                    
+            }
+            
+            alerController.addAction(action)
+            
+        }
+        
+        return alerController
     }
     
 }
-
- */

@@ -13,8 +13,9 @@ import FirebaseAuth
 import NotificationBannerSwift
 
 //swiftlint:disable all
-
-class EditViewController: UIViewController {
+//EditViewController
+//userInfoController
+class UserInfoController: UIViewController {
     
     #warning ("TODO: nickname 還沒有做 delegate, cell 希望可以做成 reuse, 目前不能上傳新改變的值")
     
@@ -287,7 +288,7 @@ class EditViewController: UIViewController {
     
 }
 
-extension EditViewController: UITableViewDataSource{
+extension UserInfoController: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -565,7 +566,7 @@ extension EditViewController: UITableViewDataSource{
     
 }
 
-extension EditViewController: UITableViewDelegate{}
+extension UserInfoController: UITableViewDelegate{}
 
 //extension EditViewController: CellDelegate {
 //
@@ -745,7 +746,7 @@ extension EditViewController: UITableViewDelegate{}
 //
 //}
 
-extension EditViewController: UIPickerViewDataSource {
+extension UserInfoController: UIPickerViewDataSource {
     
     //@IBAction
     //let test = "3" Extensions must not contain stored properties
@@ -1020,9 +1021,9 @@ extension EditViewController: UIPickerViewDataSource {
     
 }
 
-extension EditViewController: UIPickerViewDelegate {}
+extension UserInfoController: UIPickerViewDelegate {}
 
-extension EditViewController: PersonalInformationCellDelegate {
+extension UserInfoController: PersonalInformationCellDelegate {
     func editSave(textInput: String, tableViewCell: UITableViewCell) {
         
                 guard let indexPath = editTableView.indexPath(for: tableViewCell) else { return }

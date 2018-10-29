@@ -10,8 +10,6 @@ import UIKit
 import FBSDKLoginKit
 import FBSDKCoreKit
 import Firebase
-//import GoogleMaps
-//import GooglePlaces
 import IQKeyboardManagerSwift
 import Fabric
 import Crashlytics
@@ -69,22 +67,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //20181018
         let keychain = Keychain(service: "com.frank.MapTalk")
         
-        if  keychain[FirebaseType.uuid.rawValue] != nil {
+        if  keychain[FirebaseType.uuid.rawValue] != nil || keychain["anonymous"] == "anonymous" {
             switchToMainStoryBoard()
-            //switchToLoginStoryBoard()
-
         } else {
             switchToLoginStoryBoard()
         }
-        
-//        guard keychain[FirebaseType.uuid.rawValue] != nil || keychain["anonymous"] == "anonymous" else {
-//
-//            //switchLogIn()
-//            switchToLoginStoryBoard()
-//            return true
-//        }
-        
-        //switchToMainStoryBoard()
         
         Fabric.with([Crashlytics.self])
         return true
@@ -153,20 +140,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         window?.rootViewController = UIStoryboard.mainStoryboard().instantiateInitialViewController()
-        
-//        // swiftlint:disable force_cast
-//        let ramTBC = self.window!.rootViewController as! TabBarViewController
-//
-//        // swiftlint:enable force_cast
-//
-//        
-//        ramTBC.selectedIndex = 1
-//        
-//        ramTBC.setSelectIndex(from: 0, to: 1)
-        
-       // 沒用 window?.rootViewController?.tabBarController?.selectedIndex = 1
-        
-//        window?.rootViewController = UIStoryboard.mapStoryboard().instantiateInitialViewController()
         
     }
     

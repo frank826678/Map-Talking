@@ -11,6 +11,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 import KeychainAccess
+import NotificationBannerSwift
 
 class ProfileViewController: UIViewController {
     
@@ -22,7 +23,7 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var storyHighlightsTextField: UITextField!
     
-//imageArray: [UIImage] = []
+    //imageArray: [UIImage] = []
     //var iconImageArray: [UIImage] = [UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!]
     //var iconNameArray: [String] = ["個人資料","獲取金幣","設定","聯絡我們"]
     
@@ -30,7 +31,7 @@ class ProfileViewController: UIViewController {
     
     var iconNameArray: [String] = ["個人資料", "聯絡我們", "登出裝置"]
     var iconImageArray: [String] = ["new3-pencil-50", "new3-new-post-50", "new4-logout-100"]
-
+    
     // swiftlint:disable identifier_name
     var ref: DatabaseReference!
     // swiftlint:enable identifier_name
@@ -84,50 +85,50 @@ class ProfileViewController: UIViewController {
         userImage.clipsToBounds = true //沒這行的話 圖片還是方方正正的
         // shadowRadius = blur / 2.0
         //userImageShadowView.ok
-//        userImageShadowView.layer.cornerRadius = 65
-//
-//        userImageShadowView.clipsToBounds = false
-//        userImageShadowView.layer.shadowRadius = 20 //20
-//
-//        userImageShadowView.layer.shadowColor = UIColor.gray.cgColor
-//        userImageShadowView.layer.shadowOpacity = 0.6
-//        userImageShadowView.layer.shadowOffset = CGSize.zero
-         //userImageShadowView. END
+        //        userImageShadowView.layer.cornerRadius = 65
+        //
+        //        userImageShadowView.clipsToBounds = false
+        //        userImageShadowView.layer.shadowRadius = 20 //20
+        //
+        //        userImageShadowView.layer.shadowColor = UIColor.gray.cgColor
+        //        userImageShadowView.layer.shadowOpacity = 0.6
+        //        userImageShadowView.layer.shadowOffset = CGSize.zero
+        //userImageShadowView. END
         
         //userImageShadowView.layer.cornerRadius = 65
-    
+        
         userImageShadowView.clipsToBounds = false
         //紅色明顯
         //userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
-
+        
         //原本的 color Ok
         //BEBEBE
-      userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 1, x: 0, y: 0, blur: 15, spread: 15, corner: 60)
+        userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 1, x: 0, y: 0, blur: 15, spread: 15, corner: 60)
         //userImageShadowView.layer.applySketchShadow(color: UIColor.red, alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
-
+        
         //
         //userImageShadowView.layer.shadowPath = UIBezierPath(roundedRect: userImageShadowView.bounds, cornerRadius: 65).cgPath
-
-//        userImageShadowView.layer.shadowOffset = CGSize(width: 4, height: 4)
-
+        
+        //        userImageShadowView.layer.shadowOffset = CGSize(width: 4, height: 4)
+        
         //        userImage.layer.borderColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
-//        userImage.layer.borderWidth = 4
+        //        userImage.layer.borderWidth = 4
         
         //userImage.shadowSetup(cgSize: CGSize(width: 5, height: 5), shadowRadius: 5, shadowOpacity: 0.5)
         
-//        let outerView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-//        outerView.clipsToBounds = false
-//        outerView.layer.shadowColor = UIColor.black.cgColor
-//        outerView.layer.shadowOpacity = 1
-//        outerView.layer.shadowOffset = CGSize.zero
-//        outerView.layer.shadowRadius = 10
-//        outerView.layer.shadowPath = UIBezierPath(roundedRect: outerView.bounds, cornerRadius: 60).cgPath
+        //        let outerView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        //        outerView.clipsToBounds = false
+        //        outerView.layer.shadowColor = UIColor.black.cgColor
+        //        outerView.layer.shadowOpacity = 1
+        //        outerView.layer.shadowOffset = CGSize.zero
+        //        outerView.layer.shadowRadius = 10
+        //        outerView.layer.shadowPath = UIBezierPath(roundedRect: outerView.bounds, cornerRadius: 60).cgPath
         
-//        let myImage = UIImageView(frame: outerView.bounds)
-//        myImage.clipsToBounds = true
-//        myImage.layer.cornerRadius = 10
+        //        let myImage = UIImageView(frame: outerView.bounds)
+        //        myImage.clipsToBounds = true
+        //        myImage.layer.cornerRadius = 10
         
-       // outerView.addSubview(userImage)
+        // outerView.addSubview(userImage)
         
         //userImage.layer.masksToBounds = false
         //120
@@ -208,7 +209,7 @@ extension ProfileViewController: UITableViewDataSource {
             cell.iconButton.addTarget(self, action: #selector(iconBtnClicked(sender:)), for: .touchUpInside)
             
             //cell.iconButton.addTarget(self, action: "iconBtnPressed", for: UIControl.Event.touchUpInside)
-
+            
             //cell.selectedBackgroundView?.backgroundColor = UIColor.orange
             
             //cell.selectionStyle = UITableViewCell.SelectionStyle.none
@@ -224,32 +225,6 @@ extension ProfileViewController: UITableViewDataSource {
         
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.row == 0 {
-//            //configure action when tap cell 1
-//            print("點了個人資料")
-//            performSegue(
-//                withIdentifier: String(describing: EditViewController.self),
-//                sender: indexPath
-//            )
-//
-//        } else if indexPath.row == 1 {
-//            //configure action when tap cell 1
-//            print("點了聯絡我們")
-//            performSegue(
-//                withIdentifier: String(describing: ContactUsViewController.self),
-//                sender: indexPath
-//            )
-//
-//        }
-//        else if indexPath.row == 2 {
-//
-//            print("點了登出裝置")
-//            logOut()
-//        }
-//
-//    }
-    
     @objc func iconBtnClicked(sender: UIButton) {
         
         let indexPath = sender.tag
@@ -258,7 +233,7 @@ extension ProfileViewController: UITableViewDataSource {
             //configure action when tap cell 1
             print("點了個人資料")
             performSegue(
-                withIdentifier: String(describing: EditViewController.self),
+                withIdentifier: String(describing: UserInfoController.self),
                 sender: indexPath
             )
             
@@ -277,40 +252,84 @@ extension ProfileViewController: UITableViewDataSource {
         }
     }
     
-    func logOut() {
-        let alert = UIAlertController(title: "登出", message: "您是否要登出帳號？", preferredStyle: UIAlertController.Style.alert)
+//    func logOut() {
+//        let alert = UIAlertController(title: "登出", message: "您是否要登出帳號？", preferredStyle: UIAlertController.Style.alert)
+//
+//        let action = UIAlertAction(title: "確認", style: .default) { (_) in
+//
+//            let keychain = Keychain(service: "com.frank.MapTalk")
+//
+//            do {
+//
+//                try keychain.remove(FirebaseType.uuid.rawValue)
+//
+//                try Auth.auth().signOut()
+//
+//                AppDelegate.shared.switchToLoginStoryBoard()
+//
+//                self.resetDefaults()
+//
+//                print("登出成功及清空 user")
+//
+//            } catch {
+//                print("登出失敗，請確認網路")
+//                //BaseNotificationBanner.warningBanner(subtitle: "登出失敗，請確認網路")
+//                return
+//            }
+//
+//        }
+//
+//        let cancel = UIAlertAction(title: "取消", style: .cancel)
+//
+//        alert.addAction(cancel)
+//
+//        alert.addAction(action)
+//
+//        self.present(alert, animated: true, completion: nil)
+//    }
+    
+    private func logOut() {
         
-        let action = UIAlertAction(title: "確認", style: .default) { (_) in
+        let alertController =  UIAlertController.showActionSheet(
+        defaultOption: ["登出"]) { (action) in
             
-            let keychain = Keychain(service: "com.frank.MapTalk")
-            
-            do {
-                
-                try keychain.remove(FirebaseType.uuid.rawValue)
-                
-                try Auth.auth().signOut()
-                
-                AppDelegate.shared.switchToLoginStoryBoard()
-                
-                self.resetDefaults()
-                
-                print("登出成功及清空 user")
-                
-            } catch {
-                print("登出失敗，請確認網路")
-                //BaseNotificationBanner.warningBanner(subtitle: "登出失敗，請確認網路")
-                return
+            let alert = UIAlertController.showAlert(
+                title: "登出",
+                message: "您是否要登出帳號？",
+                defaultOption: ["確定"]) { (action) in
+                    
+                    let keychain = Keychain(service: "com.frank.MapTalk")
+                    
+                    do  {
+                        
+                        try keychain.remove(FirebaseType.uuid.rawValue)
+                        
+                        try keychain.remove("anonymous")
+                        
+                        try Auth.auth().signOut()
+                        
+                        self.resetDefaults()
+                        
+                        print("登出成功及清空 user")
+                        
+                        AppDelegate.shared.switchToLoginStoryBoard()
+
+                        //AppDelegate.shared.switchLogIn()
+                        
+                    } catch {
+                        
+                        BaseNotificationBanner.warningBanner(subtitle: "登出失敗，請確認網路")
+                        print("登出失敗，請確認網路")
+                        return
+                    }
+                    
             }
+            
+            self.present(alert, animated: true, completion: nil)
             
         }
         
-        let cancel = UIAlertAction(title: "取消", style: .cancel)
-        
-        alert.addAction(cancel)
-        
-        alert.addAction(action)
-        
-        self.present(alert, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func resetDefaults() {

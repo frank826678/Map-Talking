@@ -469,12 +469,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    //    func fetchCenter(center: CLLocationCoordinate2D) {
-    //
-    //
-    //    }
-    
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let coord = manager.location?.coordinate {
@@ -487,20 +481,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //20181009 準備使用 notification 本身的位置 及更新的位置 打去給 filter 那頁
             NotificationCenter.default.post(name: .myselfLocation, object: center)
             
-            
-            //fetchCenter(center: center)
-            
-            //            let region = MKCoordinateRegion(center: center,
-            //                                            span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08))
-            
             saveSelfLocation(latitude: center.latitude, longitude: center.longitude)
             
             //增加一個 closure 傳值 把目前位置傳過去 filter 讓他 setvalue 的時候 也有值可以上傳
         }
         
     }
-    
-    //新寫法 不會有白色的點擋住 但是點擊後不會觸發任何事件 不能做任何動作
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -547,20 +533,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         let annotationLabel = UILabel(frame: CGRect(x: -40, y: -35, width: 140, height: 30))
         
-        //if shadowView.tag == 6 {
-        //        if shadowView.viewWithTag(6) != nil {
-        //            annotationLabel.text = userAnnotation?.message
-        //            print("---已經加過 view")
-        //            return annotationView
-        //        } else {
-        //            print("尚未加過 view")
-        //        }
-        
         shadowView.tag = 6
         shadowView.contentMode = .scaleAspectFit
-        //let blurEffect = UIBlurEffect(style: .light)
-        //let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        
         shadowView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         //shadowView.layer.applySketchShadow(color: UIColor.red, alpha: 1, x: 0, y: 0, blur: 10, spread: 40, corner: 30,center: (annotationView?.center)!)
         //角度修正
@@ -569,17 +543,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //B7B7B7 改透明度 0.6
         //20181024 color ok
         //shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5980040668), alpha: 0.3, x: 0, y: 0, blur: 10, spread: 10, corner: 25)
-        
-        shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5980040668), alpha: 1, x: 0, y: 0, blur: 10, spread: 10, corner: 25)
-        
-        
-        //userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
-        
-        
-        //shadowView.clipsToBounds = true
-        //shadowView.layer.cornerRadius = 27.5
-        //shadowView.layer.borderColor = #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5)
-        //shadowView.layer.borderWidth = 4
+        //#colorLiteral(red: 0.8392156863, green: 0.8392156863, blue: 0.8392156863, alpha: 1)
+        shadowView.layer.applySketchShadow(color: UIColor.lightGray, alpha: 1, x: 0, y: 0, blur: 15, spread: 15, corner: 25)
         
         // 設定頭像
         let imageView = UIImageView()
@@ -644,8 +609,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         } else {
             annotationLabel.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
             triangle.textColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
-            
-            
         }
         
         //annotationLabel.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
@@ -658,42 +621,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         annotationView?.addSubview(annotationLabel)
         annotationView?.addSubview(triangle)
         
-        
-        
-        //OK
-        /*
-         let annotationName = UILabel(frame: CGRect(x: -20, y: 65, width: 95, height: 25))
-         annotationName.numberOfLines = 3
-         annotationName.textAlignment = .center
-         annotationName.font = UIFont(name: "Rockwell", size: 12)
-         
-         if let name = userAnnotation?.name {
-         annotationName.text = name
-         annotationName.isHidden = false
-         } else {
-         annotationName.isHidden = true
-         }
-         
-         annotationName.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.631372549, blue: 0.7921568627, alpha: 1)
-         annotationName.textColor = .white
-         
-         annotationName.layer.cornerRadius = 15
-         annotationName.clipsToBounds = true
-         annotationView?.addSubview(annotationName)
-         */
-        //END 20181017
-        
-        // 下面這行改了 白點消失 變成純愛心
-        //annotationView?.image = #imageLiteral(resourceName: "btn_like_normal")
-        
-        //有這行也不 call didselect
-        //userAnnotation?.title = userAnnotation?.name
-        
-        //https://stackoverflow.com/questions/26713582/didselectannotationview-not-called
-        
-        //        annotationView?.canShowCallout = true
-        
-        //annotationView?.annotation?.title = userAnnotation?.name
         return annotationView
     }
     
@@ -837,12 +764,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func removeUser(friendUserId: String) {
         
-        //        let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput)
-        //
-        //        self.mapView.addAnnotation(userlocations.userAnnotation)
-        //
-        //        self.locations.append(userlocations)
-        
         for (index, user) in locations.enumerated() where user.id == friendUserId {
             
             //刪除該使用者在 array 整筆資料
@@ -853,7 +774,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //break
             return
         }
-        
     }
     
     
@@ -1035,15 +955,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
     }
     
-    @IBAction func test(_ sender: Any) {
-        if self.userAnnotation != nil {
-            navigationUserName = userAnnotation?.name!
-            self.showAlert(title: "即將導航到\(navigationUserName!)", message: "系好安全帶")
-        } else {
-            navigationUserName = "使用者"
-        }
-        
-    }
+
     
     func giveDirections(coordinate: CLLocationCoordinate2D, userName: String) {
         let requestCllocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -1124,39 +1036,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         
-        //增加 alert的約束條件 調整高度
-        //        let height: NSLayoutConstraint = NSLayoutConstraint(item: alertController.view,
-        //                                                           attribute: NSLayoutConstraint.Attribute.height,
-        //                                                           relatedBy: NSLayoutConstraint.Relation.equal,
-        //                                                           toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute,
-        //                                                           multiplier: 1, constant: self.view.frame.height * 0.80)
-        
-        //        let topConstraint : NSLayoutConstraint =  NSLayoutConstraint(item: alertController.view,
-        //                                      attribute: NSLayoutConstraint.Attribute.top,
-        //                                      relatedBy: NSLayoutConstraint.Relation.equal,
-        //                                      toItem: self.view, attribute: NSLayoutConstraint.Attribute.top,
-        //                                      multiplier: 1, constant: 140)
-        
-        //        let topConstraint : NSLayoutConstraint =  NSLayoutConstraint(item: alertController.view,
-        //                                                                    attribute: .top,
-        //                                                                    relatedBy: .equal,
-        //                                                                    toItem: self.view, attribute: .top,
-        //                                                                    multiplier: 1, constant: 140)
-        
-        //         let topConstraint : NSLayoutConstraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: sueperView, attribute: .top, multiplier: 1.0, constant: 50)
-        
-        //alertController.view.frame.origin.y += 200
-        //  alertController.view.frame.origin.y = alertController.view.frame.origin.y + 50
-        //                alertController.view.alpha = 0
-        //                alertController.view.frame.origin.y += 200
-        //            UIView.animate(withDuration: 0.4, animations: { () -> Void in
-        //                    alertController.view.alpha = 1.0;
-        //                    alertController.view.frame.origin.y -= 50
-        //                })
-        
-        
-        //alertController.view.addConstraint(topConstraint)
-        //增加 alert的約束條件 調整高度 END
         self.present(alertController, animated: true, completion: nil)
         
     }
@@ -1303,9 +1182,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //                filterButton.setImage(templateImage, for: .selected)
         //20191021 新 icon
         
-        var mappingIcon = #imageLiteral(resourceName: "heart-mapping").withRenderingMode(.alwaysTemplate)
+        let mappingIcon = #imageLiteral(resourceName: "heart-mapping").withRenderingMode(.alwaysTemplate)
         
-        var locationIcon = #imageLiteral(resourceName: "geo_fence").withRenderingMode(.alwaysTemplate)
+        let locationIcon = #imageLiteral(resourceName: "geo_fence").withRenderingMode(.alwaysTemplate)
         
         filterButton.setImage(mappingIcon, for: .normal)
         location.setImage(locationIcon, for: .normal)
@@ -1393,28 +1272,6 @@ extension MapViewController: UITableViewDataSource {
                 
                 //可以改用 userdefault
                 cell.moreButton.addTarget(self, action: #selector(showMoreAlert), for: .touchUpInside)
-                
-                //                guard let myselfId = Auth.auth().currentUser?.uid else { return UITableViewCell() }
-                //                guard let friendId =  friendUserId else { return UITableViewCell() }
-                //                if myselfId == friendId {
-                //                    //cell.moreButton.isHidden = true
-                //                    cell.moreButton.addTarget(self, action: #selector(showMoreAlert), for: .touchUpInside)
-                //
-                //                } else {
-                //                    cell.moreButton.addTarget(self, action: #selector(showMoreAlert), for: .touchUpInside)
-                //
-                ////                    cell.moreButton.addTarget(self, action: #selector(self.showReportAlert), for: .touchUpInside)
-                //                    //cell.moreButton.isHidden = false
-                //                }
-                
-                
-                //self.userInfoDetailView.userImage.kf.setImage(with: bigPhotoURL)
-                
-                
-                
-                //cell.userImage
-                //cell.userDetailTitle.text = userInfo[indexPath.row]
-                //cell.userDetailContent.text = userSelected[indexPath.row]
                 
                 cell.selectionStyle = UITableViewCell.SelectionStyle.none
                 

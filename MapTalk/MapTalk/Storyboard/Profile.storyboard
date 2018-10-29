@@ -84,7 +84,7 @@
                         <outlet property="userImage" destination="hLD-Pf-W6k" id="0In-20-bcf"/>
                         <outlet property="userImageShadowView" destination="jUE-au-VAW" id="PJQ-J4-ZyW"/>
                         <outlet property="userName" destination="zCF-ut-ww4" id="Lta-IJ-IfI"/>
-                        <segue destination="HuO-uy-mCW" kind="show" identifier="EditViewController" id="FqI-eW-yNA"/>
+                        <segue destination="HuO-uy-mCW" kind="show" identifier="UserInfoController" id="FqI-eW-yNA"/>
                         <segue destination="BiF-ZW-PW7" kind="show" identifier="ADCoinViewController" id="voI-Bo-HGi"/>
                         <segue destination="2LA-cz-Bcv" kind="show" identifier="SettingViewController" id="PKc-RE-rLL"/>
                         <segue destination="pnO-qN-jpc" kind="show" identifier="ContactUsViewController" id="s3j-MH-sbL"/>
@@ -277,10 +277,10 @@
             </objects>
             <point key="canvasLocation" x="1671" y="802"/>
         </scene>
-        <!--Edit View Controller-->
+        <!--User Info Controller-->
         <scene sceneID="mhu-RJ-9sV">
             <objects>
-                <viewController id="HuO-uy-mCW" customClass="EditViewController" customModule="MapTalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HuO-uy-mCW" customClass="UserInfoController" customModule="MapTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4xW-Te-PLR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

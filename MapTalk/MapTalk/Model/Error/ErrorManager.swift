@@ -14,6 +14,21 @@ protocol ErrorComment: Error {
     
 }
 
+//enum UserMiscouductError: ErrorComment {
+//    
+//    case putStrInPrice
+//    
+//    func errorMessage() -> String {
+//        
+//        switch self {
+//        case .putStrInPrice:
+//            return "請輸入數字"
+//        }
+//        
+//    }
+//    
+//}
+
 enum FBError: ErrorComment {
     
     case system(String)
@@ -46,6 +61,7 @@ enum FirebaseError: ErrorComment {
     
     case system(String)
     case unrecognized(String)
+    case uploadPicFail(String)
     
     func errorMessage() -> String {
         
@@ -56,8 +72,13 @@ enum FirebaseError: ErrorComment {
             
         case .unrecognized(let message):
             return message
+            
+        case .uploadPicFail(let message):
+            
+            return message
         }
         
     }
     
 }
+

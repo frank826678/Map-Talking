@@ -99,46 +99,6 @@ class LoginViewController: UIViewController {
                 
             }
         )
-        
-        /*
-        let fbLoginManager = FBSDKLoginManager()
-        
-        fbLoginManager.logIn(
-            withReadPermissions: ["public_profile", "email"],
-            from: self,
-            handler: { result, error in
-                
-                if let error = error {
-                    self.loginErrorAlert(errorMessage: error.localizedDescription)
-                    return
-                }
-                
-                guard let result = result else {
-                    self.loginErrorAlert(errorMessage: nil)
-                    return
-                }
-                
-                guard result.isCancelled == false else {
-                    return
-                }
-                
-                if result.token.declinedPermissions.contains("email") {
-                    let errorMessage = "Please allow your email permission to sign up the Voyage account."
-                    self.loginErrorAlert(errorMessage: errorMessage)
-                    return
-                }
-                
-                guard let tokenString = result.token.tokenString else {
-                    self.loginErrorAlert(errorMessage: nil)
-                    return
-                }
-                
-                print(tokenString)
-                
-                //self.createVoyageAccount(token: tokenString)
-        })
-        
-        */
     }
     
     private func signInFirebase(token: String) {
@@ -252,32 +212,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    // old
-//    private func signInFirebase(token: String) {
-//
-//        firebaseManager.logInFirebase(token: token, sucess: { (userInfo) in
-//
-//            DispatchQueue.main.async {
-//                AppDelegate.shared.switchToMainStoryBoard()
-//            }
-//
-//        }) { (error) in
-//
-//            // TODO:
-//
-//        }
-//
-//    }
-    
-//    func loginErrorAlert(errorMessage: String?) {
-//        
-//        let alert = UIAlertController(title: "Login Failed", message: errorMessage, preferredStyle: .alert)
-//        
-//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//        
-//        self.present(alert, animated: true, completion: nil)
-//    }
-    
     func changeStyle() {
         
         //美化字體
@@ -342,7 +276,6 @@ class LoginViewController: UIViewController {
         let keychain = Keychain(service: "com.frank.MapTalk")
         keychain["anonymous"] = "anonymous"
         
-        //AppDelegate.shared.switchMainPage()
         AppDelegate.shared.switchToMainStoryBoard()
 
     }
