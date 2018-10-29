@@ -16,9 +16,9 @@ class FilterCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var iconBackgroundView: UIView!
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
-        // Initialization code
-        //setTemplate()
+        
         setColor()
         
     }
@@ -45,9 +45,4 @@ class FilterCollectionViewCell: UICollectionViewCell {
         iconImage.contentMode = .scaleAspectFit
         
     }
-    
-//    func set(name: String) {
-//
-//    }
-    
 }

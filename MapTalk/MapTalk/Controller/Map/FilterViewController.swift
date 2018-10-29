@@ -398,21 +398,6 @@ class FilterViewController: UIViewController {
        currentCenter?.latitude = center.latitude
        currentCenter?.longitude = center.longitude
         
-//        guard let text = noti.object as? String else { return print("no text") }
-//
-//        if noti.name == .add {
-//
-//            toDoListItem.append(text)
-//
-//        } else {
-//
-//            guard let indexPath = indexPath else { return print("no index") }
-//            toDoListItem[indexPath.row] = text
-//
-//        }
-//
-//        tableView.reloadData()
-        
     }
     
     @objc func addTapped() {
@@ -429,9 +414,6 @@ class FilterViewController: UIViewController {
         case 0:
             print("男生")
             
-            //filterData[0].gender = "男生"
-            //            filterAllData = Filter(gender: <#String#>, age: <#String#>, location: <#String#>, dating: <#String#>, time: <#String#>)
-            
         case 1:
             print("女生")
             
@@ -439,8 +421,6 @@ class FilterViewController: UIViewController {
             print("全部")
             
         default:
-            
-            
             print("男生")
             break;
         }
