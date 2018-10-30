@@ -11,6 +11,8 @@ import MapKit
 import FirebaseDatabase
 import FirebaseAuth
 import Kingfisher
+import KeychainAccess
+import NotificationBannerSwift
 
 //swiftlint:disable all
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
@@ -259,6 +261,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
             
         }
+        //匿名檢查
+        let keychain = Keychain(service: "com.frank.MapTalk")
+        
+        if  keychain[FirebaseType.uuid.rawValue] == nil || keychain["anonymous"] == "anonymous" {
+            print("目前為匿名模式 請登出後使用 Facebook 登入")
+            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+
+        }
+
         
     }
     
@@ -324,7 +335,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 return
                 
             }
-            guard let userId = Auth.auth().currentUser?.uid else { return }
+            let userId = Auth.auth().currentUser?.uid
             
             if statusInput == "disappear" && snapshot.key != userId  {
                 print("向其他用戶 隱藏 中1")
@@ -332,6 +343,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             } else {
                 print("向其他用戶顯示中1")
             }
+            
+            print("***99 目前的 userID\(userId)")
             
             let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput, status: statusInput)
             
@@ -408,8 +421,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
             }
             
-            guard let userId = Auth.auth().currentUser?.uid else { return }
+            let userId = Auth.auth().currentUser?.uid
             
+//            let keychain = Keychain(service: "com.frank.MapTalk")
+//            if let userID = keychain[FirebaseType.uuid.rawValue] {
+//
+//            } else {
+//                userID = keychain["anonymous"]
+//            }
+            //if  keychain[FirebaseType.uuid.rawValue] != nil || keychain["anonymous"] == "anonymous"
+            //print("*****9 印出 keychain \(keychain[FirebaseType.uuid.rawValue]) *** \( keychain["anonymous"]) ")
             if statusInput == "disappear" && snapshot.key != userId  {
                 print("向其他用戶 隱藏 中2")
                 self.removeUser(friendUserId: snapshot.key)

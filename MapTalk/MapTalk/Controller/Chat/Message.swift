@@ -39,7 +39,7 @@ struct FreindData {
     
 }
 
-struct NewMessage {
+struct NewMessage: Codable {
     
     var content: String?
     

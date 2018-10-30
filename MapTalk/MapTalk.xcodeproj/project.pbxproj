@@ -70,6 +70,7 @@
 		01A624962171B363009CD507 /* UserDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A624942171B362009CD507 /* UserDataTableViewCell.swift */; };
 		01A624972171B363009CD507 /* UserDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A624952171B362009CD507 /* UserDataTableViewCell.xib */; };
 		01A714DC21874B9F00955BE5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A714DB21874B9F00955BE5 /* UserInfo.swift */; };
+		01A714DF2187D97600955BE5 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A714DE2187D97600955BE5 /* Chat.swift */; };
 		01CF3563216F334E00B98D71 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF3562216F334E00B98D71 /* Profile.swift */; };
 		01CF3566216F759500B98D71 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF3565216F759500B98D71 /* DateManager.swift */; };
 		01E6581F216DE40D00928C9B /* ProfileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E6581E216DE40D00928C9B /* ProfileContentView.swift */; };
@@ -157,6 +158,7 @@
 		01A624942171B362009CD507 /* UserDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTableViewCell.swift; sourceTree = "<group>"; };
 		01A624952171B362009CD507 /* UserDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserDataTableViewCell.xib; sourceTree = "<group>"; };
 		01A714DB21874B9F00955BE5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		01A714DE2187D97600955BE5 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		01CF3562216F334E00B98D71 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		01CF3565216F759500B98D71 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		01E6581E216DE40D00928C9B /* ProfileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContentView.swift; sourceTree = "<group>"; };
@@ -284,6 +286,14 @@
 			path = UserInfo;
 			sourceTree = "<group>";
 		};
+		01A714DD2187D94000955BE5 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				01A714DE2187D97600955BE5 /* Chat.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		01CF3564216F755C00B98D71 /* Time */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +367,7 @@
 		01EBF3562152815D00D23871 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				01A714DD2187D94000955BE5 /* Chat */,
 				01A714DA21874B2900955BE5 /* UserInfo */,
 				01CF3564216F755C00B98D71 /* Time */,
 				0141678C216320DE0080EDCE /* Enum */,
@@ -696,6 +707,7 @@
 				01E6581F216DE40D00928C9B /* ProfileContentView.swift in Sources */,
 				01A624962171B363009CD507 /* UserDataTableViewCell.swift in Sources */,
 				01CF3566216F759500B98D71 /* DateManager.swift in Sources */,
+				01A714DF2187D97600955BE5 /* Chat.swift in Sources */,
 				01701AF1215BC6930074B0B9 /* ChatViewController.swift in Sources */,
 				0106CC332174A2EE009A80C4 /* EditUserContentTableViewCell.swift in Sources */,
 				0106CC3021734EDD009A80C4 /* UITextView.swift in Sources */,

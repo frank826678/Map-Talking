@@ -18,6 +18,8 @@ import NotificationBannerSwift
 class UserInfoController: UIViewController {
     
     #warning ("TODO: nickname 還沒有做 delegate, cell 希望可以做成 reuse, 目前不能上傳新改變的值")
+    let decoder = JSONDecoder()
+    //var userInformation: UserInformation = []
     
     @IBOutlet weak var editTableView: UITableView!
     //20181014
@@ -157,7 +159,9 @@ class UserInfoController: UIViewController {
         //print("自己的位置是\(centerDeliveryFromMap)")
         //guard let text = messageTxt.text else { return }
         
-        guard let userId = Auth.auth().currentUser?.uid else { return }
+        guard let userId = Auth.auth().currentUser?.uid else {
+            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+            return }
         
         //guard let userName = Auth.auth().currentUser?.displayName else { return }
         
@@ -242,7 +246,18 @@ class UserInfoController: UIViewController {
             guard let value = snapshot.value as? NSArray else { return }
             print("*********1")
             
-            print(value)
+            guard let userInfoJSONData = try? JSONSerialization.data(withJSONObject: value) else { return }
+
+            do {
+                let userInfo = try self.decoder.decode(UserInformation.self, from: userInfoJSONData)
+                
+                //self.userInformation = userInfo
+                
+            } catch {
+                print(error)
+            }
+            //代辦
+            //print(value)
             
             guard let userGender = value[0] as? String else { return }
             guard let userBirthday = value[1] as? String else { return }

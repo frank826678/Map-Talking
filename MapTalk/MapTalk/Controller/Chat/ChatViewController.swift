@@ -14,6 +14,8 @@ import FirebaseAuth
 // 模擬機測試會有一句話顯示兩次的問題 要做外面可以顯示對方的最後一筆資料 並且可以按照順序排
 
 class ChatViewController: UIViewController {
+
+    let decoder = JSONDecoder()
     
     @IBOutlet weak var hintLabel: UILabel!
     @IBOutlet weak var chatTableView: UITableView!
@@ -393,79 +395,137 @@ class ChatViewController: UIViewController {
         }
         ref.child("chatroom").child("PersonalChannel").child(channel).queryOrdered(byChild: "time").queryLimited(toLast: 1).observe(.childAdded) { (snapshot) in
             
+            //var message: NewMessage
+            
             guard let value = snapshot.value as? NSDictionary else { return }
             
-            guard let senderId = value["senderId"] as? String else { return }
+            //codable 開始
+            guard let messageJSONData = try? JSONSerialization.data(withJSONObject: value) else { return }
             
-            guard let senderName = value["senderName"] as? String else { return }
+            do {
+                let message = try self.decoder.decode(NewMessage.self, from: messageJSONData)
+                print("****codable**** start")
+                print(message)
+                print("****codable**** END")
+                //message = messageCodable
+                //self.userInformation = userInfo
+                if  message.senderId == self.myselfUID {
+                    
+                    for (index, user) in self.newMessage.enumerated() where user.friendUID == message.friendUID || user.senderId == message.friendUID {
+                        
+                        //user.friendUID == message.friendUID || user.senderId == message.friendUID  {
+                        
+                        // || user.friendUID == message.senderId
+                        self.newMessage[index].content = message.content
+                        
+                        self.chatTableView.reloadData()
+                        
+                        return //跳出 整個 getNewFriendMessage 的 func
+                    }
+                    
+                } else {
+                    
+                    //不確定判斷式正確不正確
+                    for (index, user) in self.newMessage.enumerated()
+                        where user.friendUID == message.senderId
+                            || user.senderId == message.senderId {
+                                
+                                //user.friendUID == message.senderId
+                                self.newMessage[index].content = message.content
+                                
+                                self.chatTableView.reloadData()
+                                
+                                return
+                    }
+                    
+                }
+                
+                self.newMessage.append(message)
+                //20181016 searchbar
+                self.result.append(message)
+                //END
+                print("_____")
+                print(self.newMessage)
+                
+            self.chatTableView.reloadData()
+                
+            } catch {
+                print(error)
+            }
             
-            guard let time = value["time"] as? Int else { return }
-            
-            let content = value["content"] as? String
-            
-            let senderPhoto = value["senderPhoto"] as? String
-            
-            let imageUrl = value["imageUrl"] as? String
-            
-            let friendName = value["friendName"] as? String
-            
-            let friendNameURL = value["friendImageUrl"] as? String
-            
-            guard let friendUID = value["friendUID"] as? String else { return }
-            
-            let message = NewMessage(
-                content: content,
-                senderId: senderId,
-                senderName: senderName,
-                senderPhoto: senderPhoto,
-                time: time,
-                imageUrl: imageUrl,
-                friendName: friendName,
-                friendImageUrl: friendNameURL,
-                friendUID: friendUID
-            )
+            //self.chatTableView.reloadData()
+
+//            guard let senderId = value["senderId"] as? String else { return }
+//
+//            guard let senderName = value["senderName"] as? String else { return }
+//
+//            guard let time = value["time"] as? Int else { return }
+//
+//            let content = value["content"] as? String
+//
+//            let senderPhoto = value["senderPhoto"] as? String
+//
+//            let imageUrl = value["imageUrl"] as? String
+//
+//            let friendName = value["friendName"] as? String
+//
+//            let friendNameURL = value["friendImageUrl"] as? String
+//
+//            guard let friendUID = value["friendUID"] as? String else { return }
+//
+//            let message = NewMessage(
+//                content: content,
+//                senderId: senderId,
+//                senderName: senderName,
+//                senderPhoto: senderPhoto,
+//                time: time,
+//                imageUrl: imageUrl,
+//                friendName: friendName,
+//                friendImageUrl: friendNameURL,
+//                friendUID: friendUID
+//            )
             
             //要判斷是不是相同的人 相同的取代最後一行對話 不相同的再往上加
             
-            if  message.senderId == self.myselfUID {
-
-                for (index, user) in self.newMessage.enumerated() where user.friendUID == message.friendUID || user.senderId == message.friendUID {
-
-                    //user.friendUID == message.friendUID || user.senderId == message.friendUID  {
-
-                    // || user.friendUID == message.senderId
-                    self.newMessage[index].content = message.content
-
-                    self.chatTableView.reloadData()
-
-                    return //跳出 整個 getNewFriendMessage 的 func
-                }
-
-            } else {
-                
-                    //不確定判斷式正確不正確
-                for (index, user) in self.newMessage.enumerated()
-                    where user.friendUID == message.senderId
-                        || user.senderId == message.senderId {
-                            
-                    //user.friendUID == message.senderId
-                    self.newMessage[index].content = message.content
-                    
-                    self.chatTableView.reloadData()
-                    
-                    return
-                }
-                
-            }
-            
-            self.newMessage.append(message)
-            //20181016 searchbar
-            self.result.append(message)
-            //END
-            print("_____")
-            print(self.newMessage)
-            
-            self.chatTableView.reloadData()
+//            if  message.senderId == self.myselfUID {
+//
+//                for (index, user) in self.newMessage.enumerated() where user.friendUID == message.friendUID || user.senderId == message.friendUID {
+//
+//                    //user.friendUID == message.friendUID || user.senderId == message.friendUID  {
+//
+//                    // || user.friendUID == message.senderId
+//                    self.newMessage[index].content = message.content
+//
+//                    self.chatTableView.reloadData()
+//
+//                    return //跳出 整個 getNewFriendMessage 的 func
+//                }
+//
+//            } else {
+//
+//                    //不確定判斷式正確不正確
+//                for (index, user) in self.newMessage.enumerated()
+//                    where user.friendUID == message.senderId
+//                        || user.senderId == message.senderId {
+//
+//                    //user.friendUID == message.senderId
+//                    self.newMessage[index].content = message.content
+//
+//                    self.chatTableView.reloadData()
+//
+//                    return
+//                }
+//
+//            }
+//
+//            self.newMessage.append(message)
+//            //20181016 searchbar
+//            self.result.append(message)
+//            //END
+//            print("_____")
+//            print(self.newMessage)
+//
+//            self.chatTableView.reloadData()
             
         }
         
