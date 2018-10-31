@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,8 +25,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v3n-wm-EsK">
                                 <rect key="frame" x="0.0" y="0.0" width="315" height="76"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi, I am Luke, I love coding! " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m77-d8-t5Q">
-                                        <rect key="frame" x="10" y="28" width="295" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi, I am Luke, I love coding! " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="m77-d8-t5Q">
+                                        <rect key="frame" x="10" y="10" width="295" height="56"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -35,8 +36,10 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="76" id="44B-g3-iY4"/>
                                     <constraint firstItem="m77-d8-t5Q" firstAttribute="leading" secondItem="v3n-wm-EsK" secondAttribute="leading" constant="10" id="Qwb-0n-ONh"/>
+                                    <constraint firstItem="m77-d8-t5Q" firstAttribute="top" secondItem="v3n-wm-EsK" secondAttribute="top" constant="10" id="UVl-zh-EbB"/>
                                     <constraint firstItem="m77-d8-t5Q" firstAttribute="centerX" secondItem="v3n-wm-EsK" secondAttribute="centerX" id="ZVD-qY-Jba"/>
                                     <constraint firstItem="m77-d8-t5Q" firstAttribute="centerY" secondItem="v3n-wm-EsK" secondAttribute="centerY" id="dy9-fh-xPC"/>
+                                    <constraint firstAttribute="bottom" secondItem="m77-d8-t5Q" secondAttribute="bottom" constant="10" id="qmd-kY-ZMc"/>
                                     <constraint firstAttribute="trailing" secondItem="m77-d8-t5Q" secondAttribute="trailing" constant="10" id="zcA-E0-pUq"/>
                                 </constraints>
                             </view>

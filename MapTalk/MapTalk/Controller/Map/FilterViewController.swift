@@ -30,9 +30,9 @@ class FilterViewController: UIViewController {
     
     @IBOutlet weak var genderSegment: UISegmentedControl!
     
-//    @IBOutlet weak var ageSegment: UISegmentedControl!
+    //    @IBOutlet weak var ageSegment: UISegmentedControl!
     
-//    @IBOutlet weak var locationSegment: UISegmentedControl!
+    //    @IBOutlet weak var locationSegment: UISegmentedControl!
     
     @IBOutlet weak var maxAgeSlider: UISlider!
     @IBOutlet weak var minAgeSlider: UISlider!
@@ -40,7 +40,7 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var minAgeSliderValue: UILabel!
     @IBOutlet weak var locationSlider: UISlider!
     @IBOutlet weak var locationSliderValue: UILabel!
-      let step: Float = 1
+    let step: Float = 1
     
     // swiftlint:disable identifier_name
     var ref: DatabaseReference!
@@ -48,7 +48,7 @@ class FilterViewController: UIViewController {
     
     var filterData: [Filter] = []
     //var filterAllData: Filter? //若宣告在這不給問號要給啥???  -- 如果不用 array 只能先給 optional 下面再塞資料時一個一個給他
-
+    
     var filterNewData: [FilterData] = []
     
     var gender = ""
@@ -123,29 +123,29 @@ class FilterViewController: UIViewController {
         //20181008
         //可以用
         
-//        var pencilImage = UIImage(named: "chat_arrow_up")!
-//        // swiftlint:disable force_cast
-//        let pencilBtn: UIButton = UIButton(type: UIButton.ButtonType.custom) as! UIButton
-//
-//        // swiftlint:enable force_cast
-//
-//        pencilBtn.setImage(pencilImage, for: UIControl.State.normal)
-//        pencilBtn.addTarget(self, action: "pencilBtnPressed", for: UIControl.Event.touchUpInside)
-//        pencilBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-//        let pencilBarBtn = UIBarButtonItem(customView: pencilBtn)
-//
-//        self.navigationItem.setRightBarButtonItems([pencilBarBtn], animated: false)
+        //        var pencilImage = UIImage(named: "chat_arrow_up")!
+        //        // swiftlint:disable force_cast
+        //        let pencilBtn: UIButton = UIButton(type: UIButton.ButtonType.custom) as! UIButton
+        //
+        //        // swiftlint:enable force_cast
+        //
+        //        pencilBtn.setImage(pencilImage, for: UIControl.State.normal)
+        //        pencilBtn.addTarget(self, action: "pencilBtnPressed", for: UIControl.Event.touchUpInside)
+        //        pencilBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        //        let pencilBarBtn = UIBarButtonItem(customView: pencilBtn)
+        //
+        //        self.navigationItem.setRightBarButtonItems([pencilBarBtn], animated: false)
         
         //END
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(addTapped))
-
+        
         
         //        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
-//        let play = UIBarButtonItem(title: "Play", style: .plain, target: self, action: #selector(playTapped))
-//
-//        navigationItem.rightBarButtonItems = [add, play]
-
+        //        let play = UIBarButtonItem(title: "Play", style: .plain, target: self, action: #selector(playTapped))
+        //
+        //        navigationItem.rightBarButtonItems = [add, play]
+        
         
         // self.view.backgroundColor = .clear
         // self.view.backgroundColor = #colorLiteral(red: 0.3098039216, green: 0.8588235294, blue: 0.9921568627, alpha: 1)
@@ -200,12 +200,12 @@ class FilterViewController: UIViewController {
         //20181009  NotificationCenter
         NotificationCenter.default.addObserver(self, selector: #selector (getDataFrom(_:)), name: .myselfLocation, object: nil)
         
-//        if( CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-//            CLLocationManager.authorizationStatus() ==  .authorizedAlways){
-//
-//            currentLocation = locManager.location
-//
-//        }
+        //        if( CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+        //            CLLocationManager.authorizationStatus() ==  .authorizedAlways){
+        //
+        //            currentLocation = locManager.location
+        //
+        //        }
         
         setAgeSlider()
         setLocationSlider()
@@ -236,66 +236,56 @@ class FilterViewController: UIViewController {
     
     func showLocationAlert() {
         
-        let reportController = UIAlertController(title: "是否向其他人顯示自己位置？", message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態，需要顯示才能正常使用媒合功能。", preferredStyle: .alert)
-        
-        guard let myselfId = Auth.auth().currentUser?.uid else { return }
-        
-        let hideAction = UIAlertAction(title: "隱藏", style: .destructive) { (action) in
-            
-            //把封鎖的人加到 userdefault 每次資料回來去問 用 uuid
-            //                guard let blockID = self.friendUserId else { return }
-            //                print("把使用者\(blockID) 加到 封鎖清單")
-            //                let userDefaults = UserDefaults.standard
-            //                self.removeUser(friendUserId: blockID)
-            //                userDefaults.set("block", forKey: blockID)
-            //20181020
-            // let userDefaults = UserDefaults.standard
-            
-            // let myselfGender = userDefaults.value(forKey: "myselfGender")
-            
-            let userStatus = ["status": "disappear"]
-            
-            
-            let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
-            
-            self.ref.updateChildValues(childUpdatesStatus)
-            
-            print("按下隱藏2 FilterVC")
-            
-        }
-        let appearAction = UIAlertAction(title: "顯示", style: .default) { (action) in
-            
-            let userStatus = ["status": "appear"]
-            
-            
-            let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
-            
-            self.ref.updateChildValues(childUpdatesStatus)
-            
-            print("按下顯示3 FilterVC")
+        //    defaultOption: ["檢舉用戶", "封鎖用戶"])
+        guard let myselfId = Auth.auth().currentUser?.uid else {
+            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+            return }
+        let alertController =  UIAlertController.showAlert(
+            title: "是否向其他人顯示自己位置？",
+            message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態，需要顯示才能正常使用地圖功能。",
+            defaultOption: ["顯示","隱藏"]) { [weak self] (action) in
+                
+                switch action.title {
+                    
+                case "顯示":
+                    
+                    let userStatus = ["status": "appear"]
+                    
+                    let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
+                    
+                    self?.ref.updateChildValues(childUpdatesStatus)
+                    print("按下顯示3 MapViewController")
+                    
+                case "隱藏":
+                    
+                    let userStatus = ["status": "disappear"]
+                    
+                    let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
+                    
+                    self?.ref.updateChildValues(childUpdatesStatus)
+                    print("按下隱藏2 MapViewController")
+                    
+                default:
+                    break
+                    
+                }
         }
         
-        let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
-        
-        reportController.addAction(appearAction)
-        reportController.addAction(hideAction)
-        reportController.addAction(cancelAction)
-        
-        self.present(reportController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
         
     }
     
     func detectUserInfo() {
-
+        
         let userDefaults = UserDefaults.standard
         
         let myselfGender = userDefaults.value(forKey: "myselfGender")
         
         if myselfGender == nil {
             BaseNotificationBanner.warningBanner(subtitle: "請先到個人資料頁填寫資訊")
-
+            
         } else {
-             //BaseNotificationBanner.sucessBanner(subtitle: "請選擇想媒合的條件～")
+            //BaseNotificationBanner.sucessBanner(subtitle: "請選擇想媒合的條件～")
         }
         
     }
@@ -315,11 +305,11 @@ class FilterViewController: UIViewController {
         maxAgeSlider.minimumValue = 18
         maxAgeSlider.maximumValue = 65
         //maxAgeSlider.minimumValue = 0
-
+        
         
         // UISlider 是否可以在變動時同步執行動作
         // 設定 false 時 則是滑動完後才會執行動作
-
+        
         
         minAgeSlider.isContinuous = true
         minAgeSlider.addTarget(self,action:#selector(minAgeSliderDidchange(_:)), for:UIControl.Event.valueChanged)
@@ -335,12 +325,12 @@ class FilterViewController: UIViewController {
         let roundedStepValue = round(slider.value / step) * step
         slider.value = roundedStepValue
         
-//        minAgeSlider.maximumValue = maxAgeSlider.value
-//        maxAgeSlider.minimumValue = minAgeSlider.value
+        //        minAgeSlider.maximumValue = maxAgeSlider.value
+        //        maxAgeSlider.minimumValue = minAgeSlider.value
         
         
         minAgeSlider.maximumValue = maxAgeSlider.value
-
+        
         //locationSliderValue.text = String(Int(slider.value))
         minAgeSliderValue.text = "\(Int(minAgeSlider.value))"
         print(slider.value)
@@ -352,8 +342,8 @@ class FilterViewController: UIViewController {
         let roundedStepValue = round(slider.value / step) * step
         slider.value = roundedStepValue
         
-//        minAgeSlider.maximumValue = maxAgeSlider.value
-//        maxAgeSlider.minimumValue = minAgeSlider.value
+        //        minAgeSlider.maximumValue = maxAgeSlider.value
+        //        maxAgeSlider.minimumValue = minAgeSlider.value
         maxAgeSlider.minimumValue = minAgeSlider.value
         
         //locationSliderValue.text = String(Int(slider.value))
@@ -387,7 +377,7 @@ class FilterViewController: UIViewController {
         
     }
     
-
+    
     
     @objc func getDataFrom(_ noti: Notification) {
         
@@ -395,15 +385,15 @@ class FilterViewController: UIViewController {
             print("no center")
             return  }
         
-       currentCenter?.latitude = center.latitude
-       currentCenter?.longitude = center.longitude
+        currentCenter?.latitude = center.latitude
+        currentCenter?.longitude = center.longitude
         
     }
     
     @objc func addTapped() {
         
         getFilterData()
-
+        
         print("點擊了按下 Save 的按鈕")
     }
     
@@ -428,55 +418,55 @@ class FilterViewController: UIViewController {
     }
     
     
-//    @IBAction func ageChanged(_ sender: UISegmentedControl) {
-//        switch ageSegment.selectedSegmentIndex
-//        {
-//        case 0:
-//            print("18 - 25")
-//
-//        case 1:
-//            print("26 - 35")
-//
-//        case 2:
-//            print("36 以上")
-//
-//        default:
-//
-//
-//            print("年齡")
-//            break;
-//        }
-//
-//    }
+    //    @IBAction func ageChanged(_ sender: UISegmentedControl) {
+    //        switch ageSegment.selectedSegmentIndex
+    //        {
+    //        case 0:
+    //            print("18 - 25")
+    //
+    //        case 1:
+    //            print("26 - 35")
+    //
+    //        case 2:
+    //            print("36 以上")
+    //
+    //        default:
+    //
+    //
+    //            print("年齡")
+    //            break;
+    //        }
+    //
+    //    }
     
     
-//    @IBAction func locationChanged(_ sender: UISegmentedControl) {
-//
-//        switch locationSegment.selectedSegmentIndex
-//        {
-//        case 0:
-//            print("3 KM")
-//
-//        case 1:
-//            print("15 KM")
-//
-//        case 2:
-//            print("30 KM")
-//
-//        default:
-//
-//            print("距離")
-//            break;
-//        }
-//
-//    }
+    //    @IBAction func locationChanged(_ sender: UISegmentedControl) {
+    //
+    //        switch locationSegment.selectedSegmentIndex
+    //        {
+    //        case 0:
+    //            print("3 KM")
+    //
+    //        case 1:
+    //            print("15 KM")
+    //
+    //        case 2:
+    //            print("30 KM")
+    //
+    //        default:
+    //
+    //            print("距離")
+    //            break;
+    //        }
+    //
+    //    }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-//        let banner = StatusBarNotificationBanner(title: "累死我了", style: .success)
-//        banner.show()
+        //        let banner = StatusBarNotificationBanner(title: "累死我了", style: .success)
+        //        banner.show()
     }
     
     func getFilterData() {
@@ -511,20 +501,20 @@ class FilterViewController: UIViewController {
         let createdTime = Date().millisecondsSince1970
         
         //let messageKey = self.ref.child("FilterData").child("PersonalChannel").child(friendChannel).childByAutoId().key
-               
+        
         
         //  "location": filterAllData.location,
-//         "location": ["lat": currentLocation.coordinate.latitude,"lon": currentLocation.coordinate.longitude],
+        //         "location": ["lat": currentLocation.coordinate.latitude,"lon": currentLocation.coordinate.longitude],
         
         // 或是經緯度先給預設值 只要他有移動位置 就會更新他目前的位置 但是要是第一次進來直接媒合 這邊 setvalue 可能會取代掉正確的位置資訊  這邊可以試著用 update
         // 25°2'51"N   121°31'1"E 北車 "location": ["lat": 25.251,"lon": 121.311],
         let taipeiTraonLat: Double = 25.251
         let taipeiTraonLon: Double = 121.311
-
+        
         let userDefaults = UserDefaults.standard
         
         let myselfGender = userDefaults.value(forKey: "myselfGender")
-
+        
         self.ref.child("FilterData").child(userId).setValue([
             "senderId": userId,
             "senderName": userName,
@@ -563,11 +553,11 @@ class FilterViewController: UIViewController {
         
         //抓一個最難他達到的條件的下來判斷 讓資料量減少
         
-//        ref.child("FilterData").queryOrdered(byChild: "dating").queryEqual(toValue: filterData.dating).observe(.childChanged) { (snapshot) in
-            
+        //        ref.child("FilterData").queryOrdered(byChild: "dating").queryEqual(toValue: filterData.dating).observe(.childChanged) { (snapshot) in
+        
         
         //        ref.child("FilterData").queryOrdered(byChild: "dating").queryEqual(toValue: filterData.dating).observeSingleEvent(of: .value, with: { (snapshot)
-
+        
         
         ref.child("FilterData").queryOrdered(byChild: "dating").queryEqual(toValue: filterData.dating).observe(.childAdded) { (snapshot) 
             
@@ -587,7 +577,7 @@ class FilterViewController: UIViewController {
             // swiftlint:disable identifier_name
             guard let age = value["age"] as? Int else { return }
             // swiftlint:enable identifier_name
-
+            
             guard let dating = value["dating"] as? Int else { return }
             
             guard let datingTime = value["datingTime"] as? Int else { return }
@@ -595,13 +585,13 @@ class FilterViewController: UIViewController {
             guard let gender = value["gender"] as? Int else { return }
             
             guard let location = value["location"] as? NSDictionary else { return }
-
+            
             guard let userLatitude = location["lat"] as? Double else { return }
             
             guard let userLongitude = location["lon"] as? Double else { return }
             
             guard let senderName = value["senderName"] as? String else { return }
-
+            
             guard let senderId = value["senderId"] as? String else { return }
             
             guard let time = value["time"] as? Int else { return }
@@ -609,15 +599,15 @@ class FilterViewController: UIViewController {
             guard let senderPhoto = value["senderPhoto"] as? String else { return }
             
             guard let myselfGender = value["myselfGender"] as? Int else { return }
-                
+            
             let friendFilterData = FilterData(gender: gender, myselfGender: myselfGender,
-                                        age: age, location: Location(latitude: userLatitude, longitude: userLongitude) ,
-                                        dating: dating,
-                                        datingTime: datingTime,
-                                        time: time,
-                                        senderId: senderId,
-                                        senderName: senderName,
-                                        senderPhotoURL: senderPhoto)
+                                              age: age, location: Location(latitude: userLatitude, longitude: userLongitude) ,
+                                              dating: dating,
+                                              datingTime: datingTime,
+                                              time: time,
+                                              senderId: senderId,
+                                              senderName: senderName,
+                                              senderPhotoURL: senderPhoto)
             //上面增加自己的性別
             
             //距離的計算
@@ -625,17 +615,17 @@ class FilterViewController: UIViewController {
             //let myLocation = CLLocation(latitude: 25.998443,longitude: 120.174183)
             //下面的預設值是台北車站
             
-//            let myLocation = CLLocation(latitude: self.currentCenter?.latitude ?? 25.048134,longitude: self.currentCenter?.longitude ?? 121.517314
-//            )
+            //            let myLocation = CLLocation(latitude: self.currentCenter?.latitude ?? 25.048134,longitude: self.currentCenter?.longitude ?? 121.517314
+            //            )
             
             let myLocation =  CLLocation(latitude:self.centerDeliveryFromMap?.latitude ?? 25.048134,longitude: self.centerDeliveryFromMap?.longitude ?? 121.517314)
             
-
+            
             let friendLocation = CLLocation(latitude: friendFilterData.location.latitude, longitude: friendFilterData.location.longitude)
-
+            
             
             let distance = myLocation.distance(from: friendLocation) / 1000
-
+            
             let roundDistance = round(distance * 100) / 100
             //print("***自己目前的實際所在地\(self.currentCenter?.latitude),\(self.currentCenter?.longitude )***")
             
@@ -651,20 +641,20 @@ class FilterViewController: UIViewController {
             // 測試時間 1538924236062 Your time zone: Sunday, October 7, 2018 10:57:16.062 PM GMT+08:00
             //先用名字 到時候再加上性別 和時間 (上面的搜尋是搜尋 約會類型相同的人) filterData 是自己的本地端要去搜尋的資料
             if userId != senderId &&  filterData.time == friendFilterData.datingTime && in24hr  < 86400000 && filterData.gender == friendFilterData.myselfGender  {
-            
+                
                 self.filterNewData.append(friendFilterData)
                 
                 self.showMessageAlert(title: "登愣！！！ 發現和 \(senderName) 有相同的喜好", message: "認識一下吧！", senderId: senderId, senderName: senderName)
                 print("選取的人的 userID 是 \(senderId)")
-
+                
                 
             } else {
                 print("自己的資料不用存")
             }
-//            self.friendUserName = senderName
-//            self.friendUserId = senderId
-//
-//            guard let friendUserName = self.friendUserName  else { return }
+            //            self.friendUserName = senderName
+            //            self.friendUserId = senderId
+            //
+            //            guard let friendUserName = self.friendUserName  else { return }
             
             print(" *** 準備印 searchFilterData 的資料 ")
             print(value)
@@ -674,8 +664,8 @@ class FilterViewController: UIViewController {
             
             //search 完去比對資料配對
             
-//                    self.showMessageAlert(title: "傳訊息給\(self.friendUserName) 嗎～？", message: "認識一下吧！")
-//                    print("選取的人的 userID 是 \(self.friendUserId)")
+            //                    self.showMessageAlert(title: "傳訊息給\(self.friendUserName) 嗎～？", message: "認識一下吧！")
+            //                    print("選取的人的 userID 是 \(self.friendUserId)")
             
         } //)
         
@@ -882,17 +872,17 @@ extension FilterViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         //取消點選時的動作 要有兩個 collectionView 才能用
         
-//        if indexPath.section == 0 {
-//
-//            let cellToDeselect: FilterCollectionViewCell = (collectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell)!
-//            cellToDeselect.iconBackgroundView.backgroundColor = UIColor.clear
-//        } else if indexPath.section == 1 {
-//
-//            let cellToDeselect: FilterCollectionViewCell = (collectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell)!
-//            cellToDeselect.iconBackgroundView.backgroundColor = UIColor.clear
-//        }
-       
-    
+        //        if indexPath.section == 0 {
+        //
+        //            let cellToDeselect: FilterCollectionViewCell = (collectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell)!
+        //            cellToDeselect.iconBackgroundView.backgroundColor = UIColor.clear
+        //        } else if indexPath.section == 1 {
+        //
+        //            let cellToDeselect: FilterCollectionViewCell = (collectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell)!
+        //            cellToDeselect.iconBackgroundView.backgroundColor = UIColor.clear
+        //        }
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -900,9 +890,9 @@ extension FilterViewController: UICollectionViewDataSource{
         print("******請看這******")
         
         let selectedCell: FilterCollectionViewCell = (collectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell)!
-
         
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCollectionViewCell", for: indexPath) as? FilterCollectionViewCell
+        
+        //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCollectionViewCell", for: indexPath) as? FilterCollectionViewCell
         
         //selectedCell.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
@@ -915,11 +905,11 @@ extension FilterViewController: UICollectionViewDataSource{
                 //OK
                 //collectionView.cellForItem(at: selectedDateIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
                 
-               
                 
-            cell?.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-            cell?.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            cell?.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                
+                cell?.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                cell?.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                cell?.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 //selectedCell.iconBackgroundView.backgroundColor =  #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
                 
                 print("相同")
@@ -947,9 +937,9 @@ extension FilterViewController: UICollectionViewDataSource{
             if selectedTimeIcon1 == indexPath {
                 
                 // selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-               
+                
                 //collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
-               
+                
                 
                 //selectedCell.iconBackgroundView.backgroundColor =  #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
                 cell?.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
@@ -964,9 +954,9 @@ extension FilterViewController: UICollectionViewDataSource{
                 
                 //collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 
-                 cell?.iconBackgroundView.backgroundColor = UIColor.clear
-                 cell?.iconImage.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-                 cell?.iconName.textColor =  #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                cell?.iconBackgroundView.backgroundColor = UIColor.clear
+                cell?.iconImage.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                cell?.iconName.textColor =  #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
                 //selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             }
         }
@@ -985,7 +975,7 @@ extension FilterViewController: UICollectionViewDataSource{
             selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
             selectedCell.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             selectedCell.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-
+            
             //END
             
             //            let selectedCell:UICollectionViewCell = myCollectionView.cellForItemAtIndexPath(indexPath)!
@@ -1003,9 +993,9 @@ extension FilterViewController: UICollectionViewDataSource{
             timeNumber = indexPath.item
             //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
             
-             selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-             selectedCell.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-             selectedCell.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+            selectedCell.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            selectedCell.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             #warning ("TODO: 儲存他按了哪一個")
         }
         

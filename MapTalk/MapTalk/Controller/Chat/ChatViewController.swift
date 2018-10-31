@@ -74,7 +74,14 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // swiftlint:disable force_cast
+        let ramTBC = tabBarController as! TabBarViewController
+        // swiftlint:enable force_cast
         
+        ramTBC.selectedIndex = 1
+        ramTBC.setSelectIndex(from: 0, to: 1)
+
         //偵測網路
         downloadData()
         
@@ -96,19 +103,8 @@ class ChatViewController: UIViewController {
         
         //simpleQueues()
         
-        guard let myselfId = Auth.auth().currentUser?.uid else { return }
-        
-        myselfUID = myselfId
-        
         //change tabbar page 有作用 但是顏色沒變過去
         //tabBarController?.selectedIndex = 2
-        
-        // swiftlint:disable force_cast
-        let ramTBC = tabBarController as! TabBarViewController
-        // swiftlint:enable force_cast
-        
-        ramTBC.selectedIndex = 1
-        ramTBC.setSelectIndex(from: 0, to: 1)
         
         //取消 tableView 虛線
         chatTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -117,6 +113,10 @@ class ChatViewController: UIViewController {
         //self.result = self.newMessage
         
         hintLabel.isHidden = true
+        
+        guard let myselfId = Auth.auth().currentUser?.uid else { return }
+        
+        myselfUID = myselfId
     }
     
     override func viewWillAppear(_ animated: Bool) {

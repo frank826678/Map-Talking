@@ -152,7 +152,9 @@ class ProfileViewController: UIViewController {
         if let textFieldInput = storyHighlightsTextField.text {
             
             print("輸入的內容2 為\(textFieldInput)")
-            guard let userId = Auth.auth().currentUser?.uid else { return }
+            guard let userId = Auth.auth().currentUser?.uid else {
+                BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+                return }
             
             let userStatus = ["text": textFieldInput]
             
@@ -252,41 +254,41 @@ extension ProfileViewController: UITableViewDataSource {
         }
     }
     
-//    func logOut() {
-//        let alert = UIAlertController(title: "登出", message: "您是否要登出帳號？", preferredStyle: UIAlertController.Style.alert)
-//
-//        let action = UIAlertAction(title: "確認", style: .default) { (_) in
-//
-//            let keychain = Keychain(service: "com.frank.MapTalk")
-//
-//            do {
-//
-//                try keychain.remove(FirebaseType.uuid.rawValue)
-//
-//                try Auth.auth().signOut()
-//
-//                AppDelegate.shared.switchToLoginStoryBoard()
-//
-//                self.resetDefaults()
-//
-//                print("登出成功及清空 user")
-//
-//            } catch {
-//                print("登出失敗，請確認網路")
-//                //BaseNotificationBanner.warningBanner(subtitle: "登出失敗，請確認網路")
-//                return
-//            }
-//
-//        }
-//
-//        let cancel = UIAlertAction(title: "取消", style: .cancel)
-//
-//        alert.addAction(cancel)
-//
-//        alert.addAction(action)
-//
-//        self.present(alert, animated: true, completion: nil)
-//    }
+    //    func logOut() {
+    //        let alert = UIAlertController(title: "登出", message: "您是否要登出帳號？", preferredStyle: UIAlertController.Style.alert)
+    //
+    //        let action = UIAlertAction(title: "確認", style: .default) { (_) in
+    //
+    //            let keychain = Keychain(service: "com.frank.MapTalk")
+    //
+    //            do {
+    //
+    //                try keychain.remove(FirebaseType.uuid.rawValue)
+    //
+    //                try Auth.auth().signOut()
+    //
+    //                AppDelegate.shared.switchToLoginStoryBoard()
+    //
+    //                self.resetDefaults()
+    //
+    //                print("登出成功及清空 user")
+    //
+    //            } catch {
+    //                print("登出失敗，請確認網路")
+    //                //BaseNotificationBanner.warningBanner(subtitle: "登出失敗，請確認網路")
+    //                return
+    //            }
+    //
+    //        }
+    //
+    //        let cancel = UIAlertAction(title: "取消", style: .cancel)
+    //
+    //        alert.addAction(cancel)
+    //
+    //        alert.addAction(action)
+    //
+    //        self.present(alert, animated: true, completion: nil)
+    //    }
     
     private func logOut() {
         
@@ -313,7 +315,7 @@ extension ProfileViewController: UITableViewDataSource {
                         print("登出成功及清空 user")
                         
                         AppDelegate.shared.switchToLoginStoryBoard()
-
+                        
                         //AppDelegate.shared.switchLogIn()
                         
                     } catch {

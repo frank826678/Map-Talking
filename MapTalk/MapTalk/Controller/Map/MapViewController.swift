@@ -154,7 +154,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         addSwipe()
         mapBackgroundView.isHidden = true
         
-        //showLocationAlert()
+        showLocationAlert()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -228,7 +228,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
             
         }
-        
         
     }
     
@@ -1095,6 +1094,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "確認", style: .default) { (action) in
             
+            guard let myselfId = Auth.auth().currentUser?.uid else {
+                BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+                return }
+            
             //collectionView.deselectItem(at: indexPath, animated: true)
             
             // 換頁並且改變 detail頁的 friendUserId 的值
@@ -1109,7 +1112,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             //新增對方到 firebase 的好友列表
             guard let friendId =  self.friendUserId else { return }
-            guard let myselfId = Auth.auth().currentUser?.uid else { return }
+            
             guard let friendName = self.navigationUserName else { return }
             
             guard let myselfName = Auth.auth().currentUser?.displayName else { return }
