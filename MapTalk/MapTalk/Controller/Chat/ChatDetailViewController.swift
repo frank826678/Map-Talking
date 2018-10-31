@@ -16,8 +16,9 @@ import SVProgressHUD
 
 class ChatDetailViewController: UIViewController {
     
-    @IBOutlet weak var chatDetailTableView: UITableView!
+    let decoder = JSONDecoder()
     
+    @IBOutlet weak var chatDetailTableView: UITableView!
     
     //@IBOutlet weak var chatTableView: UITableView!
     
@@ -270,39 +271,80 @@ class ChatDetailViewController: UIViewController {
             .observe(.childAdded) { (snapshot) in
                 
                 guard let value = snapshot.value as? NSDictionary else { return }
+                //
                 
-                guard let senderId = value["senderId"] as? String else { return }
+                guard let messageJSONData = try? JSONSerialization.data(withJSONObject: value) else { return }
                 
-                guard let senderName = value["senderName"] as? String else { return }
+                do {
+                    let message = try self.decoder.decode(Message.self, from: messageJSONData)
+                    print("****codable**** start")
+                    print(message)
+                    print("****codable**** END")
+                    
+                    self.messages.append(message)
+                    
+                    self.chatDetailTableView.beginUpdates()
+                    
+                    let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                    
+                    self.chatDetailTableView.insertRows(at: [indexPath], with: .automatic)
+                    
+                    self.chatDetailTableView.endUpdates()
+                    
+                    self.chatDetailTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                    
+                    //message = messageCodable
+                    //self.userInformation = userInfo
+                    
+//                    self.newMessage.append(message)
+//                    //20181016 searchbar
+//                    self.result.append(message)
+//                    //END
+//                    print("_____")
+//                    print(self.newMessage)
+//
+//                    self.chatTableView.reloadData()
+                    
+                } catch {
+                    print(error)
+                }
                 
-                guard let time = value["time"] as? Int else { return }
+                //
                 
-                let content = value["content"] as? String
                 
-                let senderPhoto = value["senderPhoto"] as? String
+//                guard let senderId = value["senderId"] as? String else { return }
+//
+//                guard let senderName = value["senderName"] as? String else { return }
+//
+//                guard let time = value["time"] as? Int else { return }
+//
+//                let content = value["content"] as? String
+//
+//                let senderPhoto = value["senderPhoto"] as? String
+//
+//                let imageUrl = value["imageUrl"] as? String
+//
+//                let message = Message(
+//                    content: content,
+//                    senderId: senderId,
+//                    senderName: senderName,
+//                    senderPhoto: senderPhoto,
+//                    time: time,
+//                    imageUrl: imageUrl
+//                )
+//
+//                self.messages.append(message)
+//
+//                self.chatDetailTableView.beginUpdates()
+//
+//                let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+//
+//                self.chatDetailTableView.insertRows(at: [indexPath], with: .automatic)
+//
+//                self.chatDetailTableView.endUpdates()
+//
+//                self.chatDetailTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
                 
-                let imageUrl = value["imageUrl"] as? String
-                
-                let message = Message(
-                    content: content,
-                    senderId: senderId,
-                    senderName: senderName,
-                    senderPhoto: senderPhoto,
-                    time: time,
-                    imageUrl: imageUrl
-                )
-                
-                self.messages.append(message)
-                
-                self.chatDetailTableView.beginUpdates()
-                
-                let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-                
-                self.chatDetailTableView.insertRows(at: [indexPath], with: .automatic)
-                
-                self.chatDetailTableView.endUpdates()
-                
-                self.chatDetailTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
     

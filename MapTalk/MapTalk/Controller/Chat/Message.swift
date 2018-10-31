@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Message {
+// 使用中 20181030
+struct Message: Codable {
     
     let content: String?
     
@@ -39,6 +40,7 @@ struct FreindData {
     
 }
 
+// 使用中 20181030
 struct NewMessage: Codable {
     
     var content: String?
@@ -49,7 +51,7 @@ struct NewMessage: Codable {
     
     let senderPhoto: String?
     
-    let time: Int
+    var time: Int
     
     let imageUrl: String?
     

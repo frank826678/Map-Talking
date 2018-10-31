@@ -71,8 +71,9 @@
 		01A624972171B363009CD507 /* UserDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A624952171B362009CD507 /* UserDataTableViewCell.xib */; };
 		01A714DC21874B9F00955BE5 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A714DB21874B9F00955BE5 /* UserInfo.swift */; };
 		01A714DF2187D97600955BE5 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A714DE2187D97600955BE5 /* Chat.swift */; };
+		01A714E12189899500955BE5 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A714E02189899500955BE5 /* Date.swift */; };
+		01A714E4218998A400955BE5 /* servishero_loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 01A714E3218998A400955BE5 /* servishero_loading.json */; };
 		01CF3563216F334E00B98D71 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF3562216F334E00B98D71 /* Profile.swift */; };
-		01CF3566216F759500B98D71 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF3565216F759500B98D71 /* DateManager.swift */; };
 		01E6581F216DE40D00928C9B /* ProfileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E6581E216DE40D00928C9B /* ProfileContentView.swift */; };
 		01E65821216DE45700928C9B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E65820216DE45700928C9B /* UIView.swift */; };
 		01EBF3422151FEA100D23871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EBF3412151FEA100D23871 /* AppDelegate.swift */; };
@@ -159,8 +160,9 @@
 		01A624952171B362009CD507 /* UserDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserDataTableViewCell.xib; sourceTree = "<group>"; };
 		01A714DB21874B9F00955BE5 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		01A714DE2187D97600955BE5 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		01A714E02189899500955BE5 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		01A714E3218998A400955BE5 /* servishero_loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = servishero_loading.json; sourceTree = "<group>"; };
 		01CF3562216F334E00B98D71 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		01CF3565216F759500B98D71 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		01E6581E216DE40D00928C9B /* ProfileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContentView.swift; sourceTree = "<group>"; };
 		01E65820216DE45700928C9B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		01EBF33E2151FEA100D23871 /* MapTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,12 +296,12 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
-		01CF3564216F755C00B98D71 /* Time */ = {
+		01A714E2218997E700955BE5 /* JSON */ = {
 			isa = PBXGroup;
 			children = (
-				01CF3565216F759500B98D71 /* DateManager.swift */,
+				01A714E3218998A400955BE5 /* servishero_loading.json */,
 			);
-			path = Time;
+			path = JSON;
 			sourceTree = "<group>";
 		};
 		01E6581C216DE3BD00928C9B /* View */ = {
@@ -347,6 +349,7 @@
 		01EBF3402151FEA100D23871 /* MapTalk */ = {
 			isa = PBXGroup;
 			children = (
+				01A714E2218997E700955BE5 /* JSON */,
 				01E6581C216DE3BD00928C9B /* View */,
 				01EBF3632153456E00D23871 /* Extension */,
 				01EBF361215343BA00D23871 /* Storyboard */,
@@ -369,7 +372,6 @@
 			children = (
 				01A714DD2187D94000955BE5 /* Chat */,
 				01A714DA21874B2900955BE5 /* UserInfo */,
-				01CF3564216F755C00B98D71 /* Time */,
 				0141678C216320DE0080EDCE /* Enum */,
 				01701AEC215B39820074B0B9 /* Error */,
 				01EBF36F21546CED00D23871 /* Firebase */,
@@ -430,6 +432,7 @@
 				0106CC2F21734EDD009A80C4 /* UITextView.swift */,
 				0106CC352176246F009A80C4 /* BaseNotificationBanner.swift */,
 				018B82D62177413C004F8FC3 /* frankUIImageView.swift */,
+				01A714E02189899500955BE5 /* Date.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				01701AF9215C5C4E0074B0B9 /* ChatDetailTableViewCell.xib in Resources */,
 				01223055217EE0FA00FC203D /* PersonalInformationTableViewCell.xib in Resources */,
 				01EBF35F21533C1900D23871 /* GoogleService-Info.plist in Resources */,
+				01A714E4218998A400955BE5 /* servishero_loading.json in Resources */,
 				01223059217F196000FC203D /* NickNameTableViewCell.xib in Resources */,
 				01EBF3492151FEA500D23871 /* Assets.xcassets in Resources */,
 				018B82D12177012E004F8FC3 /* NewUserDetailTableViewCell.xib in Resources */,
@@ -629,6 +633,7 @@
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -647,6 +652,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -706,7 +712,6 @@
 				01EBF3442151FEA200D23871 /* LoginViewController.swift in Sources */,
 				01E6581F216DE40D00928C9B /* ProfileContentView.swift in Sources */,
 				01A624962171B363009CD507 /* UserDataTableViewCell.swift in Sources */,
-				01CF3566216F759500B98D71 /* DateManager.swift in Sources */,
 				01A714DF2187D97600955BE5 /* Chat.swift in Sources */,
 				01701AF1215BC6930074B0B9 /* ChatViewController.swift in Sources */,
 				0106CC332174A2EE009A80C4 /* EditUserContentTableViewCell.swift in Sources */,
@@ -730,6 +735,7 @@
 				01E65821216DE45700928C9B /* UIView.swift in Sources */,
 				01701AFF215C7E1B0074B0B9 /* ChatDetailViewController.swift in Sources */,
 				01416790216323520080EDCE /* UIImage.swift in Sources */,
+				01A714E12189899500955BE5 /* Date.swift in Sources */,
 				01223054217EE0FA00FC203D /* PersonalInformationTableViewCell.swift in Sources */,
 				0177E2BB216143B10038F29A /* EditContentTableViewCell.swift in Sources */,
 				01701AF8215C5C4E0074B0B9 /* ChatDetailTableViewCell.swift in Sources */,

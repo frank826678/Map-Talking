@@ -22,63 +22,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     //20181028 增加 alert 告訴他我正在使用他的位置
     var flag: Bool = false
     var locationFlag: Bool = false
-    
-    func showLocationAlert() {
-        
-        let reportController = UIAlertController(title: "是否向其他人顯示自己位置？", message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態，需要顯示才能正常使用地圖功能。", preferredStyle: .alert)
-        
-        guard let myselfId = Auth.auth().currentUser?.uid else { return }
-        
-        let hideAction = UIAlertAction(title: "隱藏", style: .destructive) { (action) in
-            
-            let userStatus = ["status": "disappear"]
-            
-            
-            let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
-            
-            self.refference.updateChildValues(childUpdatesStatus)
-            
-            print("按下隱藏2 MapViewController")
-            
-        }
-        let appearAction = UIAlertAction(title: "顯示", style: .default) { (action) in
-            
-            let userStatus = ["status": "appear"]
-            
-            
-            let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
-            
-            self.refference.updateChildValues(childUpdatesStatus)
-            
-            print("按下顯示3 MapViewController")
-        }
-        
-        let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
-        
-        reportController.addAction(appearAction)
-        reportController.addAction(hideAction)
-        reportController.addAction(cancelAction)
-        
-        self.present(reportController, animated: true, completion: nil)
-        
-    }
+    var allAnnotations: [UserAnnotation] = []
     
     //20181020 偵測網路
     
     func noInternetAlert() {
-        let alert = UIAlertController(title: "無法連接網路", message: "請確認是否連上網路？", preferredStyle: UIAlertController.Style.alert)
         
-        let action = UIAlertAction(title: "確認", style: .default) { (_) in
-            print("按下確認鍵 請前往打開網路")
+        let alert = UIAlertController.showAlert(
+            title: "無法連接網路！",
+            message: "請確認是否連上網路？",
+            defaultOption: ["確定"]) { (action) in
+                
+                print("按下確認鍵 請前往打開網路")
         }
         
-        let cancel = UIAlertAction(title: "取消", style: .cancel)
-        
-        alert.addAction(cancel)
-        
-        alert.addAction(action)
-        
         self.present(alert, animated: true, completion: nil)
+        
     }
     
     var reachability = Reachability(hostName: "www.apple.com")
@@ -161,7 +120,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //kCLLocationAccuracyKilometer
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        locationManager.requestWhenInUseAuthorization()
+        //locationManager.requestWhenInUseAuthorization()
         //20181028
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
@@ -211,8 +170,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if CLLocationManager.authorizationStatus()
             == .notDetermined {
             // 取得定位服務授權
-            locationManager.requestWhenInUseAuthorization()
-            
+            //locationManager.requestWhenInUseAuthorization()
+            locationManager.requestAlwaysAuthorization()
             // 開始定位自身位置
             locationManager.startUpdatingLocation()
             filterButton.isHidden = false
@@ -265,11 +224,99 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let keychain = Keychain(service: "com.frank.MapTalk")
         
         if  keychain[FirebaseType.uuid.rawValue] == nil || keychain["anonymous"] == "anonymous" {
-            print("目前為匿名模式 請登出後使用 Facebook 登入")
+            //print("目前為匿名模式 請登出後使用 Facebook 登入")
             BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
-
+            
         }
-
+        
+        
+    }
+    
+    func showLocationAlert() {
+        
+        //    defaultOption: ["檢舉用戶", "封鎖用戶"])
+        guard let myselfId = Auth.auth().currentUser?.uid else {
+            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+            return }
+        let alertController =  UIAlertController.showAlert(
+            title: "是否向其他人顯示自己位置？",
+            message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態，需要顯示才能正常使用地圖功能。",
+            defaultOption: ["顯示","隱藏"]) { [weak self] (action) in
+                
+                switch action.title {
+                    
+                case "顯示":
+                    
+                    let userStatus = ["status": "appear"]
+                    
+                    let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
+                    
+                    self?.refference.updateChildValues(childUpdatesStatus)
+                    print("按下顯示3 MapViewController")
+                    
+                case "隱藏":
+                    
+                    let userStatus = ["status": "disappear"]
+                    
+                    let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
+                    
+                    self?.refference.updateChildValues(childUpdatesStatus)
+                    print("按下隱藏2 MapViewController")
+                    
+                default:
+                    break
+                    
+                }
+        }
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+        //        let alert = UIAlertController.showAlert(
+        //            title: "是否向其他人顯示自己位置？",
+        //            message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態，需要顯示才能正常使用地圖功能。",
+        //            defaultOption: ["顯示","隱藏"]) { (action) in
+        //
+        //
+        //        }
+        //
+        //        self.present(alert, animated: true, completion: nil)
+        
+        
+        //        let reportController = UIAlertController(title: "是否向其他人顯示自己位置？", message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態，需要顯示才能正常使用地圖功能。", preferredStyle: .alert)
+        //
+        //        guard let myselfId = Auth.auth().currentUser?.uid else { return }
+        //
+        //        let hideAction = UIAlertAction(title: "隱藏", style: .destructive) { (action) in
+        //
+        //            let userStatus = ["status": "disappear"]
+        //
+        //
+        //            let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
+        //
+        //            self.refference.updateChildValues(childUpdatesStatus)
+        //
+        //            print("按下隱藏2 MapViewController")
+        //
+        //        }
+        //        let appearAction = UIAlertAction(title: "顯示", style: .default) { (action) in
+        //
+        //            let userStatus = ["status": "appear"]
+        //
+        //
+        //            let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
+        //
+        //            self.refference.updateChildValues(childUpdatesStatus)
+        //
+        //            print("按下顯示3 MapViewController")
+        //        }
+        //
+        //        let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
+        //
+        //        reportController.addAction(appearAction)
+        //        reportController.addAction(hideAction)
+        //        reportController.addAction(cancelAction)
+        //
+        //        self.present(reportController, animated: true, completion: nil)
         
     }
     
@@ -349,6 +396,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput, status: statusInput)
             
             self.mapView.addAnnotation(userlocations.userAnnotation)
+            //self.allAnnotations = self.mapView.annotations
+            self.allAnnotations.append(userlocations.userAnnotation)
             
             self.locations.append(userlocations)
             
@@ -423,12 +472,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             let userId = Auth.auth().currentUser?.uid
             
-//            let keychain = Keychain(service: "com.frank.MapTalk")
-//            if let userID = keychain[FirebaseType.uuid.rawValue] {
-//
-//            } else {
-//                userID = keychain["anonymous"]
-//            }
+            //            let keychain = Keychain(service: "com.frank.MapTalk")
+            //            if let userID = keychain[FirebaseType.uuid.rawValue] {
+            //
+            //            } else {
+            //                userID = keychain["anonymous"]
+            //            }
             //if  keychain[FirebaseType.uuid.rawValue] != nil || keychain["anonymous"] == "anonymous"
             //print("*****9 印出 keychain \(keychain[FirebaseType.uuid.rawValue]) *** \( keychain["anonymous"]) ")
             if statusInput == "disappear" && snapshot.key != userId  {
@@ -533,6 +582,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             //Label
             (annotationView?.subviews[2] as! UILabel).text = userAnnotation?.message
+            //(annotationView?.subviews[1] as! UIImageView). = userAnnotation?.message
+            
+            if let userImage = userAnnotation?.userImage {
+                (annotationView?.subviews[1] as! UIImageView).kf.setImage(with: URL(string: userImage))
+            } else {
+                (annotationView?.subviews[1] as! UIImageView).image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+            }
+            
+            if let gender = userAnnotation?.gender {
+                if gender == 1 {
+                    
+                    (annotationView?.subviews[2] as! UILabel).backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.2392156863, blue: 0.368627451, alpha: 1)
+                    (annotationView?.subviews[3] as! UILabel).textColor = #colorLiteral(red: 0.9607843137, green: 0.2392156863, blue: 0.368627451, alpha: 1)
+                    
+                    
+                } else {
+                    (annotationView?.subviews[2] as! UILabel).backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+                    (annotationView?.subviews[3] as! UILabel).textColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+                    
+                }
+            } else {
+                (annotationView?.subviews[2] as! UILabel).backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+                (annotationView?.subviews[3] as! UILabel).textColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
+            }
+            //            annotationView?.addSubview(shadowView)
+            //            annotationView?.addSubview(imageView)
+            //            annotationView?.addSubview(annotationLabel)
+            //            annotationView?.addSubview(triangle)
             
             return annotationView
         } else {
@@ -952,7 +1029,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     //END
-
+    
     func saveSelfLocation(latitude: Double, longitude: Double) {
         
         #warning ("TODO: 拿大照片過來")
@@ -976,7 +1053,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
     }
     
-
+    
     
     func giveDirections(coordinate: CLLocationCoordinate2D, userName: String) {
         let requestCllocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -1155,36 +1232,36 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
     }
     
-    @IBAction func changeMessage(_ sender: UIButton) {
-        
-        let editAlert = UIAlertController(title: "Message:", message: nil, preferredStyle: .alert)
-        
-        editAlert.addTextField()
-        
-        let submitAction = UIAlertAction(title: "Send", style: .default, handler: { (_) in
-            
-            if let alertTextField = editAlert.textFields?.first?.text {
-                
-                print("alertTextField: \(alertTextField)")
-                
-                guard let userId = Auth.auth().currentUser?.uid else { return }
-                
-                let userStatus = ["text": alertTextField]
-                
-                let childUpdates = ["/location/\(userId)/message": userStatus]
-                
-                self.refference.updateChildValues(childUpdates)
-                
-            }
-        })
-        
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
-        
-        editAlert.addAction(submitAction)
-        editAlert.addAction(cancel)
-        
-        self.present(editAlert, animated: true)
-    }
+    //    @IBAction func changeMessage(_ sender: UIButton) {
+    //
+    //        let editAlert = UIAlertController(title: "Message:", message: nil, preferredStyle: .alert)
+    //
+    //        editAlert.addTextField()
+    //
+    //        let submitAction = UIAlertAction(title: "Send", style: .default, handler: { (_) in
+    //
+    //            if let alertTextField = editAlert.textFields?.first?.text {
+    //
+    //                print("alertTextField: \(alertTextField)")
+    //
+    //                guard let userId = Auth.auth().currentUser?.uid else { return }
+    //
+    //                let userStatus = ["text": alertTextField]
+    //
+    //                let childUpdates = ["/location/\(userId)/message": userStatus]
+    //
+    //                self.refference.updateChildValues(childUpdates)
+    //
+    //            }
+    //        })
+    //
+    //        let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
+    //
+    //        editAlert.addAction(submitAction)
+    //        editAlert.addAction(cancel)
+    //
+    //        self.present(editAlert, animated: true)
+    //    }
     
     func setIconCorner() {
         
@@ -1196,11 +1273,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func setButtonTemplateImage() {
-//                var templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
-//                filterButton.setImage(templateImage, for: .normal)
-//
-//                templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
-//                filterButton.setImage(templateImage, for: .selected)
+        //                var templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
+        //                filterButton.setImage(templateImage, for: .normal)
+        //
+        //                templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
+        //                filterButton.setImage(templateImage, for: .selected)
         //20191021 新 icon
         
         let mappingIcon = #imageLiteral(resourceName: "heart-mapping").withRenderingMode(.alwaysTemplate)
@@ -1221,6 +1298,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterButton.imageView?.tintColor = #colorLiteral(red: 1, green: 0.1803921569, blue: 0.3333333333, alpha: 1) //刷色 不要 color 改紅色
         location.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         location.imageView?.tintColor = color
+    }
+    
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        
+        if mapView.region.span.latitudeDelta > 2.5 {
+            
+            self.mapView.removeAnnotations(allAnnotations)
+            BaseNotificationBanner.warningBanner(subtitle: "請將地圖放大一點 🙏 ")
+            print("超過 2.5")
+        } else {
+            
+            self.mapView.removeAnnotations(allAnnotations)
+            self.mapView.addAnnotations(allAnnotations)
+            print("低於 2.5")
+            
+        }
+        //print(mapView.region.span)
+        
     }
     
 }

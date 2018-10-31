@@ -24,7 +24,7 @@ extension BaseNotificationBanner {
         banner.remove()
     }
     
-    static func sucessBanner(
+    static func successBanner(
         title: String = "成功",
         subtitle: String,
         style: BannerStyle = .success

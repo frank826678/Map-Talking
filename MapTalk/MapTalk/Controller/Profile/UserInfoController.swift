@@ -190,7 +190,7 @@ class UserInfoController: UIViewController {
             } else {
                 
                 print("Data saved successfully!")
-                BaseNotificationBanner.sucessBanner(subtitle: "上傳成功")
+                BaseNotificationBanner.successBanner(subtitle: "上傳成功")
                 
 //                let banner = StatusBarNotificationBanner(title: "上傳成功", style: .success)
 //                banner.show()
@@ -789,7 +789,7 @@ extension UserInfoController: UIPickerViewDataSource {
         datePicker.datePickerMode = .date
         
         datePicker.date = Date()
-        
+                
         let alertController: UIAlertController = UIAlertController(
             title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
         
@@ -797,7 +797,8 @@ extension UserInfoController: UIPickerViewDataSource {
         title: "確定", style: UIAlertAction.Style.default) { (_) -> Void in
             
             print("選取的時間是\(self.datePicker.date)")
-            let pickerDate = DateManager.share.formatDate(date: self.datePicker.date)
+            //let pickerDate = DateManager.share.formatDate(date: self.datePicker.date)
+            let pickerDate = Date.formatDate(date: self.datePicker.date)
             
             self.userSelected[1] = pickerDate
             

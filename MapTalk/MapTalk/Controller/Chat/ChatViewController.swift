@@ -10,11 +10,12 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
-
-// 模擬機測試會有一句話顯示兩次的問題 要做外面可以顯示對方的最後一筆資料 並且可以按照順序排
+import Lottie
 
 class ChatViewController: UIViewController {
-
+    
+    //let animationView = LOTAnimationView(name: "servishero_loading")
+    let animationView = LOTAnimationView(name: "servishero_loading")
     let decoder = JSONDecoder()
     
     @IBOutlet weak var hintLabel: UILabel!
@@ -60,13 +61,13 @@ class ChatViewController: UIViewController {
     
     func downloadData() {
         if checkInternetFunction() == false {
-
+            
             hintLabel.text = "請打開行動網路或 WI-FI"
             hintLabel.isHidden = false
             
         } else {
             
-             hintLabel.isHidden = true
+            hintLabel.isHidden = true
             
         }
     }
@@ -89,7 +90,7 @@ class ChatViewController: UIViewController {
         //讀取好友清單
         ref = Database.database().reference() //重要 沒有會 nil
         //20181019 OK 搬到 will appear 希望能即時顯示
-//        getFriendList()
+        //        getFriendList()
         
         //getFriendLastMessage()
         
@@ -122,7 +123,7 @@ class ChatViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
         getFriendList()
-
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -130,7 +131,21 @@ class ChatViewController: UIViewController {
         //getFriendLastMessage()
         //20181014
         //getFriendList()
+        
+    }
     
+    func setAniView() {
+        
+        animationView.frame = CGRect(x: 0, y: 0, width: 400, height: 400)
+        animationView.center = self.view.center
+        animationView.contentMode = .scaleAspectFill
+        animationView.loopAnimation = true
+        animationView.animationSpeed = 0.5
+        
+        view.addSubview(animationView)
+        
+        animationView.play()
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -266,117 +281,6 @@ class ChatViewController: UIViewController {
         
     }
     
-    //待修
-//    func getFriendLastMessage(friendId: String) {
-//
-//        var channel :String = "Nothing"
-//
-//        guard let myselfId = Auth.auth().currentUser?.uid else { return }
-//
-//        //            for index in 0 ... friendsList.count-1 {
-//        //
-//        //                let friendId = friendsList[index]
-//        //
-//        //                if myselfId > friendId {
-//        //                    channel = "\(myselfId)_\(friendId)"
-//        //                } else {
-//        //                    channel = "\(friendId)_\(myselfId)"
-//        //                }
-//
-//
-//
-//        let friendId = friendId
-//
-//        if myselfId > friendId {
-//            channel = "\(myselfId)_\(friendId)"
-//        } else {
-//            channel = "\(friendId)_\(myselfId)"
-//        }
-//
-//        //channel = "sgo1OooTVwbZ2PinrIY81YXN8Gl2_H6jIdMSaFydwRkuZGMGPneHZ3xf1"
-//        //        self.ref.child("UserData").queryEqual(toValue: friendId).observeSingleEvent(of: .value, with: { (snapshot)
-//
-//        self.ref.child("UserData/\(friendId)").observeSingleEvent(of: .value, with: { (snapshot)
-//
-//            //用 UID 去找是誰 到 UserData 去找
-//
-//            in
-//
-//            print("找到的資料是\(snapshot)")
-//
-//            //            let a = snapshot.value as! NSDictionary
-//            //            print("奇怪東西\(a)")
-//
-//            guard let value = snapshot.value as? NSDictionary else { return }
-//
-//            guard let friendName = value["FBName"] as? String else { return }
-//
-//            guard let friendImageUrl = value["FBPhotoSmallURL"] as? String  else { return }
-//
-//            let friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
-//
-//            self.friendInfo.append(friendInfo)
-//
-//
-//            //試著加入到同一個 array
-//            //            let friendDataArray = freindData(info: friendInfo, message: nil)
-//            //            self.friendDataArray.append(<#T##newElement: freindData##freindData#>)
-//
-//            //old 可以
-//            print("＊＊＊＊朋友的資料")
-//            print(self.friendInfo)
-//            self.chatTableView.reloadData()
-//
-//        })
-//
-//        //可以找到最後一筆資料
-//        ref.child("chatroom").child("PersonalChannel").child(channel).queryOrdered(byChild: "time").queryLimited(toLast: 1).observe(.childAdded) { (snapshot) in
-//
-//
-//
-//            guard let value = snapshot.value as? NSDictionary else { return }
-//
-//            guard let senderId = value["senderId"] as? String else { return }
-//
-//            guard let senderName = value["senderName"] as? String else { return }
-//
-//            guard let time = value["time"] as? Int else { return }
-//
-//            let content = value["content"] as? String
-//
-//            let senderPhoto = value["senderPhoto"] as? String
-//
-//            let imageUrl = value["imageUrl"] as? String
-//
-//            let message = Message(
-//                content: content,
-//                senderId: senderId,
-//                senderName: senderName,
-//                senderPhoto: senderPhoto,
-//                time: time,
-//                imageUrl: imageUrl
-//            )
-//
-//            self.messages.append(message)
-//
-//            print("_____")
-//            print(self.messages)
-//
-//            self.chatTableView.reloadData()
-//
-//            //                        self.chatTableView.beginUpdates()
-//            //
-//            //                        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-//            //
-//            //                        self.chatTableView.insertRows(at: [indexPath], with: .automatic)
-//            //
-//            //                        self.chatTableView.endUpdates()
-//            //
-//            //                        self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-//        }
-//
-//    }
-    
     //let chatroomKey = "publicChannel"
     //每個 channel 都要讀取 讀最後一筆
     
@@ -417,6 +321,7 @@ class ChatViewController: UIViewController {
                         
                         // || user.friendUID == message.senderId
                         self.newMessage[index].content = message.content
+                        self.newMessage[index].time = message.time
                         
                         self.chatTableView.reloadData()
                         
@@ -432,7 +337,7 @@ class ChatViewController: UIViewController {
                                 
                                 //user.friendUID == message.senderId
                                 self.newMessage[index].content = message.content
-                                
+                                self.newMessage[index].time = message.time
                                 self.chatTableView.reloadData()
                                 
                                 return
@@ -447,90 +352,13 @@ class ChatViewController: UIViewController {
                 print("_____")
                 print(self.newMessage)
                 
-            self.chatTableView.reloadData()
+                self.chatTableView.reloadData()
                 
             } catch {
                 print(error)
             }
-            
-            //self.chatTableView.reloadData()
-
-//            guard let senderId = value["senderId"] as? String else { return }
-//
-//            guard let senderName = value["senderName"] as? String else { return }
-//
-//            guard let time = value["time"] as? Int else { return }
-//
-//            let content = value["content"] as? String
-//
-//            let senderPhoto = value["senderPhoto"] as? String
-//
-//            let imageUrl = value["imageUrl"] as? String
-//
-//            let friendName = value["friendName"] as? String
-//
-//            let friendNameURL = value["friendImageUrl"] as? String
-//
-//            guard let friendUID = value["friendUID"] as? String else { return }
-//
-//            let message = NewMessage(
-//                content: content,
-//                senderId: senderId,
-//                senderName: senderName,
-//                senderPhoto: senderPhoto,
-//                time: time,
-//                imageUrl: imageUrl,
-//                friendName: friendName,
-//                friendImageUrl: friendNameURL,
-//                friendUID: friendUID
-//            )
-            
-            //要判斷是不是相同的人 相同的取代最後一行對話 不相同的再往上加
-            
-//            if  message.senderId == self.myselfUID {
-//
-//                for (index, user) in self.newMessage.enumerated() where user.friendUID == message.friendUID || user.senderId == message.friendUID {
-//
-//                    //user.friendUID == message.friendUID || user.senderId == message.friendUID  {
-//
-//                    // || user.friendUID == message.senderId
-//                    self.newMessage[index].content = message.content
-//
-//                    self.chatTableView.reloadData()
-//
-//                    return //跳出 整個 getNewFriendMessage 的 func
-//                }
-//
-//            } else {
-//
-//                    //不確定判斷式正確不正確
-//                for (index, user) in self.newMessage.enumerated()
-//                    where user.friendUID == message.senderId
-//                        || user.senderId == message.senderId {
-//
-//                    //user.friendUID == message.senderId
-//                    self.newMessage[index].content = message.content
-//
-//                    self.chatTableView.reloadData()
-//
-//                    return
-//                }
-//
-//            }
-//
-//            self.newMessage.append(message)
-//            //20181016 searchbar
-//            self.result.append(message)
-//            //END
-//            print("_____")
-//            print(self.newMessage)
-//
-//            self.chatTableView.reloadData()
-            
         }
-        
     }
-    
 }
 
 //    func setButtonTemplateImage() {
@@ -544,7 +372,7 @@ class ChatViewController: UIViewController {
 
 extension ChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        
         //OK 可以顯示最後一行
         //return messages.count
         
@@ -558,45 +386,29 @@ extension ChatViewController: UITableViewDataSource {
                 print("顯示空值畫面")
                 hintLabel.isHidden = false
                 hintLabel.text = "到地圖上認識一些新朋友吧！"
+                animationView.isHidden = false
+                setAniView()
             } else {
                 print("已有對話紀錄")
                 hintLabel.isHidden = true
+                animationView.isHidden = true
             }
             //hintLabel.isHidden = true
         }
         
         if searchStatus == false {
             
-        return newMessage.count
+            return newMessage.count
         } else {
             return result.count
         }
-        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(
             withIdentifier: "Chat", for: indexPath)
             as? ChatTableViewCell {
-            
-            // OK 可以顯示最後一行
-            // cell.userMessage.text = messages[indexPath.row].content
-            
-            //cell.userMessage.text = "要吃飯了沒？？？"
-            //cell.userMessage.text = messages[indexPath.row].content
-            
-            //以下獨立時可以用
-            //           cell.userName.text = friendInfo[indexPath.row].friendName
-            //
-            
-            //            if let photoString = friendInfo[indexPath.row].friendImageUrl
-            //            {
-            //                cell.userImage.kf.setImage(with: URL(string: photoString))
-            //            } else {
-            //                cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
-            //            }
-            
-            //Start
             
             if searchStatus == false {
                 
@@ -611,6 +423,18 @@ extension ChatViewController: UITableViewDataSource {
                     
                     cell.userMessage.text = newMessage[indexPath.row].content
                     
+                    //                    let seconds = newMessage[indexPath.row].time / 1000
+                    //                    let timestampDate = Date(timeIntervalSince1970: TimeInterval(seconds))
+                    //
+                    //                    let dateFormater = DateFormatter()
+                    //                    dateFormater.dateFormat = "MM-dd hh:mm a"
+                    //                    cell.messageTime.text = dateFormater.string(from: timestampDate)
+                    
+                    //let messageTime = DateManager.share.formatMessageTime(time: newMessage[indexPath.row].time)
+                    let messageTime = Date.formatMessageTime(time: newMessage[indexPath.row].time)
+                    cell.messageTime.text = messageTime
+                    
+                    
                 } else {
                     
                     cell.userName.text = newMessage[indexPath.row].senderName
@@ -622,6 +446,17 @@ extension ChatViewController: UITableViewDataSource {
                     }
                     
                     cell.userMessage.text = newMessage[indexPath.row].content
+                    
+                    //                    let seconds = newMessage[indexPath.row].time / 1000
+                    //                    let timestampDate = Date(timeIntervalSince1970: TimeInterval(seconds))
+                    //
+                    //                    let dateFormater = DateFormatter()
+                    //                    dateFormater.dateFormat = "MM-dd hh:mm a"
+                    //                    cell.messageTime.text = dateFormater.string(from: timestampDate)
+                    
+                    //let messageTime = DateManager.share.formatMessageTime(time: newMessage[indexPath.row].time)
+                    let messageTime = Date.formatMessageTime(time: newMessage[indexPath.row].time)
+                    cell.messageTime.text = messageTime
                     
                 }
                 
@@ -653,26 +488,6 @@ extension ChatViewController: UITableViewDataSource {
                     
                 }
             }
-        
-            //END
-            // OK 原本
-            //            cell.userName.text = newMessage[indexPath.row].friendName
-            //
-            //
-            //                        if let photoString = newMessage[indexPath.row].friendImageUrl
-            //                        {
-            //                            cell.userImage.kf.setImage(with: URL(string: photoString))
-            //                        } else {
-            //                            cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
-            //                        }
-            //
-            //            cell.userMessage.text = newMessage[indexPath.row].content
-            
-            //
-            //cell.textLabel?.text = self.result[indexPath.row]
-            
-            //cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-            //cell.userName.text = result[indexPath.row].friendName
             
             //點擊 cell 後 不反灰
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
@@ -710,17 +525,17 @@ extension ChatViewController: UITableViewDelegate {
             ) as? ChatDetailViewController else { return }
         if searchStatus == false {
             
-        //controller.article = articles[indexPath.row]
-        if newMessage[indexPath.row].senderId ==  myselfUID { controller.friendUserId = self.newMessage[indexPath.row].friendUID
-        } else {
-            controller.friendUserId = self.newMessage[indexPath.row].senderId
-        }
+            //controller.article = articles[indexPath.row]
+            if newMessage[indexPath.row].senderId ==  myselfUID { controller.friendUserId = self.newMessage[indexPath.row].friendUID
+            } else {
+                controller.friendUserId = self.newMessage[indexPath.row].senderId
+            }
         } else {
             if result[indexPath.row].senderId ==  myselfUID { controller.friendUserId = self.result[indexPath.row].friendUID
             } else {
                 controller.friendUserId = self.result[indexPath.row].senderId
             }
-
+            
         }
         self.show(controller, sender: nil)
         print("跳頁成功")
@@ -751,9 +566,9 @@ extension ChatViewController: UISearchBarDelegate {
                 
                 //arr.friendName
                 //if arr.friendName.lowercaseString.hasPrefix(searchText.lowercaseString) {
-                    
-//                if(arrr.friendName?.lowercased().contains(searchText.lowercased()))! {
-//        if(arrr.friendName?.lowercased(with: <#T##Locale?#>)) {
+                
+                //                if(arrr.friendName?.lowercased().contains(searchText.lowercased()))! {
+                //        if(arrr.friendName?.lowercased(with: <#T##Locale?#>)) {
                 
                 //guard let friendName = arrr.friendName else { return }
                 
@@ -769,16 +584,16 @@ extension ChatViewController: UISearchBarDelegate {
                     }
                     
                     //cell.userName.text = newMessage[index].friendName
-//                    cell.userName.text = newMessage[index]
-//
-//                    if let photoString = newMessage[indexPath.row].friendImageUrl
-//                    {
-//                        cell.userImage.kf.setImage(with: URL(string: photoString))
-//                    } else {
-//                        cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
-//                    }
-//
-//                    cell.userMessage.text = newMessage[indexPath.row].content
+                    //                    cell.userName.text = newMessage[index]
+                    //
+                    //                    if let photoString = newMessage[indexPath.row].friendImageUrl
+                    //                    {
+                    //                        cell.userImage.kf.setImage(with: URL(string: photoString))
+                    //                    } else {
+                    //                        cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
+                    //                    }
+                    //
+                    //                    cell.userMessage.text = newMessage[indexPath.row].content
                     
                 } else {
                     
@@ -793,12 +608,12 @@ extension ChatViewController: UISearchBarDelegate {
                 }
                 
                 //OK
-//                let friendResult = friendName.contains(searchText)
-//                if friendResult == true {
-//                    self.result.append(arrr)
-//                } else {
-//                    print("名字不同")
-//                }
+                //                let friendResult = friendName.contains(searchText)
+                //                if friendResult == true {
+                //                    self.result.append(arrr)
+                //                } else {
+                //                    print("名字不同")
+                //                }
                 
                 //}
             }

@@ -83,6 +83,7 @@ PODS:
   - KeychainAccess (3.1.2)
   - Kingfisher (4.10.0)
   - leveldb-library (1.20)
+  - lottie-ios (2.5.0)
   - MarqueeLabel/Swift (3.2.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -108,6 +109,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - KeychainAccess
   - Kingfisher (~> 4.0)
+  - lottie-ios
   - NotificationBannerSwift
   - RAMAnimatedTabBarController
   - SVProgressHUD
@@ -135,6 +137,7 @@ SPEC REPOS:
     - KeychainAccess
     - Kingfisher
     - leveldb-library
+    - lottie-ios
     - MarqueeLabel
     - nanopb
     - NotificationBannerSwift
@@ -164,6 +167,7 @@ SPEC CHECKSUMS:
   KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
   Kingfisher: 43c4b802d8b5256cf1f4379e9cd10b329be6d3e2
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
   MarqueeLabel: 440a502b91a9179bd98f9fff00ba1150650a1c0e
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NotificationBannerSwift: c9f4bc868d78df975ed59c0b2fccdbbe0e863efe
@@ -172,6 +176,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 
-PODFILE CHECKSUM: 082011b6bd94a7ee8304c978637861bf92121013
+PODFILE CHECKSUM: 5391037308e1e2e9c23845f5db99aad0df36eeec
 
 COCOAPODS: 1.5.3

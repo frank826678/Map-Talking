@@ -36,7 +36,7 @@ class UserLocation: NSObject, MKAnnotation {
     
 }
 
-struct Locations {
+struct Locations: Codable {
     
     var latitude: Double {
         didSet {
@@ -98,7 +98,7 @@ struct Locations {
     }
 }
 
-class UserAnnotation: MKPointAnnotation {
+class UserAnnotation: MKPointAnnotation, Codable {
     
     var name: String?
     var userImage: String?

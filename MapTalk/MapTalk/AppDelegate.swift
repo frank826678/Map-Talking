@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //20181018
         let keychain = Keychain(service: "com.frank.MapTalk")
         
-        if  keychain[FirebaseType.uuid.rawValue] != nil || keychain["anonymous"] == "anonymous" {
+        if  keychain[FirebaseType.uuid.rawValue] != nil {
             switchToMainStoryBoard()
         } else {
             switchToLoginStoryBoard()

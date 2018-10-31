@@ -9,23 +9,23 @@
 import Foundation
 
 struct NewMessageCodable: Codable {
-    
+
     var content: String?
-    
+
     let senderId: String
-    
+
     let senderName: String
-    
+
     let senderPhoto: String?
-    
+
     let time: Int
-    
+
     let imageUrl: String?
-    
+
     let friendName: String?
-    
+
     let friendImageUrl: String?
-    
+
     let friendUID: String
-    
+
 }

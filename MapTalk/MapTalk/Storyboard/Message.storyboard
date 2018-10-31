@@ -34,8 +34,8 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到地圖上認識一些新朋友吧！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nt6-La-ddX">
-                                <rect key="frame" x="55" y="321.5" width="265" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="42.5" y="580.5" width="290" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -51,12 +51,12 @@
                         <constraints>
                             <constraint firstItem="Ebp-xn-yvw" firstAttribute="leading" secondItem="Hfc-EJ-Z1E" secondAttribute="leading" id="BL7-i5-hbX"/>
                             <constraint firstItem="BFs-zt-WQf" firstAttribute="top" secondItem="Hfc-EJ-Z1E" secondAttribute="top" constant="3" id="Ef4-Kw-wgC"/>
+                            <constraint firstItem="Hfc-EJ-Z1E" firstAttribute="bottom" secondItem="nt6-La-ddX" secondAttribute="bottom" constant="60" id="FVU-s9-S1U"/>
                             <constraint firstItem="Hfc-EJ-Z1E" firstAttribute="trailing" secondItem="Ebp-xn-yvw" secondAttribute="trailing" id="HQ5-y5-bRu"/>
                             <constraint firstItem="Lt9-hx-7Zp" firstAttribute="top" secondItem="Hfc-EJ-Z1E" secondAttribute="top" id="Ikt-o2-vpi"/>
                             <constraint firstItem="Hfc-EJ-Z1E" firstAttribute="bottom" secondItem="pxe-G1-XtW" secondAttribute="bottom" id="JEh-1D-kId"/>
                             <constraint firstItem="pxe-G1-XtW" firstAttribute="leading" secondItem="Hfc-EJ-Z1E" secondAttribute="leading" id="NWN-hd-5Ds"/>
                             <constraint firstItem="Hfc-EJ-Z1E" firstAttribute="trailing" secondItem="BFs-zt-WQf" secondAttribute="trailing" constant="10" id="QD8-g8-gdZ"/>
-                            <constraint firstItem="nt6-La-ddX" firstAttribute="centerY" secondItem="TTk-xj-ftv" secondAttribute="centerY" id="bZ4-5t-SBZ"/>
                             <constraint firstItem="Ebp-xn-yvw" firstAttribute="top" secondItem="Lt9-hx-7Zp" secondAttribute="bottom" constant="4" id="fZX-jg-Jvr"/>
                             <constraint firstItem="nt6-La-ddX" firstAttribute="centerX" secondItem="TTk-xj-ftv" secondAttribute="centerX" id="h3K-Wy-rhv"/>
                             <constraint firstItem="BFs-zt-WQf" firstAttribute="leading" secondItem="Lt9-hx-7Zp" secondAttribute="trailing" constant="10" id="nsH-Qo-VkT"/>
