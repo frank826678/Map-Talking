@@ -409,8 +409,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     MKCoordinateRegion(
                         center: userlocations.userAnnotation.coordinate,
                         span: MKCoordinateSpan(
-                            latitudeDelta: 0.1,
-                            longitudeDelta: 0.1
+                            latitudeDelta: 1,
+                            longitudeDelta: 1
                         )
                     ),
                     animated: false
@@ -529,11 +529,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 MKCoordinateRegion(
                     center: location.userAnnotation.coordinate,
                     span: MKCoordinateSpan(
-                        latitudeDelta: 0.1,
-                        longitudeDelta: 0.1
+                        latitudeDelta: 0.4,
+                        longitudeDelta: 0.4
                     )
                 ),
-                animated: false
+                animated: true
             )
         }
     }
@@ -1305,16 +1305,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         
-        if mapView.region.span.latitudeDelta > 2.5 {
+        if mapView.region.span.latitudeDelta > 3 {
             
             self.mapView.removeAnnotations(allAnnotations)
-            BaseNotificationBanner.warningBanner(subtitle: "請將地圖放大一點 🙏 ")
-            print("超過 2.5")
+            BaseNotificationBanner.warningBanner(subtitle: "請將地圖放大一點   🙏 ")
+            //print("超過 2.5")
         } else {
             
             self.mapView.removeAnnotations(allAnnotations)
             self.mapView.addAnnotations(allAnnotations)
-            print("低於 2.5")
+            //print("低於 2.5")
             
         }
         //print(mapView.region.span)

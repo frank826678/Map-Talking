@@ -23,10 +23,10 @@
                         <rect key="frame" x="30" y="10" width="315" height="234.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v3n-wm-EsK">
-                                <rect key="frame" x="0.0" y="0.0" width="315" height="76"/>
+                                <rect key="frame" x="0.0" y="0.0" width="315" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi, I am Luke, I love coding! " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="m77-d8-t5Q">
-                                        <rect key="frame" x="10" y="10" width="295" height="56"/>
+                                        <rect key="frame" x="10" y="10" width="295" height="80"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -34,7 +34,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.45882352941176469" green="0.71372549019607845" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="76" id="44B-g3-iY4"/>
+                                    <constraint firstAttribute="height" constant="100" id="44B-g3-iY4"/>
                                     <constraint firstItem="m77-d8-t5Q" firstAttribute="leading" secondItem="v3n-wm-EsK" secondAttribute="leading" constant="10" id="Qwb-0n-ONh"/>
                                     <constraint firstItem="m77-d8-t5Q" firstAttribute="top" secondItem="v3n-wm-EsK" secondAttribute="top" constant="10" id="UVl-zh-EbB"/>
                                     <constraint firstItem="m77-d8-t5Q" firstAttribute="centerX" secondItem="v3n-wm-EsK" secondAttribute="centerX" id="ZVD-qY-Jba"/>
@@ -44,7 +44,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我想尋找一個美女，跟我一樣喜歡寫 code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="2gd-Z5-FtR">
-                                <rect key="frame" x="10" y="106" width="295" height="18"/>
+                                <rect key="frame" x="10" y="130" width="295" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

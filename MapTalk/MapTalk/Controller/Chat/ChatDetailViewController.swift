@@ -428,6 +428,9 @@ class ChatDetailViewController: UIViewController {
             
             guard let friendImageUrl = value["FBPhotoSmallURL"] as? String  else { return }
             
+            //self.navigationController?.title = friendName
+            self.navigationController?.navigationBar.topItem?.title = "     \(friendName)"
+            
             let friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
             
             self.friendInfo.append(friendInfo)

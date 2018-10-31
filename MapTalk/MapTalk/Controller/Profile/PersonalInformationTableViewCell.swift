@@ -11,7 +11,7 @@ import UIKit
 protocol PersonalInformationCellDelegate: AnyObject {
     
     func editSave(textInput: String, tableViewCell: UITableViewCell)
-    
+    //func textCount(textInput: String, tableViewCell: UITableViewCell)
 }
 
 class PersonalInformationTableViewCell: UITableViewCell {
@@ -38,11 +38,24 @@ class PersonalInformationTableViewCell: UITableViewCell {
 
 extension PersonalInformationTableViewCell: UITextViewDelegate {
     
-    //鍵盤每打一個字 就會縮回去 註解掉沒問題
+    //鍵盤每打一個字 就會縮回去 註解掉沒問題 reloaddata 的問題
     func textViewDidChangeSelection(_ textView: UITextView) {
         
         delegate?.editSave(textInput: textView.text, tableViewCell: self) //delegate 的 func 帶著傳入值
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
+        guard let textViewText = textView.text else {
+            
+            return true
+            
+        }
+        
+        let count = textViewText.count + text.count - range.length
+        
+        return count <= 30
+    
     }
     
 }

@@ -74,14 +74,14 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // swiftlint:disable force_cast
         let ramTBC = tabBarController as! TabBarViewController
         // swiftlint:enable force_cast
         
         ramTBC.selectedIndex = 1
         ramTBC.setSelectIndex(from: 0, to: 1)
-
+        
         //偵測網路
         downloadData()
         
@@ -323,6 +323,10 @@ class ChatViewController: UIViewController {
                         self.newMessage[index].content = message.content
                         self.newMessage[index].time = message.time
                         
+                        self.newMessage.sort(by: { (message1, message2) -> Bool in
+                            return message1.time > message2.time
+                        })
+                        
                         self.chatTableView.reloadData()
                         
                         return //跳出 整個 getNewFriendMessage 的 func
@@ -338,6 +342,11 @@ class ChatViewController: UIViewController {
                                 //user.friendUID == message.senderId
                                 self.newMessage[index].content = message.content
                                 self.newMessage[index].time = message.time
+                                
+                                self.newMessage.sort(by: { (message1, message2) -> Bool in
+                                    return message1.time > message2.time
+                                })
+                                
                                 self.chatTableView.reloadData()
                                 
                                 return
@@ -351,6 +360,14 @@ class ChatViewController: UIViewController {
                 //END
                 print("_____")
                 print(self.newMessage)
+                
+                //                newMessage.sort { (date1, date2) -> Bool in
+                //                    return date1.time  (date2.time) == ComparisonResult.orderedDescending
+                //                }
+                
+                self.newMessage.sort(by: { (message1, message2) -> Bool in
+                    return message1.time > message2.time
+                })
                 
                 self.chatTableView.reloadData()
                 
@@ -421,18 +438,11 @@ extension ChatViewController: UITableViewDataSource {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
                     }
                     
-                    cell.userMessage.text = newMessage[indexPath.row].content
+                    //cell.userMessage.text = newMessage[indexPath.row].content
                     
-                    //                    let seconds = newMessage[indexPath.row].time / 1000
-                    //                    let timestampDate = Date(timeIntervalSince1970: TimeInterval(seconds))
-                    //
-                    //                    let dateFormater = DateFormatter()
-                    //                    dateFormater.dateFormat = "MM-dd hh:mm a"
-                    //                    cell.messageTime.text = dateFormater.string(from: timestampDate)
                     
-                    //let messageTime = DateManager.share.formatMessageTime(time: newMessage[indexPath.row].time)
-                    let messageTime = Date.formatMessageTime(time: newMessage[indexPath.row].time)
-                    cell.messageTime.text = messageTime
+//                    let messageTime = Date.formatMessageTime(time: newMessage[indexPath.row].time)
+//                    cell.messageTime.text = messageTime
                     
                     
                 } else {
@@ -445,21 +455,17 @@ extension ChatViewController: UITableViewDataSource {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
                     }
                     
-                    cell.userMessage.text = newMessage[indexPath.row].content
+                    //cell.userMessage.text = newMessage[indexPath.row].content
                     
-                    //                    let seconds = newMessage[indexPath.row].time / 1000
-                    //                    let timestampDate = Date(timeIntervalSince1970: TimeInterval(seconds))
-                    //
-                    //                    let dateFormater = DateFormatter()
-                    //                    dateFormater.dateFormat = "MM-dd hh:mm a"
-                    //                    cell.messageTime.text = dateFormater.string(from: timestampDate)
-                    
-                    //let messageTime = DateManager.share.formatMessageTime(time: newMessage[indexPath.row].time)
-                    let messageTime = Date.formatMessageTime(time: newMessage[indexPath.row].time)
-                    cell.messageTime.text = messageTime
+//                    let messageTime = Date.formatMessageTime(time: newMessage[indexPath.row].time)
+//                    cell.messageTime.text = messageTime
                     
                 }
                 
+                cell.userMessage.text = newMessage[indexPath.row].content
+                let messageTime = Date.formatMessageTime(time: newMessage[indexPath.row].time)
+                cell.messageTime.text = messageTime
+
             } else {
                 
                 //cell.userName.text = result[indexPath.row].friendName
@@ -472,7 +478,7 @@ extension ChatViewController: UITableViewDataSource {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
                     }
                     
-                    cell.userMessage.text = result[indexPath.row].content
+                    //cell.userMessage.text = result[indexPath.row].content
                     
                 } else {
                     
@@ -484,9 +490,14 @@ extension ChatViewController: UITableViewDataSource {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
                     }
                     
-                    cell.userMessage.text = result[indexPath.row].content
+                    //cell.userMessage.text = result[indexPath.row].content
                     
                 }
+                
+                cell.userMessage.text = result[indexPath.row].content
+                let messageTime = Date.formatMessageTime(time: newMessage[indexPath.row].time)
+                cell.messageTime.text = messageTime
+
             }
             
             //點擊 cell 後 不反灰
