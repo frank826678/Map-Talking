@@ -269,54 +269,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         self.present(alertController, animated: true, completion: nil)
-        
-        //        let alert = UIAlertController.showAlert(
-        //            title: "是否向其他人顯示自己位置？",
-        //            message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態，需要顯示才能正常使用地圖功能。",
-        //            defaultOption: ["顯示","隱藏"]) { (action) in
-        //
-        //
-        //        }
-        //
-        //        self.present(alert, animated: true, completion: nil)
-        
-        
-        //        let reportController = UIAlertController(title: "是否向其他人顯示自己位置？", message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態，需要顯示才能正常使用地圖功能。", preferredStyle: .alert)
-        //
-        //        guard let myselfId = Auth.auth().currentUser?.uid else { return }
-        //
-        //        let hideAction = UIAlertAction(title: "隱藏", style: .destructive) { (action) in
-        //
-        //            let userStatus = ["status": "disappear"]
-        //
-        //
-        //            let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
-        //
-        //            self.refference.updateChildValues(childUpdatesStatus)
-        //
-        //            print("按下隱藏2 MapViewController")
-        //
-        //        }
-        //        let appearAction = UIAlertAction(title: "顯示", style: .default) { (action) in
-        //
-        //            let userStatus = ["status": "appear"]
-        //
-        //
-        //            let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
-        //
-        //            self.refference.updateChildValues(childUpdatesStatus)
-        //
-        //            print("按下顯示3 MapViewController")
-        //        }
-        //
-        //        let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
-        //
-        //        reportController.addAction(appearAction)
-        //        reportController.addAction(hideAction)
-        //        reportController.addAction(cancelAction)
-        //
-        //        self.present(reportController, animated: true, completion: nil)
-        
+                
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
