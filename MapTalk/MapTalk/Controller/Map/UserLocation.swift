@@ -36,6 +36,18 @@ class UserLocation: NSObject, MKAnnotation {
     
 }
 
+//codable
+
+struct UserMapInfo: Codable {
+//    var gender: Int?
+//    var message: String?
+//    var status: String?
+    var gender: Locations
+    var message: Locations
+    var status: Locations
+    var location: Locations
+}
+
 struct Locations: Codable {
     
     var latitude: Double {
@@ -108,3 +120,4 @@ class UserAnnotation: MKPointAnnotation, Codable {
     var gender: Int?
     var status: String?
 }
+

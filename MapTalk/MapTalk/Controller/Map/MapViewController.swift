@@ -17,6 +17,7 @@ import NotificationBannerSwift
 //swiftlint:disable all
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
+    let decoder = JSONDecoder()
     var iconImageArray: [String] = ["white-heart","road-sign","hot-air-balloon"]
     
     //20181028 增加 alert 告訴他我正在使用他的位置
@@ -295,6 +296,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func dataBaseLocation() {
         refference.child("location").observe(.childAdded) { (snapshot) in
             guard let value = snapshot.value as? NSDictionary else { return }
+            
+//            guard let messageJSONData = try? JSONSerialization.data(withJSONObject: value) else { return }
+//            
+//            do {
+//                let userlocations = try self.decoder.decode(Locations.self, from: messageJSONData)
+//                print("****codable**** start")
+//                print(userlocations)
+//                print("****codable**** END")
+//            }
+//            
+//            catch {
+//                print(error)
+//            }
+            
             guard let location = value["location"] as? NSDictionary else { return }
             guard let latitude = location["lat"] as? Double else { return }
             guard let longitude = location["lon"] as? Double else { return }

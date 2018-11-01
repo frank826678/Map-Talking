@@ -423,6 +423,7 @@ extension UserInfoController: UITableViewDataSource{
                 //cell.selectionStyle = UITableViewCell.SelectionStyle.none
                 
                 if isEdit == true {
+                    //改用 isEditable
                     cell.contentTextView.isUserInteractionEnabled = true
                 } else {
                     cell.contentTextView.isUserInteractionEnabled = false
