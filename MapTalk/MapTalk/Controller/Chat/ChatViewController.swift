@@ -136,7 +136,7 @@ class ChatViewController: UIViewController {
     
     func setAniView() {
         
-        animationView.frame = CGRect(x: 0, y: 0, width: 400, height: 400)
+        animationView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
         animationView.center = self.view.center
         animationView.contentMode = .scaleAspectFill
         animationView.loopAnimation = true

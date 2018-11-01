@@ -45,17 +45,17 @@ extension PersonalInformationTableViewCell: UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
+
         guard let textViewText = textView.text else {
-            
+
             return true
-            
+
         }
-        
+
         let count = textViewText.count + text.count - range.length
-        
-        return count <= 30
-    
+
+        return count <= 41
+
     }
     
 }

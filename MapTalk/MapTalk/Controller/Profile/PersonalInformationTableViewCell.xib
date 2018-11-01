@@ -23,13 +23,13 @@
                         <rect key="frame" x="20" y="5" width="335" height="104.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="專長 興趣" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KZ-d3-Knu">
-                                <rect key="frame" x="55" y="15" width="73.5" height="20.5"/>
+                                <rect key="frame" x="25" y="15" width="73.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="吃飯 睡覺  打球 游泳" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M1Z-Bw-oEo">
-                                <rect key="frame" x="50" y="40.5" width="280" height="56"/>
+                                <rect key="frame" x="20" y="40.5" width="295" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -40,9 +40,9 @@
                             <constraint firstAttribute="height" constant="104.5" id="7sG-wx-wRw"/>
                             <constraint firstItem="5KZ-d3-Knu" firstAttribute="top" secondItem="J23-RI-hbV" secondAttribute="top" constant="15" id="ESk-VD-7sg"/>
                             <constraint firstItem="M1Z-Bw-oEo" firstAttribute="top" secondItem="5KZ-d3-Knu" secondAttribute="bottom" constant="5" id="FRN-Je-6CE"/>
-                            <constraint firstItem="M1Z-Bw-oEo" firstAttribute="leading" secondItem="J23-RI-hbV" secondAttribute="leading" constant="50" id="G6n-1e-SPh"/>
-                            <constraint firstAttribute="trailing" secondItem="M1Z-Bw-oEo" secondAttribute="trailing" constant="5" id="LFk-kl-PMh"/>
-                            <constraint firstItem="5KZ-d3-Knu" firstAttribute="leading" secondItem="J23-RI-hbV" secondAttribute="leading" constant="55" id="nWg-Wn-W3j"/>
+                            <constraint firstItem="M1Z-Bw-oEo" firstAttribute="leading" secondItem="J23-RI-hbV" secondAttribute="leading" constant="20" id="G6n-1e-SPh"/>
+                            <constraint firstAttribute="trailing" secondItem="M1Z-Bw-oEo" secondAttribute="trailing" constant="20" id="LFk-kl-PMh"/>
+                            <constraint firstItem="5KZ-d3-Knu" firstAttribute="leading" secondItem="J23-RI-hbV" secondAttribute="leading" constant="25" id="nWg-Wn-W3j"/>
                             <constraint firstAttribute="bottom" secondItem="M1Z-Bw-oEo" secondAttribute="bottom" constant="8" id="yFP-7A-jg2"/>
                         </constraints>
                     </view>

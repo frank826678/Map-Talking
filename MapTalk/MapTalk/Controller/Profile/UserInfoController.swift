@@ -423,10 +423,10 @@ extension UserInfoController: UITableViewDataSource{
                 //cell.selectionStyle = UITableViewCell.SelectionStyle.none
                 
                 if isEdit == true {
-                    //改用 isEditable
-                    cell.contentTextView.isUserInteractionEnabled = true
+                    //改用 isEditable 原本 isUserInteractionEnabled
+                    cell.contentTextView.isEditable = true
                 } else {
-                    cell.contentTextView.isUserInteractionEnabled = false
+                    cell.contentTextView.isEditable = false
                 }
                 
                 cell.titleLabel.isHidden = true
@@ -477,9 +477,9 @@ extension UserInfoController: UITableViewDataSource{
                 cell.selectionStyle = UITableViewCell.SelectionStyle.none
                 
                 if isEdit == true {
-                    cell.contentTextView.isUserInteractionEnabled = true
+                    cell.contentTextView.isEditable = true
                 } else {
-                    cell.contentTextView.isUserInteractionEnabled = false
+                    cell.contentTextView.isEditable = false
                 }
                 
                 //                cell.delegate = self
@@ -801,8 +801,9 @@ extension UserInfoController: PersonalInformationCellDelegate {
         
         guard let indexPath = editTableView.indexPath(for: tableViewCell) else { return }
         
-        if textInput.count > 20 {
-            print("超過 20 字 ＊＊＊")
+        if textInput.count > 40 {
+            //print("超過 20 字 ＊＊＊")
+            BaseNotificationBanner.warningBanner(subtitle: "字數請勿超過 40 個字～")
         }
         
         if indexPath.section == 0 {

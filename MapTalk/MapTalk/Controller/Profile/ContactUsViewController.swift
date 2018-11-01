@@ -100,15 +100,19 @@ class ContactUsViewController: UIViewController {
         
             versionLabel.layer.cornerRadius = 20
             versionLabel.clipsToBounds = true
+            versionLabel.layer.backgroundColor = UIColor.white.cgColor
             
             updateLabel.layer.cornerRadius = 20
             updateLabel.clipsToBounds = true
+            updateLabel.layer.backgroundColor = UIColor.white.cgColor
 
             nameLabel.layer.cornerRadius = 20
             nameLabel.clipsToBounds = true
+            nameLabel.layer.backgroundColor = UIColor.white.cgColor
 
             contactButton.layer.cornerRadius = 20
             contactButton.clipsToBounds = true
+            contactButton.backgroundColor = UIColor.white
 
     }
 

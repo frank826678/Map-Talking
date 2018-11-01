@@ -1276,7 +1276,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if mapView.region.span.latitudeDelta > 3 {
             
             self.mapView.removeAnnotations(allAnnotations)
-            BaseNotificationBanner.warningBanner(subtitle: "請將地圖放大一點   🙏 ")
+            BaseNotificationBanner.warningBanner(subtitle: "請將地圖放大一點   🙏 ，才能看到其他使用者喔～ ")
             //print("超過 2.5")
         } else {
             
