@@ -112,19 +112,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         if let name = Auth.auth().currentUser?.displayName {
             userName = name
+            
+            locationManager.delegate = self
+            //kCLLocationAccuracyKilometer
+            locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+            //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+            //locationManager.requestWhenInUseAuthorization()
+            //20181028
+            locationManager.requestAlwaysAuthorization()
+            locationManager.startUpdatingLocation()
+            showLocationAlert()
+            downloadUserInfo()
+            
         } else {
             userName = "User"
         }
         userName = Auth.auth().currentUser?.displayName
         
-        locationManager.delegate = self
-        //kCLLocationAccuracyKilometer
-        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        //locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        //locationManager.requestWhenInUseAuthorization()
-        //20181028
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
+        
         
         dataBaseLocation()
         
@@ -155,7 +160,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         addSwipe()
         mapBackgroundView.isHidden = true
         
-        showLocationAlert()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -167,60 +172,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // 首次使用 向使用者詢問定位自身位置權限
-        if CLLocationManager.authorizationStatus()
-            == .notDetermined {
-            // 取得定位服務授權
-            //locationManager.requestWhenInUseAuthorization()
-            locationManager.requestAlwaysAuthorization()
-            // 開始定位自身位置
-            locationManager.startUpdatingLocation()
-            filterButton.isHidden = false
-            location.isHidden = false
-            //showLocationAlert()
-            if locationFlag == false {
-                showLocationAlert()
-                locationFlag = true
-            } else {
-                print("已經顯示過 showLocationAlert MapVC ")
-            }
-            
-        }
-            // 使用者已經拒絕定位自身位置權限
-        else if CLLocationManager.authorizationStatus()
-            == .denied {
-            // 提示可至[設定]中開啟權限
-            let alertController = UIAlertController(
-                title: "定位權限已關閉",
-                message:
-                "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟。 開啟後我們將存取您目前的地理位置資訊來顯示您的位置及媒合時的距離限制條件，且其他使用者將在地圖上看到您目前的位置。",
-                preferredStyle: .alert)
-            let okAction = UIAlertAction(
-                title: "確認", style: .default, handler:nil)
-            alertController.addAction(okAction)
-            self.present(
-                alertController,
-                animated: true, completion: nil)
-            filterButton.isHidden = true
-            location.isHidden = true
-        }
-            // 使用者已經同意定位自身位置權限
-        else if CLLocationManager.authorizationStatus()
-            == .authorizedWhenInUse {
-            // 開始定位自身位置
-            locationManager.startUpdatingLocation()
-            filterButton.isHidden = false
-            location.isHidden = false
-            //showLocationAlert()
-            
-            if locationFlag == false {
-                showLocationAlert()
-                locationFlag = true
-            } else {
-                print("已經顯示過 showLocationAlert MapVC ")
-            }
-            
-        }
         //匿名檢查
         let keychain = Keychain(service: "com.frank.MapTalk")
         
@@ -228,6 +179,62 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //print("目前為匿名模式 請登出後使用 Facebook 登入")
             BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
             
+        } else {
+            // 首次使用 向使用者詢問定位自身位置權限
+            if CLLocationManager.authorizationStatus()
+                == .notDetermined {
+                // 取得定位服務授權
+                //locationManager.requestWhenInUseAuthorization()
+                locationManager.requestAlwaysAuthorization()
+                // 開始定位自身位置
+                locationManager.startUpdatingLocation()
+                filterButton.isHidden = false
+                location.isHidden = false
+                //showLocationAlert()
+                if locationFlag == false {
+                    showLocationAlert()
+                    locationFlag = true
+                } else {
+                    print("已經顯示過 showLocationAlert MapVC ")
+                }
+                
+            }
+                // 使用者已經拒絕定位自身位置權限
+            else if CLLocationManager.authorizationStatus()
+                == .denied {
+                // 提示可至[設定]中開啟權限
+                let alertController = UIAlertController(
+                    title: "定位權限已關閉",
+                    message:
+                    "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟。 開啟後我們將存取您目前的地理位置資訊來顯示您的位置及媒合時的距離限制條件，且其他使用者將在地圖上看到您目前的位置。",
+                    preferredStyle: .alert)
+                let okAction = UIAlertAction(
+                    title: "確認", style: .default, handler:nil)
+                alertController.addAction(okAction)
+                self.present(
+                    alertController,
+                    animated: true, completion: nil)
+                filterButton.isHidden = true
+                location.isHidden = true
+            }
+                // 使用者已經同意定位自身位置權限
+            else if CLLocationManager.authorizationStatus()
+                == .authorizedWhenInUse || CLLocationManager.authorizationStatus()
+                == .authorizedAlways {
+                // 開始定位自身位置
+                locationManager.startUpdatingLocation()
+                filterButton.isHidden = false
+                location.isHidden = false
+                //showLocationAlert()
+                
+                if locationFlag == false {
+                    showLocationAlert()
+                    locationFlag = true
+                } else {
+                    print("已經顯示過 showLocationAlert MapVC ")
+                }
+                
+            }
         }
         
     }
@@ -270,7 +277,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         self.present(alertController, animated: true, completion: nil)
-                
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -292,23 +299,52 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
+    func downloadUserInfo() {
+        
+        print("*********")
+        
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        
+        //此時的 userSelected 是 array
+        self.refference.child("FilterData").child(userId).observeSingleEvent(of: .value, with: { (snapshot)
+            
+            in
+            
+            print("找到的資料是\(snapshot)")
+            
+            guard let value = snapshot.value as? NSDictionary else { return }
+            print("*********1")
+            
+            guard let myselfGender = value["myselfGender"] as? Int else { return }
+            
+            //guard let gender = value["gender"] as? Int else { return }
+            
+            //存下 gender
+            let userDefaults = UserDefaults.standard
+            
+            userDefaults.set(myselfGender, forKey: "myselfGender")
+            
+            print("自己的性別是 \(myselfGender)")
+        })
+        
+    }
     
     func dataBaseLocation() {
         refference.child("location").observe(.childAdded) { (snapshot) in
             guard let value = snapshot.value as? NSDictionary else { return }
             
-//            guard let messageJSONData = try? JSONSerialization.data(withJSONObject: value) else { return }
-//            
-//            do {
-//                let userlocations = try self.decoder.decode(Locations.self, from: messageJSONData)
-//                print("****codable**** start")
-//                print(userlocations)
-//                print("****codable**** END")
-//            }
-//            
-//            catch {
-//                print(error)
-//            }
+            //            guard let messageJSONData = try? JSONSerialization.data(withJSONObject: value) else { return }
+            //
+            //            do {
+            //                let userlocations = try self.decoder.decode(Locations.self, from: messageJSONData)
+            //                print("****codable**** start")
+            //                print(userlocations)
+            //                print("****codable**** END")
+            //            }
+            //
+            //            catch {
+            //                print(error)
+            //            }
             
             guard let location = value["location"] as? NSDictionary else { return }
             guard let latitude = location["lat"] as? Double else { return }
@@ -516,7 +552,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             centerDelivery = center
             
             //20181009 準備使用 notification 本身的位置 及更新的位置 打去給 filter 那頁
-            NotificationCenter.default.post(name: .myselfLocation, object: center)
+            //NotificationCenter.default.post(name: .myselfLocation, object: center)
             
             saveSelfLocation(latitude: center.latitude, longitude: center.longitude)
             
@@ -763,6 +799,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 self.removeUser(friendUserId: blockID)
                 userDefaults.set("block", forKey: blockID)
                 
+                NotificationCenter.default.post(name: .blockUser, object: blockID)
+                
+                
             }
             
             let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
@@ -1002,7 +1041,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         #warning ("TODO: 拿大照片過來")
         guard let userId = Auth.auth().currentUser?.uid else { return }
         guard let userImage = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
-        refference.child("location").child(userId).child("location").setValue([
+        refference.child("location").child(userId).child("location").updateChildValues([
             "userId": userId,
             "lat": latitude,
             "lon": longitude,
@@ -1273,7 +1312,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         
-        if mapView.region.span.latitudeDelta > 3 {
+        if mapView.region.span.latitudeDelta > 3.5 {
             
             self.mapView.removeAnnotations(allAnnotations)
             BaseNotificationBanner.warningBanner(subtitle: "請將地圖放大一點   🙏 ，才能看到其他使用者喔～ ")
@@ -1285,7 +1324,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //print("低於 2.5")
             
         }
-        //print(mapView.region.span)
+        print(mapView.region.span)
         
     }
     
@@ -1313,8 +1352,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 extension NSNotification.Name {
     
-    static let myselfLocation = NSNotification.Name("Location")
-    
+    //static let myselfLocation = NSNotification.Name("Location")
+    static let blockUser = NSNotification.Name("BLOCK_USER")
 }
 
 extension MapViewController: UITableViewDataSource {

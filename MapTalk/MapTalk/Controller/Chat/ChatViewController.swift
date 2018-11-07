@@ -113,6 +113,7 @@ class ChatViewController: UIViewController {
         //self.result = self.newMessage
         
         hintLabel.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector (getDataFrom(_:)), name: .blockUser, object: nil)
         
         guard let myselfId = Auth.auth().currentUser?.uid else { return }
         
@@ -134,6 +135,18 @@ class ChatViewController: UIViewController {
         
     }
     
+        @objc func getDataFrom(_ noti: Notification) {
+    
+//            guard let center = noti.object as? String else {
+//                print("No blockUser")
+//                return  }
+            friendsList.removeAll()
+            newMessage.removeAll()
+            getFriendList()
+            chatTableView.reloadData()
+            print("收到封鎖資料")
+        }
+
     func setAniView() {
         
         animationView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
@@ -247,6 +260,16 @@ class ChatViewController: UIViewController {
                 
                 guard let allFriends = value.allKeys[index] as? String else { return }
                 
+                //封鎖功能 20181022
+                let userDefaults = UserDefaults.standard
+                
+                guard userDefaults.value(forKey: allFriends) == nil else {
+                    
+                    print("此用戶被封鎖了ChatVC \(allFriends)")
+                    continue
+                    
+                }
+                
                 print("以下為allFriends資料")
                 
                 print(allFriends)
@@ -259,15 +282,7 @@ class ChatViewController: UIViewController {
                 //OK
                 //self.getFriendLastMessage(friendId: allFriends)
                 
-                //封鎖功能 20181022
-                let userDefaults = UserDefaults.standard
-                
-                guard userDefaults.value(forKey: allFriends) == nil else {
-                    
-                    print("此用戶被封鎖了ChatVC \(allFriends)")
-                    return
-                    
-                }
+
                 
                 //20181006
                 

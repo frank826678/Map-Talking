@@ -198,7 +198,7 @@ class FilterViewController: UIViewController {
         currentLocation = locManager.location
         
         //20181009  NotificationCenter
-        NotificationCenter.default.addObserver(self, selector: #selector (getDataFrom(_:)), name: .myselfLocation, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector (getDataFrom(_:)), name: .myselfLocation, object: nil)
         
         //        if( CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
         //            CLLocationManager.authorizationStatus() ==  .authorizedAlways){
@@ -379,16 +379,16 @@ class FilterViewController: UIViewController {
     
     
     
-    @objc func getDataFrom(_ noti: Notification) {
-        
-        guard let center = noti.object as? CLLocationCoordinate2D else {
-            print("no center")
-            return  }
-        
-        currentCenter?.latitude = center.latitude
-        currentCenter?.longitude = center.longitude
-        
-    }
+//    @objc func getDataFrom(_ noti: Notification) {
+//
+//        guard let center = noti.object as? CLLocationCoordinate2D else {
+//            print("no center")
+//            return  }
+//
+//        currentCenter?.latitude = center.latitude
+//        currentCenter?.longitude = center.longitude
+//
+//    }
     
     @objc func addTapped() {
         

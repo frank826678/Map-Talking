@@ -332,6 +332,12 @@ extension UserInfoController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = #colorLiteral(red: 0.8392156863, green: 0.8392156863, blue: 0.8392156863, alpha: 0.5)
+        
+        //轉換 title
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor.black
+        header.textLabel?.font = UIFont(name: "Futura", size: 19)!
+    
     }
     
     //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
