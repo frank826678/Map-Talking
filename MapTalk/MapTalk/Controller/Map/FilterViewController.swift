@@ -193,9 +193,6 @@ class FilterViewController: UIViewController {
         //        datingTypeCollectionView.register(UINib(nibName: "FilterCollectionViewCell", bundle: nil),
         //                               forCellReuseIdentifier: "Date")
         
-        //20181009
-        locManager.requestWhenInUseAuthorization()
-        currentLocation = locManager.location
         
         //20181009  NotificationCenter
         //NotificationCenter.default.addObserver(self, selector: #selector (getDataFrom(_:)), name: .myselfLocation, object: nil)
@@ -212,8 +209,14 @@ class FilterViewController: UIViewController {
         detectUserInfo()
         
         //是否跳過 alert 判斷
+        guard let myselfId = Auth.auth().currentUser?.uid else {
+            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+            return }
         
-        
+        //20181009
+        locManager.requestWhenInUseAuthorization()
+        currentLocation = locManager.location
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -225,6 +228,9 @@ class FilterViewController: UIViewController {
         if flag == true {
             print("已經跑過這個 showLocationAlert() 選項了 filterVC")
         } else {
+            guard let myselfId = Auth.auth().currentUser?.uid else {
+                BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+                return }
             showLocationAlert()
             //flag = true
         }

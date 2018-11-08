@@ -17,7 +17,7 @@ import KeychainAccess
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     
     // swiftlint:disable force_cast
@@ -30,17 +30,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         FBSDKSettings.setAppID("242593443093281")
         
+        Fabric.with([Crashlytics.self])
         //let userDefault = UserDefaults.standard
         //let userFBToken = userDefault.string(forKey: "userFbTokenFile")
         
         //print("給我userToken\(userFBToken)")
         
-//        if userFBToken != nil {
-//            switchHomePage()
-//        } else {
-//            switchLogin()
-//        }
-       
+        //        if userFBToken != nil {
+        //            switchHomePage()
+        //        } else {
+        //            switchLogin()
+        //        }
+        
         FirebaseApp.configure()
         
         //GMSServices.provideAPIKey("AIzaSyDUQVZIOfdopcNAHEgv0mJY3VlEYtAaLOc")
@@ -55,14 +56,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
         //switch page //OLD OK
-//        if UserDefaults.standard.value(forKey: FirebaseType.uuid.rawValue) != nil {
-//
-//            switchToMainStoryBoard()
-//
-//        } else {
-//            switchToLoginStoryBoard()
-//
-//        }
+        //        if UserDefaults.standard.value(forKey: FirebaseType.uuid.rawValue) != nil {
+        //
+        //            switchToMainStoryBoard()
+        //
+        //        } else {
+        //            switchToLoginStoryBoard()
+        //
+        //        }
         
         //20181018
         let keychain = Keychain(service: "com.frank.MapTalk")
@@ -73,22 +74,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             switchToLoginStoryBoard()
         }
         
-        Fabric.with([Crashlytics.self])
         return true
     }
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         
     }
-
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
-       
+        
     }
-
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
-
+        
     }
-
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         FBSDKAppEvents.activateApp()
     }
@@ -106,9 +106,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             annotation: annotation)
         return result
     }
-
+    
     func applicationWillTerminate(_ application: UIApplication) {
-
+        
     }
     
     func switchToLoginStoryBoard() {
@@ -133,7 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DispatchQueue.main.async { [weak self] in
                 
                 self?.switchToMainStoryBoard()
-
+                
             }
             
             return
