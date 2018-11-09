@@ -11,6 +11,7 @@ import Photos
 import FirebaseStorage
 import FirebaseDatabase
 import FirebaseAuth
+import SVProgressHUD
 
 class PhotoCollectionViewCell: UICollectionViewCell {
     
@@ -120,6 +121,8 @@ class PhotoViewController: UIViewController {
         failure: @escaping (Error) -> Void
         ) {
         
+        SVProgressHUD.show()
+        
         let storageRef = Storage.storage().reference()
         
         guard let userId = Auth.auth().currentUser?.uid else { return }
@@ -206,6 +209,7 @@ class PhotoViewController: UIViewController {
                 } else {
                     
                     print("Data saved successfully!")
+                    SVProgressHUD.dismiss()
                 }
         }
     }

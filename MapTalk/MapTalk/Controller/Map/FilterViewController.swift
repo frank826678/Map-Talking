@@ -309,8 +309,10 @@ class FilterViewController: UIViewController {
         //minAgeSlider.maximumTrackTintColor = maxAgeSlider.tintColor
         
         maxAgeSlider.minimumValue = 18
+        //maxAgeSlider.setValue(30,animated:true)
         maxAgeSlider.maximumValue = 65
         //maxAgeSlider.minimumValue = 0
+        maxAgeSlider.setValue(30,animated:true)
         
         
         // UISlider 是否可以在變動時同步執行動作

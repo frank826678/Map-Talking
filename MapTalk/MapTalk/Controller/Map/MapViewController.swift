@@ -152,6 +152,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         userInfoDetailView.userInfoDetailTableView.dataSource = self
         userInfoDetailView.userInfoDetailTableView.delegate = self
+       
         userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "NewUserDetailTableViewCell", bundle: nil),forCellReuseIdentifier: "UserDetail")
         userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "UserDataTableViewCell", bundle: nil),forCellReuseIdentifier: "UserData")
         userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "NewIntroduceTableViewCell", bundle: nil),forCellReuseIdentifier: "UserIntroduce")
@@ -962,6 +963,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let bigPhotoURL = URL(string: photo + "?height=500")
             self.userInfoDetailView.userImage.kf.setImage(with: bigPhotoURL)
             
+            let singleFinger = UITapGestureRecognizer(
+                target:self,
+                action:#selector(self.animateViewDown))
+
+            self.userInfoDetailView.backgroundTapView.addGestureRecognizer(singleFinger)
+            
             // cell.userImage.kf.setImage(with: bigPhotoURL)
             
             //加上 reload
@@ -978,9 +985,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func addSwipe() {
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(animateViewDown))
-        swipe.direction = .down
-        userInfoDetailView.addGestureRecognizer(swipe)
+        // tableView 無法加下滑手勢
+        //let swipe = UISwipeGestureRecognizer(target: self, action: #selector(animateViewDown))
+        //swipe.direction = .down
+        //userInfoDetailView.addGestureRecognizer(swipe)
+        //userInfoDetailView.userInfoDetailTableView.addGestureRecognizer(swipe)
         
         let singleFinger = UITapGestureRecognizer(
             target:self,
@@ -990,8 +999,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         mapBackgroundView.addGestureRecognizer(singleFinger)
         
         //20181013
-        userInfoDetailView.userInfoDetailTableView.addGestureRecognizer(swipe)
-        
+
         //        let viewBackgroundTap = UITapGestureRecognizer(target: self, action: #selector(animateViewDown))
         //        mapBackgroundView.addGestureRecognizer(viewBackgroundTap)
         
@@ -1056,41 +1064,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             ]]
         
         refference.updateChildValues(myLocationUpdates)
-        
-    }
-    
-    
-    
-    func giveDirections(coordinate: CLLocationCoordinate2D, userName: String) {
-        let requestCllocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        
-        CLGeocoder().reverseGeocodeLocation(requestCllocation) { (placemarks, _) in
-            if let placemarks = placemarks {
-                if placemarks.count > 0 {
-                    let placemark = MKPlacemark(placemark: placemarks[0])
-                    let mapItem = MKMapItem(placemark: placemark)
-                    mapItem.name = userName
-                    let options = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
-                    mapItem.openInMaps(launchOptions: options)
-                }
-            }
-        }
-    }
-    
-    func showAlert(title: String, message: String) {
-        
-        //跳到導航用
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "確認", style: .default) { (action) in
-            self.giveDirections(coordinate: (self.userAnnotation?.coordinate)!, userName: self.navigationUserName!)
-        }
-        
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        
-        self.present(alertController, animated: true, completion: nil)
         
     }
     
@@ -1319,12 +1292,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //print("超過 2.5")
         } else {
             
-            self.mapView.removeAnnotations(allAnnotations)
+            //self.mapView.removeAnnotations(allAnnotations)
             self.mapView.addAnnotations(allAnnotations)
             //print("低於 2.5")
             
         }
-        print(mapView.region.span)
+        //print(mapView.region.span)
         
     }
     
@@ -1394,6 +1367,7 @@ extension MapViewController: UITableViewDataSource {
                 cell.userName.text = userSelected[6]
                 cell.userBirthday.text = "來到地球的日子：\(userSelected[1])"
                 cell.userGender.text = userSelected[0]
+
                 cell.chatButton.addTarget(self, action: #selector(userInfoButtonClicked(sender:)), for: .touchUpInside)
                 
                 //可以改用 userdefault
@@ -1401,6 +1375,13 @@ extension MapViewController: UITableViewDataSource {
                 
                 cell.selectionStyle = UITableViewCell.SelectionStyle.none
                 
+                if let myselfId = Auth.auth().currentUser?.uid, let friendId = friendUserId {
+                    if myselfId == friendId {
+                        cell.chatButton.isHidden = true
+                    } else {
+                        cell.chatButton.isHidden = false
+                    }
+                }
                 return cell
             }
         case 1:

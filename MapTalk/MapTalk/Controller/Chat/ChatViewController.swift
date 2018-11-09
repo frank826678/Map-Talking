@@ -14,7 +14,6 @@ import Lottie
 
 class ChatViewController: UIViewController {
     
-    //let animationView = LOTAnimationView(name: "servishero_loading")
     let animationView = LOTAnimationView(name: "servishero_loading")
     let decoder = JSONDecoder()
     
@@ -26,9 +25,6 @@ class ChatViewController: UIViewController {
     // swiftlint:disable identifier_name
     var ref: DatabaseReference!
     // swiftlint:enable identifier_name
-    
-    //    var userName = ""
-    //    var userEmail = ""
     
     var friendsList: [String] = []
     var friendInfo: [FriendInfo] = []
@@ -118,20 +114,13 @@ class ChatViewController: UIViewController {
         guard let myselfId = Auth.auth().currentUser?.uid else { return }
         
         myselfUID = myselfId
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
         getFriendList()
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        //getFriendLastMessage()
-        //20181014
-        //getFriendList()
         
     }
     

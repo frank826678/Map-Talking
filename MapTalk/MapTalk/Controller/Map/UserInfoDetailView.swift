@@ -17,6 +17,7 @@ class UserInfoDetailView: UIView {
     @IBOutlet weak var userInfoDetailTableView: UITableView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userImageShadowView: UIView!
+    @IBOutlet weak var backgroundTapView: UIView!
     //@IBOutlet weak var chatButton: UIButton!
     
     /*
