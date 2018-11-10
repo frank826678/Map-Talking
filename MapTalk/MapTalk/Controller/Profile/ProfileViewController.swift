@@ -16,7 +16,9 @@ import NotificationBannerSwift
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileTableView: UITableView!
+    
     @IBOutlet weak var userImage: UIImageView!
+    
     @IBOutlet weak var userImageShadowView: UIView!
     
     @IBOutlet weak var userName: UILabel!
@@ -24,6 +26,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var storyHighlightsTextField: UITextField!
     
     var iconNameArray: [String] = ["個人資料", "聯絡我們", "登出裝置"]
+    
     var iconImageArray: [String] = ["new3-pencil-50", "new3-new-post-50", "new4-logout-100"]
     
     // swiftlint:disable identifier_name
@@ -33,8 +36,6 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        #warning ("TODO: 改成 static 用程式碼控制顏色")
-                
         setImage()
         
         profileTableView.delegate = self
@@ -45,8 +46,8 @@ class ProfileViewController: UIViewController {
         
         storyHighlightsTextField.delegate = self
         
-        ref = Database.database().reference() //重要 沒有會 nil
-        //取消 tableView 虛線
+        ref = Database.database().reference()
+        
         profileTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         setStoryHighlightsTextField()
@@ -54,6 +55,7 @@ class ProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
         

@@ -12,7 +12,6 @@ import FirebaseDatabase
 import FirebaseAuth
 import AVFoundation
 import SVProgressHUD
-//swiftlint:disable all
 
 class ChatDetailViewController: UIViewController {
     
@@ -510,109 +509,7 @@ class ChatDetailViewController: UIViewController {
     
     
     @IBAction func sendAudio(_ sender: Any) {
-        //        //Check if there is an active AudioRecorder
-        //        if audioRecorder == nil {
-        //            numberOfRecords += 1
-        //            let filename = getAudioFileURL()
-        //
-        //            let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-        //                            AVSampleRateKey: 12000,
-        //                            AVNumberOfChannelsKey: 2,
-        //                            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
-        //
-        //            //Start recording
-        //            do {
-        //                audioRecorder = try AVAudioRecorder(url: filename, settings: settings)
-        //                audioRecorder.delegate = self
-        //                audioRecorder.record()
-        //
-        //                audioButton.setTitle("Stop", for: .normal)
-        //            } catch {
-        //                //alertsAudio(title: "Recording error", message: "Error in the audio recording.")
-        //            }
-        //        } else {
-        //            //Stopping the recording
-        //            SVProgressHUD.show()
-        //
-        //            audioRecorder.stop()
-        //            audioRecorder = nil
-        //
-        //            UserDefaults.standard.set(numberOfRecords, forKey: "myNumber")
-        //
-        //            //messageTableView.reloadData()
-        //            chatDetailTableView.reloadData()
-        //
-        //            audioButton.setTitle("record", for: .normal)
-        //
-        //            let fileUrl = getAudioFileURL()
-        //            let storage = Storage.storage()
-        //            let metadata = StorageMetadata()
-        //
-        //
-        //            metadata.contentType = "audio/mp4"
-        //            let refStr = (Auth.auth().currentUser?.email)! + "|" + "\(NSUUID().uuidString)" + "|" + "recording.m4a"
-        //            let pathStr = "Messages/\(NSUUID().uuidString)/\(refStr)"
-        //            let uploadRef = storage.reference().child(pathStr)
-        //
-        ////            uploadRef.putData(data as Data, metadata: metaData) { (_, error) in
-        ////
-        ////                if let error = error {
-        ////
-        ////                    failure(error)
-        ////
-        ////                    return
-        ////
-        ////                } else {
-        ////
-        ////                    storageRef.child(userId).child(fileName).downloadURL(completion: { (url, error) in
-        ////
-        ////                        if let error = error {
-        ////
-        ////                            failure(error)
-        ////                        }
-        ////
-        ////                        if let url = url {
-        ////
-        ////                            success(url.absoluteString)
-        ////                        }
-        ////                    })
-        ////                }
-        ////            }
-        //
-        ////            uploadRef.putData(from: fileUrl, metadata: nil) {
-        ////
-        ////            }
-        //
-        //            uploadRef.putFile(from: fileUrl, metadata: nil) { metadata,
-        //                error in
-        //                if error == nil {
-        //                    print("Successfully Uploaded Audio")
-        //                    SVProgressHUD.dismiss()
-        //
-        ////                    let downloadUrl = (metadata?.downloadURL())!
-        ////                    print("URL: \(downloadUrl)")
-        ////
-        //                    //completion(fileUrl)
-        //                    //let messagesDB = Database.database().reference().child("Messages")
-        //                    //let key = messagesDB.childByAutoId().key
-        //
-        //                    var messageInfoArray = refStr.components(separatedBy: "|")
-        //                    let messageDict = ["Sender": messageInfoArray[0], "MessageBody": "recording-audioRecorded", "AudioURL": "\(pathStr)", "AudioID": messageInfoArray[1], "IsAudio": "\(NSUUID().uuidString)-True"]
-        //
-        //                    let childUpdates = ["Mensagens/\(messageInfoArray[1])": messageDict]
-        //                    Database.database().reference().updateChildValues(childUpdates)
-        //
-        //                }
-        //                else {
-        //                    SVProgressHUD.dismiss()
-        //                    print("UploadError \(String(describing: error?.localizedDescription))")
-        //                    let alert = UIAlertController(title: "Error!!!", message: "The following error ocurred \(String(describing: error?.localizedDescription))", preferredStyle: .alert)
-        //                    alert.addAction(UIKit.UIAlertAction(title: "Ok", style: .default, handler: nil))
-        //                    self.present(alert, animated: true)
-        //                }
-        //            }
-        //
-        //        }
+      
     }
     
     
@@ -805,86 +702,6 @@ extension ChatDetailViewController: UITableViewDataSource {
         }
     }
     
-    //    func showBigImageAlert(bigImageURLFromCell: String?) {
-    //
-    //        let showAlert = UIAlertController(title: "Picture", message: nil, preferredStyle: .alert)
-    //
-    //        //let showAlert = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
-    //
-    //        let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: fullScreenSize.width*1, height: fullScreenSize.height * 0.8 )) // x 10 y 50
-    //
-    //        //        if let userImage = bigImageURL {
-    //
-    //
-    //        if let userImage = bigImageURLFromCell {
-    //            imageView.kf.setImage(with: URL(string: userImage))
-    //        } else {
-    //            imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
-    //        }
-    //
-    //
-    //        //imageView.image = image // Your image here...
-    //        showAlert.view.addSubview(imageView)
-    //
-    ////                    let height: NSLayoutConstraint = NSLayoutConstraint(item: backgroundView.inputView, attribute: .height,
-    ////        relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 320)
-    ////                    let width: NSLayoutConstraint = NSLayoutConstraint(item: chatDetailTableView.backgroundView, attribute: .width,
-    ////        relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
-    ////
-    ////                    showAlert.view.addConstraint(height)
-    ////                    showAlert.view.addConstraint(width)
-    //
-    //        //加了這行會沒有 title 和 OK
-    //        //imageView.translatesAutoresizingMaskIntoConstraints = false
-    //        showAlert.view.addConstraint(NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: showAlert.view, attribute: .centerX, multiplier: 1, constant: 0)) //0
-    //        showAlert.view.addConstraint(NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: showAlert.view, attribute: .centerY, multiplier: 1, constant: 0))
-    //        showAlert.view.addConstraint(NSLayoutConstraint(item: showAlert.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant:  self.view.frame.width * 0.8)) //320.0
-    //        showAlert.view.addConstraint(NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: fullScreenSize.height*0.8 - 100)) //250
-    //
-    //
-    ////        var height:NSLayoutConstraint = NSLayoutConstraint(item: alertController.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: self.view.frame.height * 0.80)
-    //
-    //        showAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-    //            // your actions here...
-    //        }))
-    //        self.present(showAlert, animated: true, completion: nil)
-    //
-    //    }
-    
-    //   @objc func animateViewUp(_ gesture: UITapGestureRecognizer){
-    //
-    //        if gesture.state != .began { return }
-    //        let tapLocation = gesture.location(in: self.chatDetailTableView)
-    //        if let tapIndexPath = self.chatDetailTableView.indexPathForRow(at: tapLocation) {
-    //            if let tappedCell = self.chatDetailTableView.cellForRow(at: tapIndexPath) as? ChatImageOwnerTableViewCell {
-    //                print("-----重要Row Selected")
-    //                let message = messages[tapIndexPath.row]
-    ////                guard let bigImageURLFromCell = message.imageUrl else {
-    ////                    print("沒拿到照片")
-    ////                    return }
-    //                let bigImageURLFromCell = message.imageUrl
-    //
-    //                //showBigImageAlert(bigImageURLFromCell: bigImageURLFromCell)
-    //                //prtformZoomInForStartingImageView
-    //
-    //            }
-    //
-    //            if let tappedFriendCell = self.chatDetailTableView.cellForRow(at: tapIndexPath) as? ChatImageTableViewCell {
-    //                print("-----重要Row Selected")
-    //                let message = messages[tapIndexPath.row]
-    //                //                guard let bigImageURLFromCell = message.imageUrl else {
-    //                //                    print("沒拿到照片")
-    //                //                    return }
-    //                let bigImageURLFromCell = message.imageUrl
-    //
-    //                //showBigImageAlert(bigImageURLFromCell: bigImageURLFromCell)
-    //
-    //            }
-    //
-    //
-    //        }
-    //
-    //    }
     
 }
 

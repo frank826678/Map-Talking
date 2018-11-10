@@ -13,8 +13,6 @@ import FirebaseAuth
 import MapKit //為了拿到 CLLocationCoordinate2D
 import NotificationBannerSwift
 
-//swiftlint:disable all
-
 protocol sendAlertstatus: AnyObject {
     func checkBool(flag: Bool)
 }
@@ -986,12 +984,6 @@ extension FilterViewController: UICollectionViewDataSource{
             
             //END
             
-            //            let selectedCell:UICollectionViewCell = myCollectionView.cellForItemAtIndexPath(indexPath)!
-            //            selectedCell.contentView.backgroundColor = UIColor(red: 102/256, green: 255/256, blue: 255/256, alpha: 0.66)
-            //
-            
-            #warning ("TODO: 儲存他按了哪一個")
-            
         }
         else {
             print("你選擇了 time \(indexPath.section) 組的")
@@ -1004,7 +996,7 @@ extension FilterViewController: UICollectionViewDataSource{
             selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
             selectedCell.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             selectedCell.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            #warning ("TODO: 儲存他按了哪一個")
+            
         }
         
         
@@ -1012,32 +1004,7 @@ extension FilterViewController: UICollectionViewDataSource{
     
 }
 
-//extension FilterViewController: UICollectionViewDelegateFlowLayout{
-//
-//}
-
-// MARK: - 設定 CollectionView Cell 與 Cell 之間的間距、距確 Super View 的距離等等
 extension FilterViewController: UICollectionViewDelegateFlowLayout {
-    
-    /// 設定 Collection View 距離 Super View上、下、左、下間的距離
-    ///
-    /// - Parameters:
-    ///   - collectionView: _
-    ///   - collectionViewLayout: _
-    ///   - section: _
-    /// - Returns: _
-    
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    //        return UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-    //    }
-    
-    ///  設定 CollectionViewCell 的寬、高
-    ///
-    /// - Parameters:
-    ///   - collectionView: _
-    ///   - collectionViewLayout: _
-    ///   - indexPath: _
-    /// - Returns: _
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -1048,26 +1015,11 @@ extension FilterViewController: UICollectionViewDelegateFlowLayout {
         
     }
     
-    /// 滑動方向為「垂直」的話即「上下」的間距(預設為重直)
-    ///
-    /// - Parameters:
-    ///   - collectionView: _
-    ///   - collectionViewLayout: _
-    ///   - section: _
-    /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
-    /// 滑動方向為「垂直」的話即「左右」的間距(預設為重直)
-    ///
-    /// - Parameters:
-    ///   - collectionView: _
-    ///   - collectionViewLayout: _
-    ///   - section: _
-    /// - Returns: _
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
 }
-//swiftlint:disable all

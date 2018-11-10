@@ -12,9 +12,6 @@ import FirebaseDatabase
 import FirebaseAuth
 import NotificationBannerSwift
 
-//swiftlint:disable all
-//EditViewController
-//userInfoController
 class UserInfoController: UIViewController {
     
     #warning ("TODO: nickname 還沒有做 delegate, cell 希望可以做成 reuse, 目前不能上傳新改變的值")
@@ -334,7 +331,10 @@ extension UserInfoController: UITableViewDataSource{
         view.tintColor = #colorLiteral(red: 0.8392156863, green: 0.8392156863, blue: 0.8392156863, alpha: 0.5)
         
         //轉換 title
+        // swiftlint:disable force_cast
         let header = view as! UITableViewHeaderFooterView
+        // swiftlint:enable force_cast
+
         header.textLabel?.textColor = UIColor.black
         header.textLabel?.font = UIFont(name: "Futura", size: 19)!
     
@@ -843,4 +843,4 @@ extension UserInfoController: PersonalInformationCellDelegate {
     }
 }
 
-//swiftlint:disable all
+
