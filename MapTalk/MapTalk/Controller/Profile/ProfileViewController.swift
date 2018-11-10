@@ -75,57 +75,10 @@ class ProfileViewController: UIViewController {
     func setImage() {
         
         userImage.layer.cornerRadius = 60
-        userImage.clipsToBounds = true //沒這行的話 圖片還是方方正正的
-        // shadowRadius = blur / 2.0
-        //userImageShadowView.ok
-        //        userImageShadowView.layer.cornerRadius = 65
-        //
-        //        userImageShadowView.clipsToBounds = false
-        //        userImageShadowView.layer.shadowRadius = 20 //20
-        //
-        //        userImageShadowView.layer.shadowColor = UIColor.gray.cgColor
-        //        userImageShadowView.layer.shadowOpacity = 0.6
-        //        userImageShadowView.layer.shadowOffset = CGSize.zero
-        //userImageShadowView. END
-        
-        //userImageShadowView.layer.cornerRadius = 65
-        
+        userImage.clipsToBounds = true
         userImageShadowView.clipsToBounds = false
-        //紅色明顯
-        //userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1), alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
         
-        //原本的 color Ok
-        //BEBEBE
         userImageShadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7450980392, green: 0.7450980392, blue: 0.7450980392, alpha: 1), alpha: 1, x: 0, y: 0, blur: 15, spread: 15, corner: 60)
-        //userImageShadowView.layer.applySketchShadow(color: UIColor.red, alpha: 0.5, x: 0, y: 0, blur: 15, spread: 15,corner: 60)
-        
-        //
-        //userImageShadowView.layer.shadowPath = UIBezierPath(roundedRect: userImageShadowView.bounds, cornerRadius: 65).cgPath
-        
-        //        userImageShadowView.layer.shadowOffset = CGSize(width: 4, height: 4)
-        
-        //        userImage.layer.borderColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
-        //        userImage.layer.borderWidth = 4
-        
-        //userImage.shadowSetup(cgSize: CGSize(width: 5, height: 5), shadowRadius: 5, shadowOpacity: 0.5)
-        
-        //        let outerView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        //        outerView.clipsToBounds = false
-        //        outerView.layer.shadowColor = UIColor.black.cgColor
-        //        outerView.layer.shadowOpacity = 1
-        //        outerView.layer.shadowOffset = CGSize.zero
-        //        outerView.layer.shadowRadius = 10
-        //        outerView.layer.shadowPath = UIBezierPath(roundedRect: outerView.bounds, cornerRadius: 60).cgPath
-        
-        //        let myImage = UIImageView(frame: outerView.bounds)
-        //        myImage.clipsToBounds = true
-        //        myImage.layer.cornerRadius = 10
-        
-        // outerView.addSubview(userImage)
-        
-        //userImage.layer.masksToBounds = false
-        //120
-        //profileTableView.backgroundView?.backgroundColor = #colorLiteral(red: 0.08870747934, green: 0.8215307774, blue: 1, alpha: 0.8)
         
         guard let userDisplayName = Auth.auth().currentUser?.displayName else { return }
         guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
@@ -183,35 +136,13 @@ extension ProfileViewController: UITableViewDataSource {
             withIdentifier: "Profile", for: indexPath)
             as? ProfileTableViewCell {
             
-            //            cell.messageBody.text = message.content
-            //            if let photoString = message.senderPhoto {
-            //                cell.userImage.sd_setImage(with: URL(string: photoString), completed: nil)
-            //            } else {
-            //                cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
-            //            }
             
             cell.iconName.text = iconNameArray[indexPath.row]
-            
-            //cell.iconImage.backgroundColor =  #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1) // FB message borderColor
-            
-            //原本
-            //cell.iconImage.image = UIImage(named: iconImageArray[indexPath.row])
-            //原本 END
             
             cell.iconImage.image = UIImage.setIconTemplate(iconName: iconImageArray[indexPath.row])
             //pencilBtn.addTarget(self, action: "pencilBtnPressed", for: UIControl.Event.touchUpInside)
             cell.iconButton.tag = indexPath.row
             cell.iconButton.addTarget(self, action: #selector(iconBtnClicked(sender:)), for: .touchUpInside)
-            
-            //cell.iconButton.addTarget(self, action: "iconBtnPressed", for: UIControl.Event.touchUpInside)
-            
-            //cell.selectedBackgroundView?.backgroundColor = UIColor.orange
-            
-            //cell.selectionStyle = UITableViewCell.SelectionStyle.none
-            
-            //tableView.separatorStyle = UITableViewCellSeparatorStyleNone
-            //            cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
-            //
             
             return cell
         }
@@ -233,7 +164,7 @@ extension ProfileViewController: UITableViewDataSource {
             )
             
         } else if indexPath == 1 {
-            //configure action when tap cell 1
+            
             print("點了聯絡我們")
             performSegue(
                 withIdentifier: String(describing: ContactUsViewController.self),
@@ -247,42 +178,6 @@ extension ProfileViewController: UITableViewDataSource {
         }
     }
     
-    //    func logOut() {
-    //        let alert = UIAlertController(title: "登出", message: "您是否要登出帳號？", preferredStyle: UIAlertController.Style.alert)
-    //
-    //        let action = UIAlertAction(title: "確認", style: .default) { (_) in
-    //
-    //            let keychain = Keychain(service: "com.frank.MapTalk")
-    //
-    //            do {
-    //
-    //                try keychain.remove(FirebaseType.uuid.rawValue)
-    //
-    //                try Auth.auth().signOut()
-    //
-    //                AppDelegate.shared.switchToLoginStoryBoard()
-    //
-    //                self.resetDefaults()
-    //
-    //                print("登出成功及清空 user")
-    //
-    //            } catch {
-    //                print("登出失敗，請確認網路")
-    //                //BaseNotificationBanner.warningBanner(subtitle: "登出失敗，請確認網路")
-    //                return
-    //            }
-    //
-    //        }
-    //
-    //        let cancel = UIAlertAction(title: "取消", style: .cancel)
-    //
-    //        alert.addAction(cancel)
-    //
-    //        alert.addAction(action)
-    //
-    //        self.present(alert, animated: true, completion: nil)
-    //    }
-    
     private func logOut() {
         
         let alertController =  UIAlertController.showActionSheet(
@@ -291,11 +186,11 @@ extension ProfileViewController: UITableViewDataSource {
             let alert = UIAlertController.showAlert(
                 title: "登出",
                 message: "您是否要登出帳號？",
-                defaultOption: ["確定"]) { (action) in
+                defaultOption: ["確定"]) { (_) in
                     
                     let keychain = Keychain(service: "com.frank.MapTalk")
                     
-                    do  {
+                    do {
                         
                         try keychain.remove(FirebaseType.uuid.rawValue)
                         
@@ -308,8 +203,6 @@ extension ProfileViewController: UITableViewDataSource {
                         print("登出成功及清空 user")
                         
                         AppDelegate.shared.switchToLoginStoryBoard()
-                        
-                        //AppDelegate.shared.switchLogIn()
                         
                     } catch {
                         

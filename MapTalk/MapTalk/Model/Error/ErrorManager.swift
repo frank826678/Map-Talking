@@ -81,4 +81,3 @@ enum FirebaseError: ErrorComment {
     }
     
 }
-

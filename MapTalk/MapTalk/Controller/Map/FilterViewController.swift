@@ -51,15 +51,15 @@ class FilterViewController: UIViewController {
     
     var gender = ""
     
-    var iconNameArray: [String] = ["看夜景","唱歌","喝酒","吃飯","看電影","浪漫","喝咖啡","兜風"]
+    var iconNameArray: [String] = ["看夜景", "唱歌", "喝酒", "吃飯", "看電影", "浪漫", "喝咖啡", "兜風"]
     //imageArray: [UIImage] = []
     //var iconImageArray: [UIImage] = [UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!]
     
     var iconImageArray: [String] = ["date-crescent-moon-50",
                                     "date-micro-filled-50",
                                     "date-wine-glass-50",
-                                    "date-dining-room-50","date-documentary-50","date-romance-50",
-                                    "date-cafe-50","date-car-50"]
+                                    "date-dining-room-50", "date-documentary-50", "date-romance-50",
+                                    "date-cafe-50", "date-car-50"]
     
     var filterEnum: [FilterIcon] = [
         
@@ -70,7 +70,7 @@ class FilterViewController: UIViewController {
         .movie,
         .romance,
         .cafe,
-        .cars,
+        .cars
         
         //        case moon = "date-crescent-moon-50"
         //    case microphone = "date-micro-filled-100"
@@ -81,7 +81,6 @@ class FilterViewController: UIViewController {
         //    case cafe = "date-cafe-50"
         //    case car = "date-car-50"
         
-        
     ]
     
     //20181008
@@ -89,16 +88,16 @@ class FilterViewController: UIViewController {
     
     var friendUserId: String?
     
-    var timeNameArray: [String] = ["現在","隨時","下班後","週末"]
+    var timeNameArray: [String] = ["現在", "隨時", "下班後", "週末"]
     var timeImageArray: [String] = ["date-present-50",
                                     "date-future-50",
                                     "date-business-50",
                                     "date-calendar-50"]
     
-    var selectedDateIcon1 : IndexPath = []
+    var selectedDateIcon1: IndexPath = []
     var datingNumber: Int?
     
-    var selectedTimeIcon1 : IndexPath = []
+    var selectedTimeIcon1: IndexPath = []
     var timeNumber: Int?
     
     //20181009
@@ -138,23 +137,19 @@ class FilterViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(addTapped))
         
-        
         //        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         //        let play = UIBarButtonItem(title: "Play", style: .plain, target: self, action: #selector(playTapped))
         //
         //        navigationItem.rightBarButtonItems = [add, play]
         
-        
         // self.view.backgroundColor = .clear
         // self.view.backgroundColor = #colorLiteral(red: 0.3098039216, green: 0.8588235294, blue: 0.9921568627, alpha: 1)
-        
         
         // swiftlint:disable identifier_name
         let nib = UINib(nibName: "FilterCollectionViewCell", bundle: nil)
         // swiftlint:enable identifier_name
         
         filterCollectionView.register(nib, forCellWithReuseIdentifier: "FilterCollectionViewCell")
-        
         
         filterCollectionView.delegate = self
         filterCollectionView.dataSource = self
@@ -165,17 +160,12 @@ class FilterViewController: UIViewController {
         
         filterCollectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FilterHeaderCell")
         
-        
         ref = Database.database().reference() //重要 沒有會 nil
-        
-        
         
         //self.filterCollectionView.register(headerNib, forCellReuseIdentifier: "FilterHeader")
         
         //let cellNib = UINib(nibName: "TypeCollectionViewCell", bundle: nil)
         //self.typeCollectionView.register(cellNib, forCellWithReuseIdentifier: "typeCell")
-        
-        
         
         //        datingTypeCollectionView.delegate = self
         //        datingTypeCollectionView.dataSource = self
@@ -187,10 +177,8 @@ class FilterViewController: UIViewController {
         //
         //        timeCollectionView.register(nib, forCellWithReuseIdentifier: "FilterCollectionViewCell")
         
-        
         //        datingTypeCollectionView.register(UINib(nibName: "FilterCollectionViewCell", bundle: nil),
         //                               forCellReuseIdentifier: "Date")
-        
         
         //20181009  NotificationCenter
         //NotificationCenter.default.addObserver(self, selector: #selector (getDataFrom(_:)), name: .myselfLocation, object: nil)
@@ -235,7 +223,6 @@ class FilterViewController: UIViewController {
         
     }
     
-    
     //20181028 增加 alert 告訴他我正在使用他的位置
     
     func showLocationAlert() {
@@ -247,7 +234,7 @@ class FilterViewController: UIViewController {
         let alertController =  UIAlertController.showAlert(
             title: "是否向其他人顯示自己位置？",
             message: "按下『 顯示 』 或是 『 隱藏 』來改變狀態，需要顯示才能正常使用地圖功能。",
-            defaultOption: ["顯示","隱藏"]) { [weak self] (action) in
+            defaultOption: ["顯示", "隱藏"]) { [weak self] (action) in
                 
                 switch action.title {
                     
@@ -310,30 +297,26 @@ class FilterViewController: UIViewController {
         //maxAgeSlider.setValue(30,animated:true)
         maxAgeSlider.maximumValue = 65
         //maxAgeSlider.minimumValue = 0
-        maxAgeSlider.setValue(30,animated:true)
-        
+        maxAgeSlider.setValue(30, animated: true)
         
         // UISlider 是否可以在變動時同步執行動作
         // 設定 false 時 則是滑動完後才會執行動作
         
-        
         minAgeSlider.isContinuous = true
-        minAgeSlider.addTarget(self,action:#selector(minAgeSliderDidchange(_:)), for:UIControl.Event.valueChanged)
+        minAgeSlider.addTarget(self, action: #selector(minAgeSliderDidchange(_:)), for: UIControl.Event.valueChanged)
         
         maxAgeSlider.isContinuous = true
-        maxAgeSlider.addTarget(self,action:#selector(maxAgeSliderDidchange(_:)), for:UIControl.Event.valueChanged)
-        
+        maxAgeSlider.addTarget(self, action: #selector(maxAgeSliderDidchange(_:)), for: UIControl.Event.valueChanged)
         
     }
     
-    @objc func minAgeSliderDidchange(_ slider:UISlider) {
+    @objc func minAgeSliderDidchange(_ slider: UISlider) {
         
         let roundedStepValue = round(slider.value / step) * step
         slider.value = roundedStepValue
         
         //        minAgeSlider.maximumValue = maxAgeSlider.value
         //        maxAgeSlider.minimumValue = minAgeSlider.value
-        
         
         minAgeSlider.maximumValue = maxAgeSlider.value
         
@@ -343,7 +326,7 @@ class FilterViewController: UIViewController {
         
     }
     
-    @objc func maxAgeSliderDidchange(_ slider:UISlider) {
+    @objc func maxAgeSliderDidchange(_ slider: UISlider) {
         
         let roundedStepValue = round(slider.value / step) * step
         slider.value = roundedStepValue
@@ -363,16 +346,16 @@ class FilterViewController: UIViewController {
         locationSlider.minimumValue = 1
         locationSlider.maximumValue = 100
         //locationSlider.value = 30
-        locationSlider.setValue(30,animated:true)
+        locationSlider.setValue(30, animated: true)
         
         // UISlider 是否可以在變動時同步執行動作
         // 設定 false 時 則是滑動完後才會執行動作
         locationSlider.isContinuous = true
-        locationSlider.addTarget(self,action:#selector(locationSliderDidchange(_:)), for:UIControl.Event.valueChanged)
+        locationSlider.addTarget(self, action: #selector(locationSliderDidchange(_:)), for: UIControl.Event.valueChanged)
         
     }
     
-    @objc func locationSliderDidchange(_ slider:UISlider){
+    @objc func locationSliderDidchange(_ slider: UISlider) {
         
         let roundedStepValue = round(slider.value / step) * step
         slider.value = roundedStepValue
@@ -382,8 +365,6 @@ class FilterViewController: UIViewController {
         print(slider.value)
         
     }
-    
-    
     
 //    @objc func getDataFrom(_ noti: Notification) {
 //
@@ -405,8 +386,7 @@ class FilterViewController: UIViewController {
     
     @IBAction func genderChanged(_ sender: UISegmentedControl) {
         
-        switch genderSegment.selectedSegmentIndex
-        {
+        switch genderSegment.selectedSegmentIndex {
         case 0:
             print("男生")
             
@@ -418,11 +398,10 @@ class FilterViewController: UIViewController {
             
         default:
             print("男生")
-            break;
+            break
         }
         
     }
-    
     
     //    @IBAction func ageChanged(_ sender: UISegmentedControl) {
     //        switch ageSegment.selectedSegmentIndex
@@ -445,7 +424,6 @@ class FilterViewController: UIViewController {
     //
     //    }
     
-    
     //    @IBAction func locationChanged(_ sender: UISegmentedControl) {
     //
     //        switch locationSegment.selectedSegmentIndex
@@ -466,7 +444,6 @@ class FilterViewController: UIViewController {
     //        }
     //
     //    }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -508,7 +485,6 @@ class FilterViewController: UIViewController {
         
         //let messageKey = self.ref.child("FilterData").child("PersonalChannel").child(friendChannel).childByAutoId().key
         
-        
         //  "location": filterAllData.location,
         //         "location": ["lat": currentLocation.coordinate.latitude,"lon": currentLocation.coordinate.longitude],
         
@@ -528,7 +504,7 @@ class FilterViewController: UIViewController {
             "time": createdTime,
             "gender": filterAllData.gender,
             "age": filterAllData.age,
-            "location": ["lat": taipeiTraonLat,"lon": taipeiTraonLon], //value 要用 double
+            "location": ["lat": taipeiTraonLat, "lon": taipeiTraonLon], //value 要用 double
             "dating": filterAllData.dating,
             "datingTime": filterAllData.time,
             "myselfGender": myselfGender
@@ -556,14 +532,11 @@ class FilterViewController: UIViewController {
         
         //        refference.child("location").observe(.childAdded) { (snapshot) in
         
-        
         //抓一個最難他達到的條件的下來判斷 讓資料量減少
         
         //        ref.child("FilterData").queryOrdered(byChild: "dating").queryEqual(toValue: filterData.dating).observe(.childChanged) { (snapshot) in
         
-        
         //        ref.child("FilterData").queryOrdered(byChild: "dating").queryEqual(toValue: filterData.dating).observeSingleEvent(of: .value, with: { (snapshot)
-        
         
         ref.child("FilterData").queryOrdered(byChild: "dating").queryEqual(toValue: filterData.dating).observe(.childAdded) { (snapshot) 
             
@@ -624,11 +597,9 @@ class FilterViewController: UIViewController {
             //            let myLocation = CLLocation(latitude: self.currentCenter?.latitude ?? 25.048134,longitude: self.currentCenter?.longitude ?? 121.517314
             //            )
             
-            let myLocation =  CLLocation(latitude:self.centerDeliveryFromMap?.latitude ?? 25.048134,longitude: self.centerDeliveryFromMap?.longitude ?? 121.517314)
-            
+            let myLocation =  CLLocation(latitude: self.centerDeliveryFromMap?.latitude ?? 25.048134, longitude: self.centerDeliveryFromMap?.longitude ?? 121.517314)
             
             let friendLocation = CLLocation(latitude: friendFilterData.location.latitude, longitude: friendFilterData.location.longitude)
-            
             
             let distance = myLocation.distance(from: friendLocation) / 1000
             
@@ -646,13 +617,12 @@ class FilterViewController: UIViewController {
             
             // 測試時間 1538924236062 Your time zone: Sunday, October 7, 2018 10:57:16.062 PM GMT+08:00
             //先用名字 到時候再加上性別 和時間 (上面的搜尋是搜尋 約會類型相同的人) filterData 是自己的本地端要去搜尋的資料
-            if userId != senderId &&  filterData.time == friendFilterData.datingTime && in24hr  < 86400000 && filterData.gender == friendFilterData.myselfGender  {
+            if userId != senderId &&  filterData.time == friendFilterData.datingTime && in24hr  < 86400000 && filterData.gender == friendFilterData.myselfGender {
                 
                 self.filterNewData.append(friendFilterData)
                 
                 self.showMessageAlert(title: "登愣！！！ 發現和 \(senderName) 有相同的喜好", message: "認識一下吧！", senderId: senderId, senderName: senderName)
                 print("選取的人的 userID 是 \(senderId)")
-                
                 
             } else {
                 print("自己的資料不用存")
@@ -677,14 +647,14 @@ class FilterViewController: UIViewController {
         
     }
     
-    func showMessageAlert(title: String, message: String,senderId: String,senderName: String) {
+    func showMessageAlert(title: String, message: String, senderId: String, senderName: String) {
         
         //把全域變數拿掉
         
         //要直接跳到 chatDetail 頁面
         //可以跳過去 但是返回上一頁會直接跳回 map 主頁
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "確認", style: .default) { (action) in
+        let okAction = UIAlertAction(title: "確認", style: .default) { (_) in
             
             //collectionView.deselectItem(at: indexPath, animated: true)
             
@@ -709,23 +679,20 @@ class FilterViewController: UIViewController {
             
             guard let myselfName = Auth.auth().currentUser?.displayName else { return }
             
-            
             //refference.child("UserFriendList").child(myselfId).child(friendId).setValue([])
             
             // 我媒合到 friend 在我自己的節點下 存朋友的 ID 並且 朋友的狀態為 發出邀請中
             // 被我媒合的到的朋友 在朋友的節點下 存下自己的 ID 並且 朋友的狀態為 收到邀請中
             // 朋友應該監控自己下方的節點 邀請中 如果有 要跳出 alert 提醒有人要跟你當朋友
             
-            let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(senderId)": ["FriendUID": "\(senderId)","FriendName": "\(senderName)","Accept": "發出邀請中","Friend_Email": "emailTest"]]
+            let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(senderId)": ["FriendUID": "\(senderId)", "FriendName": "\(senderName)", "Accept": "發出邀請中", "Friend_Email": "emailTest"]]
             
-            let friendChildUpdates = ["/UserData/\(senderId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)","FriendName": "\(myselfName)","Accept": "收到邀請中","Friend_Email": "emailTest"]]
-            
+            let friendChildUpdates = ["/UserData/\(senderId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)", "FriendName": "\(myselfName)", "Accept": "收到邀請中", "Friend_Email": "emailTest"]]
             
             //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
             //
             self.ref.updateChildValues(myChildUpdates)
             self.ref.updateChildValues(friendChildUpdates)
-            
             
         }
         
@@ -740,7 +707,7 @@ class FilterViewController: UIViewController {
     
 }
 
-extension FilterViewController: UICollectionViewDataSource{
+extension FilterViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -765,8 +732,6 @@ extension FilterViewController: UICollectionViewDataSource{
         //            //cell.backgroundColor = self.randomColor()
         //        }
         
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -780,7 +745,6 @@ extension FilterViewController: UICollectionViewDataSource{
             cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
             //cell?.iconImage.image = UIImage(named: filterEnum[indexPath.row.])
             
-            
         } else {
             
             cell?.iconName.text = timeNameArray[indexPath.row]
@@ -788,7 +752,6 @@ extension FilterViewController: UICollectionViewDataSource{
             cell?.iconImage.image = UIImage(named: timeImageArray[indexPath.row])
             
         }
-        
         
         //        if(collectionView == self.datingTypeCollectionView) {
         //            //cell.backgroundColor = UIColor.black
@@ -819,8 +782,6 @@ extension FilterViewController: UICollectionViewDataSource{
         //            //return cell
         //            //cell.backgroundColor = self.randomColor()
         //        }
-        
-        
         
         // 設定背景色
         //        cell.backgroundColor = indexPath.row % 2 == 0 ? UIColor.orange : UIColor.brown
@@ -869,9 +830,7 @@ extension FilterViewController: UICollectionViewDataSource{
             return headerCellView
         }
         
-        
         return UICollectionReusableView()
-        
         
     }
     
@@ -888,7 +847,6 @@ extension FilterViewController: UICollectionViewDataSource{
         //            cellToDeselect.iconBackgroundView.backgroundColor = UIColor.clear
         //        }
         
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -896,7 +854,6 @@ extension FilterViewController: UICollectionViewDataSource{
         print("******請看這******")
         
         let selectedCell: FilterCollectionViewCell = (collectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell)!
-        
         
         //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCollectionViewCell", for: indexPath) as? FilterCollectionViewCell
         
@@ -910,8 +867,6 @@ extension FilterViewController: UICollectionViewDataSource{
                 // selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
                 //OK
                 //collectionView.cellForItem(at: selectedDateIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
-                
-                
                 
                 cell?.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
                 cell?.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -932,8 +887,6 @@ extension FilterViewController: UICollectionViewDataSource{
                 cell?.iconName.textColor =  #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
             }
             
-            
-            
         }
         if   indexPath.section == 1 {
             
@@ -946,13 +899,11 @@ extension FilterViewController: UICollectionViewDataSource{
                 
                 //collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
                 
-                
                 //selectedCell.iconBackgroundView.backgroundColor =  #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
                 cell?.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
                 cell?.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 cell?.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 print("相同")
-                
                 
             } else {
                 
@@ -966,7 +917,6 @@ extension FilterViewController: UICollectionViewDataSource{
                 //selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             }
         }
-        
         
         if indexPath.section == 0 {
             print("你選擇了 Dating \(indexPath.section) 組的")
@@ -984,8 +934,7 @@ extension FilterViewController: UICollectionViewDataSource{
             
             //END
             
-        }
-        else {
+        } else {
             print("你選擇了 time \(indexPath.section) 組的")
             print("第 \(indexPath.item) 張圖片")
             
@@ -999,7 +948,6 @@ extension FilterViewController: UICollectionViewDataSource{
             
         }
         
-        
     }
     
 }
@@ -1008,8 +956,7 @@ extension FilterViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: (self.view.frame.size.width) / 4 , height: (self.view.frame.size.width) / 4)
-        
+        return CGSize(width: (self.view.frame.size.width) / 4, height: (self.view.frame.size.width) / 4)
         
         //        return CGSize(width: (self.view.frame.size.width - 30) / 2 , height: (self.view.frame.size.width - 30) / 2)
         

@@ -120,4 +120,3 @@ class UserAnnotation: MKPointAnnotation, Codable {
     var gender: Int?
     var status: String?
 }
-

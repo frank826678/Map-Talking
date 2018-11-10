@@ -271,8 +271,6 @@ class ChatViewController: UIViewController {
                 //OK
                 //self.getFriendLastMessage(friendId: allFriends)
                 
-
-                
                 //20181006
                 
                 self.getNewFriendMessage(friendId: allFriends)
@@ -444,10 +442,8 @@ extension ChatViewController: UITableViewDataSource {
                     
                     //cell.userMessage.text = newMessage[indexPath.row].content
                     
-                    
 //                    let messageTime = Date.formatMessageTime(time: newMessage[indexPath.row].time)
 //                    cell.messageTime.text = messageTime
-                    
                     
                 } else {
                     

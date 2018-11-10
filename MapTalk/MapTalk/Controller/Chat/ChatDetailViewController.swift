@@ -81,7 +81,6 @@ class ChatDetailViewController: UIViewController {
         //20181014 照片
         addObservers()
         
-        
         //getMessages()
         
         //addObservers()
@@ -125,8 +124,7 @@ class ChatDetailViewController: UIViewController {
     
     @IBAction func didTouchBackButton() {
         
-        dismiss(animated: true
-            , completion: nil)
+        dismiss(animated: true, completion: nil)
         //        self.navigationController?.popViewController(animated: true)
     }
     
@@ -185,13 +183,12 @@ class ChatDetailViewController: UIViewController {
     
     private func setupChat(friendUserId: String) {
         
-        var channel :String?
+        var channel: String?
         
         //如果沒開過聊天室 開一個新的 如果有 讀取上次的資料
         guard let myselfId = Auth.auth().currentUser?.uid else { return }
         guard let myselfName = Auth.auth().currentUser?.displayName else { return }
         guard let userImage = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
-        
         
         let createdTime = Date().millisecondsSince1970
         
@@ -248,7 +245,6 @@ class ChatDetailViewController: UIViewController {
         }
         
     }
-    
     
     //END
     
@@ -314,7 +310,6 @@ class ChatDetailViewController: UIViewController {
                 }
                 
                 //
-                
                 
                 //                guard let senderId = value["senderId"] as? String else { return }
                 //
@@ -385,7 +380,7 @@ class ChatDetailViewController: UIViewController {
                 "time": createdTime,
                 "friendName": friendName,
                 "friendImageUrl": friendNameURL,
-                "friendUID": friendUserId,
+                "friendUID": friendUserId
                 ]) { (error, _) in
                     
                     if let error = error {
@@ -507,11 +502,9 @@ class ChatDetailViewController: UIViewController {
         return getDirectory().appendingPathComponent(".m4a")
     }
     
-    
     @IBAction func sendAudio(_ sender: Any) {
       
     }
-    
     
 }
 
@@ -548,10 +541,8 @@ extension ChatDetailViewController: UITableViewDataSource {
                     cell.messageImageView.isUserInteractionEnabled = true
                     //cell.messageImageView.addGestureRecognizer(singleFinger)
                     
-                    
                     //cell.messageImageView.contentMode = .scaleAspectFit
  cell.messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap)))
-                    
                     
                     return cell
                 }
@@ -627,13 +618,11 @@ extension ChatDetailViewController: UITableViewDataSource {
     
     func prtformZoomInForStartingImageView(startingImageView: UIImageView) {
         
-        
         //        if let userImage = bigImageURLFromCell {
         //            imageView.kf.setImage(with: URL(string: userImage))
         //        } else {
         //            imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
         //        }
-        
         
         self.startingImageView = startingImageView
         self.startingImageView?.isHidden = true
@@ -660,7 +649,6 @@ extension ChatDetailViewController: UITableViewDataSource {
             //點黑色地方也會收回 只會收回黑色 imageView 還在
 //            blackBackgroundView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomout)))
             
-            
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 
                 self.blackBackgroundView?.alpha = 1
@@ -669,10 +657,8 @@ extension ChatDetailViewController: UITableViewDataSource {
                 
                 zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
                 zoomingImageView.center = keyWindow.center
-               
                 
-                
-            }) { (completed: Bool) in
+            }) { (_: Bool) in
             }
         }
     }
@@ -688,7 +674,7 @@ extension ChatDetailViewController: UITableViewDataSource {
                 zoomOutImageView.frame = self.startingFrame!
                 self.blackBackgroundView?.alpha = 0
                 
-            }) { (completed: Bool) in
+            }) { (_: Bool) in
                 zoomOutImageView.removeFromSuperview()
                 self.startingImageView?.isHidden = false
             }
@@ -701,7 +687,6 @@ extension ChatDetailViewController: UITableViewDataSource {
             
         }
     }
-    
     
 }
 

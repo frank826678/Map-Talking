@@ -19,7 +19,6 @@ class FilterCollectionViewCell: UICollectionViewCell {
         
         super.awakeFromNib()
         
-        
     }
     
     override func layoutSubviews() {

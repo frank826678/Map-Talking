@@ -27,24 +27,23 @@ class UserInfoController: UIViewController {
     //20181015
     var isEdit = false
     //END
-    var userInfo = ["性別","生日","感情狀態","居住地","體型","我想尋找"]
-    var userSelected =  ["請選擇性別","請選擇生日","單身","台北","肌肉結實","短暫浪漫","請輸入您的暱稱","吃飯，睡覺，看電影","台灣/美國/英國/日本","變胖了想要多運動","想找人一起玩高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友。請在此輸入一些想對大家說的話吧～"]
+    var userInfo = ["性別", "生日", "感情狀態", "居住地", "體型", "我想尋找"]
+    var userSelected =  ["請選擇性別", "請選擇生日", "單身", "台北", "肌肉結實", "短暫浪漫", "請輸入您的暱稱", "吃飯，睡覺，看電影", "台灣/美國/英國/日本", "變胖了想要多運動", "想找人一起玩高空跳傘，環遊世界", "大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友。請在此輸入一些想對大家說的話吧～"]
     
-    var infoTitle = ["專長 興趣","喜歡的國家","自己最近的困擾","想找人嘗試的事情","自我介紹"]
-    
+    var infoTitle = ["專長 興趣", "喜歡的國家", "自己最近的困擾", "想找人嘗試的事情", "自我介紹"]
     
     //var userSelected =  ["男生","1990-01-01","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
     
-    let gender = ["男生","女生","其他"]
-    let relationship = ["不顯示","秘密","單身","穩定交往","交往中但保有交友空間","一言難盡"]
-    let city = ["基隆市","台北市","新北市","桃園縣","新竹市","新竹縣","苗栗縣","台中市","彰化縣","南投縣","雲林縣","嘉義市","嘉義縣","台南市","高雄市","屏東縣","台東縣","花蓮縣","宜蘭縣","澎湖縣","金門縣","連江縣"]
+    let gender = ["男生", "女生", "其他"]
+    let relationship = ["不顯示", "秘密", "單身", "穩定交往", "交往中但保有交友空間", "一言難盡"]
+    let city = ["基隆市", "台北市", "新北市", "桃園縣", "新竹市", "新竹縣", "苗栗縣", "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義市", "嘉義縣", "台南市", "高雄市", "屏東縣", "台東縣", "花蓮縣", "宜蘭縣", "澎湖縣", "金門縣", "連江縣"]
     
-    let bodyType = ["體型纖細","勻稱","中等身材","肌肉結實","微肉","豐滿"]
-    let searchTarget = ["網上私聊","短暫浪漫","固定情人","開放式關係","先碰面再說","談心朋友"]
+    let bodyType = ["體型纖細", "勻稱", "中等身材", "肌肉結實", "微肉", "豐滿"]
+    let searchTarget = ["網上私聊", "短暫浪漫", "固定情人", "開放式關係", "先碰面再說", "談心朋友"]
     
     var selectedSender: Int = 0
     
-    var pickerView:UIPickerView!
+    var pickerView: UIPickerView!
     var datePicker: UIDatePicker!
     
     var cell: EditUserDataTableViewCell?
@@ -79,7 +78,6 @@ class UserInfoController: UIViewController {
         
         editTableView.register(UINib(nibName: "NickNameTableViewCell", bundle: nil),
                                forCellReuseIdentifier: "NickName")
-        
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editClicked))
         
@@ -168,7 +166,6 @@ class UserInfoController: UIViewController {
         
         //let messageKey = self.ref.child("FilterData").child("PersonalChannel").child(friendChannel).childByAutoId().key
         
-        
         //  "location": filterAllData.location,
         //         "location": ["lat": currentLocation.coordinate.latitude,"lon": currentLocation.coordinate.longitude],
         
@@ -225,7 +222,6 @@ class UserInfoController: UIViewController {
         print("*********")
         //print(userSelected)
         //print("準備上傳的 userSelected 是\(userSelected)")
-        
         
         guard let userId = Auth.auth().currentUser?.uid else { return }
         
@@ -290,17 +286,15 @@ class UserInfoController: UIViewController {
             self.userSelected[10] = userWantToTry
             self.userSelected[11] = userIntroduce
             
-            
             self.editTableView.reloadData()
             
         })
         
     }
     
-    
 }
 
-extension UserInfoController: UITableViewDataSource{
+extension UserInfoController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -412,7 +406,6 @@ extension UserInfoController: UITableViewDataSource{
         return title
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
@@ -468,7 +461,6 @@ extension UserInfoController: UITableViewDataSource{
                 //cell.userInfoButton..titleLabel?.font = UIFont.systemFont(ofSize: 23)
                 //OK
                 cell.userInfoButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-                
                 
                 cell.userInfoLabel.text = userInfo[indexPath.row]
                 
@@ -533,7 +525,6 @@ extension UserInfoController: UITableViewDataSource{
             //                return cell
             //            }
             
-            
             //return UITableViewCell()
             
         default:
@@ -573,7 +564,7 @@ extension UserInfoController: UITableViewDataSource{
     }
 }
 
-extension UserInfoController: UITableViewDelegate{}
+extension UserInfoController: UITableViewDelegate {}
 
 extension UserInfoController: UIPickerViewDataSource {
     
@@ -621,7 +612,6 @@ extension UserInfoController: UIPickerViewDataSource {
             //            guard let cell = self.editTableView.cellForRow(at: IndexPath(row: 0, section: 1))
             //                as? EditContentTableViewCell else { return }
             //
-            
             
             //            let pickerDate = DateManager.share.transformDate(date: self.datePicker.date)
             //
@@ -694,8 +684,8 @@ extension UserInfoController: UIPickerViewDataSource {
         //把UIPickerView放到alert里面（也可以用datePick）
         
         let alertController: UIAlertController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-        alertController.addAction(UIAlertAction(title: "確定", style: UIAlertAction.Style.default){
-            (alertAction)->Void in
+        alertController.addAction(UIAlertAction(title: "確定", style: UIAlertAction.Style.default) {
+            (_) -> Void in
             
             print("確定送出為\(self.pickerView.selectedRow(inComponent: 0))的 row")
             let rowInt = self.pickerView.selectedRow(inComponent: 0)
@@ -736,7 +726,7 @@ extension UserInfoController: UIPickerViewDataSource {
             //                    personInfo?.searchTarget = searchTarget[rowInt]
         })
         
-        alertController.addAction(UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel, handler:nil))
+        alertController.addAction(UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel, handler: nil))
         //let width = frameView.frame.width;
         
         //350
@@ -821,10 +811,10 @@ extension UserInfoController: PersonalInformationCellDelegate {
         } else if indexPath.section == 2 {
             print("想和大家分享的事情列表")
             
-            if indexPath.row == 0  {
+            if indexPath.row == 0 {
                 print("興趣列")
                 userSelected[7] = textInput
-            } else if indexPath.row == 1  {
+            } else if indexPath.row == 1 {
                 print("國家列")
                 userSelected[8] = textInput
             } else if indexPath.row == 2 {
@@ -838,9 +828,6 @@ extension UserInfoController: PersonalInformationCellDelegate {
                 userSelected[11] = textInput
             }
             
-            
         } else { print("編輯個人資料錯誤") }
     }
 }
-
-
