@@ -20,17 +20,10 @@ protocol sendAlertstatus: AnyObject {
 class FilterViewController: UIViewController {
     
     weak var delegate: sendAlertstatus?
-    //@IBOutlet weak var datingTypeCollectionView: UICollectionView!
-    
-    //@IBOutlet weak var timeCollectionView: UICollectionView!
     
     @IBOutlet weak var filterCollectionView: UICollectionView!
     
     @IBOutlet weak var genderSegment: UISegmentedControl!
-    
-    //    @IBOutlet weak var ageSegment: UISegmentedControl!
-    
-    //    @IBOutlet weak var locationSegment: UISegmentedControl!
     
     @IBOutlet weak var maxAgeSlider: UISlider!
     @IBOutlet weak var minAgeSlider: UISlider!
@@ -45,15 +38,12 @@ class FilterViewController: UIViewController {
     // swiftlint:enable identifier_name
     
     var filterData: [Filter] = []
-    //var filterAllData: Filter? //若宣告在這不給問號要給啥???  -- 如果不用 array 只能先給 optional 下面再塞資料時一個一個給他
     
     var filterNewData: [FilterData] = []
     
     var gender = ""
     
     var iconNameArray: [String] = ["看夜景", "唱歌", "喝酒", "吃飯", "看電影", "浪漫", "喝咖啡", "兜風"]
-    //imageArray: [UIImage] = []
-    //var iconImageArray: [UIImage] = [UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!]
     
     var iconImageArray: [String] = ["date-crescent-moon-50",
                                     "date-micro-filled-50",
@@ -71,19 +61,8 @@ class FilterViewController: UIViewController {
         .romance,
         .cafe,
         .cars
-        
-        //        case moon = "date-crescent-moon-50"
-        //    case microphone = "date-micro-filled-100"
-        //    case wine = "date-wine-glass-50"
-        //    case dinner = "date-dining-room-50"
-        //    case movie = "date-documentary-50"
-        //    case romance = "date-romance-50"
-        //    case cafe = "date-cafe-50"
-        //    case car = "date-car-50"
-        
     ]
     
-    //20181008
     var friendUserName: String?
     
     var friendUserId: String?
@@ -105,8 +84,6 @@ class FilterViewController: UIViewController {
     
     var locManager = CLLocationManager()
     var currentLocation: CLLocation!
-    //
-    //
     var currentCenter: CLLocationCoordinate2D?
     
     //20181028
@@ -117,33 +94,7 @@ class FilterViewController: UIViewController {
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         
-        //20181008
-        //可以用
-        
-        //        var pencilImage = UIImage(named: "chat_arrow_up")!
-        //        // swiftlint:disable force_cast
-        //        let pencilBtn: UIButton = UIButton(type: UIButton.ButtonType.custom) as! UIButton
-        //
-        //        // swiftlint:enable force_cast
-        //
-        //        pencilBtn.setImage(pencilImage, for: UIControl.State.normal)
-        //        pencilBtn.addTarget(self, action: "pencilBtnPressed", for: UIControl.Event.touchUpInside)
-        //        pencilBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        //        let pencilBarBtn = UIBarButtonItem(customView: pencilBtn)
-        //
-        //        self.navigationItem.setRightBarButtonItems([pencilBarBtn], animated: false)
-        
-        //END
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(addTapped))
-        
-        //        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
-        //        let play = UIBarButtonItem(title: "Play", style: .plain, target: self, action: #selector(playTapped))
-        //
-        //        navigationItem.rightBarButtonItems = [add, play]
-        
-        // self.view.backgroundColor = .clear
-        // self.view.backgroundColor = #colorLiteral(red: 0.3098039216, green: 0.8588235294, blue: 0.9921568627, alpha: 1)
         
         // swiftlint:disable identifier_name
         let nib = UINib(nibName: "FilterCollectionViewCell", bundle: nil)
@@ -161,34 +112,6 @@ class FilterViewController: UIViewController {
         filterCollectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FilterHeaderCell")
         
         ref = Database.database().reference() //重要 沒有會 nil
-        
-        //self.filterCollectionView.register(headerNib, forCellReuseIdentifier: "FilterHeader")
-        
-        //let cellNib = UINib(nibName: "TypeCollectionViewCell", bundle: nil)
-        //self.typeCollectionView.register(cellNib, forCellWithReuseIdentifier: "typeCell")
-        
-        //        datingTypeCollectionView.delegate = self
-        //        datingTypeCollectionView.dataSource = self
-        //
-        //        timeCollectionView.delegate = self
-        //        timeCollectionView.dataSource = self
-        //
-        //        datingTypeCollectionView.register(nib, forCellWithReuseIdentifier: "FilterCollectionViewCell")
-        //
-        //        timeCollectionView.register(nib, forCellWithReuseIdentifier: "FilterCollectionViewCell")
-        
-        //        datingTypeCollectionView.register(UINib(nibName: "FilterCollectionViewCell", bundle: nil),
-        //                               forCellReuseIdentifier: "Date")
-        
-        //20181009  NotificationCenter
-        //NotificationCenter.default.addObserver(self, selector: #selector (getDataFrom(_:)), name: .myselfLocation, object: nil)
-        
-        //        if( CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-        //            CLLocationManager.authorizationStatus() ==  .authorizedAlways){
-        //
-        //            currentLocation = locManager.location
-        //
-        //        }
         
         setAgeSlider()
         setLocationSlider()
@@ -227,7 +150,6 @@ class FilterViewController: UIViewController {
     
     func showLocationAlert() {
         
-        //    defaultOption: ["檢舉用戶", "封鎖用戶"])
         guard let myselfId = Auth.auth().currentUser?.uid else {
             BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
             return }
@@ -315,15 +237,11 @@ class FilterViewController: UIViewController {
         let roundedStepValue = round(slider.value / step) * step
         slider.value = roundedStepValue
         
-        //        minAgeSlider.maximumValue = maxAgeSlider.value
-        //        maxAgeSlider.minimumValue = minAgeSlider.value
         
         minAgeSlider.maximumValue = maxAgeSlider.value
         
-        //locationSliderValue.text = String(Int(slider.value))
         minAgeSliderValue.text = "\(Int(minAgeSlider.value))"
         print(slider.value)
-        
     }
     
     @objc func maxAgeSliderDidchange(_ slider: UISlider) {
@@ -338,21 +256,17 @@ class FilterViewController: UIViewController {
         //locationSliderValue.text = String(Int(slider.value))
         maxAgeSliderValue.text = " \(Int(maxAgeSlider.value))"
         print(slider.value)
-        
     }
     
     func setLocationSlider() {
         
         locationSlider.minimumValue = 1
         locationSlider.maximumValue = 100
-        //locationSlider.value = 30
         locationSlider.setValue(30, animated: true)
         
-        // UISlider 是否可以在變動時同步執行動作
-        // 設定 false 時 則是滑動完後才會執行動作
         locationSlider.isContinuous = true
-        locationSlider.addTarget(self, action: #selector(locationSliderDidchange(_:)), for: UIControl.Event.valueChanged)
         
+        locationSlider.addTarget(self, action: #selector(locationSliderDidchange(_:)), for: UIControl.Event.valueChanged)
     }
     
     @objc func locationSliderDidchange(_ slider: UISlider) {
@@ -365,17 +279,6 @@ class FilterViewController: UIViewController {
         print(slider.value)
         
     }
-    
-//    @objc func getDataFrom(_ noti: Notification) {
-//
-//        guard let center = noti.object as? CLLocationCoordinate2D else {
-//            print("no center")
-//            return  }
-//
-//        currentCenter?.latitude = center.latitude
-//        currentCenter?.longitude = center.longitude
-//
-//    }
     
     @objc func addTapped() {
         
@@ -403,58 +306,14 @@ class FilterViewController: UIViewController {
         
     }
     
-    //    @IBAction func ageChanged(_ sender: UISegmentedControl) {
-    //        switch ageSegment.selectedSegmentIndex
-    //        {
-    //        case 0:
-    //            print("18 - 25")
-    //
-    //        case 1:
-    //            print("26 - 35")
-    //
-    //        case 2:
-    //            print("36 以上")
-    //
-    //        default:
-    //
-    //
-    //            print("年齡")
-    //            break;
-    //        }
-    //
-    //    }
-    
-    //    @IBAction func locationChanged(_ sender: UISegmentedControl) {
-    //
-    //        switch locationSegment.selectedSegmentIndex
-    //        {
-    //        case 0:
-    //            print("3 KM")
-    //
-    //        case 1:
-    //            print("15 KM")
-    //
-    //        case 2:
-    //            print("30 KM")
-    //
-    //        default:
-    //
-    //            print("距離")
-    //            break;
-    //        }
-    //
-    //    }
-    
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        //        let banner = StatusBarNotificationBanner(title: "累死我了", style: .success)
-        //        banner.show()
-    }
+        }
     
     func getFilterData() {
-        //let value = genderChanged.(value)
-        //let title = genderChanged
+        
         print(genderSegment.selectedSegmentIndex)
         
         //應該要有個地方 存自己的年紀性別和經緯度來算距離
@@ -530,13 +389,7 @@ class FilterViewController: UIViewController {
     
     func searchFilterData(filterData: Filter) {
         
-        //        refference.child("location").observe(.childAdded) { (snapshot) in
-        
         //抓一個最難他達到的條件的下來判斷 讓資料量減少
-        
-        //        ref.child("FilterData").queryOrdered(byChild: "dating").queryEqual(toValue: filterData.dating).observe(.childChanged) { (snapshot) in
-        
-        //        ref.child("FilterData").queryOrdered(byChild: "dating").queryEqual(toValue: filterData.dating).observeSingleEvent(of: .value, with: { (snapshot)
         
         ref.child("FilterData").queryOrdered(byChild: "dating").queryEqual(toValue: filterData.dating).observe(.childAdded) { (snapshot) 
             

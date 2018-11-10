@@ -610,10 +610,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 (annotationView?.subviews[2] as! UILabel).backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
                 (annotationView?.subviews[3] as! UILabel).textColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
             }
-            //            annotationView?.addSubview(shadowView)
-            //            annotationView?.addSubview(imageView)
-            //            annotationView?.addSubview(annotationLabel)
-            //            annotationView?.addSubview(triangle)
             
             return annotationView
         } else {
@@ -622,9 +618,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         
         annotationView?.tag = 7
-        //新增 20181002 重要 點擊後可以執行 didselect
+    
         annotationView?.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
-        //annotationView?.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
         //判斷是否增加過 有的話修改 tag 的值
         
         //設定照片陰影
@@ -638,14 +633,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         shadowView.tag = 6
         shadowView.contentMode = .scaleAspectFit
         shadowView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        //shadowView.layer.applySketchShadow(color: UIColor.red, alpha: 1, x: 0, y: 0, blur: 10, spread: 40, corner: 30,center: (annotationView?.center)!)
-        //角度修正
-        //shadowView.layer.applySketchShadow(color: UIColor.red, alpha: 1, x: -5, y: -5, blur: 10, spread: 40, corner: 30)
         
-        //B7B7B7 改透明度 0.6
-        //20181024 color ok
-        //shadowView.layer.applySketchShadow(color: #colorLiteral(red: 0.7176470588, green: 0.7176470588, blue: 0.7176470588, alpha: 0.5980040668), alpha: 0.3, x: 0, y: 0, blur: 10, spread: 10, corner: 25)
-        //#colorLiteral(red: 0.8392156863, green: 0.8392156863, blue: 0.8392156863, alpha: 1)
         shadowView.layer.applySketchShadow(color: UIColor.lightGray, alpha: 1, x: 0, y: 0, blur: 15, spread: 15, corner: 25)
         
         // 設定頭像
@@ -985,24 +973,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func addSwipe() {
-        // tableView 無法加下滑手勢
-        //let swipe = UISwipeGestureRecognizer(target: self, action: #selector(animateViewDown))
-        //swipe.direction = .down
-        //userInfoDetailView.addGestureRecognizer(swipe)
-        //userInfoDetailView.userInfoDetailTableView.addGestureRecognizer(swipe)
         
         let singleFinger = UITapGestureRecognizer(
             target:self,
             action:#selector(animateViewDown))
-        //singleFinger.numberOfTapsRequired = 1
         
         mapBackgroundView.addGestureRecognizer(singleFinger)
-        
-        //20181013
-
-        //        let viewBackgroundTap = UITapGestureRecognizer(target: self, action: #selector(animateViewDown))
-        //        mapBackgroundView.addGestureRecognizer(viewBackgroundTap)
-        
     }
     
     
@@ -1215,53 +1191,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
     }
     
-    //    @IBAction func changeMessage(_ sender: UIButton) {
-    //
-    //        let editAlert = UIAlertController(title: "Message:", message: nil, preferredStyle: .alert)
-    //
-    //        editAlert.addTextField()
-    //
-    //        let submitAction = UIAlertAction(title: "Send", style: .default, handler: { (_) in
-    //
-    //            if let alertTextField = editAlert.textFields?.first?.text {
-    //
-    //                print("alertTextField: \(alertTextField)")
-    //
-    //                guard let userId = Auth.auth().currentUser?.uid else { return }
-    //
-    //                let userStatus = ["text": alertTextField]
-    //
-    //                let childUpdates = ["/location/\(userId)/message": userStatus]
-    //
-    //                self.refference.updateChildValues(childUpdates)
-    //
-    //            }
-    //        })
-    //
-    //        let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
-    //
-    //        editAlert.addAction(submitAction)
-    //        editAlert.addAction(cancel)
-    //
-    //        self.present(editAlert, animated: true)
-    //    }
-    
     func setIconCorner() {
         
         location.clipsToBounds = true
         location.layer.cornerRadius = 25
         filterButton.clipsToBounds = true
         filterButton.layer.cornerRadius = 25
-        
     }
     
     func setButtonTemplateImage() {
-        //                var templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
-        //                filterButton.setImage(templateImage, for: .normal)
-        //
-        //                templateImage = #imageLiteral(resourceName: "new3-two-hearts-filled-40").withRenderingMode(.alwaysTemplate)
-        //                filterButton.setImage(templateImage, for: .selected)
-        //20191021 新 icon
         
         let mappingIcon = #imageLiteral(resourceName: "heart-mapping").withRenderingMode(.alwaysTemplate)
         
@@ -1270,12 +1208,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterButton.setImage(mappingIcon, for: .normal)
         location.setImage(locationIcon, for: .normal)
         setButtonColor(with: #colorLiteral(red: 0.137254902, green: 0.462745098, blue: 0.8980392157, alpha: 1)) //顏色已經挑選完成 是根據定位的按鈕的藍色 刷色
-        
     }
     
     func setButtonColor(with color: UIColor) {
-        //filterButton.imageView?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) //按鈕的圖案的背景 顏色已經挑選完成 是根據定位的按鈕的白色
-        
+    
         filterButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) // 按鈕的背景
         
         filterButton.imageView?.tintColor = #colorLiteral(red: 1, green: 0.1803921569, blue: 0.3333333333, alpha: 1) //刷色 不要 color 改紅色
@@ -1302,26 +1238,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
 }
-
-//extension MapViewController: ClusterDelegate {
-//
-//    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> ClusterAnnotation {
-//        let annotation = ClusterAnnotation(memberAnnotations: memberAnnotations)
-//        annotation.title = "Emojis"
-//        return annotation
-//    }
-//
-//}
-
-//extension MapViewController: MKMapViewDelegate {
-//
-//    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
-//        let test = MKClusterAnnotation(memberAnnotations: memberAnnotations)
-//        test.title = "Emojis"
-//        test.subtitle = nil
-//        return test
-//    }
-//}
 
 extension NSNotification.Name {
     
@@ -1407,50 +1323,7 @@ extension MapViewController: UITableViewDataSource {
                     //cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
                 }
                 
-                //cell.userDetailTitle.text = "生日"
-                //            var userInfo = ["暱稱","性別","生日","感情狀態","居住地","體型5","我想尋找","專長 興趣","喜歡的國家","自己最近的困擾","想嘗試的事情","自我介紹",]
-                //            var userSelected =  ["男","1993-06-06","單身","台北","肌肉結實4","短暫浪漫","Frank Lin","吃飯，睡覺，看電影7","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
                 
-                //            cell.userDetailTitle.text = userInfo[indexPath.row]
-                //            cell.userDetailContent.text = userSelected[indexPath.row]
-                
-                //OK 20181017
-                
-                //                if indexPath.row == 0 {
-                //                    cell.userDetailTitle.text = userInfo[3]
-                //                    cell.userDetailContent.text = userSelected[2]
-                //                } else if indexPath.row == 1 {
-                //                    cell.userDetailTitle.text = userInfo[4]
-                //                    cell.userDetailContent.text = userSelected[3]
-                //                } else if indexPath.row == 2 {
-                //                    cell.userDetailTitle.text = userInfo[5]
-                //                    cell.userDetailContent.text = userSelected[4]
-                //                } else if indexPath.row == 3 {
-                //                    cell.userDetailTitle.text = userInfo[6]
-                //                    cell.userDetailContent.text = userSelected[5]
-                //                } else if indexPath.row == 4 {
-                //                    cell.userDetailTitle.text = userInfo[7]
-                //                    cell.userDetailContent.text = userSelected[7]
-                //                } else {
-                //                    cell.userDetailTitle.text = userInfo[indexPath.row + 3]
-                //                    cell.userDetailContent.text = userSelected[indexPath.row + 3]
-                //                }
-                
-                //END 20181017
-                
-                //cell.iconImage.backgroundColor =  #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1) // FB message borderColor
-                
-                //原本
-                //cell.iconImage.image = UIImage(named: iconImageArray[indexPath.row])
-                //原本 END
-                
-                //            cell.iconImage.image = UIImage.setIconTemplate(iconName: iconImageArray[indexPath.row])
-                //
-                //
-                //            cell.selectedBackgroundView?.backgroundColor = UIColor.orange
-                
-                //            cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
-                //
                 cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
                 cell.selectionStyle = UITableViewCell.SelectionStyle.none
                 

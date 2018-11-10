@@ -136,7 +136,6 @@ extension ProfileViewController: UITableViewDataSource {
             withIdentifier: "Profile", for: indexPath)
             as? ProfileTableViewCell {
             
-            
             cell.iconName.text = iconNameArray[indexPath.row]
             
             cell.iconImage.image = UIImage.setIconTemplate(iconName: iconImageArray[indexPath.row])

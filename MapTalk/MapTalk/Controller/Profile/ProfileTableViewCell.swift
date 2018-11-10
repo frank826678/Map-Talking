@@ -31,15 +31,16 @@ class ProfileTableViewCell: UITableViewCell {
     
     private func setColor() {
         
-        //iconImage.tintColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
-        
         iconImage.tintColor = UIColor.white
+        
         iconImage.contentMode = .scaleAspectFit
+        
         iconName.textColor = UIColor.white
         
         iconBackgroundView.backgroundColor = #colorLiteral(red: 0.4588235294, green: 0.7137254902, blue: 1, alpha: 1)
         
         iconBackgroundView.layer.cornerRadius = 25
+        
         iconBackgroundView.clipsToBounds = true
         
         //目前12張照片 icon 是用 程式碼控制 template

@@ -36,8 +36,6 @@ class ChatViewController: UIViewController {
     
     var myselfUID: String?
     
-    let dispatchGroup = DispatchGroup()
-    //201801016 searchbar
     @IBOutlet weak var searchBar: UISearchBar!
     var result: [NewMessage] = []
     var searchStatus = false
@@ -83,8 +81,6 @@ class ChatViewController: UIViewController {
         
         setImage()
         
-        // Do any additional setup after loading the view.
-        
         chatTableView.delegate = self
         chatTableView.dataSource = self
         
@@ -92,15 +88,6 @@ class ChatViewController: UIViewController {
                                forCellReuseIdentifier: "Chat")
         //讀取好友清單
         ref = Database.database().reference() //重要 沒有會 nil
-        //20181019 OK 搬到 will appear 希望能即時顯示
-        //        getFriendList()
-        
-        //getFriendLastMessage()
-        
-        //simpleQueues()
-        
-        //change tabbar page 有作用 但是顏色沒變過去
-        //tabBarController?.selectedIndex = 2
         
         //取消 tableView 虛線
         chatTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -126,9 +113,6 @@ class ChatViewController: UIViewController {
     
         @objc func getDataFrom(_ noti: Notification) {
     
-//            guard let center = noti.object as? String else {
-//                print("No blockUser")
-//                return  }
             friendsList.removeAll()
             newMessage.removeAll()
             getFriendList()
@@ -178,42 +162,9 @@ class ChatViewController: UIViewController {
         userImage.layer.cornerRadius = 25
         userImage.clipsToBounds = true
         
-        //  guard let userDisplayName = Auth.auth().currentUser?.displayName else { return }
         guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
         
         userImage.kf.setImage(with: URL(string: photoSmallURL))
-        
-        //userName.text = userDisplayName
-        
-    }
-    
-    func simpleQueues() {
-        
-        //        let queue = DispatchQueue(label: "123")
-        //        queue.sync {
-        //            getFriendList()
-        //        }
-        //
-        //        getFriendLastMessage()
-        
-    }
-    
-    func group() {
-        
-        print("--------------")
-        print("Dowloading Data")
-        dispatchGroup.enter()
-        
-        self.dispatchGroup.leave()
-        
-        dispatchGroup.enter()
-        
-        self.dispatchGroup.leave()
-        
-        dispatchGroup.notify(queue: .main) {
-            self.display()
-            print("--------------")
-        }
     }
     
     func display() {
@@ -244,8 +195,6 @@ class ChatViewController: UIViewController {
             print("------")
             //let key = value?.allKeys.first
             for index in 0 ..< allkeyCount {
-                //guard let member = value[value.allKeys[0]] as? NSDictionary else { return }
-                //guard let member = value[value.allKeys[index]] as? NSDictionary else { return }
                 
                 guard let allFriends = value.allKeys[index] as? String else { return }
                 
@@ -336,7 +285,7 @@ class ChatViewController: UIViewController {
                     
                 } else {
                     
-                    //不確定判斷式正確不正確
+                    
                     for (index, user) in self.newMessage.enumerated()
                         where user.friendUID == message.senderId
                             || user.senderId == message.senderId {
@@ -357,15 +306,12 @@ class ChatViewController: UIViewController {
                 }
                 
                 self.newMessage.append(message)
-                //20181016 searchbar
+                
                 self.result.append(message)
-                //END
+        
                 print("_____")
                 print(self.newMessage)
                 
-                //                newMessage.sort { (date1, date2) -> Bool in
-                //                    return date1.time  (date2.time) == ComparisonResult.orderedDescending
-                //                }
                 
                 self.newMessage.sort(by: { (message1, message2) -> Bool in
                     return message1.time > message2.time
@@ -380,22 +326,9 @@ class ChatViewController: UIViewController {
     }
 }
 
-//    func setButtonTemplateImage() {
-//        var templateImage = #imageLiteral(resourceName: "btn_play").withRenderingMode(.alwaysTemplate)
-//        playButton.setImage(templateImage, for: .normal)
-//
-//        templateImage = #imageLiteral(resourceName: "btn_stop").withRenderingMode(.alwaysTemplate)
-//        playButton.setImage(templateImage, for: .selected)
-//
-//    }
-
 extension ChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        //OK 可以顯示最後一行
-        //return messages.count
-        
-        //20181020 NEW
         if checkInternetFunction() == false {
             hintLabel.isHidden = false
             hintLabel.text = "請打開行動網路或 WI-FI"
@@ -412,7 +345,7 @@ extension ChatViewController: UITableViewDataSource {
                 hintLabel.isHidden = true
                 animationView.isHidden = true
             }
-            //hintLabel.isHidden = true
+        
         }
         
         if searchStatus == false {
@@ -440,11 +373,6 @@ extension ChatViewController: UITableViewDataSource {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
                     }
                     
-                    //cell.userMessage.text = newMessage[indexPath.row].content
-                    
-//                    let messageTime = Date.formatMessageTime(time: newMessage[indexPath.row].time)
-//                    cell.messageTime.text = messageTime
-                    
                 } else {
                     
                     cell.userName.text = newMessage[indexPath.row].senderName
@@ -455,11 +383,6 @@ extension ChatViewController: UITableViewDataSource {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
                     }
                     
-                    //cell.userMessage.text = newMessage[indexPath.row].content
-                    
-//                    let messageTime = Date.formatMessageTime(time: newMessage[indexPath.row].time)
-//                    cell.messageTime.text = messageTime
-                    
                 }
                 
                 cell.userMessage.text = newMessage[indexPath.row].content
@@ -468,8 +391,7 @@ extension ChatViewController: UITableViewDataSource {
 
             } else {
                 
-                //cell.userName.text = result[indexPath.row].friendName
-                if  result[indexPath.row].senderId == myselfUID {
+                 if  result[indexPath.row].senderId == myselfUID {
                     cell.userName.text = result[indexPath.row].friendName
                     
                     if let photoString = result[indexPath.row].friendImageUrl {
@@ -477,8 +399,6 @@ extension ChatViewController: UITableViewDataSource {
                     } else {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
                     }
-                    
-                    //cell.userMessage.text = result[indexPath.row].content
                     
                 } else {
                     
@@ -489,8 +409,6 @@ extension ChatViewController: UITableViewDataSource {
                     } else {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
                     }
-                    
-                    //cell.userMessage.text = result[indexPath.row].content
                     
                 }
                 
@@ -503,7 +421,6 @@ extension ChatViewController: UITableViewDataSource {
             //點擊 cell 後 不反灰
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
-            //OK 原本 done
             
         }
         
@@ -513,30 +430,13 @@ extension ChatViewController: UITableViewDataSource {
 
 extension ChatViewController: UITableViewDelegate {
     
-    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    //
-    //        return 150.0
-    //    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        // Luke 老大的用法
-        
-        //        tableView.deselectRow(at: indexPath, animated: true)
-        //
-        //        performSegue(
-        //            withIdentifier: String(describing: ChatDetailViewController.self),
-        //            sender: indexPath
-        //        )
-        
-        // Luke 老大的用法 END
         
         guard let controller = UIStoryboard.chatStoryboard().instantiateViewController(
             withIdentifier: String(describing: ChatDetailViewController.self)
             ) as? ChatDetailViewController else { return }
         if searchStatus == false {
             
-            //controller.article = articles[indexPath.row]
             if newMessage[indexPath.row].senderId ==  myselfUID { controller.friendUserId = self.newMessage[indexPath.row].friendUID
             } else {
                 controller.friendUserId = self.newMessage[indexPath.row].senderId
@@ -560,30 +460,15 @@ extension ChatViewController: UISearchBarDelegate {
         
         print("[ViewController searchBar] searchText: \(searchText)")
         
-        // 没有搜索内容时显示全部内容
+        // 没有搜索内容顯示全部内容
         if searchText == "" {
             self.result = self.newMessage
             searchStatus = false
         } else {
             
-            // for arrr in self.newMessage {
-            
-            //arr.friendName
-            
-            // 匹配用户输入的前缀，不区分大小写
             self.result = []
             searchStatus = true
             for index in 0...self.newMessage.count-1 {
-                
-                //arr.friendName
-                //if arr.friendName.lowercaseString.hasPrefix(searchText.lowercaseString) {
-                
-                //                if(arrr.friendName?.lowercased().contains(searchText.lowercased()))! {
-                //        if(arrr.friendName?.lowercased(with: <#T##Locale?#>)) {
-                
-                //guard let friendName = arrr.friendName else { return }
-                
-                //if friendName == ""
                 
                 if  newMessage[index].senderId == myselfUID {
                     guard let friendName = newMessage[index].friendName else { return }
@@ -594,17 +479,6 @@ extension ChatViewController: UISearchBarDelegate {
                         print("名字不同")
                     }
                     
-                    //cell.userName.text = newMessage[index].friendName
-                    //                    cell.userName.text = newMessage[index]
-                    //
-                    //                    if let photoString = newMessage[indexPath.row].friendImageUrl
-                    //                    {
-                    //                        cell.userImage.kf.setImage(with: URL(string: photoString))
-                    //                    } else {
-                    //                        cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
-                    //                    }
-                    //
-                    //                    cell.userMessage.text = newMessage[indexPath.row].content
                     
                 } else {
                     
@@ -618,41 +492,29 @@ extension ChatViewController: UISearchBarDelegate {
                     
                 }
                 
-                //OK
-                //                let friendResult = friendName.contains(searchText)
-                //                if friendResult == true {
-                //                    self.result.append(arrr)
-                //                } else {
-                //                    print("名字不同")
-                //                }
-                
-                //}
             }
         }
         
-        // 刷新tableView 数据显示
+       
         self.chatTableView.reloadData()
     }
     
-    // 搜索触发事件，点击虚拟键盘上的search按钮时触发此方法
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         searchBar.resignFirstResponder()
     }
     
-    // 书签按钮触发事件
+    
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         
-        print("搜索历史")
+        print("搜索歷史")
     }
     
-    // 取消按钮触发事件
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        // 搜索内容置空
+        //無搜索內容
         searchBar.text = ""
         self.result = self.newMessage
         self.chatTableView.reloadData()
     }
-    
 }

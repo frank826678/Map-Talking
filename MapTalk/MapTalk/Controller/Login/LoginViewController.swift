@@ -31,11 +31,11 @@ class LoginViewController: UIViewController {
     
     let fbUserDefault: UserDefaults = UserDefaults.standard
     
-//    @IBAction func loginButtonAction(_ sender: UIButton) {
-//
-//        bindFB()
-//
-//    }
+    //    @IBAction func loginButtonAction(_ sender: UIButton) {
+    //
+    //        bindFB()
+    //
+    //    }
     
     override func viewDidLoad() {
         
@@ -44,11 +44,11 @@ class LoginViewController: UIViewController {
         refference = Database.database().reference()
         
         changeStyle()
-           //邊緣都會跑掉 why?
-//        setupLayerGradient(width: backgroundView.frame.width, height: backgroundView.frame.height)
+        //邊緣都會跑掉 why?
+        //        setupLayerGradient(width: backgroundView.frame.width, height: backgroundView.frame.height)
         
         setupLayerGradient(width: fullScreenSize.width, height: fullScreenSize.height)
-
+        
     }
     
     @IBAction func loginFacebook(_ sender: UIButton) {
@@ -63,25 +63,8 @@ class LoginViewController: UIViewController {
                 
                 self?.signInFirebase(token: token)
                 
-                //20181019
-                //self?.getUserInfo(token: token)
-
-                //這裡有 signInFirebase 下面 firebase login 可以刪掉
+                print("登入成功 Success")
                 
-            //    let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                
-              //  Auth.auth().signInAndRetrieveData(with: credential, completion: { (result, error) in
-                        print("登入成功 Success")
-//                        print(Auth.auth().currentUser?.displayName)
-//                        print(Auth.auth().currentUser?.email)
-//                        print(Auth.auth().currentUser?.photoURL)
-//
-                
-//                        AppDelegate.shared.window?.rootViewController
-//                                                = UIStoryboard
-//                                                    .mainStoryboard()
-//                                                    .instantiateInitialViewController()
-//
             },
             failure: { [weak self ] (error) in
                 
@@ -108,7 +91,7 @@ class LoginViewController: UIViewController {
             sucess: { (_) in
                 
                 DispatchQueue.main.async {
-                   AppDelegate.shared.switchToMainStoryBoard()
+                    AppDelegate.shared.switchToMainStoryBoard()
                 }
                 
         },
@@ -130,66 +113,6 @@ class LoginViewController: UIViewController {
         
     }
     
-    //20181019
-    /*
-    func getUserInfo(token: String) {
-        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"]).start(completionHandler: { (connection, result, error) in
-            
-//            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, picture.type(large)"]).start(completionHandler: { (connection, result, error) in
-            //guard let 改成 let
-            
-            if error == nil {
-                if let info = result as? [String: Any] {
-                    print("info: \(info)")
-                    //old
-                    
-//                    guard let fbID = info["id"] as? String else { return }
-//                    guard let fbName = info["name"] as? String else { return }
-//                    guard let userId = Auth.auth().currentUser?.uid else { return }
-//                    guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
-
-                    //OLD END
-                    //guard let fbEmail = info["email"] as? String else { return }
-//                  guard let fbPhoto = info["picture"] as? [String: Any] else { return }
-//                    guard let photoData = fbPhoto["data"] as? [String: Any] else { return }
-//                    guard let photoURL = photoData["url"] as? String else { return }
-
-                    //self.uploadImagePic(url: URL(string: photoURL)!)
-                    
-                    //self.fbUserDefault.set(token, forKey: "token")
-                    
-                     let fbID = info["id"] as? String
-                     let fbName = info["name"] as? String
-                    guard let userId = Auth.auth().currentUser?.uid else { return }
-                    guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
-
-                    
-                    //20181018 改成 updatevalue setValue
-                    self.refference.child("UserData").child(userId).updateChildValues([
-                        "FBID": fbID,
-                        "FBName": fbName,
-                        "FBPhotoSmallURL": photoSmallURL,
-                        "UID": userId
-                        ])
-                    
-//                    self.refference.child("UserData").child(userId).setValue([
-//                        "FBID": fbID,
-//                        "FBName": fbName,
-//                        "FBEmail": fbEmail,
-//                        "FBPhotoURL": photoURL,
-//                        "FBPhotoSmallURL": photoSmallURL,
-//                        "UID": userId
-//                        ])
-
-                    
-                    print("----存到 firebase 成功 -----")
-                }
-            }
-        })
-    }
-       */
-      //20181019END
- 
     func uploadImagePic(
         url: URL
         ) {
@@ -214,21 +137,11 @@ class LoginViewController: UIViewController {
     
     func changeStyle() {
         
-        //美化字體
         logingButtonShape.layer.cornerRadius = 25
+        
         anonymousLoginButtonShape.layer.cornerRadius = 25
         
         loginIcon.layer.cornerRadius = 90
-        
-        //let layerGradient = CAGradientLayer()
-        
-//        entryContent.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        entryContent.layer.shadowOpacity = 1
-//        entryContent.layer.shadowRadius = 5
-        
-//        facebookLoginBot.layer.cornerRadius = 10
-//        facebookLoginBot.layer.borderWidth = 1
-//        facebookLoginBot.layer.borderColor = UIColor.lightGray.cgColor
         
     }
     
@@ -236,38 +149,19 @@ class LoginViewController: UIViewController {
         
         let layerGradient = CAGradientLayer()
         
-        //layerGradient.colors = [#colorLiteral(red: 0.1764705882, green: 0.7647058824, blue: 0.9960784314, alpha: 1) , #colorLiteral(red: 0.07058823529, green: 0.4431372549, blue: 1, alpha: 1) ]
-        
-//        layerGradient.colors = [
-//            UIColor(red: 70/255.0, green: 95/255.0, blue: 222/255.0, alpha: 0.9).cgColor,
-//            UIColor(red: 235/255.0, green: 121/255.0, blue: 243/255.0, alpha: 0.9).cgColor
-//        ]
-        
-        //OK 重藍到清藍 alpha 1 - 0.5
-//        layerGradient.colors = [
-//            UIColor(red:0.07, green:0.44, blue:1.00, alpha:0.6).cgColor,
-//            UIColor(red:0.18, green:0.76, blue:1.00, alpha:0.8).cgColor
-//        ]
-
         layerGradient.colors = [
             UIColor(red: 188/255.0, green: 229/255.0, blue: 255/255.0, alpha: 1).cgColor,
             UIColor(red: 219/255.0, green: 234/255.0, blue: 255/255.0, alpha: 1).cgColor
         ]
         
-//        layerGradient.colors = [UIColor(hex: 0x1271ff).CGColor,UIColor(hex: 0x2dc3fe).CGColor]
-        //#2dc3fe 淡藍
-        //#1271ff 重藍 UIColor(red:0.07, green:0.44, blue:1.00, alpha:1.0)
-        
-        //layerGradient.startPoint = CGPoint(x: 0, y: 0.5)
-        //layerGradient.endPoint = CGPoint(x: 1, y: 0.5)
         layerGradient.startPoint = CGPoint(x: 0.5, y: 0)
         layerGradient.endPoint = CGPoint(x: 0.5, y: 1)
-
+        
         layerGradient.frame = CGRect(x: 0, y: 0, width: width, height: height)
         
         self.backgroundView.layer.addSublayer(layerGradient)
-    
-        //self.layer.addSublayer(layerGradient)
+        
+        
     }
     
     //20181018準備新增按鈕
@@ -277,7 +171,7 @@ class LoginViewController: UIViewController {
         keychain["anonymous"] = "anonymous"
         
         AppDelegate.shared.switchToMainStoryBoard()
-
+        
     }
     
 }

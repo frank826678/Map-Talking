@@ -16,23 +16,15 @@ class UserInfoController: UIViewController {
     
     #warning ("TODO: nickname 還沒有做 delegate, cell 希望可以做成 reuse, 目前不能上傳新改變的值")
     let decoder = JSONDecoder()
-    //var userInformation: UserInformation = []
-    
+
     @IBOutlet weak var editTableView: UITableView!
-    //20181014
-    var expandingCellHeight: CGFloat = 200
-    let expandingIndexRow = 0
-    //END
-    
-    //20181015
+
     var isEdit = false
-    //END
+    
     var userInfo = ["性別", "生日", "感情狀態", "居住地", "體型", "我想尋找"]
     var userSelected =  ["請選擇性別", "請選擇生日", "單身", "台北", "肌肉結實", "短暫浪漫", "請輸入您的暱稱", "吃飯，睡覺，看電影", "台灣/美國/英國/日本", "變胖了想要多運動", "想找人一起玩高空跳傘，環遊世界", "大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友。請在此輸入一些想對大家說的話吧～"]
     
     var infoTitle = ["專長 興趣", "喜歡的國家", "自己最近的困擾", "想找人嘗試的事情", "自我介紹"]
-    
-    //var userSelected =  ["男生","1990-01-01","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
     
     let gender = ["男生", "女生", "其他"]
     let relationship = ["不顯示", "秘密", "單身", "穩定交往", "交往中但保有交友空間", "一言難盡"]
@@ -131,22 +123,7 @@ class UserInfoController: UIViewController {
     }
     
     func uploadUserInfo() {
-        //        //let value = genderChanged.(value)
-        //        //let title = genderChanged
-        //        print(genderSegment.selectedSegmentIndex)
-        //
-        //        //應該要有個地方 存自己的年紀性別和經緯度來算距離
-        //        guard let datingNumber = datingNumber else { return }
-        //        guard let timeNumber = timeNumber else { return }
-        //
-        //        //有可能沒按到約會類型和時間範圍 要給預設值或是設定?
-        //        guard let filterAllData: Filter = Filter(gender: genderSegment.selectedSegmentIndex,
-        //                                                 age: ageSegment.selectedSegmentIndex,
-        //                                                 location: locationSegment.selectedSegmentIndex,
-        //                                                 dating: datingNumber,
-        //                                                 time: timeNumber)    else { return }
-        //
-        //        print("filterALLData 是 \(filterAllData)")
+        
         print("*********")
         //print(userSelected)
         print("準備上傳的 userSelected 是\(userSelected)")
@@ -480,9 +457,6 @@ extension UserInfoController: UITableViewDataSource {
                     cell.contentTextView.isEditable = false
                 }
                 
-                //                cell.delegate = self
-                //                cell.editContentTextView.text = userSelected[10]
-                
                 cell.titleLabel.isHidden = false
                 cell.contentTextViewTopConstraint.constant = 5
                 cell.titleLabel.text = infoTitle[indexPath.row]
@@ -494,39 +468,6 @@ extension UserInfoController: UITableViewDataSource {
                 return cell
             }
             
-            //        case 6:
-            //            if let cell = tableView.dequeueReusableCell(
-            //                withIdentifier: "EditUserData", for: indexPath)
-            //                as? EditUserContentTableViewCell {
-            //
-            //                //cell.contentTextView.text = "大家好 我是法克"
-            //                //cell.baseView.contentTextView.text = "大家好 我是法克"
-            //
-            //                //cell.baseView.contentTextView.text = userSelected[11]
-            //
-            //                //沒用 why
-            //                //userSelected[11] = cell.baseView.contentTextView.text
-            //
-            //                //                cell.delegate = self
-            //                //                cell.baseView.delegate = self
-            //
-            //                cell.selectionStyle = UITableViewCell.SelectionStyle.none
-            //
-            //                if isEdit == true {
-            //                    cell.editContentTextView.isUserInteractionEnabled = true
-            //                } else {
-            //
-            //                    cell.editContentTextView.isUserInteractionEnabled = false
-            //
-            //                }
-            //                cell.delegate = self
-            //                cell.editContentTextView.text = userSelected[11]
-            //
-            //                return cell
-            //            }
-            
-            //return UITableViewCell()
-            
         default:
             
             return  UITableViewCell()   //要有() 也因為上面有 -> UITableViewCell 所以一定要有一個回傳值
@@ -536,31 +477,12 @@ extension UserInfoController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //目前 EditUserDataTableViewCell 沒有拉 限制高度
-        
-        //        return 80
-        //return self.view.frame.width * (53 / 375)
-        
-        //        if indexPath.row == expandingIndexRow {
-        //            return expandingCellHeight
-        //        } else {
-        //            return 100
-        //        }
-        
-        //自我介紹列讓系統偵測  原本是全部都 automaticDimension
-        //        if indexPath.section == 2 || indexPath.section == 3 || indexPath.section == 4 || indexPath.section == 5  {
-        //        return 80
-        //        }    //return 100
-        //        else {
-        //            return UITableView.automaticDimension
-        //        }
         
         if indexPath.section == 1 || indexPath.section == 0 {
             return 60
         } else {
             return UITableView.automaticDimension
         }
-        
     }
 }
 
@@ -602,26 +524,10 @@ extension UserInfoController: UIPickerViewDataSource {
         title: "確定", style: UIAlertAction.Style.default) { (_) -> Void in
             
             print("選取的時間是\(self.datePicker.date)")
-            //let pickerDate = DateManager.share.formatDate(date: self.datePicker.date)
+            
             let pickerDate = Date.formatDate(date: self.datePicker.date)
             
             self.userSelected[1] = pickerDate
-            
-            //date = pickerDate
-            
-            //            guard let cell = self.editTableView.cellForRow(at: IndexPath(row: 0, section: 1))
-            //                as? EditContentTableViewCell else { return }
-            //
-            
-            //            let pickerDate = DateManager.share.transformDate(date: self.datePicker.date)
-            //
-            //            self.date = pickerDate
-            //
-            //            print(pickerDate)
-            //
-            //            let titleDate = DateManager.share.formatDate(forTaskPage: pickerDate)
-            //
-            //            self.dateButton.setTitle(titleDate, for: .normal)
             
             print("轉換過的時間為\(pickerDate)")
             //要有 reload data 此時 model 已經改變
@@ -637,41 +543,6 @@ extension UserInfoController: UIPickerViewDataSource {
         //self.show(alertController, sender: nil)
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    //    func dateButtonPressed(_ sender: Any) {
-    //
-    //        datePicker = UIDatePicker(frame: CGRect(
-    //            x: 0, y: 0,
-    //            width: UIScreen.main.bounds.width - 5, height: 250))
-    //
-    //        datePicker.datePickerMode = .date
-    //
-    //        datePicker.date = Date()
-    //
-    //        let alertController: UIAlertController = UIAlertController(
-    //            title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
-    //
-    //        alertController.addAction(UIAlertAction(
-    //        title: "OK", style: UIAlertAction.Style.default) { (_) -> Void in
-    //
-    //            //let pickerDate = DateManager.share.transformDate(date: self.datePicker.date)
-    //
-    //            //self.date = pickerDate
-    //
-    //            //print(pickerDate)
-    //
-    //            //let titleDate = DateManager.share.formatDate(forTaskPage: pickerDate)
-    //
-    //            //self.dateButton.setTitle(titleDate, for: .normal)
-    //        })
-    //
-    //        alertController.addAction(UIAlertAction(
-    //            title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-    //
-    //        alertController.view.addSubview(datePicker)
-    //
-    //        self.show(alertController, sender: nil)
-    //    }
     
     func selectDatePick(_ sender: Any) {
         //初始化UIPickerView
