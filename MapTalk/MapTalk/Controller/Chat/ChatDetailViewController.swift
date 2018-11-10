@@ -650,7 +650,10 @@ extension ChatDetailViewController: UITableViewDataSource {
                     //                        action:#selector(animateViewUp))
                     cell.messageImageView.isUserInteractionEnabled = true
                     //cell.messageImageView.addGestureRecognizer(singleFinger)
-                    cell.messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap)))
+                    
+                    
+                    //cell.messageImageView.contentMode = .scaleAspectFit
+ cell.messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap)))
                     
                     
                     return cell
@@ -691,6 +694,7 @@ extension ChatDetailViewController: UITableViewDataSource {
                     cell.messageImageView.isUserInteractionEnabled = true
                     //cell.messageImageView.addGestureRecognizer(singleFinger)
                     
+                   //cell.messageImageView.contentMode = .scaleAspectFit
                     cell.messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap)))
                     
                     //                    cell.messageImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
@@ -740,10 +744,10 @@ extension ChatDetailViewController: UITableViewDataSource {
         startingFrame = startingImageView.superview?.convert(startingImageView.frame, to: nil)
         
         let zoomingImageView = UIImageView(frame: startingFrame!)
-        zoomingImageView.backgroundColor = UIColor.red
+        zoomingImageView.backgroundColor = UIColor.clear //red
         zoomingImageView.image = startingImageView.image
         zoomingImageView.isUserInteractionEnabled = true
-        
+        zoomingImageView.contentMode = .scaleAspectFill
         
         zoomingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomout)))
         
@@ -768,6 +772,8 @@ extension ChatDetailViewController: UITableViewDataSource {
                 
                 zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
                 zoomingImageView.center = keyWindow.center
+               
+                
                 
             }) { (completed: Bool) in
             }

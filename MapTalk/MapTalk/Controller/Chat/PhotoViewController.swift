@@ -38,6 +38,7 @@ class PhotoViewController: UIViewController {
         
         setBackground()
         
+        //if PhotoViewController
         getPhotos()
         
         //20181014 照片 OK

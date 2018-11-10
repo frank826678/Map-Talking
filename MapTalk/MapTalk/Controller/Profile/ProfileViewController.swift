@@ -23,12 +23,6 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var storyHighlightsTextField: UITextField!
     
-    //imageArray: [UIImage] = []
-    //var iconImageArray: [UIImage] = [UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!,UIImage(named: "new3-pencil-50")!]
-    //var iconNameArray: [String] = ["個人資料","獲取金幣","設定","聯絡我們"]
-    
-    //var iconImageArray: [String] = ["new3-pencil-50","new3-cheap-2-50","new3-settings-50-2","new3-new-post-50"]
-    
     var iconNameArray: [String] = ["個人資料", "聯絡我們", "登出裝置"]
     var iconImageArray: [String] = ["new3-pencil-50", "new3-new-post-50", "new4-logout-100"]
     
@@ -40,10 +34,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         #warning ("TODO: 改成 static 用程式碼控制顏色")
-        
-        //        self.view.backgroundColor = .clear
-        //        self.view.backgroundColor = #colorLiteral(red: 0.3098039216, green: 0.8588235294, blue: 0.9921568627, alpha: 1)
-        
+                
         setImage()
         
         profileTableView.delegate = self

@@ -20,11 +20,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ubn-2V-fSR">
-                        <rect key="frame" x="0.0" y="-15" width="80" height="80"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="80" id="TQe-1C-Ny6"/>
-                            <constraint firstAttribute="height" constant="80" id="gxg-Ew-Ujt"/>
-                        </constraints>
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U9S-6e-zLo">
                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -48,16 +44,20 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="Ubn-2V-fSR" secondAttribute="bottom" constant="15" id="0pw-gW-jdG"/>
                 <constraint firstAttribute="trailing" secondItem="coF-Wp-FWL" secondAttribute="trailing" constant="10" id="2QF-Rc-Dg8"/>
                 <constraint firstItem="U9S-6e-zLo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7lf-bG-h5U"/>
+                <constraint firstItem="Ubn-2V-fSR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="BPG-6d-VgZ"/>
                 <constraint firstItem="Ubn-2V-fSR" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="CZ9-vA-Mhy"/>
                 <constraint firstItem="8L9-SI-md0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="13" id="D0o-eL-cMd"/>
                 <constraint firstItem="8L9-SI-md0" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="P4p-mD-dkF"/>
                 <constraint firstItem="coF-Wp-FWL" firstAttribute="top" secondItem="8L9-SI-md0" secondAttribute="bottom" constant="10" id="Rgd-pb-Na6"/>
                 <constraint firstAttribute="bottom" secondItem="U9S-6e-zLo" secondAttribute="bottom" id="TJp-Ih-hVe"/>
+                <constraint firstItem="Ubn-2V-fSR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="UIX-TT-b9i"/>
                 <constraint firstItem="U9S-6e-zLo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ZCj-5Z-IeI"/>
                 <constraint firstItem="coF-Wp-FWL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="jfz-1A-Gce"/>
+                <constraint firstAttribute="bottom" secondItem="Ubn-2V-fSR" secondAttribute="bottom" id="kho-8v-VA0"/>
+                <constraint firstItem="Ubn-2V-fSR" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="l84-RY-tXC"/>
+                <constraint firstAttribute="trailing" secondItem="Ubn-2V-fSR" secondAttribute="trailing" id="t10-pz-V4N"/>
                 <constraint firstAttribute="trailing" secondItem="U9S-6e-zLo" secondAttribute="trailing" id="wpB-5J-4l5"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -71,6 +71,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="new3-cheap-2-50" width="50" height="50"/>
+        <image name="new3-cheap-2-50" width="37.5" height="37.5"/>
     </resources>
 </document>

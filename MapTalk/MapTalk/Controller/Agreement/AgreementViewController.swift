@@ -16,10 +16,10 @@ class AgreementViewController: UIViewController {
     @IBOutlet weak var webView: WKWebView!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         setup()
-        
     }
     
     private func setup() {
@@ -32,7 +32,6 @@ class AgreementViewController: UIViewController {
         
         webView.uiDelegate = self
         webView.navigationDelegate = self
-        
     }
     
     private func startingPage() {
@@ -42,10 +41,10 @@ class AgreementViewController: UIViewController {
         guard let url = URL(string: "https://termsfeed.com/eula/646a191f532da23e064a0d89869a550b") else {
             return
         }
+        
         let request = URLRequest(url: url)
         
         webView.load(request)
-        
     }
     
     @IBAction func goToEULAWeb(_ sender: UIButton) {
@@ -58,7 +57,6 @@ class AgreementViewController: UIViewController {
         let request = URLRequest(url: url)
         
         webView.load(request)
-        
     }
     
     @IBAction func goToPrivicyWeb(_ sender: UIButton) {
@@ -68,10 +66,10 @@ class AgreementViewController: UIViewController {
         guard let url = URL(string: "https://privacypolicies.com/privacy/view/c82f8fb3e38aba20e4f0182e8c5a2fc4") else {
             return
         }
+        
         let request = URLRequest(url: url)
         
         webView.load(request)
-        
     }
     
     @IBAction func backToLoginPage(_ sender: UIButton) {

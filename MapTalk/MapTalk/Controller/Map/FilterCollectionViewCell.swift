@@ -19,8 +19,13 @@ class FilterCollectionViewCell: UICollectionViewCell {
         
         super.awakeFromNib()
         
-        setColor()
         
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setColor()
+
     }
     
     private func setColor() {
@@ -30,7 +35,8 @@ class FilterCollectionViewCell: UICollectionViewCell {
         iconName.textColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
         //iconBackgroundView.layer.cornerRadius = iconBackgroundView.frame.width/2
        
-        iconBackgroundView.layer.cornerRadius = 40
+        //iconBackgroundView.layer.cornerRadius = 40
+        iconBackgroundView.layer.cornerRadius =  (UIScreen.main.bounds.size.width) / 8
         iconBackgroundView.clipsToBounds = true
         //目前12張照片 icon 是用 程式碼控制 template
         //目前12張照片 icon 是用 storyboard 的 renderAs 改成 template
