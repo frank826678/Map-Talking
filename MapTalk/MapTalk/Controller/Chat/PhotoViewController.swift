@@ -51,6 +51,12 @@ class PhotoViewController: UIViewController {
         //nil 可是資料可以過來 anObject：這是設定是否接收特定的物件的通知。如設定nil，則就是不論哪個物件傳送的通知都收，若有設定物件，則只收這物件所發出的通知。
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        SVProgressHUD.dismiss()
+    }
+    
     //20181014 照片
     @objc func getDataFromChatDetail(_ noti: Notification) {
         //20181110
