@@ -16,9 +16,9 @@ class UserInfoController: UIViewController {
     
     #warning ("TODO: nickname 還沒有做 delegate, cell 希望可以做成 reuse, 目前不能上傳新改變的值")
     let decoder = JSONDecoder()
-
+    
     @IBOutlet weak var editTableView: UITableView!
-
+    
     var isEdit = false
     
     var userInfo = ["性別", "生日", "感情狀態", "居住地", "體型", "我想尋找"]
@@ -60,17 +60,20 @@ class UserInfoController: UIViewController {
         editTableView.delegate = self
         editTableView.dataSource = self
         
-        editTableView.register(UINib(nibName: "EditUserContentTableViewCell", bundle: nil),
-                               forCellReuseIdentifier: "EditUserData")
+        
         editTableView.register(UINib(nibName: "EditContentTableViewCell", bundle: nil),
                                forCellReuseIdentifier: "EditContent")
         
         editTableView.register(UINib(nibName: "PersonalInformationTableViewCell", bundle: nil),
                                forCellReuseIdentifier: "PersonalInformation")
         
+        //可 delete 20181111
         editTableView.register(UINib(nibName: "NickNameTableViewCell", bundle: nil),
                                forCellReuseIdentifier: "NickName")
+        editTableView.register(UINib(nibName: "EditUserContentTableViewCell", bundle: nil),
+                               forCellReuseIdentifier: "EditUserData")
         
+        //可 delete 20181111
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editClicked))
         
         ref = Database.database().reference() //重要 沒有會 nil
@@ -79,13 +82,6 @@ class UserInfoController: UIViewController {
         
         editTableView.allowsSelection = false
         editTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        //let tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,22 +134,15 @@ class UserInfoController: UIViewController {
             if let error = error {
                 
                 print("Data could not be saved: \(error).")
-                //BaseNotificationBanner.warningBanner(subtitle: "上傳失敗")
-                BaseNotificationBanner.warningBanner(subtitle: "上傳失敗")
                 
+                BaseNotificationBanner.warningBanner(subtitle: "上傳失敗")
             } else {
                 
                 print("Data saved successfully!")
                 BaseNotificationBanner.successBanner(subtitle: "上傳成功")
-                
-                //                let banner = StatusBarNotificationBanner(title: "上傳成功", style: .success)
-                //                banner.show()
-                
             }
         }
-        //20181013 更新 filersearch 的條件 self 的
         
-        //self.ref.child("FilterData").child(userId).setValue([
         var myselfGender = 0
         if userSelected[0] == "男生" {
             myselfGender = 0
@@ -172,8 +161,6 @@ class UserInfoController: UIViewController {
         print("自己上傳的性別是\(myselfGender)")
         
         self.ref.updateChildValues(childUpdates)
-        
-        //searchFilterData(filterData: filterAllData)
         
     }
     
@@ -281,19 +268,18 @@ extension UserInfoController: UITableViewDataSource {
         // swiftlint:disable force_cast
         let header = view as! UITableViewHeaderFooterView
         // swiftlint:enable force_cast
-
+        
         header.textLabel?.textColor = UIColor.black
         header.textLabel?.font = UIFont(name: "Futura", size: 19)!
-    
+        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return 50
-        
     }
     
-    // 每個 section 的標題
+    
     func tableView(_ tableView: UITableView,
                    titleForHeaderInSection section: Int) -> String? {
         
@@ -302,33 +288,13 @@ extension UserInfoController: UITableViewDataSource {
         if section == 0 {
             
             title = "暱稱"
-            
         } else if section == 1 {
             
             title = "基本資料"
-            
         } else if section == 2 {
             
             title = "想和大家分享的事"
-            
         }
-        //else if section == 3 {
-        //
-        //            title = "喜歡的國家"
-        //
-        //        } else if section == 4 {
-        //
-        //            title = "自己最近的困擾"
-        //
-        //        } else if section == 5 {
-        //
-        //            title = "想找人嘗試的事情"
-        //            //想嘗試的事情
-        //        } else {
-        //
-        //            title = "自我介紹"
-        //
-        //        }
         
         return title
     }
@@ -420,7 +386,7 @@ extension UserInfoController: UITableViewDataSource {
             
         default:
             
-            return  UITableViewCell()   //要有() 也因為上面有 -> UITableViewCell 所以一定要有一個回傳值
+            return  UITableViewCell()
         }
         
         return  UITableViewCell()
@@ -440,14 +406,11 @@ extension UserInfoController: UITableViewDelegate {}
 
 extension UserInfoController: UIPickerViewDataSource {
     
-    //@IBAction
-    //let test = "3" Extensions must not contain stored properties
-    
     @objc func userInfoButtonClicked(sender: UIButton) {
         
         let buttonRow = sender.tag
         selectedSender = buttonRow
-        //let result = articles[buttonRow]
+        
         if buttonRow == 1 {
             dateButtonPressed(buttonRow)
         } else {
@@ -490,19 +453,15 @@ extension UserInfoController: UIPickerViewDataSource {
         
         alertController.view.addSubview(datePicker)
         
-        //self.show(alertController, sender: nil)
         self.present(alertController, animated: true, completion: nil)
     }
     
     func selectDatePick(_ sender: Any) {
-        //初始化UIPickerView
+        //初始化 UIPickerView
         pickerView = UIPickerView()
         pickerView.dataSource = self
         pickerView.delegate = self
         
-        //设置选择框的默认值
-        //pickerView.selectRow(0, inComponent:0, animated:true)
-        //把UIPickerView放到alert里面（也可以用datePick）
         
         let alertController: UIAlertController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         alertController.addAction(UIAlertAction(title: "確定", style: UIAlertAction.Style.default) {
@@ -538,17 +497,11 @@ extension UserInfoController: UIPickerViewDataSource {
             self.editTableView.reloadData()
             
             print("目前的 userSelected 是\(self.userSelected)")
-            //print("date select:" + String(self.pickerView.selectedRow(inComponent: 0)+1))
-            //            personInfo?.gender = gender[rowInt]
-            //                    personInfo?.relationship = relationship[rowInt]
-            //                    personInfo?.city = city[rowInt]
-            //                    personInfo?.bodyType = bodyType[rowInt]
-            //
-            //                    personInfo?.searchTarget = searchTarget[rowInt]
+            
         })
         
         alertController.addAction(UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel, handler: nil))
-        //let width = frameView.frame.width;
+        
         
         //350
         pickerView.frame = CGRect(x: -10, y: 0, width: fullScreenSize.width, height: 250)
@@ -556,14 +509,11 @@ extension UserInfoController: UIPickerViewDataSource {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    //@IBOutlet weak var frameView: UIView!
-    
-    //设置选择框的列数为3列,继承于UIPickerViewDataSource协议
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    //设置选择框的行数为9行，继承于UIPickerViewDataSource协议
+    //設定選擇框的列數 繼承 UIPickerViewDataSource 協議
     func pickerView(_ pickerView: UIPickerView,
                     numberOfRowsInComponent component: Int) -> Int {
         
@@ -580,11 +530,8 @@ extension UserInfoController: UIPickerViewDataSource {
         } else {
             return 12
         }
-        
-        //return 12
     }
     
-    //设置选择框各选项的内容，继承于UIPickerViewDelegate协议
     func pickerView(_ pickerView: UIPickerView, titleForRow rowInt: Int,
                     forComponent component: Int) -> String? {
         //新增日期結束

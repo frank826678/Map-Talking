@@ -20,9 +20,8 @@ class ChatDetailViewController: UIViewController {
     
     @IBOutlet weak var chatDetailTableView: UITableView!
     
-    //@IBOutlet weak var chatTableView: UITableView!
-    
     @IBOutlet weak var messageTxt: UITextView!
+    
     @IBOutlet weak var messageBorder: UIView!
     
     @IBOutlet weak var backgroundView: UIView!
@@ -83,25 +82,7 @@ class ChatDetailViewController: UIViewController {
         //20181014 照片
         addObservers()
         
-        //getMessages()
-        
-        //addObservers()
-        
-        //NEW
-        
-        //        guard let friendName = friendName else { return }
-        //        guard let friendUserId = friendUserId else { return }
-        //
-        //        setupData(friendName: friendName)
-        //        setupChat(friendUserId: friendUserId)
-        
-        //END
-        
-        guard let friendUserId = friendUserId else {
-            
-            return
-            
-        }
+        guard let friendUserId = friendUserId else { return }
         
         setChannel(friendUserId: friendUserId) //new
         
@@ -112,11 +93,6 @@ class ChatDetailViewController: UIViewController {
         //20181005
         getFriendInfo(friendUserId: friendUserId)
         //20181020
-        //        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.handleLongPress(_:)))
-        
-        //        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(animateViewUp))
-        //        lpgr.minimumPressDuration = 1
-        //        chatDetailTableView.addGestureRecognizer(lpgr)
         
         //先把傳送語音功能關閉
         audioButton.isHidden = true
@@ -175,6 +151,7 @@ class ChatDetailViewController: UIViewController {
         
     }
     
+    //可刪除 20181111
     private func setupChat(friendUserId: String) {
         
         var channel: String?

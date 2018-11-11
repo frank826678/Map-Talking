@@ -29,6 +29,12 @@ class ProfileTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    func iconInfoUpdate(iconNameFromVC: String, iconImageFromVC: String) {
+        
+        iconName.text = iconNameFromVC
+        iconImage.image = UIImage.setIconTemplate(iconName: iconImageFromVC)
+    }
+    
     private func setColor() {
         
         iconImage.tintColor = UIColor.white

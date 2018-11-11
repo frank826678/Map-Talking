@@ -54,6 +54,8 @@
 		0177E2B8216143870038F29A /* EditInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0177E2B6216143870038F29A /* EditInfoTableViewCell.xib */; };
 		0177E2BB216143B10038F29A /* EditContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177E2B9216143B10038F29A /* EditContentTableViewCell.swift */; };
 		0177E2BC216143B10038F29A /* EditContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0177E2BA216143B10038F29A /* EditContentTableViewCell.xib */; };
+		017DC33D21986737001BA242 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017DC33C21986737001BA242 /* UITableView.swift */; };
+		017DC33F21986C26001BA242 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017DC33E21986C26001BA242 /* UITableViewCell.swift */; };
 		018B82D02177012E004F8FC3 /* NewUserDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B82CE2177012E004F8FC3 /* NewUserDetailTableViewCell.swift */; };
 		018B82D12177012E004F8FC3 /* NewUserDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018B82CF2177012E004F8FC3 /* NewUserDetailTableViewCell.xib */; };
 		018B82D421770535004F8FC3 /* NewIntroduceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B82D221770535004F8FC3 /* NewIntroduceTableViewCell.swift */; };
@@ -143,6 +145,8 @@
 		0177E2B6216143870038F29A /* EditInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditInfoTableViewCell.xib; sourceTree = "<group>"; };
 		0177E2B9216143B10038F29A /* EditContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContentTableViewCell.swift; sourceTree = "<group>"; };
 		0177E2BA216143B10038F29A /* EditContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditContentTableViewCell.xib; sourceTree = "<group>"; };
+		017DC33C21986737001BA242 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		017DC33E21986C26001BA242 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		018B82CE2177012E004F8FC3 /* NewUserDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserDetailTableViewCell.swift; sourceTree = "<group>"; };
 		018B82CF2177012E004F8FC3 /* NewUserDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewUserDetailTableViewCell.xib; sourceTree = "<group>"; };
 		018B82D221770535004F8FC3 /* NewIntroduceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIntroduceTableViewCell.swift; sourceTree = "<group>"; };
@@ -433,6 +437,8 @@
 				0106CC352176246F009A80C4 /* BaseNotificationBanner.swift */,
 				018B82D62177413C004F8FC3 /* frankUIImageView.swift */,
 				01A714E02189899500955BE5 /* Date.swift */,
+				017DC33C21986737001BA242 /* UITableView.swift */,
+				017DC33E21986C26001BA242 /* UITableViewCell.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -698,6 +704,7 @@
 				01EBF3592152824000D23871 /* FacebookManager.swift in Sources */,
 				01701B03215C7F5F0074B0B9 /* PhotoViewController.swift in Sources */,
 				0177E29C215FCB590038F29A /* ProfileViewController.swift in Sources */,
+				017DC33D21986737001BA242 /* UITableView.swift in Sources */,
 				01701B0D215C8A280074B0B9 /* Message.swift in Sources */,
 				01701AFC215C5DEB0074B0B9 /* ChatOwnerTableViewCell.swift in Sources */,
 				01EBF37321546F2600D23871 /* UIAlertController.swift in Sources */,
@@ -708,6 +715,7 @@
 				01701AEE215B39A00074B0B9 /* ErrorManager.swift in Sources */,
 				01CF3563216F334E00B98D71 /* Profile.swift in Sources */,
 				01701AEB215A72760074B0B9 /* TabBarColor.swift in Sources */,
+				017DC33F21986C26001BA242 /* UITableViewCell.swift in Sources */,
 				01701B06215C88EF0074B0B9 /* ChatImageTableViewCell.swift in Sources */,
 				01EBF3442151FEA200D23871 /* LoginViewController.swift in Sources */,
 				01E6581F216DE40D00928C9B /* ProfileContentView.swift in Sources */,
