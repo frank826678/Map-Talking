@@ -48,9 +48,11 @@ class ChatDetailViewController: UIViewController {
     var userName = ""
     var userEmail = ""
     var messages: [Message] = []
+    //20181111
+    var friendInfo: FriendInfo?
     
-    //201801005
-    var friendInfo: [FriendInfo] = []
+    //201801005 OK 1111
+    //var friendInfo: [FriendInfo] = []
     //20181014
     //var friendNewInfo: FriendNewInfo = FriendNewInfo(friendName: "測試11", friendImageUrl: "測試12", friendUID: "測試13", friendChannel: "測試13")
     //20181014 END
@@ -195,8 +197,8 @@ class ChatDetailViewController: UIViewController {
         
         let friendId = friendUserId
         // 這時候沒有存 name, URL
-//        let friendName = friendInfo[0].friendName
-//        let friendNameURL =  friendInfo[0].friendImageUrl
+        //        let friendName = friendInfo[0].friendName
+        //        let friendNameURL =  friendInfo[0].friendImageUrl
         
         // OK
         //  "friendImageUrl": friendNameURL,
@@ -298,57 +300,11 @@ class ChatDetailViewController: UIViewController {
                     
                     self.chatDetailTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
                     
-                    //message = messageCodable
-                    //self.userInformation = userInfo
-                    
-                    //                    self.newMessage.append(message)
-                    //                    //20181016 searchbar
-                    //                    self.result.append(message)
-                    //                    //END
-                    //                    print("_____")
-                    //                    print(self.newMessage)
-                    //
-                    //                    self.chatTableView.reloadData()
+                    // reloadData ?
                     
                 } catch {
                     print(error)
                 }
-                
-                //
-                
-                //                guard let senderId = value["senderId"] as? String else { return }
-                //
-                //                guard let senderName = value["senderName"] as? String else { return }
-                //
-                //                guard let time = value["time"] as? Int else { return }
-                //
-                //                let content = value["content"] as? String
-                //
-                //                let senderPhoto = value["senderPhoto"] as? String
-                //
-                //                let imageUrl = value["imageUrl"] as? String
-                //
-                //                let message = Message(
-                //                    content: content,
-                //                    senderId: senderId,
-                //                    senderName: senderName,
-                //                    senderPhoto: senderPhoto,
-                //                    time: time,
-                //                    imageUrl: imageUrl
-                //                )
-                //
-                //                self.messages.append(message)
-                //
-                //                self.chatDetailTableView.beginUpdates()
-                //
-                //                let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-                //
-                //                self.chatDetailTableView.insertRows(at: [indexPath], with: .automatic)
-                //
-                //                self.chatDetailTableView.endUpdates()
-                //
-                //                self.chatDetailTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-                
         }
     }
     
@@ -370,11 +326,13 @@ class ChatDetailViewController: UIViewController {
             //
             //        guard let friendMmageUrl = value["FBPhotoSmallURL"] as? String  else { return }
             
-            //20181005 Start
-            let friendName = friendInfo[0].friendName
-            let friendNameURL =  friendInfo[0].friendImageUrl
+            //20181005 Start OK 20181111
+            //let friendName = friendInfo[0].friendName
+            //let friendNameURL =  friendInfo[0].friendImageUrl
             
-            //20181005 End
+            //20181111
+            guard let friendName = friendInfo?.friendName else { return }
+            guard let friendNameURL =  friendInfo?.friendImageUrl else { return }
             
             guard let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(friendChannel).childByAutoId().key else { return }
             self.ref.child("chatroom").child("PersonalChannel").child(friendChannel).child(messageKey).setValue([
@@ -435,9 +393,12 @@ class ChatDetailViewController: UIViewController {
             //self.navigationController?.title = friendName
             self.navigationController?.navigationBar.topItem?.title = "     \(friendName)"
             
-            let friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
+            //let friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
             
-            self.friendInfo.append(friendInfo)
+            //20181111
+            self.friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
+            //self.friendInfo.append(friendInfo)
+            
             //20181014 傳送發送照片的詳細資料 channel 已經變更好的來自全域變數
             let friendNewInfo: FriendNewInfo = FriendNewInfo(friendName: friendName, friendImageUrl: friendImageUrl, friendUID: friendUserId, friendChannel: self.friendChannel)
             
