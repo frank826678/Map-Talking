@@ -178,7 +178,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         if  keychain[FirebaseType.uuid.rawValue] == nil || keychain["anonymous"] == "anonymous" {
             //print("目前為匿名模式 請登出後使用 Facebook 登入")
-            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
             
         } else {
             // 首次使用 向使用者詢問定位自身位置權限
@@ -244,7 +244,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         //    defaultOption: ["檢舉用戶", "封鎖用戶"])
         guard let myselfId = Auth.auth().currentUser?.uid else {
-            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
             return }
         let alertController =  UIAlertController.showAlert(
             title: "是否向其他人顯示自己位置？",
@@ -1068,7 +1068,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let okAction = UIAlertAction(title: "確認", style: .default) { (action) in
             
             guard let myselfId = Auth.auth().currentUser?.uid else {
-                BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+                BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
                 return }
             
             //collectionView.deselectItem(at: indexPath, animated: true)
@@ -1239,7 +1239,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if mapView.region.span.latitudeDelta > 3.5 {
             
             self.mapView.removeAnnotations(allAnnotations)
-            BaseNotificationBanner.warningBanner(subtitle: "請將地圖放大一點   🙏 ，才能看到其他使用者喔～ ")
+            BaseNotificationBanner.warningBanner(subtitle: "請將地圖放大🙏,才能看到其他使用者喔～")
             //print("超過 2.5")
         } else {
             

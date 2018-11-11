@@ -119,7 +119,7 @@ class FilterViewController: UIViewController {
         
         //是否跳過 alert 判斷
         guard let myselfId = Auth.auth().currentUser?.uid else {
-            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
             return }
         
         //20181009
@@ -138,7 +138,7 @@ class FilterViewController: UIViewController {
             print("已經跑過這個 showLocationAlert() 選項了 filterVC")
         } else {
             guard let myselfId = Auth.auth().currentUser?.uid else {
-                BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+                BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
                 return }
             showLocationAlert()
             //flag = true
@@ -151,7 +151,7 @@ class FilterViewController: UIViewController {
     func showLocationAlert() {
         
         guard let myselfId = Auth.auth().currentUser?.uid else {
-            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
             return }
         let alertController =  UIAlertController.showAlert(
             title: "是否向其他人顯示自己位置？",
@@ -338,7 +338,7 @@ class FilterViewController: UIViewController {
         //guard let text = messageTxt.text else { return }
         
         guard let userId = Auth.auth().currentUser?.uid else {
-            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
             return }
         
         guard let userName = Auth.auth().currentUser?.displayName else { return }

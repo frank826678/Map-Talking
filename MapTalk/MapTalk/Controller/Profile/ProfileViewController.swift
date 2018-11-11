@@ -101,7 +101,7 @@ class ProfileViewController: UIViewController {
             } else {
                 print("輸入的內容2 為\(textFieldInput)")
                 guard let userId = Auth.auth().currentUser?.uid else {
-                    BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+                    BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
                     return }
                 
                 let userStatus = ["text": textFieldInput]
