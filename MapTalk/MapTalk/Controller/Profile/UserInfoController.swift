@@ -670,7 +670,7 @@ extension UserInfoController: PersonalInformationCellDelegate {
         
         if textInput.count > 40 {
             //print("超過 20 字 ＊＊＊")
-            BaseNotificationBanner.warningBanner(subtitle: "字數請勿超過 40 個字～")
+            BaseNotificationBanner.warningBanner(subtitle: "請勿超過 40 個字")
         }
         
         if indexPath.section == 0 {

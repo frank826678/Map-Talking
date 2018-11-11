@@ -150,6 +150,10 @@ class ProfileViewController: UIViewController {
         //let count = textFieldText.count + string.count - range.length
         //確認幾個字是可以正常顯示的 中英文長度不同 但單元相同ˊ˙
         let count = textFieldText.count + string.count - range.length
+        
+        if count > 14 {
+            BaseNotificationBanner.warningBanner(subtitle: "請勿超過 15 個字")
+        }
         return count <= 14
         
 //        let countOfWords = string.characters.count +  textField.text!.characters.count — range.length

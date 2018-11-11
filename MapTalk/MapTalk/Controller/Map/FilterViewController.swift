@@ -317,8 +317,13 @@ class FilterViewController: UIViewController {
         print(genderSegment.selectedSegmentIndex)
         
         //應該要有個地方 存自己的年紀性別和經緯度來算距離
-        guard let datingNumber = datingNumber else { return }
-        guard let timeNumber = timeNumber else { return }
+        guard let datingNumber = datingNumber else {
+            BaseNotificationBanner.warningBanner(subtitle: "請選擇約會類型")
+            return }
+        
+        guard let timeNumber = timeNumber else {
+            BaseNotificationBanner.warningBanner(subtitle: "請選擇時間範圍")
+            return }
         
         //有可能沒按到約會類型和時間範圍 要給預設值或是設定?
         guard let filterAllData: Filter = Filter(gender: genderSegment.selectedSegmentIndex,
