@@ -9,15 +9,10 @@
 import Foundation
 import FirebaseCore
 import FirebaseAuth
-//import UIKit
 import FBSDKLoginKit
-//import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
-//20181018
 import KeychainAccess
-
-//var refference: DatabaseReference!
 
 struct UserInfo {
     

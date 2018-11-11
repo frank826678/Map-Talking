@@ -6,8 +6,6 @@
 //  Copyright © 2018 Frank. All rights reserved.
 //
 
-//import Foundation
-
 import UIKit
 
 class ProfileContentView: UIView {

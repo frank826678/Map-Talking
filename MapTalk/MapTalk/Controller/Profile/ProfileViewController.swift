@@ -44,9 +44,9 @@ class ProfileViewController: UIViewController {
         profileTableView.registerTableViewCell(identifiers: [
             String(describing: ProfileTableViewCell.self)
             ])
-
-//        profileTableView.register(UINib(nibName: "ProfileTableViewCell", bundle: nil),
-//                                  forCellReuseIdentifier: "Profile")
+        
+        //        profileTableView.register(UINib(nibName: "ProfileTableViewCell", bundle: nil),
+        //                                  forCellReuseIdentifier: "Profile")
         
         storyHighlightsTextField.delegate = self
         
@@ -149,7 +149,7 @@ class ProfileViewController: UIViewController {
             BaseNotificationBanner.warningBanner(subtitle: "請勿超過 15 個字")
         }
         return count <= 14
-
+        
     }
     
 }
@@ -161,14 +161,6 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        if let cell = tableView.dequeueReusableCell(
-//            withIdentifier: "ProfileTableViewCell", for: indexPath)
-//            as? ProfileTableViewCell {
-        
-//        if let cell = tableView.dequeueReusableCell(
-//            withIdentifier: String(describing: ProfileTableViewCell.self), for: indexPath)
-//            as? ProfileTableViewCell {
-        
         let cell: ProfileTableViewCell = UITableViewCell.createCell(tableView: tableView, indexPath: indexPath)
         
         cell.iconInfoUpdate(iconNameFromVC: iconNameArray[indexPath.row], iconImageFromVC: iconImageArray[indexPath.row])
@@ -178,25 +170,6 @@ extension ProfileViewController: UITableViewDataSource {
         cell.iconButton.addTarget(self, action: #selector(iconBtnClicked(sender:)), for: .touchUpInside)
         
         return cell
-
-//        if let cell = tableView.dequeueReusableCell(
-//            withIdentifier: String(describing: ProfileTableViewCell.self), for: indexPath)
-//            as? ProfileTableViewCell {
-//
-//            cell.iconInfoUpdate(iconNameFromVC: iconNameArray[indexPath.row], iconImageFromVC: iconImageArray[indexPath.row])
-//
-//            //cell.iconName.text = iconNameArray[indexPath.row]
-//
-//            //cell.iconImage.image = UIImage.setIconTemplate(iconName: iconImageArray[indexPath.row])
-//
-//            cell.iconButton.tag = indexPath.row
-//
-//            cell.iconButton.addTarget(self, action: #selector(iconBtnClicked(sender:)), for: .touchUpInside)
-//
-//            return cell
-//        }
-        
-        //return UITableViewCell()
         
     }
     
