@@ -101,7 +101,7 @@ class ChatViewController: UIViewController {
         guard let myselfId = Auth.auth().currentUser?.uid else { return }
         
         myselfUID = myselfId
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,15 +111,15 @@ class ChatViewController: UIViewController {
         
     }
     
-        @objc func getDataFrom(_ noti: Notification) {
+    @objc func getDataFrom(_ noti: Notification) {
+        
+        friendsList.removeAll()
+        newMessage.removeAll()
+        getFriendList()
+        chatTableView.reloadData()
+        print("收到封鎖資料")
+    }
     
-            friendsList.removeAll()
-            newMessage.removeAll()
-            getFriendList()
-            chatTableView.reloadData()
-            print("收到封鎖資料")
-        }
-
     func setAniView() {
         
         animationView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
@@ -167,12 +167,12 @@ class ChatViewController: UIViewController {
         userImage.kf.setImage(with: URL(string: photoSmallURL))
     }
     
-    func display() {
-        
-        print("Display Data")
-        self.chatTableView.reloadData()
-        
-    }
+    //    func display() {
+    //
+    //        print("Display Data")
+    //        self.chatTableView.reloadData()
+    //
+    //    }
     
     func getFriendList() {
         
@@ -285,7 +285,6 @@ class ChatViewController: UIViewController {
                     
                 } else {
                     
-                    
                     for (index, user) in self.newMessage.enumerated()
                         where user.friendUID == message.senderId
                             || user.senderId == message.senderId {
@@ -308,10 +307,9 @@ class ChatViewController: UIViewController {
                 self.newMessage.append(message)
                 
                 self.result.append(message)
-        
+                
                 print("_____")
                 print(self.newMessage)
-                
                 
                 self.newMessage.sort(by: { (message1, message2) -> Bool in
                     return message1.time > message2.time
@@ -345,7 +343,7 @@ extension ChatViewController: UITableViewDataSource {
                 hintLabel.isHidden = true
                 animationView.isHidden = true
             }
-        
+            
         }
         
         if searchStatus == false {
@@ -388,10 +386,10 @@ extension ChatViewController: UITableViewDataSource {
                 cell.userMessage.text = newMessage[indexPath.row].content
                 let messageTime = Date.formatMessageTime(time: newMessage[indexPath.row].time)
                 cell.messageTime.text = messageTime
-
+                
             } else {
                 
-                 if  result[indexPath.row].senderId == myselfUID {
+                if  result[indexPath.row].senderId == myselfUID {
                     cell.userName.text = result[indexPath.row].friendName
                     
                     if let photoString = result[indexPath.row].friendImageUrl {
@@ -415,7 +413,7 @@ extension ChatViewController: UITableViewDataSource {
                 cell.userMessage.text = result[indexPath.row].content
                 let messageTime = Date.formatMessageTime(time: newMessage[indexPath.row].time)
                 cell.messageTime.text = messageTime
-
+                
             }
             
             //點擊 cell 後 不反灰
@@ -495,16 +493,13 @@ extension ChatViewController: UISearchBarDelegate {
             }
         }
         
-       
         self.chatTableView.reloadData()
     }
-    
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         searchBar.resignFirstResponder()
     }
-    
     
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         

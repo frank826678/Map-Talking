@@ -657,10 +657,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         imageView.layer.borderWidth = 4
         
         annotationLabel.tag = 6
-        annotationLabel.numberOfLines = 1
         annotationLabel.textAlignment = .center
         annotationLabel.font = UIFont(name: "Monaco", size: 12)
         annotationLabel.font = annotationLabel.font.withSize(14)
+        
+        annotationLabel.numberOfLines = 1
+        annotationLabel.minimumScaleFactor = 0.7 //字體最小時 縮放 0.7 倍
+        annotationLabel.adjustsFontSizeToFitWidth = true
+
         annotationLabel.textColor = UIColor.white
         
         //        增加三角形圖案

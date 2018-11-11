@@ -12,6 +12,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import AVFoundation
 import SVProgressHUD
+import NotificationBannerSwift
 
 class ChatDetailViewController: UIViewController {
     
@@ -67,9 +68,8 @@ class ChatDetailViewController: UIViewController {
     var startingImageView: UIImageView?
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        super.viewDidLoad()
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         registerCells()
@@ -155,12 +155,6 @@ class ChatDetailViewController: UIViewController {
         )
     }
     
-    //    func sendPersonalChannelToPhotoVC() {
-    //
-    //        NotificationCenter.default.post(name: .sendPersonalChannel, object: friendChannel)
-    //
-    //    }
-    
     //NEW
     private func setChannel(friendUserId: String) {
         
@@ -176,12 +170,9 @@ class ChatDetailViewController: UIViewController {
         }
         
         //讓不管名字是啥都可以照順序排序
-        
         guard let myselfIdAndFriendId = channel else { return }
         friendChannel = myselfIdAndFriendId
         
-        //20181014 照片
-        //sendPersonalChannelToPhotoVC()
     }
     
     private func setupChat(friendUserId: String) {
@@ -358,6 +349,7 @@ class ChatDetailViewController: UIViewController {
                 }
             }
         } else {
+            BaseNotificationBanner.warningBanner(subtitle: "請輸入內容")
             print("沒輸入東西")
         }
         

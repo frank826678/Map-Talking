@@ -127,6 +127,45 @@ class ProfileViewController: UIViewController {
         
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        //var number = 0
+        
+        guard let textFieldText = textField.text else {
+            
+            return true
+            
+        }
+        
+//        for index in 0...textFieldText.count - 1 {
+//            let char : unichar = (textFieldText as NSString).character(at: index)
+//
+//            if (char >= 0x4E00) {
+//                number += 2
+//            }else {
+//                number += 1
+//            }
+//        }
+        
+        //let count = textFieldText.count + string.count - range.length
+        //確認幾個字是可以正常顯示的 中英文長度不同 但單元相同ˊ˙
+        let count = textFieldText.count + string.count - range.length
+        return count <= 14
+        
+//        let countOfWords = string.characters.count +  textField.text!.characters.count — range.length
+//        if countOfWords > 10{
+//            return false
+//        }
+//        wordsCountLabel.text = String(countOfWords)
+//        return true
+
+    }
+    
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//
+//
+//    }
+    
 }
 
 extension ProfileViewController: UITableViewDataSource {
