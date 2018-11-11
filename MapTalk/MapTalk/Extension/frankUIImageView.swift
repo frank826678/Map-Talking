@@ -9,11 +9,11 @@
 import UIKit
 
 class FrankUIImageView: UIImageView {
-
+    
     private var shadowLayer: CAShapeLayer!
     private var cornerRadius: CGFloat = 65
     private var fillColor: UIColor = .white
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -52,27 +52,18 @@ class RoundShadowView: UIView {
     
     func layoutView() {
         
-        // set the shadow of the view's layer
         layer.backgroundColor = UIColor.clear.cgColor
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 1.0)
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 4.0
         
-        // set the cornerRadius of the containerView's layer
         containerView.layer.cornerRadius = cornerRadius
         containerView.layer.masksToBounds = true
         
         addSubview(containerView)
         
-        //
-        // add additional views to the containerView here
-        //
-        
-        // add constraints
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // pin the containerView to the edges to the view
         containerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         containerView.topAnchor.constraint(equalTo: topAnchor).isActive = true

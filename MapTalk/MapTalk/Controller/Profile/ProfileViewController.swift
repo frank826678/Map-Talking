@@ -96,28 +96,32 @@ class ProfileViewController: UIViewController {
         print("輸入的內容為\(storyHighlightsTextField.text)")
         
         if let textFieldInput = storyHighlightsTextField.text {
-            
-            print("輸入的內容2 為\(textFieldInput)")
-            guard let userId = Auth.auth().currentUser?.uid else {
-                BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
-                return }
-            
-            let userStatus = ["text": textFieldInput]
-            
-            let childUpdates = ["/location/\(userId)/message": userStatus]
-            
-            ref.updateChildValues(childUpdates)
-            
-            //20181020
-            let userDefaults = UserDefaults.standard
-            
-            let myselfGender = userDefaults.value(forKey: "myselfGender")
-            
-            let userGender = ["gender": myselfGender]
-            
-            let childUpdatesGender = ["/location/\(userId)/gender": userGender]
-            
-            ref.updateChildValues(childUpdatesGender)
+            if textFieldInput == "" {
+                BaseNotificationBanner.warningBanner(subtitle: "請輸入您的心情動態")
+            } else {
+                print("輸入的內容2 為\(textFieldInput)")
+                guard let userId = Auth.auth().currentUser?.uid else {
+                    BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式 請登出後使用 Facebook 登入")
+                    return }
+                
+                let userStatus = ["text": textFieldInput]
+                
+                let childUpdates = ["/location/\(userId)/message": userStatus]
+                
+                ref.updateChildValues(childUpdates)
+                
+                //20181020
+                let userDefaults = UserDefaults.standard
+                
+                let myselfGender = userDefaults.value(forKey: "myselfGender")
+                
+                let userGender = ["gender": myselfGender]
+                
+                let childUpdatesGender = ["/location/\(userId)/gender": userGender]
+                
+                ref.updateChildValues(childUpdatesGender)
+                BaseNotificationBanner.successBanner(subtitle: "心情動態將顯示在地圖上")
+            }
             
         }
         

@@ -881,8 +881,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //friendNameForCell = friendName
         
         friendImageURLForCell = friendImageURL
-        //reload 看看
-        userInfoDetailView.userInfoDetailTableView.reloadData()
+        //reload 看看 delete 20181110
+        //userInfoDetailView.userInfoDetailTableView.reloadData()
         
         downloadUserInfo(selectedUserId: friendId)
     }
@@ -907,7 +907,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //var userSelected =  ["男","1993-06-06","單身","台北","臃腫","喝酒"]
             
             //這邊可以試著用 codable
-            guard let value = snapshot.value as? NSArray else { return }
+            guard let value = snapshot.value as? NSArray else {
+                BaseNotificationBanner.warningBanner(subtitle: "該用戶尚未填寫個人資料")
+                return }
             print("*********1")
             
             print(value)
@@ -1044,6 +1046,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func showMessageAlert(title: String, message: String) {
+        //讓 hello world 也可以讀 20181111
+        
+        //新增對方到 firebase 的好友列表
+        guard let friendId =  self.friendUserId else { return }
+        
+        guard let friendName = self.navigationUserName else { return }
+        
+        guard let myselfName = Auth.auth().currentUser?.displayName else { return }
+
+        //friendUserId = userAnnotation?.id
+        //let firiendImageURL = userAnnotation?.userImage
         
         //要直接跳到 chatDetail 頁面
         //可以跳過去 但是返回上一頁會直接跳回 map 主頁
@@ -1063,15 +1076,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             //controller.article = articles[indexPath.row]
             controller.friendUserId = self.friendUserId
+        
+            //讓 hello world 也可以讀 20181111
+//            controller.friendInfo[0].friendImageUrl = firiendImageURL
+//            controller.friendInfo[0].friendName = friendName
+            
             self.show(controller, sender: nil)
             print("跳頁成功")
-            
-            //新增對方到 firebase 的好友列表
-            guard let friendId =  self.friendUserId else { return }
-            
-            guard let friendName = self.navigationUserName else { return }
-            
-            guard let myselfName = Auth.auth().currentUser?.displayName else { return }
             
             
             //refference.child("UserFriendList").child(myselfId).child(friendId).setValue([])

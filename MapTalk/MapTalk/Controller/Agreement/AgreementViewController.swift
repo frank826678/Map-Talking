@@ -73,7 +73,7 @@ class AgreementViewController: UIViewController {
     }
     
     @IBAction func backToLoginPage(_ sender: UIButton) {
-        
+        SVProgressHUD.dismiss()
         dismiss(animated: true)
     }
 

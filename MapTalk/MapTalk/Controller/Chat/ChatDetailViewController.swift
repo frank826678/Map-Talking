@@ -59,7 +59,7 @@ class ChatDetailViewController: UIViewController {
     var bigImageURL: String?
     let fullScreenSize = UIScreen.main.bounds.size
     
-    //20191108
+    //20181108
     var startingFrame: CGRect?
     var blackBackgroundView: UIView?
     var startingImageView: UIImageView?
@@ -103,7 +103,8 @@ class ChatDetailViewController: UIViewController {
         
         setChannel(friendUserId: friendUserId) //new
         
-        setupChat(friendUserId: friendUserId) //1
+        //把 setupChat 註解掉
+        //setupChat(friendUserId: friendUserId) //1
         getPersonalMessages(channel: friendChannel)
         
         //20181005
@@ -193,6 +194,17 @@ class ChatDetailViewController: UIViewController {
         let createdTime = Date().millisecondsSince1970
         
         let friendId = friendUserId
+        // 這時候沒有存 name, URL
+//        let friendName = friendInfo[0].friendName
+//        let friendNameURL =  friendInfo[0].friendImageUrl
+        
+        // OK
+        //  "friendImageUrl": friendNameURL,
+        //  "friendName": friendName,
+        // "friendUID": friendUserId
+        
+        //"content": " Hello World~~~ ",
+        
         
         if myselfId > friendId {
             channel = "\(myselfId)_\(friendId)"
@@ -213,9 +225,8 @@ class ChatDetailViewController: UIViewController {
                 print("找不到原始資料，創建新頻道")
                 //送出的第一句話
                 guard let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).childByAutoId().key else { return }
-                
                 self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).child(messageKey).setValue([
-                    "content": " Hello World~~~~ ",
+                    "content": " Hello World~~~ ",
                     "senderId": myselfId,
                     "senderName": myselfName,
                     "senderPhoto": userImage,
@@ -238,15 +249,9 @@ class ChatDetailViewController: UIViewController {
             }
             
             print("頻道已存在")
-            //讀取上次聊天資料
-            //20181014 註解掉解決 detail 介面有兩行重複的留言
-            //self.getPersonalMessages(channel:  myselfIdAndFriendId)
             
         }
-        
     }
-    
-    //END
     
     func setBackground() {
         
@@ -381,18 +386,18 @@ class ChatDetailViewController: UIViewController {
                 "friendName": friendName,
                 "friendImageUrl": friendNameURL,
                 "friendUID": friendUserId
-                ]) { (error, _) in
+            ]) { (error, _) in
+                
+                if let error = error {
                     
-                    if let error = error {
-                        
-                        print("Data could not be saved: \(error).")
-                        
-                    } else {
-                        
-                        print("Data saved successfully!")
-                        
-                        self.messageTxt.text = ""
-                    }
+                    print("Data could not be saved: \(error).")
+                    
+                } else {
+                    
+                    print("Data saved successfully!")
+                    
+                    self.messageTxt.text = ""
+                }
             }
         } else {
             print("沒輸入東西")
@@ -453,6 +458,8 @@ class ChatDetailViewController: UIViewController {
     }
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
+        //20181110
+        //NotificationCenter.default.post(name: .sendPersonalChannel, object: nil)
         
         photoSelectorShowing()
         // 20181014加上傳送頻道
@@ -503,7 +510,7 @@ class ChatDetailViewController: UIViewController {
     }
     
     @IBAction func sendAudio(_ sender: Any) {
-      
+        
     }
     
 }
@@ -531,18 +538,9 @@ extension ChatDetailViewController: UITableViewDataSource {
                     as? ChatImageOwnerTableViewCell {
                     
                     cell.messageImageView.kf.setImage(with: URL(string: imageUrl))
-                    //加手勢看看
-                    //bigImageURL = imageUrl
-                    //singleFinger.numberOfTapsRequired = 1
-                    
-                    //                    let singleFinger = UITapGestureRecognizer(
-                    //                        target:self,
-                    //                        action:#selector(animateViewUp))
                     cell.messageImageView.isUserInteractionEnabled = true
-                    //cell.messageImageView.addGestureRecognizer(singleFinger)
                     
-                    //cell.messageImageView.contentMode = .scaleAspectFit
- cell.messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap)))
+                    cell.messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap)))
                     
                     return cell
                 }
@@ -573,25 +571,8 @@ extension ChatDetailViewController: UITableViewDataSource {
                         cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
                     }
                     
-                    //singleFinger.numberOfTapsRequired = 1
-                    
-                    //                    let singleFinger = UITapGestureRecognizer(
-                    //                        target:self,
-                    //                        action:#selector(animateViewUp))
-                    
                     cell.messageImageView.isUserInteractionEnabled = true
-                    //cell.messageImageView.addGestureRecognizer(singleFinger)
-                    
-                   //cell.messageImageView.contentMode = .scaleAspectFit
                     cell.messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap)))
-                    
-                    //                    cell.messageImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
-                    //
-                    //                    if let photoString = message.senderPhoto {
-                    //                        cell.userImage.sd_setImage(with: URL(string: photoString), completed: nil)
-                    //                    } else {
-                    //                        cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
-                    //                    }
                     
                     return cell
                 }
@@ -604,7 +585,7 @@ extension ChatDetailViewController: UITableViewDataSource {
                 cell.messageBody.text = message.content
                 if let photoString = message.senderPhoto {
                     cell.userImage.kf.setImage(with: URL(string: photoString))
-                    //cell.userImage.sd_setImage(with: URL(string: photoString), completed: nil)
+                    
                 } else {
                     cell.userImage.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
                 }
@@ -647,7 +628,7 @@ extension ChatDetailViewController: UITableViewDataSource {
             keyWindow.addSubview(zoomingImageView)
             
             //點黑色地方也會收回 只會收回黑色 imageView 還在
-//            blackBackgroundView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomout)))
+            //            blackBackgroundView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomout)))
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 
@@ -694,16 +675,3 @@ extension ChatDetailViewController: UITableViewDelegate {}
 
 extension ChatDetailViewController: AVAudioRecorderDelegate {}
 
-extension Date {
-    
-    var millisecondsSince1970: Int {
-        
-        return Int((self.timeIntervalSince1970 * 1000.0).rounded())
-    }
-    
-    init(milliseconds: Int) {
-        
-        self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
-    }
-    
-}

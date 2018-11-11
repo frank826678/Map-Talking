@@ -46,9 +46,21 @@ struct UserMapInfo: Codable {
     var message: Locations
     var status: Locations
     var location: Locations
+    
+    //可以不用 codable 自己解一層
+//    init(dictionary:[String: Any]) {
+//        self.gender = dictionary["gender"] as! Locations
+//        self.message = dictionary["message"] as! Locations
+//        self.status = dictionary["status"] as! Locations
+//        self.location = dictionary["location"] as! Locations
+//    }
+    
+    
 }
 
 struct Locations: Codable {
+    
+    
     
     var latitude: Double {
         didSet {
@@ -108,6 +120,10 @@ struct Locations: Codable {
         
         annotation.message = self.message
     }
+    
+//    init(dic: [String: Any]) {
+//        self.name = dic["name"]
+//    }
 }
 
 class UserAnnotation: MKPointAnnotation, Codable {

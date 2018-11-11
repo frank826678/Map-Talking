@@ -27,9 +27,9 @@ struct Message: Codable {
 
 struct FriendInfo {
     
-    let friendName: String
+    var friendName: String
     
-    let friendImageUrl: String?
+    var friendImageUrl: String?
 
 }
 

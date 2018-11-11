@@ -398,10 +398,7 @@ class FilterViewController: UIViewController {
             guard let userId = Auth.auth().currentUser?.uid else { return }
             
             print("測試用20181013")
-            // childChanged 不能監控自身的變化嗎？ 改了 dating 沒反應 改 datingtime 可以
-            // Q2: 是否要執行過一次 才會持續的監控 childChanged
-            // 應該把相同的都先抓下來 依序判斷是否相同 跳出 alert
-            
+                        
             guard let value = snapshot.value as? NSDictionary else { return }
             
             //print(value)
@@ -571,20 +568,9 @@ extension FilterViewController: UICollectionViewDataSource {
         if section == 0 {
             
             return 8
-            
         } else {
             return 4
         }
-        
-        //return 12
-        //        if(collectionView == self.datingTypeCollectionView) {
-        //            //cell.backgroundColor = UIColor.black
-        //            return 8
-        //        } else {
-        //            return 4
-        //            //cell.backgroundColor = self.randomColor()
-        //        }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -606,39 +592,6 @@ extension FilterViewController: UICollectionViewDataSource {
             
         }
         
-        //        if(collectionView == self.datingTypeCollectionView) {
-        //            //cell.backgroundColor = UIColor.black
-        //            //cell?.iconName.text =
-        //            //cell?.iconImage
-        //
-        //            //cell?.backgroundColor = #colorLiteral(red: 0.08870747934, green: 0.8215307774, blue: 1, alpha: 0.8)
-        //            cell?.iconName.text = iconNameArray[indexPath.row]
-        //
-        //            //cell.iconImage.backgroundColor =  #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1) // FB message borderColor
-        //
-        //            //原本寫法
-        //            //            cell?.iconImage.image = UIImage(named: iconImageArray[indexPath.row])
-        //
-        //            //傳輸照片的同時 把照片 set 成 template
-        //            cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
-        //            //cell?.iconImage.image = UIImage(named: filterEnum[indexPath.row.])
-        //
-        //
-        //            //return cell
-        //        } else {
-        //
-        //            //cell?.backgroundColor = #colorLiteral(red: 0.08870747934, green: 0.8215307774, blue: 1, alpha: 0.8)
-        //            cell?.iconName.text = timeNameArray[indexPath.row]
-        //
-        //            cell?.iconImage.image = UIImage(named: timeImageArray[indexPath.row])
-        //
-        //            //return cell
-        //            //cell.backgroundColor = self.randomColor()
-        //        }
-        
-        // 設定背景色
-        //        cell.backgroundColor = indexPath.row % 2 == 0 ? UIColor.orange : UIColor.brown
-        
         return cell!
         
     }
@@ -650,23 +603,6 @@ extension FilterViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        //        var reusableview:UICollectionReusableView!
-        //        //分区头
-        //        if kind == UICollectionView.elementKindSectionHeader{
-        //            reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-        //                                                                           withReuseIdentifier: "HeaderView", for: indexPath)
-        //            //设置头部标题
-        //            let label = reusableview.viewWithTag(1) as! UILabel
-        //            label.text = books[indexPath.section].title
-        //        }
-        //            //分区尾
-        //        else if kind == UICollectionView.elementKindSectionFooter{
-        //            reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-        //                                                                           withReuseIdentifier: "FooterView", for: indexPath)
-        //
-        //        }
-        //        return reusableview
         
         if let headerCellView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier:
             "FilterHeaderCell", for: indexPath) as? FilterHeaderCollectionViewCell {
@@ -687,20 +623,6 @@ extension FilterViewController: UICollectionViewDataSource {
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        //取消點選時的動作 要有兩個 collectionView 才能用
-        
-        //        if indexPath.section == 0 {
-        //
-        //            let cellToDeselect: FilterCollectionViewCell = (collectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell)!
-        //            cellToDeselect.iconBackgroundView.backgroundColor = UIColor.clear
-        //        } else if indexPath.section == 1 {
-        //
-        //            let cellToDeselect: FilterCollectionViewCell = (collectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell)!
-        //            cellToDeselect.iconBackgroundView.backgroundColor = UIColor.clear
-        //        }
-        
-    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -717,23 +639,13 @@ extension FilterViewController: UICollectionViewDataSource {
                 as? FilterCollectionViewCell
             if selectedDateIcon1 == indexPath {
                 
-                // selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-                //OK
-                //collectionView.cellForItem(at: selectedDateIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
-                
                 cell?.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
                 cell?.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 cell?.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                //selectedCell.iconBackgroundView.backgroundColor =  #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
                 
                 print("相同")
                 
             } else {
-                
-                //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-                
-                //OK
-                //collectionView.cellForItem(at: selectedDateIcon1)?.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 
                 cell?.iconBackgroundView.backgroundColor = UIColor.clear
                 cell?.iconImage.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
@@ -748,11 +660,6 @@ extension FilterViewController: UICollectionViewDataSource {
             
             if selectedTimeIcon1 == indexPath {
                 
-                // selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-                
-                //collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
-                
-                //selectedCell.iconBackgroundView.backgroundColor =  #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
                 cell?.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
                 cell?.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 cell?.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -760,14 +667,9 @@ extension FilterViewController: UICollectionViewDataSource {
                 
             } else {
                 
-                //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-                
-                //collectionView.cellForItem(at: selectedTimeIcon1)?.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                
                 cell?.iconBackgroundView.backgroundColor = UIColor.clear
                 cell?.iconImage.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
                 cell?.iconName.textColor =  #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-                //selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             }
         }
         
@@ -776,16 +678,10 @@ extension FilterViewController: UICollectionViewDataSource {
             print("第 \(indexPath.item ) 張圖片")
             selectedDateIcon1 = indexPath
             datingNumber = indexPath.item
-            #warning ("TODO: 點擊後變色 且只能點一個 點了其中一個其他的就不能點 或者再把原本的取消才能再點下一個，或是點擊後再點其他的 本來的會消失 只顯示另外ㄧ個")
-            //let selectedCell:UICollectionViewCell = collectionView.cellForItem(at: indexPath)!
             
-            //OK
-            //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
             selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
             selectedCell.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             selectedCell.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            
-            //END
             
         } else {
             print("你選擇了 time \(indexPath.section) 組的")
@@ -793,7 +689,6 @@ extension FilterViewController: UICollectionViewDataSource {
             
             selectedTimeIcon1 = indexPath
             timeNumber = indexPath.item
-            //selectedCell.contentView.backgroundColor = #colorLiteral(red: 0.9995340705, green: 0.988355577, blue: 0.4726552367, alpha: 1)
             
             selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
             selectedCell.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -810,8 +705,6 @@ extension FilterViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: (self.view.frame.size.width) / 4, height: (self.view.frame.size.width) / 4)
-        
-        //        return CGSize(width: (self.view.frame.size.width - 30) / 2 , height: (self.view.frame.size.width - 30) / 2)
         
     }
     

@@ -24,7 +24,12 @@ class PhotoViewController: UIViewController {
     
     @IBOutlet weak var photoCollectionView: UICollectionView!
     
-    var photos: [PHAsset] = []
+    var photos: [PHAsset] = [] {
+        //20181110
+        didSet {
+            self.photoCollectionView.reloadData()
+        }
+    }
     
     //20181014 照片
     var friendChannel: String = "測試33"
@@ -48,6 +53,8 @@ class PhotoViewController: UIViewController {
     
     //20181014 照片
     @objc func getDataFromChatDetail(_ noti: Notification) {
+        //20181110
+        //self.photoCollectionView.reloadData()
         
         guard let friendChannelFromChatDetail = noti.object as? FriendNewInfo else {
                         print("no channel")
