@@ -137,38 +137,16 @@ class ProfileViewController: UIViewController {
             
         }
         
-//        for index in 0...textFieldText.count - 1 {
-//            let char : unichar = (textFieldText as NSString).character(at: index)
-//
-//            if (char >= 0x4E00) {
-//                number += 2
-//            }else {
-//                number += 1
-//            }
-//        }
-        
         //let count = textFieldText.count + string.count - range.length
-        //確認幾個字是可以正常顯示的 中英文長度不同 但單元相同ˊ˙
+        //確認幾個字是可以正常顯示的 中英文長度不同 但單元相同
         let count = textFieldText.count + string.count - range.length
         
         if count > 14 {
             BaseNotificationBanner.warningBanner(subtitle: "請勿超過 15 個字")
         }
         return count <= 14
-        
-//        let countOfWords = string.characters.count +  textField.text!.characters.count — range.length
-//        if countOfWords > 10{
-//            return false
-//        }
-//        wordsCountLabel.text = String(countOfWords)
-//        return true
 
     }
-    
-//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//
-//
-//    }
     
 }
 

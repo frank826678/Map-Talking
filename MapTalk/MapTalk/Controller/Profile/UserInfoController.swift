@@ -128,26 +128,9 @@ class UserInfoController: UIViewController {
         //print(userSelected)
         print("準備上傳的 userSelected 是\(userSelected)")
         
-        //print("自己的位置是\(centerDeliveryFromMap)")
-        //guard let text = messageTxt.text else { return }
-        
         guard let userId = Auth.auth().currentUser?.uid else {
             BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
             return }
-        
-        //guard let userName = Auth.auth().currentUser?.displayName else { return }
-        
-        //guard let userImage = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
-        
-        //let createdTime = Date().millisecondsSince1970
-        
-        //let messageKey = self.ref.child("FilterData").child("PersonalChannel").child(friendChannel).childByAutoId().key
-        
-        //  "location": filterAllData.location,
-        //         "location": ["lat": currentLocation.coordinate.latitude,"lon": currentLocation.coordinate.longitude],
-        
-        // 或是經緯度先給預設值 只要他有移動位置 就會更新他目前的位置 但是要是第一次進來直接媒合 這邊 setvalue 可能會取代掉正確的位置資訊  這邊可以試著用 update
-        // 25°2'51"N   121°31'1"E 北車
         
         //此時的 userSelected 是 array
         self.ref.child("UserInfo").child(userId).setValue(userSelected) { (error, _) in
@@ -291,13 +274,6 @@ extension UserInfoController: UITableViewDataSource {
         
     }
     
-    // 設置每個 section 的 title 為一個 UIView
-    // 如果實作了這個方法 會蓋過單純設置文字的 section title
-    //    private func tableView(tableView: UITableView,
-    //                           viewForHeaderInSection section: Int) -> UIView? {
-    //        return UIView()
-    //    }
-    
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = #colorLiteral(red: 0.8392156863, green: 0.8392156863, blue: 0.8392156863, alpha: 0.5)
         
@@ -310,32 +286,6 @@ extension UserInfoController: UITableViewDataSource {
         header.textLabel?.font = UIFont(name: "Futura", size: 19)!
     
     }
-    
-    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    //
-    //
-    //
-    ////        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerId") as! CustomHeader
-    ////        header.contentView.backgroundColor = AnyColor
-    ////
-    ////        return header
-    //
-    //
-    ////        let returnedView = UIView(frame: CGRect(0, 0, 100, 100)) //set these values as necessary
-    // //       returnedView.backgroundColor = UIColor.red
-    ////        let label = UILabel(frame: CGRectMake(labelX, labelY, labelWidth, labelHeight))
-    ////        label.text = self.sectionHeaderTitleArray[section]
-    ////        returnedView.addSubview(label)
-    //
-    ////        return returnedView
-    //
-    //    }
-    
-    // 設置 section header 的高度 刪除 private
-    //    func tableView(tableView: UITableView,
-    //                           heightForHeaderInSection section: Int) -> CGFloat {
-    //        return 140
-    //    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         

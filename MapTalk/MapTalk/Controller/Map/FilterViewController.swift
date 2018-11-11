@@ -476,7 +476,7 @@ class FilterViewController: UIViewController {
                 
                 self.filterNewData.append(friendFilterData)
                 
-                self.showMessageAlert(title: "登愣！！！ 發現和 \(senderName) 有相同的喜好", message: "認識一下吧！", senderId: senderId, senderName: senderName)
+                self.showMessageAlert(title: "登愣！！！ \n 發現和 \(senderName) 有相同的喜好！", message: "認識一下吧～", senderId: senderId, senderName: senderName)
                 print("選取的人的 userID 是 \(senderId)")
                 
             } else {
