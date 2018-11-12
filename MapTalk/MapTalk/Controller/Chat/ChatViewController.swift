@@ -11,6 +11,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 import Lottie
+import NotificationBannerSwift
 
 class ChatViewController: UIViewController {
     
@@ -457,6 +458,11 @@ extension ChatViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         print("[ViewController searchBar] searchText: \(searchText)")
+        
+        //匿名模式跳開
+        guard let myselfId = Auth.auth().currentUser?.uid else {
+            BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
+            return }
         
         // 没有搜索内容顯示全部内容
         if searchText == "" {

@@ -129,25 +129,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         userName = Auth.auth().currentUser?.displayName
         
-        
-        
         dataBaseLocation()
         
         setButtonTemplateImage()
         setIconCorner()
         
-        //20181003
-        //        saveSelfLocation(latitude: (selfLocation?.latitude)!, longitude: (selfLocation?.longitude)!)
-        
-        //20181008
         userDataMappingTrack()
         
-        //20181012
-        //userInfoDetailView.userName.text = "大頭大頭"
-        //profileTableView.delegate = self
-        //profileTableView.dataSource = self
-        
-        //取消 tableView 虛線
         userInfoDetailView.userInfoDetailTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         userInfoDetailView.userInfoDetailTableView.dataSource = self
@@ -317,9 +305,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             print("*********1")
             
             guard let myselfGender = value["myselfGender"] as? Int else { return }
-            
-            //guard let gender = value["gender"] as? Int else { return }
-            
+
             //存下 gender
             let userDefaults = UserDefaults.standard
             
@@ -462,8 +448,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 statusInput = status
             }
             
-            
-            //確認是否被封鎖過 snapshot.key = ID
             //封鎖功能 20181022
             let userDefaults = UserDefaults.standard
             
@@ -476,14 +460,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             let userId = Auth.auth().currentUser?.uid
             
-            //            let keychain = Keychain(service: "com.frank.MapTalk")
-            //            if let userID = keychain[FirebaseType.uuid.rawValue] {
-            //
-            //            } else {
-            //                userID = keychain["anonymous"]
-            //            }
-            //if  keychain[FirebaseType.uuid.rawValue] != nil || keychain["anonymous"] == "anonymous"
-            //print("*****9 印出 keychain \(keychain[FirebaseType.uuid.rawValue]) *** \( keychain["anonymous"]) ")
             if statusInput == "disappear" && snapshot.key != userId  {
                 print("向其他用戶 隱藏 中2")
                 self.removeUser(friendUserId: snapshot.key)
@@ -507,23 +483,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 self.mapView.removeAnnotation(self.locations[index].userAnnotation)
                 self.mapView.addAnnotation(self.locations[index].userAnnotation)
                 
-                //OK END
-                
-                //                for index in 0..<self.locations.count {
-                //                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
-                //                    self.mapView.addAnnotation(self.locations[index].userAnnotation)
-                //                }
-                
-                //break
                 return
             }
-            
-            //新增刪除
-            //self.mapView.removeAnnotation(userLocations.userAnnotation)
-            
-            //self.mapView.addAnnotation(userLocations.userAnnotation)
-            
-            //self.locations.append(userLocations)
         }
     }
     
@@ -570,9 +531,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
         }
         
-        // if is 在幹嘛？
+   
         if annotation is MKUserLocation {
-            // 直接跳開
+    
             return nil
         }
         //新增 20181001
@@ -747,21 +708,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         //20181019 可以連點兩次
         mapView.deselectAnnotation(view.annotation, animated: true)
-        //20181012
-        //addTap(taskCoordinate: coordinate)
-        
-        //        animateViewUp()
-        //        addSwipe()
         
     }
-    
-    //20181012
-    
     
     @objc func userInfoButtonClicked(sender: UIButton) {
         
         showMessageAlert(title: "傳訊息給\(navigationUserName!) 嗎～？", message: "認識一下吧！")
-        
     }
     
     @objc func showMoreAlert()  {
@@ -1249,9 +1201,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
         }
         //print(mapView.region.span)
-        
     }
-    
 }
 
 extension NSNotification.Name {
@@ -1285,15 +1235,6 @@ extension MapViewController: UITableViewDataSource {
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: "UserData", for: indexPath)
                 as? UserDataTableViewCell {
-                
-                //                friendNameForCell = friendName
-                //                friendImageURLForCell = friendImageURL
-                
-                //照片需要重改
-                //let photo = friendImageURLForCell
-                //let bigPhotoURL = URL(string: photo + "?height=500")
-                
-                // cell.userImage.kf.setImage(with: bigPhotoURL)
                 
                 cell.userName.text = userSelected[6]
                 cell.userBirthday.text = "來到地球的日子：\(userSelected[1])"

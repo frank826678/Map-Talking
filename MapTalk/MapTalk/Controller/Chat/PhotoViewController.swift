@@ -24,12 +24,14 @@ class PhotoViewController: UIViewController {
     
     @IBOutlet weak var photoCollectionView: UICollectionView!
     
-    var photos: [PHAsset] = [] {
-        //20181110
-        didSet {
-            self.photoCollectionView.reloadData()
-        }
-    }
+    var photos: [PHAsset] = []
+    
+//    {
+//        //20181110
+////        didSet {
+////            self.photoCollectionView.reloadData()
+////        }
+//    }
     
     //20181014 照片
     var friendChannel: String = "測試33"
@@ -37,14 +39,16 @@ class PhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         
         setBackground()
         
         //if PhotoViewController
-        getPhotos()
+        
+        fetchGallaryResources()
+        //getPhotos()
         
         //20181014 照片 OK
         NotificationCenter.default.addObserver(self, selector: #selector (getDataFromChatDetail(_:)), name: .sendPersonalChannel, object: nil)
@@ -57,25 +61,53 @@ class PhotoViewController: UIViewController {
         SVProgressHUD.dismiss()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //fetchGallaryResources()
+        //getPhotoStatus()
+        
+    }
+    
+    func getPhotoStatus() {
+        
+        let status = PHPhotoLibrary.authorizationStatus()
+        if status == .denied || status == .restricted {
+            
+            print("沒打開權限 photoVC")
+            
+            let alert = UIAlertController.showAlert(
+                title: "照片權限已關閉",
+                message: "如要變更權限，請至 設定 > Mapping Talk > 允許照片讀取。 我們需要存取您的相簿資訊，同意後即可傳送照片給其他使用者。",
+                defaultOption: ["確定"]) { (action) in
+                    
+                    print("按下確認鍵 請前往打開照片權限")
+            }
+            
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+    }
+    
     //20181014 照片
     @objc func getDataFromChatDetail(_ noti: Notification) {
         //20181110
         //self.photoCollectionView.reloadData()
         
         guard let friendChannelFromChatDetail = noti.object as? FriendNewInfo else {
-                        print("no channel")
-                        return  }
-
+            print("no channel")
+            return  }
+        
         friendNewInfo = friendChannelFromChatDetail
         print("***朋友頻道\(friendNewInfo)")
-//        guard let friendChannelFromChatDetail = noti.object as? String else {
-//            print("no channel")
-//            return  }
-//
-//        friendChannel = friendChannelFromChatDetail
-//
-//        print("***朋友頻道\(friendChannel)")
-
+        //        guard let friendChannelFromChatDetail = noti.object as? String else {
+        //            print("no channel")
+        //            return  }
+        //
+        //        friendChannel = friendChannelFromChatDetail
+        //
+        //        print("***朋友頻道\(friendChannel)")
+        
     }
     
     func setBackground() {
@@ -98,11 +130,56 @@ class PhotoViewController: UIViewController {
         let options = PHFetchOptions()
         options.sortDescriptors = [ NSSortDescriptor(key: "creationDate", ascending: true) ]
         
-        let result = PHAsset.fetchAssets(with: options)
         
-        result.enumerateObjects { (object, _, _) in
+        // 要權限
+        //        let result = PHAsset.fetchAssets(with: options)
+        //
+        //        result.enumerateObjects { (object, _, _) in
+        //
+        //            self.photos.insert(object, at: 0)
+        //        }
+    }
+    
+    func fetchGallaryResources () {
+        
+//        let status = PHPhotoLibrary.authorizationStatus()
+//
+//        if status == .denied || status == .restricted {
+//
+//
+//        }
+        
+        let status = PHPhotoLibrary.authorizationStatus()
+        if status == .denied || status == .restricted {
             
-            self.photos.insert(object, at: 0)
+            print("沒打開權限 photoVC")
+            
+            let alert = UIAlertController.showAlert(
+                title: "照片權限已關閉",
+                message: "如要變更權限，請至 設定 > Mapping Talk > 勾選照片讀取。 我們需要存取您的相簿資訊，同意後即可傳送照片給其他使用者。",
+                defaultOption: ["確定"]) { (action) in
+                    
+                    print("按下確認鍵 請前往打開照片權限")
+            }
+            
+            self.present(alert, animated: true, completion: nil)
+            
+        } else {
+            PHPhotoLibrary.requestAuthorization { (authStatus) in
+                if authStatus == .authorized {
+                    let imageAsset = PHAsset.fetchAssets(with: .image, options: nil)
+                    for index in 0..<imageAsset.count{
+                        
+                        // self.photos.insert(object, at: 0)
+                        //OK
+                        //self.photos.append((imageAsset[index]))
+                        self.photos.insert(imageAsset[index], at: 0)
+                        
+                    }
+                    //self.photoCollectionView.reloadData()
+                }
+                
+            }
         }
     }
     
@@ -111,6 +188,7 @@ class PhotoViewController: UIViewController {
         NotificationCenter.default.post(name: .close, object: nil)
     }
     
+    //需要換掉 func
     func convertImageFromAsset(asset: PHAsset) -> UIImage {
         
         var image = UIImage()
@@ -118,9 +196,13 @@ class PhotoViewController: UIViewController {
         let option = PHImageRequestOptions()
         
         option.isSynchronous = true
+        //targetSize: PHImageManagerMaximumSize,
+        // cell 放的照片為 85,90
+        let size = CGSize(width: 85*2, height: 90*2)
+        let newSize = CGSize(width: PHImageManagerMaximumSize.width * 0.8, height: PHImageManagerMaximumSize.height * 0.8)
         
         PHImageManager.default().requestImage(
-        for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: option) { (result, _) in
+        for: asset, targetSize: newSize, contentMode: .aspectFit, options: option) { (result, _) in
             
             guard let result = result else { return }
             
@@ -145,9 +227,9 @@ class PhotoViewController: UIViewController {
         
         //壓縮照片
         // 舊參數guard let data = UIImageJPEGRepresentation(image, 0.1) as NSData? else { return }
+        //壓縮照片 0.2
+        guard let data = image.jpegData(compressionQuality: 0.8) else { return }
         
-        guard let data = image.jpegData(compressionQuality: 0.2) else { return }
-
         print("成功壓縮照片")
         let metaData = StorageMetadata()
         metaData.contentType = "image/jpg"
@@ -192,7 +274,7 @@ class PhotoViewController: UIViewController {
         let createdTime = Date().millisecondsSince1970
         
         //let chatroomKey = "publicChannel"
-       
+        
         print("***朋友頻道\(friendChannel)")
         
         // swiftlint:disable identifier_name
@@ -202,29 +284,29 @@ class PhotoViewController: UIViewController {
         let channel = friendNewInfo.friendChannel
         guard let messageKey = ref.child("chatroom").child("PersonalChannel").child(channel).childByAutoId().key else { return }
         
-       // let messageKey = ref.child(chatroomKey).childByAutoId().key
+        // let messageKey = ref.child(chatroomKey).childByAutoId().key
         
         ref.child("chatroom").child("PersonalChannel").child(channel).child(messageKey).setValue([
-                "imageUrl": imageUrl,
-                "senderId": userId,
-                "senderName": userName,
-                "senderPhoto": userImage,
-                "time": createdTime,
-                "content": "傳送了一張照片",
-                "friendName": friendNewInfo.friendName,
-                "friendImageUrl": friendNewInfo.friendImageUrl,
-                "friendUID": friendNewInfo.friendUID
-            ]) { (error, _) in
+            "imageUrl": imageUrl,
+            "senderId": userId,
+            "senderName": userName,
+            "senderPhoto": userImage,
+            "time": createdTime,
+            "content": "傳送了一張照片",
+            "friendName": friendNewInfo.friendName,
+            "friendImageUrl": friendNewInfo.friendImageUrl,
+            "friendUID": friendNewInfo.friendUID
+        ]) { (error, _) in
+            
+            if let error = error {
                 
-                if let error = error {
-                    
-                    print("Data could not be saved: \(error).")
-                    
-                } else {
-                    
-                    print("Data saved successfully!")
-                    SVProgressHUD.dismiss()
-                }
+                print("Data could not be saved: \(error).")
+                
+            } else {
+                
+                print("Data saved successfully!")
+                SVProgressHUD.dismiss()
+            }
         }
     }
     
@@ -245,8 +327,9 @@ extension PhotoViewController: UICollectionViewDataSource {
                 return UICollectionViewCell()
         }
         
+        //會跑很多記憶體 掛掉 convertImageFromAsset
         cell.photoImage.image = convertImageFromAsset(asset: photos[indexPath.row])
-      
+        
         return cell
     }
     
@@ -274,5 +357,5 @@ extension NSNotification.Name {
     
     static let close = NSNotification.Name("CLOSE_PHOTO_SELECTOR")
     static let sendPersonalChannel = NSNotification.Name("SEND_PERSONAL_CHANNEL")
-
+    
 }
