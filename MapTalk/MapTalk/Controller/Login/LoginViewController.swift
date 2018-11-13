@@ -24,18 +24,10 @@ class LoginViewController: UIViewController {
     private let manager = FacebookManager()
     private let firebaseManager = FirebaseManager()
     
-    //20181003
-    //var dataRef: DatabaseReference!
     var refference: DatabaseReference!
     var userPhotoComplement: ((_ data: URL) -> Void)?
     
     let fbUserDefault: UserDefaults = UserDefaults.standard
-    
-    //    @IBAction func loginButtonAction(_ sender: UIButton) {
-    //
-    //        bindFB()
-    //
-    //    }
     
     override func viewDidLoad() {
         
@@ -44,8 +36,6 @@ class LoginViewController: UIViewController {
         refference = Database.database().reference()
         
         changeStyle()
-        //邊緣都會跑掉 why?
-        //        setupLayerGradient(width: backgroundView.frame.width, height: backgroundView.frame.height)
         
         setupLayerGradient(width: fullScreenSize.width, height: fullScreenSize.height)
         
@@ -56,10 +46,6 @@ class LoginViewController: UIViewController {
         manager.facebookLogIn(
             fromController: self,
             success: { [weak self] token in
-                
-                //self?.signupUser(token: token)
-                
-                // 有 weak self 所以 當沒人 keep 住他時，因為 ARC 0，消失後會 nil。
                 
                 self?.signInFirebase(token: token)
                 
@@ -160,7 +146,6 @@ class LoginViewController: UIViewController {
         layerGradient.frame = CGRect(x: 0, y: 0, width: width, height: height)
         
         self.backgroundView.layer.addSublayer(layerGradient)
-        
         
     }
     

@@ -56,6 +56,7 @@ class ProfileViewController: UIViewController {
         
         setStoryHighlightsTextField()
         profileTableView.allowsSelection = false
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

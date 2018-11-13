@@ -164,7 +164,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //匿名檢查
         let keychain = Keychain(service: "com.frank.MapTalk")
         
-        if  keychain[FirebaseType.uuid.rawValue] == nil || keychain["anonymous"] == "anonymous" {
+        if  keychain[FirebaseType.uuid.rawValue] == nil && keychain["anonymous"] == "anonymous" {
             //print("目前為匿名模式 請登出後使用 Facebook 登入")
             BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
             
@@ -531,7 +531,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
         }
         
-   
         if annotation is MKUserLocation {
     
             return nil
@@ -577,7 +576,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             print("尚未加過 view")
         }
         
-        
         annotationView?.tag = 7
     
         annotationView?.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
@@ -586,9 +584,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //設定照片陰影
         
         let shadowView = UIView()
-        //shadowView.removeFromSuperview()
-        
-        
+
         let annotationLabel = UILabel(frame: CGRect(x: -40, y: -35, width: 140, height: 30))
         
         shadowView.tag = 6
@@ -628,19 +624,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
         annotationLabel.textColor = UIColor.white
         
-        //        增加三角形圖案
-        //        OK
-        //
         let triangle = UILabel(frame: CGRect(x: -20, y: -10, width: 50, height: 10)) // 50, 10
         triangle.tag = 6
         triangle.text = "▾"
         triangle.font = UIFont.systemFont(ofSize: 24) //24
-        //triangle.textColor = #colorLiteral(red: 0.2596536937, green: 0.4559627229, blue: 0.9940910533, alpha: 1)
-        
+
         triangle.textAlignment = .center
-        
-        
-        //annotationLabel.font = UIFont(name: "Rockwell", size: 12)
         
         if let message = userAnnotation?.message {
             annotationLabel.text = message
@@ -746,7 +735,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 NotificationCenter.default.post(name: .blockUser, object: blockID)
                 
-                
             }
             
             let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
@@ -774,7 +762,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let hideAction = UIAlertAction(title: "隱藏", style: .destructive) { (action) in
                 
                 let userStatus = ["status": "disappear"]
-                
                 
                 let childUpdatesStatus = ["/location/\(myselfId)/status": userStatus]
                 
@@ -814,10 +801,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func removeUser(friendUserId: String) {
         
         for (index, user) in locations.enumerated() where user.id == friendUserId {
-            
-            //刪除該使用者在 array 整筆資料
-            
-            self.mapView.removeAnnotation(self.locations[index].userAnnotation)
+        self.mapView.removeAnnotation(self.locations[index].userAnnotation)
             locations.remove(at: index)
             print("已從 array 刪除使用者\(friendUserId)")
             //break
@@ -1030,28 +1014,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 withIdentifier: String(describing: ChatDetailViewController.self)
                 ) as? ChatDetailViewController else { return }
             
-            //controller.article = articles[indexPath.row]
             controller.friendUserId = self.friendUserId
-        
-            //讓 hello world 也可以讀 20181111
-//            controller.friendInfo[0].friendImageUrl = firiendImageURL
-//            controller.friendInfo[0].friendName = friendName
-            
+
             self.show(controller, sender: nil)
             print("跳頁成功")
             
-            
-            //refference.child("UserFriendList").child(myselfId).child(friendId).setValue([])
             let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(friendId)": ["FriendUID": "\(friendId)","FriendName": "\(friendName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
             
             let friendChildUpdates = ["/UserData/\(friendId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)","FriendName": "\(myselfName)","Accept": "已是好友中","Friend_Email": "emailTest"]]
             
-            
-            //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
-            //
             self.refference.updateChildValues(myChildUpdates)
             self.refference.updateChildValues(friendChildUpdates)
-            
             
         }
         
@@ -1061,7 +1034,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         alertController.addAction(okAction)
         
         self.present(alertController, animated: true, completion: nil)
-        
     }
     
     func userDataMappingTrack() {
@@ -1088,9 +1060,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             } else {
                 print("沒有收到邀請")
             }
-            
-            //做一個 alert
-            
         }
     }
     
@@ -1116,36 +1085,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             self.show(controller, sender: nil)
             print("跳頁成功")
-            
-            
-            //            //新增對方到 firebase 的好友列表
-            //
-            //            //guard let friendId =  self.friendUserId else { return }
-            //
-            //            guard let myselfId = Auth.auth().currentUser?.uid else { return }
-            //            //guard let friendName = self.friendUserName else { return }
-            //
-            //            guard let myselfName = Auth.auth().currentUser?.displayName else { return }
-            //
-            //
-            //            //refference.child("UserFriendList").child(myselfId).child(friendId).setValue([])
-            //
-            //            // 我媒合到 friend 在我自己的節點下 存朋友的 ID 並且 朋友的狀態為 發出邀請中
-            //            // 被我媒合的到的朋友 在朋友的節點下 存下自己的 ID 並且 朋友的狀態為 收到邀請中
-            //            // 朋友應該監控自己下方的節點 邀請中 如果有 要跳出 alert 提醒有人要跟你當朋友
-            //
-            //            let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(senderId)": ["FriendUID": "\(senderId)",
-            //"FriendName": "\(senderName)","Accept": "發出邀請中","Friend_Email": "emailTest"]]
-            //
-            //            let friendChildUpdates = ["/UserData/\(senderId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)",
-            //"FriendName": "\(myselfName)","Accept": "收到邀請中","Friend_Email": "emailTest"]]
-            //
-            //
-            //            //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
-            //            //
-            //            self.refference.updateChildValues(myChildUpdates)
-            //            self.refference.updateChildValues(friendChildUpdates)
-            
             
         }
         
@@ -1278,7 +1217,6 @@ extension MapViewController: UITableViewDataSource {
                     cell.iconBackground.backgroundColor = #colorLiteral(red: 0.9647058824, green: 1, blue: 0.4588235294, alpha: 1)
                     //cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
                 }
-                
                 
                 cell.iconImage.image = UIImage(named:iconImageArray[indexPath.row] )
                 cell.selectionStyle = UITableViewCell.SelectionStyle.none

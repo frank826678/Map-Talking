@@ -12,7 +12,7 @@ import FirebaseStorage
 import FirebaseDatabase
 import FirebaseAuth
 import SVProgressHUD
-
+//swiftlint:disable all
 class PhotoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImage: UIImageView!
@@ -26,16 +26,25 @@ class PhotoViewController: UIViewController {
     
     var photos: [PHAsset] = []
     
-//    {
-//        //20181110
-////        didSet {
-////            self.photoCollectionView.reloadData()
-////        }
-//    }
+    //    {
+    //        //20181110
+    ////        didSet {
+    ////            self.photoCollectionView.reloadData()
+    ////        }
+    //    }
     
     //20181014 照片
     var friendChannel: String = "測試33"
     var friendNewInfo: FriendNewInfo = FriendNewInfo(friendName: "測試11", friendImageUrl: "測試12", friendUID: "測試13", friendChannel: "測試13")
+    
+    ///取得的资源结果，用了存放的PHAsset
+    var assetsFetchResults: PHFetchResult<PHAsset>?
+    
+    ///缩略图大小
+    var assetGridThumbnailSize: CGSize!
+    
+    /// 带缓存的图片管理对象
+    var imageManager: PHCachingImageManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,12 +56,24 @@ class PhotoViewController: UIViewController {
         
         //if PhotoViewController
         
-        fetchGallaryResources()
+        getNewPhoto ()
+        //fetchGallaryResources()
         //getPhotos()
         
         //20181014 照片 OK
         NotificationCenter.default.addObserver(self, selector: #selector (getDataFromChatDetail(_:)), name: .sendPersonalChannel, object: nil)
         //nil 可是資料可以過來 anObject：這是設定是否接收特定的物件的通知。如設定nil，則就是不論哪個物件傳送的通知都收，若有設定物件，則只收這物件所發出的通知。
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        assetGridThumbnailSize = CGSize(width: 85, height: 90)
+        //根据单元格的尺寸计算我们需要的缩略图大小
+        //        let scale = UIScreen.main.scale
+        //        let cellSize = (self.collectionViewLayout as! UICollectionViewFlowLayout).itemSize
+        //        assetGridThumbnailSize = CGSize(width:cellSize.width*scale ,
+        //                                        height:cellSize.height*scale)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -67,6 +88,42 @@ class PhotoViewController: UIViewController {
         //fetchGallaryResources()
         //getPhotoStatus()
         
+    }
+    
+    func getNewPhoto () {
+        
+        //申请权限
+        PHPhotoLibrary.requestAuthorization({ (status) in
+            if status != .authorized {
+                return
+            }
+            
+            //则获取所有资源
+            let allPhotosOptions = PHFetchOptions()
+            //按照创建时间倒序排列
+            allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate",
+                                                                 ascending: false)]
+            //只获取图片
+            allPhotosOptions.predicate = NSPredicate(format: "mediaType = %d",
+                                                     PHAssetMediaType.image.rawValue)
+            self.assetsFetchResults = PHAsset.fetchAssets(with: PHAssetMediaType.image,
+                                                          options: allPhotosOptions)
+            
+            // 初始化和重置缓存
+            self.imageManager = PHCachingImageManager()
+            self.resetCachedAssets()
+            
+            //collection view 重新加载数据
+            DispatchQueue.main.async {
+                self.photoCollectionView.reloadData()
+            }
+        })
+        
+    }
+    
+    //重置缓存
+    func resetCachedAssets(){
+        self.imageManager.stopCachingImagesForAllAssets()
     }
     
     func getPhotoStatus() {
@@ -100,14 +157,6 @@ class PhotoViewController: UIViewController {
         
         friendNewInfo = friendChannelFromChatDetail
         print("***朋友頻道\(friendNewInfo)")
-        //        guard let friendChannelFromChatDetail = noti.object as? String else {
-        //            print("no channel")
-        //            return  }
-        //
-        //        friendChannel = friendChannelFromChatDetail
-        //
-        //        print("***朋友頻道\(friendChannel)")
-        
     }
     
     func setBackground() {
@@ -142,12 +191,12 @@ class PhotoViewController: UIViewController {
     
     func fetchGallaryResources () {
         
-//        let status = PHPhotoLibrary.authorizationStatus()
-//
-//        if status == .denied || status == .restricted {
-//
-//
-//        }
+        //        let status = PHPhotoLibrary.authorizationStatus()
+        //
+        //        if status == .denied || status == .restricted {
+        //
+        //
+        //        }
         
         let status = PHPhotoLibrary.authorizationStatus()
         if status == .denied || status == .restricted {
@@ -188,28 +237,94 @@ class PhotoViewController: UIViewController {
         NotificationCenter.default.post(name: .close, object: nil)
     }
     
-    //需要換掉 func
-    func convertImageFromAsset(asset: PHAsset) -> UIImage {
-        
-        var image = UIImage()
-        
-        let option = PHImageRequestOptions()
-        
-        option.isSynchronous = true
-        //targetSize: PHImageManagerMaximumSize,
-        // cell 放的照片為 85,90
-        let size = CGSize(width: 85*2, height: 90*2)
-        let newSize = CGSize(width: PHImageManagerMaximumSize.width * 0.8, height: PHImageManagerMaximumSize.height * 0.8)
-        
-        PHImageManager.default().requestImage(
-        for: asset, targetSize: newSize, contentMode: .aspectFit, options: option) { (result, _) in
+        func convertNewImageFromAsset(asset: PHAsset) -> UIImage {
+    
+            var image = UIImage()
             
-            guard let result = result else { return }
+            let option = PHImageRequestOptions()
             
-            image = result
+            option.isSynchronous = true
+            
+            PHImageManager.default().requestImage(
+            for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: option) { (result, _) in
+                
+                guard let result = result else { return }
+                
+                image = result
+            }
+            return image
+
+            
+//            var image = UIImage()
+//
+//            let option = PHImageRequestOptions()
+//
+//            option.isSynchronous = true
+//            //targetSize: PHImageManagerMaximumSize,
+//            // cell 放的照片為 85,90
+//            let size = CGSize(width: 85*2, height: 90*2)
+//
+//            //let newSize = CGSize(width: PHImageManagerMaximumSize.width * 0.8, height: PHImageManagerMaximumSize.height * 0.8)
+//
+//            PHImageManager.default().requestImage(
+//            for: asset, targetSize: size, contentMode: .aspectFit, options: option) { (result, _) in
+//
+//                guard let result = result else { return }
+//
+//                image = result
+//            }
+//            return image
+            
         }
-        return image
-    }
+    
+    
+    //需要換掉 func
+    //    func convertImageFromAsset(asset: PHAsset) -> UIImage {
+    //
+    //        var image = UIImage()
+    //
+    //        let option = PHImageRequestOptions()
+    //
+    //        option.isSynchronous = true
+    //        //targetSize: PHImageManagerMaximumSize,
+    //        // cell 放的照片為 85,90
+    //        let size = CGSize(width: 85*2, height: 90*2)
+    //
+    //        let newSize = CGSize(width: PHImageManagerMaximumSize.width * 0.8, height: PHImageManagerMaximumSize.height * 0.8)
+    //
+    //        PHImageManager.default().requestImage(
+    //        for: asset, targetSize: newSize, contentMode: .aspectFit, options: option) { (result, _) in
+    //
+    //            guard let result = result else { return }
+    //
+    //            image = result
+    //        }
+    //        return image
+    //    }
+    
+    
+    //    func getAssetThumbnail(asset: PHAsset, size: CGFloat) -> UIImage {
+    //        let retinaScale = UIScreen.main.scale
+    //        let retinaSquare = CGSizeMake(size * retinaScale, size * retinaScale)
+    //        let cropSizeLength = min(asset.pixelWidth, asset.pixelHeight)
+    //        let square = CGRectMake(0, 0, CGFloat(cropSizeLength), CGFloat(cropSizeLength))
+    //        let cropRect = CGRectApplyAffineTransform(square, CGAffineTransformMakeScale(1.0/CGFloat(asset.pixelWidth), 1.0/CGFloat(asset.pixelHeight)))
+    //
+    //        let manager = PHImageManager.defaultManager()
+    //        let options = PHImageRequestOptions()
+    //        var thumbnail = UIImage()
+    //
+    //        options.synchronous = true
+    //        options.deliveryMode = .HighQualityFormat
+    //        options.resizeMode = .Exact
+    //        options.normalizedCropRect = cropRect
+    //
+    //        manager.requestImageForAsset(asset, targetSize: retinaSquare, contentMode: .AspectFit, options: options, resultHandler: {(result, info)->Void in
+    //            thumbnail = result!
+    //        })
+    //        return thumbnail
+    //    }
+    
     
     func uploadImagePic(
         image: UIImage,
@@ -227,8 +342,8 @@ class PhotoViewController: UIViewController {
         
         //壓縮照片
         // 舊參數guard let data = UIImageJPEGRepresentation(image, 0.1) as NSData? else { return }
-        //壓縮照片 0.2
-        guard let data = image.jpegData(compressionQuality: 0.8) else { return }
+        //壓縮照片 0.2 0.8
+        guard let data = image.jpegData(compressionQuality: 0.2) else { return }
         
         print("成功壓縮照片")
         let metaData = StorageMetadata()
@@ -314,7 +429,8 @@ class PhotoViewController: UIViewController {
 
 extension PhotoViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        //return photos.count
+        return self.assetsFetchResults?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -327,16 +443,56 @@ extension PhotoViewController: UICollectionViewDataSource {
                 return UICollectionViewCell()
         }
         
-        //會跑很多記憶體 掛掉 convertImageFromAsset
-        cell.photoImage.image = convertImageFromAsset(asset: photos[indexPath.row])
+        if let asset = self.assetsFetchResults?[indexPath.row] {
+            //获取缩略图
+            self.imageManager.requestImage(for: asset, targetSize: assetGridThumbnailSize,
+                                           contentMode: PHImageContentMode.aspectFill,
+                                           options: nil) { (image, nfo) in
+                                            
+            cell.photoImage.image = image
+                                            
+            print(image ?? "")
+            }
+            
+//            (cell.contentView.viewWithTag(1) as! UIImageView).image = image
+//            print(image ?? "")
+
+            
+            //會跑很多記憶體 掛掉 convertImageFromAsset
+            //cell.photoImage.image = convertImageFromAsset(asset: photos[indexPath.row])
+            
+            return cell
+        }
         
-        return cell
+         return UICollectionViewCell()
     }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let myAsset = self.assetsFetchResults![indexPath.row]
+        
+//        image: convertImageFromAsset(asset: photos[indexPath.row]),
+//        success: { url in
+        
+//        self.imageManager.requestImage(for: myAsset, targetSize: assetGridThumbnailSize,
+//                                       contentMode: PHImageContentMode.aspectFill,
+//                                       options: nil) { (image, nfo) in
+//
+//                                        //cell.photoImage.image = image
+//
+//                                        self.uploadImagePic(
+//                    image: image!,
+//                    success: { url in
+//
+//                        self.sendImage(url: url)
+//
+//                }, failure: { error in
+//
+//                    print(error)
+//                })
+//        }
+        
         uploadImagePic(
-            image: convertImageFromAsset(asset: photos[indexPath.row]),
+            image: convertNewImageFromAsset(asset: myAsset),
             success: { url in
                 
                 self.sendImage(url: url)
@@ -345,6 +501,7 @@ extension PhotoViewController: UICollectionViewDataSource {
             
             print(error)
         })
+
         
         NotificationCenter.default.post(name: .close, object: nil)
     }

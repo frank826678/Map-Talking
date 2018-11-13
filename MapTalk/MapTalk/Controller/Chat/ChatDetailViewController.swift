@@ -96,15 +96,12 @@ class ChatDetailViewController: UIViewController {
         
         //先把傳送語音功能關閉
         audioButton.isHidden = true
-        
+                
     }
-    
-    // MARK: - Action
     
     @IBAction func didTouchBackButton() {
         
         dismiss(animated: true, completion: nil)
-        //        self.navigationController?.popViewController(animated: true)
     }
     
     func registerCells() {
@@ -210,12 +207,10 @@ class ChatDetailViewController: UIViewController {
                     } else {
                         
                         print("** 資料存檔成功 Data saved successfully!")
-                        
                     }
                 }
                 
                 return //guard let 的 return
-                
             }
             
             print("頻道已存在")
@@ -350,17 +345,13 @@ class ChatDetailViewController: UIViewController {
             
             print("找到的資料是\(snapshot)")
             
-            //            let a = snapshot.value as! NSDictionary
-            //            print("奇怪東西\(a)")
-            
             guard let value = snapshot.value as? NSDictionary else { return }
             
             guard let friendName = value["FBName"] as? String else { return }
             
             guard let friendImageUrl = value["FBPhotoSmallURL"] as? String  else { return }
             
-            //self.navigationController?.title = friendName
-            self.navigationController?.navigationBar.topItem?.title = "     \(friendName)"
+             self.navigationController?.navigationBar.topItem?.title = "     \(friendName)"
             
             //let friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
             
@@ -375,11 +366,6 @@ class ChatDetailViewController: UIViewController {
             
             print("friendNewInfo\(friendNewInfo)")
             
-            //試著加入到同一個 array
-            //            let friendDataArray = freindData(info: friendInfo, message: nil)
-            //            self.friendDataArray.append(<#T##newElement: freindData##freindData#>)
-            
-            //old 可以
             print("＊＊＊＊朋友的資料")
             print(self.friendInfo)
             
