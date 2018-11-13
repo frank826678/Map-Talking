@@ -343,7 +343,7 @@ class ChatDetailViewController: UIViewController {
             
             in
             
-            print("找到的資料是\(snapshot)")
+            //print("找到的資料是\(snapshot)")
             
             guard let value = snapshot.value as? NSDictionary else { return }
             

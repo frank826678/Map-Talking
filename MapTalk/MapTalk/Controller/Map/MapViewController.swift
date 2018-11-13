@@ -299,7 +299,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             in
             
-            print("找到的資料是\(snapshot)")
+            //print("找到的資料是\(snapshot)")
             
             guard let value = snapshot.value as? NSDictionary else { return }
             print("*********1")
@@ -381,7 +381,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 print("向其他用戶顯示中1")
             }
             
-            print("***99 目前的 userID\(userId)")
+            //print("***99 目前的 userID\(userId)")
             
             let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput, status: statusInput)
             
@@ -461,11 +461,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let userId = Auth.auth().currentUser?.uid
             
             if statusInput == "disappear" && snapshot.key != userId  {
-                print("向其他用戶 隱藏 中2")
+                //print("向其他用戶 隱藏 中2")
                 self.removeUser(friendUserId: snapshot.key)
                 return
             } else {
-                print("向其他用戶顯示中2")
+                //print("向其他用戶顯示中2")
             }
             
             let userLocations = Locations(latitude: latitude, longitude: longtitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput, status: statusInput)
@@ -540,7 +540,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         if annotationView?.viewWithTag(7) != nil {
             
-            print("---已經加過 view")
+            //print("---已經加過 view")
             //OK
             //(annotationView?.subviews[1] as! UIImageView).isHidden = true
             
@@ -803,12 +803,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         for (index, user) in locations.enumerated() where user.id == friendUserId {
         self.mapView.removeAnnotation(self.locations[index].userAnnotation)
             locations.remove(at: index)
+            allAnnotations.remove(at: index)
             print("已從 array 刪除使用者\(friendUserId)")
-            //break
+            animateViewDown()
             return
         }
     }
-    
     
     func showUserDetail(friendId: String?, friendName: String?, friendImageURL: String?) {
         
@@ -841,7 +841,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             in
             
-            print("找到的資料是\(snapshot)")
+            //print("找到的資料是\(snapshot)")
             
             //NSDictionary
             //var userSelected =  ["男","1993-06-06","單身","台北","臃腫","喝酒"]

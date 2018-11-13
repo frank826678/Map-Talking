@@ -177,7 +177,7 @@ class UserInfoController: UIViewController {
             
             in
             
-            print("找到的資料是\(snapshot)")
+            //print("找到的資料是\(snapshot)")
             
             //NSDictionary
             //var userSelected =  ["男","1993-06-06","單身","台北","臃腫","喝酒"]

@@ -209,15 +209,10 @@ class ChatViewController: UIViewController {
                     
                 }
                 
-                print("以下為allFriends資料")
-                
-                print(allFriends)
-                
                 //20181019 下面已經直接把值傳入 應該不需要這個 array 了
                 self.friendsList.append(allFriends)
                 //這裡有每個朋友的 UID , UID 比較重要 為結構的外層第一筆 （名字 這時候去請求
-                print("allFriends資料結束")
-                
+    
                 //OK
                 //self.getFriendLastMessage(friendId: allFriends)
                 
@@ -225,9 +220,6 @@ class ChatViewController: UIViewController {
                 
                 self.getNewFriendMessage(friendId: allFriends)
             }
-            
-            print("----------------")
-            print("所有 朋友資料 資料 \(self.friendsList)")
             
         })
         
@@ -260,11 +252,7 @@ class ChatViewController: UIViewController {
             
             do {
                 let message = try self.decoder.decode(NewMessage.self, from: messageJSONData)
-                print("****codable**** start")
-                print(message)
-                print("****codable**** END")
-                //message = messageCodable
-                //self.userInformation = userInfo
+                
                 if  message.senderId == self.myselfUID {
                     
                     for (index, user) in self.newMessage.enumerated() where user.friendUID == message.friendUID || user.senderId == message.friendUID {
