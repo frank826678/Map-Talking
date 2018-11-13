@@ -297,9 +297,6 @@ class ChatViewController: UIViewController {
                 
                 self.result.append(message)
                 
-                print("_____")
-                print(self.newMessage)
-                
                 self.newMessage.sort(by: { (message1, message2) -> Bool in
                     return message1.time > message2.time
                 })

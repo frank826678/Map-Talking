@@ -192,17 +192,26 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             else if CLLocationManager.authorizationStatus()
                 == .denied {
                 // 提示可至[設定]中開啟權限
-                let alertController = UIAlertController(
+                
+                let alert = UIAlertController.showAlert(
                     title: "定位權限已關閉",
-                    message:
-                    "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟。 開啟後我們將存取您目前的地理位置資訊來顯示您的位置及媒合時的距離限制條件，且其他使用者將在地圖上看到您目前的位置。",
-                    preferredStyle: .alert)
-                let okAction = UIAlertAction(
-                    title: "確認", style: .default, handler:nil)
-                alertController.addAction(okAction)
-                self.present(
-                    alertController,
-                    animated: true, completion: nil)
+                    message: "如要變更權限，請至 設定 > Mapping Talk > 允許定位服務。 開啟後我們將存取您目前的地理位置資訊來顯示您的位置及媒合時的距離限制條件，且其他使用者將在地圖上看到您目前的位置。",
+                    defaultOption: ["確定"]) { (action) in
+                        
+                        print("按下確認鍵 請前往打開照片權限")
+                        
+                        DispatchQueue.main.async {
+                            
+                            if let url = URL(string:UIApplication.openSettingsURLString) {
+                                if UIApplication.shared.canOpenURL(url) {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                }
+                            }
+                        }
+                }
+                
+                self.present(alert, animated: true, completion: nil)
+                
                 filterButton.isHidden = true
                 location.isHidden = true
             }
@@ -230,8 +239,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func showLocationAlert() {
         
-        //    defaultOption: ["檢舉用戶", "封鎖用戶"])
-        guard let myselfId = Auth.auth().currentUser?.uid else {
+            guard let myselfId = Auth.auth().currentUser?.uid else {
             BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
             return }
         let alertController =  UIAlertController.showAlert(
@@ -375,10 +383,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let userId = Auth.auth().currentUser?.uid
             
             if statusInput == "disappear" && snapshot.key != userId  {
-                print("向其他用戶 隱藏 中1")
+                //print("向其他用戶 隱藏 中1")
                 return
             } else {
-                print("向其他用戶顯示中1")
+                //print("向其他用戶顯示中1")
             }
             
             //print("***99 目前的 userID\(userId)")

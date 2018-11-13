@@ -140,10 +140,18 @@ class PhotoViewController: UIViewController {
                 defaultOption: ["確定"]) { (action) in
                     
                     print("按下確認鍵 請前往打開照片權限")
+                    
+                    DispatchQueue.main.async {
+                        
+                        if let url = URL(string:UIApplication.openSettingsURLString) {
+                            if UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            }
+                        }
+                    }
             }
             
             self.present(alert, animated: true, completion: nil)
-            
         }
     }
     
@@ -157,7 +165,6 @@ class PhotoViewController: UIViewController {
             return  }
         
         friendNewInfo = friendChannelFromChatDetail
-        print("***朋友頻道\(friendNewInfo)")
     }
     
     func setBackground() {
@@ -248,7 +255,7 @@ class PhotoViewController: UIViewController {
             option.isSynchronous = true
             
             PHImageManager.default().requestImage(
-            for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: option) { (result, _) in
+            for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: option) { (result, _) in
                 
                 guard let result = result else { return }
                 
@@ -342,8 +349,6 @@ class PhotoViewController: UIViewController {
         guard let userImage = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
         
         let createdTime = Date().millisecondsSince1970
-        
-        print("***朋友頻道\(friendChannel)")
         
         // swiftlint:disable identifier_name
         let ref = Database.database().reference()

@@ -241,15 +241,11 @@ class ChatDetailViewController: UIViewController {
             .observe(.childAdded) { (snapshot) in
                 
                 guard let value = snapshot.value as? NSDictionary else { return }
-                //
                 
                 guard let messageJSONData = try? JSONSerialization.data(withJSONObject: value) else { return }
                 
                 do {
                     let message = try self.decoder.decode(Message.self, from: messageJSONData)
-                    print("****codable**** start")
-                    print(message)
-                    print("****codable**** END")
                     
                     self.messages.append(message)
                     
@@ -269,6 +265,7 @@ class ChatDetailViewController: UIViewController {
                     print(error)
                 }
         }
+        
     }
     
     @IBAction func send(_ sender: Any) {
@@ -363,11 +360,6 @@ class ChatDetailViewController: UIViewController {
             let friendNewInfo: FriendNewInfo = FriendNewInfo(friendName: friendName, friendImageUrl: friendImageUrl, friendUID: friendUserId, friendChannel: self.friendChannel)
             
             NotificationCenter.default.post(name: .sendPersonalChannel, object: friendNewInfo)
-            
-            print("friendNewInfo\(friendNewInfo)")
-            
-            print("＊＊＊＊朋友的資料")
-            print(self.friendInfo)
             
         })
         
@@ -514,12 +506,6 @@ extension ChatDetailViewController: UITableViewDataSource {
     }
     
     func prtformZoomInForStartingImageView(startingImageView: UIImageView) {
-        
-        //        if let userImage = bigImageURLFromCell {
-        //            imageView.kf.setImage(with: URL(string: userImage))
-        //        } else {
-        //            imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
-        //        }
         
         self.startingImageView = startingImageView
         self.startingImageView?.isHidden = true
