@@ -23,6 +23,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     //20181028 增加 alert 告訴他我正在使用他的位置
     var flag: Bool = false
     var locationFlag: Bool = false
+    var regionFlag: Bool = false
     var allAnnotations: [UserAnnotation] = []
     
     //20181020 偵測網路
@@ -480,16 +481,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             for (index, user) in self.locations.enumerated() where user.id == userLocations.id {
                 
-                self.locations[index].latitude = userLocations.latitude
-                
-                self.locations[index].longitude = userLocations.longitude
-                
-                self.locations[index].message = userLocations.message
-                
-                //OK 註解掉下面兩行 不會跑 annotationfor View  所以無法直接更改到 message content ，位置會跑 但是不會一閃一閃。 不註解 可以即時更新到 messgae 但是會更新
-                //self.mapView(self.mapView, viewFor: self.locations[index].userAnnotation)
-                self.mapView.removeAnnotation(self.locations[index].userAnnotation)
-                self.mapView.addAnnotation(self.locations[index].userAnnotation)
+                if self.regionFlag == false {
+                    self.locations[index].latitude = userLocations.latitude
+                    
+                    self.locations[index].longitude = userLocations.longitude
+                    
+                    self.locations[index].message = userLocations.message
+                    
+                    //OK 註解掉下面兩行 不會跑 annotationfor View  所以無法直接更改到 message content ，位置會跑 但是不會一閃一閃。 不註解 可以即時更新到 messgae 但是會更新
+                    //self.mapView(self.mapView, viewFor: self.locations[index].userAnnotation)
+                    self.mapView.removeAnnotation(self.locations[index].userAnnotation)
+                    self.mapView.addAnnotation(self.locations[index].userAnnotation)
+                }
                 
                 return
             }
@@ -1139,11 +1142,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             self.mapView.removeAnnotations(allAnnotations)
             BaseNotificationBanner.warningBanner(subtitle: "請將地圖放大🙏,才能看到其他使用者喔～")
+            regionFlag = true
             //print("超過 2.5")
         } else {
             
             //self.mapView.removeAnnotations(allAnnotations)
             self.mapView.addAnnotations(allAnnotations)
+            regionFlag = false
             //print("低於 2.5")
             
         }

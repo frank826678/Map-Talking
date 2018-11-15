@@ -29,5 +29,4 @@ class ChatTableViewCell: UITableViewCell {
         
         super.setSelected(selected, animated: animated)
     }
-    
 }

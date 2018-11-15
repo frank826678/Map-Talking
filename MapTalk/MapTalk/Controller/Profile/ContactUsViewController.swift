@@ -37,7 +37,7 @@ class ContactUsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationController?.navigationBar.topItem?.title = "     聯絡我們"
+        self.navigationController?.navigationBar.topItem?.title = "聯絡我們"
         
     }
     

@@ -44,18 +44,13 @@ class UserInfoController: UIViewController {
     // personInfo: PersonalInfo = PersonalInfo()
     var personInfo: PersonalInfo?
     var date: Date?
-    //var selectedDate: String = "1980-01-01"
-    
-    //var friend: String?
-    
+
     // swiftlint:disable identifier_name
     var ref: DatabaseReference!
     // swiftlint:enable identifier_name
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
         
         editTableView.delegate = self
         editTableView.dataSource = self
@@ -88,7 +83,7 @@ class UserInfoController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         
-        self.navigationController?.navigationBar.topItem?.title = "     個人資料"
+        self.navigationController?.navigationBar.topItem?.title = "個人資料"
         
     }
     
@@ -96,7 +91,7 @@ class UserInfoController: UIViewController {
         print("點擊了按下 Edit 的按鈕")
         isEdit = true
         editTableView.reloadData()
-        self.navigationController?.navigationBar.topItem?.title = "     編輯資料"
+        self.navigationController?.navigationBar.topItem?.title = "編輯資料"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveClicked))
         
     }
@@ -105,7 +100,7 @@ class UserInfoController: UIViewController {
         print("點擊了按下 Save 的按鈕")
         isEdit = false
         editTableView.reloadData()
-        self.navigationController?.navigationBar.topItem?.title = "     個人資料"
+        self.navigationController?.navigationBar.topItem?.title = "個人資料"
         
         //上傳到 firebase
         uploadUserInfo()
