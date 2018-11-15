@@ -215,9 +215,10 @@ class ChatDetailViewController: UIViewController {
                     
                 } else {
                     
+                    self.messageTxt.text = ""
+                    
                     print("Data saved successfully!")
                     
-                    self.messageTxt.text = ""
                 }
             }
         } else {
@@ -316,8 +317,8 @@ class ChatDetailViewController: UIViewController {
 
 extension ChatDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return messages.count
-        //return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

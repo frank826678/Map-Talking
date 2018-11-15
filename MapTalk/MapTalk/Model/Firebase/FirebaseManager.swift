@@ -59,14 +59,10 @@ struct FirebaseManager {
                 
             }
             
-            //20181003
-            //getUserInfo(token: token)
             self.getUserInfo(token: token)
             
             let user = firebaseResult.user
             let userInfo = UserInfo(userName: user.displayName!, userPicUrl: user.photoURL!.absoluteString)
-            //OLD OK
-            //UserDefaults.standard.set(user.uid, forKey: FirebaseType.uuid.rawValue)
             
             let keychain = Keychain(service: "com.frank.MapTalk")
             keychain[FirebaseType.uuid.rawValue] = user.uid
@@ -89,7 +85,6 @@ struct FirebaseManager {
                     guard let userId = Auth.auth().currentUser?.uid else { return }
                     guard let photoSmallURL =  Auth.auth().currentUser?.photoURL?.absoluteString else { return }
                     
-                    //20181018 改成 updatevalue setValue
                     self.refference.child("UserData").child(userId).updateChildValues([
                         "FBID": fbID,
                         "FBName": fbName,
