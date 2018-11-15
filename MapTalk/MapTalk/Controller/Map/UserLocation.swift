@@ -13,11 +13,6 @@ import MapKit
 import Firebase
 import FirebaseDatabase
 
-//enum UserType {
-//    case man
-//    case femail
-//}
-
 class UserLocation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var userName: String?
@@ -55,12 +50,9 @@ struct UserMapInfo: Codable {
 //        self.location = dictionary["location"] as! Locations
 //    }
     
-    
 }
 
 struct Locations: Codable {
-    
-    
     
     var latitude: Double {
         didSet {
@@ -132,7 +124,6 @@ class UserAnnotation: MKPointAnnotation, Codable {
     var userImage: String?
     var id: String?
     var message: String?
-    //20181020
     var gender: Int?
     var status: String?
 }

@@ -95,7 +95,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     var friendNameForCell = "測試"
     var friendImageURLForCell = "測試"
-    //20181009
+    
     var centerDelivery: CLLocationCoordinate2D?
     
     override func viewDidLoad() {

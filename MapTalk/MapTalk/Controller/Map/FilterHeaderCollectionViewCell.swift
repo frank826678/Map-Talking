@@ -13,8 +13,8 @@ class FilterHeaderCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var headerBackgroundView: UIView!
     override func awakeFromNib() {
+        
         super.awakeFromNib()
-        // Initialization code
     }
 
 }
