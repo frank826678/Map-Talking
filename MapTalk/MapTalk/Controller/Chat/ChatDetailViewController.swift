@@ -39,7 +39,6 @@ class ChatDetailViewController: UIViewController {
     var friendName: String?
     var friendUserId: String?
     var friendChannel: String = "測試"
-    //
     
     // swiftlint:disable identifier_name
     var ref: DatabaseReference!
@@ -51,17 +50,9 @@ class ChatDetailViewController: UIViewController {
     //20181111
     var friendInfo: FriendInfo?
     
-    //201801005 OK 1111
-    //var friendInfo: [FriendInfo] = []
-    //20181014
-    //var friendNewInfo: FriendNewInfo = FriendNewInfo(friendName: "測試11", friendImageUrl: "測試12", friendUID: "測試13", friendChannel: "測試13")
-    //20181014 END
-    
-    //20181019
     var bigImageURL: String?
     let fullScreenSize = UIScreen.main.bounds.size
     
-    //20181108
     var startingFrame: CGRect?
     var blackBackgroundView: UIView?
     var startingImageView: UIImageView?
@@ -79,20 +70,16 @@ class ChatDetailViewController: UIViewController {
         ref = Database.database().reference()
         
         setBackground()
-        //20181014 照片
+        
         addObservers()
         
         guard let friendUserId = friendUserId else { return }
         
         setChannel(friendUserId: friendUserId) //new
         
-        //把 setupChat 註解掉
-        //setupChat(friendUserId: friendUserId) //1
         getPersonalMessages(channel: friendChannel)
         
-        //20181005
         getFriendInfo(friendUserId: friendUserId)
-        //20181020
         
         //先把傳送語音功能關閉
         audioButton.isHidden = true
@@ -119,8 +106,6 @@ class ChatDetailViewController: UIViewController {
                                      forCellReuseIdentifier: "ChatImageOwner")
     }
     
-    //20181014 照片
-    
     func addObservers() {
         
         NotificationCenter.default.addObserver(
@@ -128,7 +113,6 @@ class ChatDetailViewController: UIViewController {
         )
     }
     
-    //NEW
     private func setChannel(friendUserId: String) {
         
         var channel: String?
@@ -146,76 +130,6 @@ class ChatDetailViewController: UIViewController {
         guard let myselfIdAndFriendId = channel else { return }
         friendChannel = myselfIdAndFriendId
         
-    }
-    
-    //可刪除 20181111
-    private func setupChat(friendUserId: String) {
-        
-        var channel: String?
-        
-        //如果沒開過聊天室 開一個新的 如果有 讀取上次的資料
-        guard let myselfId = Auth.auth().currentUser?.uid else { return }
-        guard let myselfName = Auth.auth().currentUser?.displayName else { return }
-        guard let userImage = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
-        
-        let createdTime = Date().millisecondsSince1970
-        
-        let friendId = friendUserId
-        // 這時候沒有存 name, URL
-        //        let friendName = friendInfo[0].friendName
-        //        let friendNameURL =  friendInfo[0].friendImageUrl
-        
-        // OK
-        //  "friendImageUrl": friendNameURL,
-        //  "friendName": friendName,
-        // "friendUID": friendUserId
-        
-        //"content": " Hello World~~~ ",
-        
-        
-        if myselfId > friendId {
-            channel = "\(myselfId)_\(friendId)"
-        } else {
-            channel = "\(friendId)_\(myselfId)"
-        }
-        
-        //讓不管名字是啥都可以照順序排序
-        
-        guard let myselfIdAndFriendId = channel else { return }
-        friendChannel = myselfIdAndFriendId
-        //尋找 channel 是否已經存在
-        ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).observeSingleEvent(of: .value) { (snapshot) in
-            
-            // guard let 要做的事情要寫在 return 的前面
-            guard let value = snapshot.value as? NSDictionary else {
-                
-                print("找不到原始資料，創建新頻道")
-                //送出的第一句話
-                guard let messageKey = self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).childByAutoId().key else { return }
-                self.ref.child("chatroom").child("PersonalChannel").child(myselfIdAndFriendId).child(messageKey).setValue([
-                    "content": " Hello World~~~ ",
-                    "senderId": myselfId,
-                    "senderName": myselfName,
-                    "senderPhoto": userImage,
-                    "time": createdTime
-                ]) { (error, _) in
-                    
-                    if let error = error {
-                        
-                        print("Data could not be saved: \(error).")
-                        
-                    } else {
-                        
-                        print("** 資料存檔成功 Data saved successfully!")
-                    }
-                }
-                
-                return //guard let 的 return
-            }
-            
-            print("頻道已存在")
-            
-        }
     }
     
     func setBackground() {
@@ -362,18 +276,6 @@ class ChatDetailViewController: UIViewController {
         // 20181014加上傳送頻道
         //self.performSegue(withIdentifier: "GoPhotoVC", sender: friendChannel)
     }
-    // 20181014加上傳送頻道
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //
-    //        // swiftlint:disable force_cast
-    //        let sendChannel = sender as! String
-    //        let controller = segue.destination as! PhotoViewController
-    //
-    //        // swiftlint:enable force_cast
-    //
-    //        controller.friendChannel = sendChannel
-    //
-    //    }
     
     @objc func photoSelectorShowing() {
         

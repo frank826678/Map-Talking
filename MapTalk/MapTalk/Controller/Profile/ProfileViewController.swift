@@ -134,25 +134,19 @@ class ProfileViewController: UIViewController {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        //var number = 0
-        
         guard let textFieldText = textField.text else {
             
             return true
             
         }
         
-        //let count = textFieldText.count + string.count - range.length
-        //確認幾個字是可以正常顯示的 中英文長度不同 但單元相同
         let count = textFieldText.count + string.count - range.length
         
         if count > 14 {
             BaseNotificationBanner.warningBanner(subtitle: "請勿超過 15 個字")
         }
         return count <= 14
-        
     }
-    
 }
 
 extension ProfileViewController: UITableViewDataSource {

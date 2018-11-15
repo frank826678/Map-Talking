@@ -308,14 +308,7 @@ extension UserInfoController: UITableViewDataSource {
                 withIdentifier: "PersonalInformation", for: indexPath)
                 as? PersonalInformationTableViewCell {
                 
-                //                if let cell = tableView.dequeueReusableCell(
-                //                    withIdentifier: "NickName", for: indexPath)
-                //                    as? NickNameTableViewCell {
-                
-                //cell.selectionStyle = UITableViewCell.SelectionStyle.none
-                
                 if isEdit == true {
-                    //改用 isEditable 原本 isUserInteractionEnabled
                     cell.contentTextView.isEditable = true
                 } else {
                     cell.contentTextView.isEditable = false
@@ -346,13 +339,10 @@ extension UserInfoController: UITableViewDataSource {
                 
                 cell.userInfoButton.tag = indexPath.row
                 
-                //全域 sender
-                //                selectedSender = indexPath.row
                 cell.userInfoButton.addTarget(self, action: #selector(userInfoButtonClicked(sender:)), for: .touchUpInside) //要加 .
-                //cell.userInfoButton.titleLabel?.text = "123"
-                cell.userInfoButton.setTitle(userSelected[indexPath.row], for: .normal)//设置按钮显示的文字
-                //cell.userInfoButton..titleLabel?.font = UIFont.systemFont(ofSize: 23)
-                //OK
+                
+                cell.userInfoButton.setTitle(userSelected[indexPath.row], for: .normal)
+                
                 cell.userInfoButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
                 
                 cell.userInfoLabel.text = userInfo[indexPath.row]

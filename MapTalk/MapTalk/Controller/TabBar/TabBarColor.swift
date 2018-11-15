@@ -14,7 +14,6 @@ extension UITabBar {
         
         let layerGradient = CAGradientLayer()
         
-        //layerGradient.colors = [UIColor.red.cgColor, UIColor.yellow.cgColor]
         layerGradient.colors = [
             UIColor(red: 70/255.0, green: 95/255.0, blue: 222/255.0, alpha: 0.9).cgColor,
             UIColor(red: 235/255.0, green: 121/255.0, blue: 243/255.0, alpha: 0.9).cgColor
