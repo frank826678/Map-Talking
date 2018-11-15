@@ -16,5 +16,4 @@ class FilterHeaderCollectionViewCell: UICollectionViewCell {
         
         super.awakeFromNib()
     }
-
 }
