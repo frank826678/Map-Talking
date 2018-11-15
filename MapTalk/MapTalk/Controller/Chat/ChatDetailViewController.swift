@@ -280,17 +280,6 @@ class ChatDetailViewController: UIViewController {
             
             let createdTime = Date().millisecondsSince1970
             
-            //friendInfo
-            
-            //        guard let friendName = value["FBName"] as? String else { return }
-            //
-            //        guard let friendMmageUrl = value["FBPhotoSmallURL"] as? String  else { return }
-            
-            //20181005 Start OK 20181111
-            //let friendName = friendInfo[0].friendName
-            //let friendNameURL =  friendInfo[0].friendImageUrl
-            
-            //20181111
             guard let friendName = friendInfo?.friendName else { return }
             guard let friendNameURL =  friendInfo?.friendImageUrl else { return }
             

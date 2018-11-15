@@ -203,22 +203,11 @@ class FilterViewController: UIViewController {
         
     }
     func setAgeSlider() {
-        //minAgeSlider
-        //max
+
         minAgeSlider.minimumValue = 18
         minAgeSlider.maximumValue = 65
-        //minAgeSlider.minimumValue = 0
-        
-        //locationSlider.value = 30
-        //minAgeSlider.setValue(18,animated:true)
-        
-        //minAgeSlider.tintColor = UIColor.lightGray
-        //minAgeSlider.maximumTrackTintColor = maxAgeSlider.tintColor
-        
         maxAgeSlider.minimumValue = 18
-        //maxAgeSlider.setValue(30,animated:true)
         maxAgeSlider.maximumValue = 65
-        //maxAgeSlider.minimumValue = 0
         maxAgeSlider.setValue(30, animated: true)
         
         // UISlider 是否可以在變動時同步執行動作
@@ -229,19 +218,14 @@ class FilterViewController: UIViewController {
         
         maxAgeSlider.isContinuous = true
         maxAgeSlider.addTarget(self, action: #selector(maxAgeSliderDidchange(_:)), for: UIControl.Event.valueChanged)
-        
     }
     
     @objc func minAgeSliderDidchange(_ slider: UISlider) {
         
         let roundedStepValue = round(slider.value / step) * step
         slider.value = roundedStepValue
-        
-        
         minAgeSlider.maximumValue = maxAgeSlider.value
-        
         minAgeSliderValue.text = "\(Int(minAgeSlider.value))"
-        print(slider.value)
     }
     
     @objc func maxAgeSliderDidchange(_ slider: UISlider) {
@@ -335,7 +319,6 @@ class FilterViewController: UIViewController {
         print("filterALLData 是 \(filterAllData)")
         print("*********")
         print("自己的位置是\(centerDeliveryFromMap)")
-        //guard let text = messageTxt.text else { return }
         
         guard let userId = Auth.auth().currentUser?.uid else {
             BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
@@ -346,11 +329,6 @@ class FilterViewController: UIViewController {
         guard let userImage = Auth.auth().currentUser?.photoURL?.absoluteString else { return }
         
         let createdTime = Date().millisecondsSince1970
-        
-        //let messageKey = self.ref.child("FilterData").child("PersonalChannel").child(friendChannel).childByAutoId().key
-        
-        //  "location": filterAllData.location,
-        //         "location": ["lat": currentLocation.coordinate.latitude,"lon": currentLocation.coordinate.longitude],
         
         // 或是經緯度先給預設值 只要他有移動位置 就會更新他目前的位置 但是要是第一次進來直接媒合 這邊 setvalue 可能會取代掉正確的位置資訊  這邊可以試著用 update
         // 25°2'51"N   121°31'1"E 北車 "location": ["lat": 25.251,"lon": 121.311],
@@ -587,8 +565,7 @@ extension FilterViewController: UICollectionViewDataSource {
             
             //傳輸照片的同時 把照片 set 成 template
             cell?.iconImage.image = UIImage.setIconTemplate(iconName: filterEnum[indexPath.row].rawValue)
-            //cell?.iconImage.image = UIImage(named: filterEnum[indexPath.row.])
-            
+
         } else {
             
             cell?.iconName.text = timeNameArray[indexPath.row]
@@ -598,13 +575,11 @@ extension FilterViewController: UICollectionViewDataSource {
         }
         
         return cell!
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
         return CGSize(width: 103, height: 40)
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -628,16 +603,11 @@ extension FilterViewController: UICollectionViewDataSource {
         
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         print("******請看這******")
         
         let selectedCell: FilterCollectionViewCell = (collectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell)!
-        
-        //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCollectionViewCell", for: indexPath) as? FilterCollectionViewCell
-        
-        //selectedCell.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         if  indexPath.section == 0 {
             let cell = collectionView.cellForItem(at: selectedDateIcon1)
@@ -689,6 +659,7 @@ extension FilterViewController: UICollectionViewDataSource {
             selectedCell.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             
         } else {
+            
             print("你選擇了 time \(indexPath.section) 組的")
             print("第 \(indexPath.item) 張圖片")
             
@@ -698,19 +669,15 @@ extension FilterViewController: UICollectionViewDataSource {
             selectedCell.iconBackgroundView.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
             selectedCell.iconImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             selectedCell.iconName.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            
         }
-        
     }
-    
 }
 
 extension FilterViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+
         return CGSize(width: (self.view.frame.size.width) / 4, height: (self.view.frame.size.width) / 4)
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

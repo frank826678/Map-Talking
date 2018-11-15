@@ -148,10 +148,7 @@ class ChatViewController: UIViewController {
                     
                     return
             }
-            
-            // 對方 controller 的資料
-            // detailController.article = datas[indexPath.row]
-            
+                        
         default:
             
             return super.prepare(for: segue, sender: sender)
@@ -167,13 +164,6 @@ class ChatViewController: UIViewController {
         
         userImage.kf.setImage(with: URL(string: photoSmallURL))
     }
-    
-    //    func display() {
-    //
-    //        print("Display Data")
-    //        self.chatTableView.reloadData()
-    //
-    //    }
     
     func getFriendList() {
         
