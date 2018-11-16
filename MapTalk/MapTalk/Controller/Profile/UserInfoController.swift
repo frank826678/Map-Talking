@@ -14,7 +14,6 @@ import NotificationBannerSwift
 
 class UserInfoController: UIViewController {
     
-    #warning ("TODO: nickname 還沒有做 delegate, cell 希望可以做成 reuse, 目前不能上傳新改變的值")
     let decoder = JSONDecoder()
     
     @IBOutlet weak var editTableView: UITableView!
