@@ -12,7 +12,7 @@ import FirebaseStorage
 import FirebaseDatabase
 import FirebaseAuth
 import SVProgressHUD
-//swiftlint:disable all
+
 class PhotoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImage: UIImageView!
@@ -26,16 +26,8 @@ class PhotoViewController: UIViewController {
     
     var photos: [PHAsset] = []
     
-    //    {
-    //        //20181110
-    ////        didSet {
-    ////            self.photoCollectionView.reloadData()
-    ////        }
-    //    }
-    
-    //20181014 照片
-    var friendChannel: String = "測試33"
-    var friendNewInfo: FriendNewInfo = FriendNewInfo(friendName: "測試11", friendImageUrl: "測試12", friendUID: "測試13", friendChannel: "測試13")
+    var friendChannel: String = "頻道"
+    var friendNewInfo: FriendNewInfo = FriendNewInfo(friendName: "名字", friendImageUrl: "URL", friendUID: "UID", friendChannel: "Channel")
     
     ///取得的資源结果，用了存放的PHAsset
     var assetsFetchResults: PHFetchResult<PHAsset>?
@@ -55,12 +47,8 @@ class PhotoViewController: UIViewController {
         setBackground()
         
         getNewPhoto ()
-        //fetchGallaryResources()
-        //getPhotos()
-        
-        //20181014 照片 OK
+
         NotificationCenter.default.addObserver(self, selector: #selector (getDataFromChatDetail(_:)), name: .sendPersonalChannel, object: nil)
-        //nil 可是資料可以過來 anObject：這是設定是否接收特定的物件的通知。如設定nil，則就是不論哪個物件傳送的通知都收，若有設定物件，則只收這物件所發出的通知。
 
         //縮圖大小
         assetGridThumbnailSize = CGSize(width: 85, height: 90)
@@ -68,13 +56,8 @@ class PhotoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        //根据单元格的尺寸计算我们需要的缩略图大小
-        //        let scale = UIScreen.main.scale
-        //        let cellSize = (self.collectionViewLayout as! UICollectionViewFlowLayout).itemSize
-        //        assetGridThumbnailSize = CGSize(width:cellSize.width*scale ,
-        //                                        height:cellSize.height*scale)
+        super.viewWillAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -84,12 +67,10 @@ class PhotoViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
         super.viewDidAppear(animated)
         
-        //fetchGallaryResources()
-        //getPhotoStatus()
         getPhotoStatus()
-        
     }
     
     func getNewPhoto () {
@@ -182,65 +163,6 @@ class PhotoViewController: UIViewController {
         backgroundView.layer.masksToBounds = false
     }
     
-//    func getPhotos() {
-//
-//        let options = PHFetchOptions()
-//        options.sortDescriptors = [ NSSortDescriptor(key: "creationDate", ascending: true) ]
-//
-//
-//        // 要權限
-//        //        let result = PHAsset.fetchAssets(with: options)
-//        //
-//        //        result.enumerateObjects { (object, _, _) in
-//        //
-//        //            self.photos.insert(object, at: 0)
-//        //        }
-//    }
-    
-    //可以刪除
-    func fetchGallaryResources () {
-        
-        //        let status = PHPhotoLibrary.authorizationStatus()
-        //
-        //        if status == .denied || status == .restricted {
-        //
-        //
-        //        }
-        
-        let status = PHPhotoLibrary.authorizationStatus()
-        if status == .denied || status == .restricted {
-            
-            print("沒打開權限 photoVC")
-            
-            let alert = UIAlertController.showAlert(
-                title: "照片權限已關閉",
-                message: "如要變更權限，請至 設定 > Mapping Talk > 勾選照片讀取。 我們需要存取您的相簿資訊，同意後即可傳送照片給其他使用者。",
-                defaultOption: ["確定"]) { (action) in
-                    
-                    print("按下確認鍵 請前往打開照片權限")
-            }
-            
-            self.present(alert, animated: true, completion: nil)
-            
-        } else {
-            PHPhotoLibrary.requestAuthorization { (authStatus) in
-                if authStatus == .authorized {
-                    let imageAsset = PHAsset.fetchAssets(with: .image, options: nil)
-                    for index in 0..<imageAsset.count{
-                        
-                        // self.photos.insert(object, at: 0)
-                        //OK
-                        //self.photos.append((imageAsset[index]))
-                        self.photos.insert(imageAsset[index], at: 0)
-                        
-                    }
-                    //self.photoCollectionView.reloadData()
-                }
-                
-            }
-        }
-    }
-    
     @IBAction func closeBtnClick(_ sender: UIButton) {
         
         NotificationCenter.default.post(name: .close, object: nil)
@@ -264,31 +186,6 @@ class PhotoViewController: UIViewController {
             return image
             
         }
-    
-    
-    //需要換掉 func
-    //    func convertImageFromAsset(asset: PHAsset) -> UIImage {
-    //
-    //        var image = UIImage()
-    //
-    //        let option = PHImageRequestOptions()
-    //
-    //        option.isSynchronous = true
-    //        //targetSize: PHImageManagerMaximumSize,
-    //        // cell 放的照片為 85,90
-    //        let size = CGSize(width: 85*2, height: 90*2)
-    //
-    //        let newSize = CGSize(width: PHImageManagerMaximumSize.width * 0.8, height: PHImageManagerMaximumSize.height * 0.8)
-    //
-    //        PHImageManager.default().requestImage(
-    //        for: asset, targetSize: newSize, contentMode: .aspectFit, options: option) { (result, _) in
-    //
-    //            guard let result = result else { return }
-    //
-    //            image = result
-    //        }
-    //        return image
-    //    }
     
     func uploadImagePic(
         image: UIImage,
