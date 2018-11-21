@@ -6,8 +6,6 @@
 //  Copyright © 2018 Frank. All rights reserved.
 //
 
-// import Foundation
-
 import UIKit
 import MapKit
 import Firebase
@@ -31,25 +29,12 @@ class UserLocation: NSObject, MKAnnotation {
     
 }
 
-//codable
-
 struct UserMapInfo: Codable {
-//    var gender: Int?
-//    var message: String?
-//    var status: String?
+
     var gender: Locations
     var message: Locations
     var status: Locations
     var location: Locations
-    
-    //可以不用 codable 自己解一層
-//    init(dictionary:[String: Any]) {
-//        self.gender = dictionary["gender"] as! Locations
-//        self.message = dictionary["message"] as! Locations
-//        self.status = dictionary["status"] as! Locations
-//        self.location = dictionary["location"] as! Locations
-//    }
-    
 }
 
 struct Locations: Codable {
@@ -90,9 +75,9 @@ struct Locations: Codable {
         self.annotation.name = self.name
         self.annotation.userImage = self.userImage
         self.annotation.message = self.message
-        self.annotation.coordinate = CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
+        self.annotation.coordinate = CLLocationCoordinate2D(latitude:
+            self.latitude, longitude: self.longitude)
         
-        //補這行 20181002
         self.annotation.title = self.name
         
         self.annotation.gender = self.gender
@@ -111,11 +96,7 @@ struct Locations: Codable {
     private func updateMessage() {
         
         annotation.message = self.message
-    }
-    
-//    init(dic: [String: Any]) {
-//        self.name = dic["name"]
-//    }
+    }    
 }
 
 class UserAnnotation: MKPointAnnotation, Codable {
