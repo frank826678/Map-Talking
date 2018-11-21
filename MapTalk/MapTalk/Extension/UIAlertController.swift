@@ -30,11 +30,6 @@ extension UIAlertController {
         
     }
     
-//    static func orderMessage(title: String, message: String) -> UIAlertController {
-//
-//        return alertMessage(title: title, message: message)
-//    }
-    
     static func showAlert(
         title: String?,
         message: String?,
@@ -55,8 +50,6 @@ extension UIAlertController {
         )
         
         alerController.addAction(action)
-        
-        //action.setValue(UIColor.red, forKey: "titleTextColor")
         
         for item in defaultOption {
             
@@ -92,8 +85,6 @@ extension UIAlertController {
         )
         
         alerController.addAction(action)
-        
-        //action.setValue(UIColor.red, forKey: "titleTextColor")
         
         for item in defaultOption {
             

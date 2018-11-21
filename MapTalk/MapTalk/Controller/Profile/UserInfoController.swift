@@ -40,7 +40,7 @@ class UserInfoController: UIViewController {
     var cell: EditUserDataTableViewCell?
     
     let fullScreenSize = UIScreen.main.bounds.size
-    // personInfo: PersonalInfo = PersonalInfo()
+    
     var personInfo: PersonalInfo?
     var date: Date?
 
@@ -54,23 +54,13 @@ class UserInfoController: UIViewController {
         editTableView.delegate = self
         editTableView.dataSource = self
         
-        
         editTableView.register(UINib(nibName: "EditContentTableViewCell", bundle: nil),
                                forCellReuseIdentifier: "EditContent")
         
         editTableView.register(UINib(nibName: "PersonalInformationTableViewCell", bundle: nil),
                                forCellReuseIdentifier: "PersonalInformation")
         
-        //可 delete 20181111
-        editTableView.register(UINib(nibName: "NickNameTableViewCell", bundle: nil),
-                               forCellReuseIdentifier: "NickName")
-        editTableView.register(UINib(nibName: "EditUserContentTableViewCell", bundle: nil),
-                               forCellReuseIdentifier: "EditUserData")
-        
-        //可 delete 20181111
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editClicked))
-        
-        ref = Database.database().reference() //重要 沒有會 nil
+        ref = Database.database().reference()
         
         downloadUserInfo()
         
@@ -101,28 +91,18 @@ class UserInfoController: UIViewController {
         editTableView.reloadData()
         self.navigationController?.navigationBar.topItem?.title = "個人資料"
         
-        //上傳到 firebase
         uploadUserInfo()
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editClicked))
         
     }
     
-    func disableAllInput() {
-        
-    }
-    
     func uploadUserInfo() {
-        
-        print("*********")
-        //print(userSelected)
-        print("準備上傳的 userSelected 是\(userSelected)")
         
         guard let userId = Auth.auth().currentUser?.uid else {
             BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
             return }
         
-        //此時的 userSelected 是 array
         self.ref.child("UserInfo").child(userId).setValue(userSelected) { (error, _) in
             
             if let error = error {
@@ -145,7 +125,7 @@ class UserInfoController: UIViewController {
         } else {
             myselfGender = 2
         }
-        //存自己性別 filter 介面時 用 default 去讀
+       
         let userDefaults = UserDefaults.standard
         
         userDefaults.set(myselfGender, forKey: "myselfGender")
@@ -160,38 +140,13 @@ class UserInfoController: UIViewController {
     
     func downloadUserInfo() {
         
-        print("*********")
-        //print(userSelected)
-        //print("準備上傳的 userSelected 是\(userSelected)")
-        
         guard let userId = Auth.auth().currentUser?.uid else { return }
         
-        //此時的 userSelected 是 array
         self.ref.child("UserInfo").child(userId).observeSingleEvent(of: .value, with: { (snapshot)
             
             in
             
-            //print("找到的資料是\(snapshot)")
-            
-            //NSDictionary
-            //var userSelected =  ["男","1993-06-06","單身","台北","臃腫","喝酒"]
-            
-            //這邊可以試著用 codable
             guard let value = snapshot.value as? NSArray else { return }
-            print("*********1")
-            
-            guard let userInfoJSONData = try? JSONSerialization.data(withJSONObject: value) else { return }
-            
-            do {
-                let userInfo = try self.decoder.decode(UserInformation.self, from: userInfoJSONData)
-                
-                //self.userInformation = userInfo
-                
-            } catch {
-                print(error)
-            }
-            //代辦
-            //print(value)
             
             guard let userGender = value[0] as? String else { return }
             guard let userBirthday = value[1] as? String else { return }
@@ -207,19 +162,13 @@ class UserInfoController: UIViewController {
             guard let userWantToTry = value[10] as? String  else { return }
             guard let userIntroduce = value[11] as? String else { return }
             
-            print("*********2接回來的資料為")
-            
-            print(userRelationship)
-            print(userSearchTarget)
-            //可以接到資料
-            
             self.userSelected[0] = userGender
             self.userSelected[1] = userBirthday
             self.userSelected[2] = userRelationship
             self.userSelected[3] = userCity
             self.userSelected[4] = userBodyType
             self.userSelected[5] = userSearchTarget
-            //上面 OK
+           
             self.userSelected[6] = userNickName
             self.userSelected[7] = userInterested
             self.userSelected[8] = userCountry
@@ -243,8 +192,6 @@ extension UserInfoController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        //        if section == 0 || section ==  1 || section ==  3 {
-        
         if section == 1 {
             return 6
         } else if section == 0 {
@@ -252,10 +199,10 @@ extension UserInfoController: UITableViewDataSource {
         } else {
             return 5
         }
-        
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
         view.tintColor = #colorLiteral(red: 0.8392156863, green: 0.8392156863, blue: 0.8392156863, alpha: 0.5)
         
         //轉換 title
@@ -265,14 +212,12 @@ extension UserInfoController: UITableViewDataSource {
         
         header.textLabel?.textColor = UIColor.black
         header.textLabel?.font = UIFont(name: "Futura", size: 19)!
-        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return 50
     }
-    
     
     func tableView(_ tableView: UITableView,
                    titleForHeaderInSection section: Int) -> String? {
@@ -333,7 +278,7 @@ extension UserInfoController: UITableViewDataSource {
                 
                 cell.userInfoButton.tag = indexPath.row
                 
-                cell.userInfoButton.addTarget(self, action: #selector(userInfoButtonClicked(sender:)), for: .touchUpInside) //要加 .
+                cell.userInfoButton.addTarget(self, action: #selector(userInfoButtonClicked(sender:)), for: .touchUpInside)
                 
                 cell.userInfoButton.setTitle(userSelected[indexPath.row], for: .normal)
                 
@@ -401,7 +346,7 @@ extension UserInfoController: UIPickerViewDataSource {
             selectDatePick(buttonRow)
             
         }
-        print(buttonRow) //OK 可以知道點了哪一個
+        
     }
     
     func dateButtonPressed(_ sender: Any) {
@@ -420,14 +365,10 @@ extension UserInfoController: UIPickerViewDataSource {
         alertController.addAction(UIAlertAction(
         title: "確定", style: UIAlertAction.Style.default) { (_) -> Void in
             
-            print("選取的時間是\(self.datePicker.date)")
-            
             let pickerDate = Date.formatDate(date: self.datePicker.date)
             
             self.userSelected[1] = pickerDate
             
-            print("轉換過的時間為\(pickerDate)")
-            //要有 reload data 此時 model 已經改變
             self.editTableView.reloadData()
             
         })
@@ -441,7 +382,7 @@ extension UserInfoController: UIPickerViewDataSource {
     }
     
     func selectDatePick(_ sender: Any) {
-        //初始化 UIPickerView
+       
         pickerView = UIPickerView()
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -453,8 +394,6 @@ extension UserInfoController: UIPickerViewDataSource {
             
             print("確定送出為\(self.pickerView.selectedRow(inComponent: 0))的 row")
             let rowInt = self.pickerView.selectedRow(inComponent: 0)
-            
-            //var userSelected =  ["男","1993-06-06","單身","台北","臃腫","喝酒"]
             
             if self.selectedSender == 0 {
                 
@@ -486,8 +425,6 @@ extension UserInfoController: UIPickerViewDataSource {
         
         alertController.addAction(UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel, handler: nil))
         
-        
-        //350
         pickerView.frame = CGRect(x: -10, y: 0, width: fullScreenSize.width, height: 250)
         alertController.view.addSubview(pickerView)
         self.present(alertController, animated: true, completion: nil)
@@ -518,7 +455,7 @@ extension UserInfoController: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow rowInt: Int,
                     forComponent component: Int) -> String? {
-        //新增日期結束
+    
         if selectedSender == 0 {
             return gender[rowInt]
         } else if selectedSender == 2 {
@@ -541,16 +478,12 @@ extension UserInfoController: UIPickerViewDelegate {}
 
 extension UserInfoController: PersonalInformationCellDelegate {
     
-    //    func textCount(textInput: String, tableViewCell: UITableViewCell) {
-    //        print("textcount")
-    //    }
-    
     func editSave(textInput: String, tableViewCell: UITableViewCell) {
         
         guard let indexPath = editTableView.indexPath(for: tableViewCell) else { return }
         
         if textInput.count > 40 {
-            //print("超過 20 字 ＊＊＊")
+        
             BaseNotificationBanner.warningBanner(subtitle: "請勿超過 40 個字")
         }
         

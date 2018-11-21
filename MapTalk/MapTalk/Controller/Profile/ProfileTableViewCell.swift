@@ -54,7 +54,7 @@ class ProfileTableViewCell: UITableViewCell {
         
         var templateImage = #imageLiteral(resourceName: "new3-pencil-50").withRenderingMode(.alwaysTemplate)
         
-        setButtonColor(with: #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1)) //顏色已經挑選完成 是根據定位的按鈕的藍色
+        setButtonColor(with: #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1)) 
     }
     
     func setButtonColor(with color: UIColor) {

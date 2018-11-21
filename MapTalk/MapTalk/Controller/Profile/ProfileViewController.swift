@@ -70,7 +70,7 @@ class ProfileViewController: UIViewController {
         storyHighlightsTextField.layer.borderWidth = 2
         storyHighlightsTextField.layer.borderColor = #colorLiteral(red: 0.4588235294, green: 0.6078431373, blue: 1, alpha: 1)
         storyHighlightsTextField.layer.cornerRadius = 30
-                
+        
     }
     
     func setImage() {
@@ -86,7 +86,6 @@ class ProfileViewController: UIViewController {
         
         let bigPhotoURL = URL(string: photoSmallURL + "?height=500")
         
-        //userImage.kf.setImage(with: URL(string: photoSmallURL))
         userImage.kf.setImage(with: bigPhotoURL)
         userName.text = userDisplayName
     }
@@ -169,7 +168,6 @@ extension ProfileViewController: UITableViewDataSource {
         let indexPath = sender.tag
         
         if indexPath == 0 {
-            //configure action when tap cell 1
             print("點了個人資料")
             performSegue(
                 withIdentifier: String(describing: UserInfoController.self),

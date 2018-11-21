@@ -28,8 +28,6 @@ extension CALayer {
             shadowPath = nil
         } else {
             
-            //let center = CGPoint(x: x + bounds.width / 2.0, y: y + bounds.height / 2.0)
-            //let center = CGPoint(x: (x + bounds.width) / 2.0, y: (y + bounds.height) / 2.0)
             let center = CGPoint(x: (frame.width) / 2.0, y: (frame.height) / 2.0)
             
             shadowPath = UIBezierPath(

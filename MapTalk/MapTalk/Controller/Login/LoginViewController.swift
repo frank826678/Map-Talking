@@ -149,7 +149,6 @@ class LoginViewController: UIViewController {
         
     }
     
-    //20181018準備新增按鈕
     @IBAction func anonymousLogin(_ sender: UIButton) {
         
         let keychain = Keychain(service: "com.frank.MapTalk")
