@@ -84,7 +84,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var friendUserId: String?
     
     var userInfo = ["暱稱","性別","生日","感情狀態","居住地","體型","我想尋找","專長 興趣","喜歡的國家","自己最近的困擾","想嘗試的事情","自我介紹",]
-    var userSelected =  ["男生","1993-06-06","單身","台北","肌肉結實","短暫浪漫","Frank Lin","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
+    var userSelected =  ["男生","1990-06-06","單身","台北","肌肉結實","短暫浪漫","Jack","吃飯，睡覺，看電影","台灣/美國/英國","變胖了想要多運動","高空跳傘，環遊世界","大家好，歡迎使用這個 App，希望大家都可以在這認識新朋友"]
     
     var friendNameForCell = "測試"
     var friendImageURLForCell = "測試"
@@ -133,11 +133,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "UserDataTableViewCell", bundle: nil),forCellReuseIdentifier: "UserData")
         userInfoDetailView.userInfoDetailTableView.register(UINib(nibName: "NewIntroduceTableViewCell", bundle: nil),forCellReuseIdentifier: "UserIntroduce")
         
-        // 20181013 感覺沒作用
-        addSwipe()
         mapBackgroundView.isHidden = true
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -271,8 +267,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             controller.centerDeliveryFromMap = centerDelivery
             controller.delegate = self
             controller.flag = self.flag
-            //flag = false
-            
         }
             
         else {
@@ -281,8 +275,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func downloadUserInfo() {
-        
-        print("*********")
         
         guard let userId = Auth.auth().currentUser?.uid else { return }
         
@@ -342,7 +334,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 
                 genderInput = gender
             }
-            //增加是否顯示欄位 20181025
+        
             var statusInput = "appear"
             if let status = value["status"] as? NSDictionary {
                 
@@ -373,12 +365,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let userlocations = Locations(latitude: latitude, longitude: longitude, name: userName, userImage: userImage, id: snapshot.key, message: messageInput, gender: genderInput, status: statusInput)
             
             self.mapView.addAnnotation(userlocations.userAnnotation)
-            //self.allAnnotations = self.mapView.annotations
+            
             self.allAnnotations.append(userlocations.userAnnotation)
             
             self.locations.append(userlocations)
             
-            //guard let userId = Auth.auth().currentUser?.uid else { return }
             if userlocations.id == userId {
                 
                 self.selfLocation = userlocations
@@ -434,7 +425,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 statusInput = status
             }
             
-            //封鎖功能 20181022
             let userDefaults = UserDefaults.standard
             
             guard userDefaults.value(forKey: snapshot.key) == nil else {
@@ -511,15 +501,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Pin")
         if annotationView == nil {
-            // 執行下面這行 why 會 nil?
+
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
         }
-        
+
         if annotation is MKUserLocation {
-            
+
             return nil
         }
-        
+                
         let userAnnotation = annotation as? UserAnnotation
         
         if annotationView?.viewWithTag(7) != nil {
@@ -568,7 +558,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         shadowView.layer.applySketchShadow(color: UIColor.lightGray, alpha: 1, x: 0, y: 0, blur: 15, spread: 15, corner: 25)
         
-        // 設定頭像
+        
         let imageView = UIImageView()
         imageView.tag = 6
         
@@ -582,7 +572,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             imageView.image = #imageLiteral(resourceName: "profile_sticker_placeholder02")
         }
         
-        //設定照片圓角
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 25
         imageView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -874,17 +863,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     func animateViewUp() {
-        //userInfoDetailViewHeightConstraints.constant = 400
+      
         userInfoDetailViewBottomConstraints.constant = 10 //有 tabbar 高度 tabbar 有隱藏
-        //self.tabBarController?.tabBar.layer.zPosition = -1
-        
-        
-        //self.tabBarController?.tabBar.isHidden = true
         
         let animatedTabBar = self.tabBarController as! TabBarViewController
         animatedTabBar.animationTabBarHidden(true)
-        //沒用
-        //animatedTabBar.bottomLineColor = UIColor.red
         
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
@@ -894,12 +877,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     @objc func animateViewDown() {
-        //userInfoDetailViewHeightConstraints.constant = 0
         
         userInfoDetailViewBottomConstraints.constant = 800
         
-        //20181016
-        //        self.tabBarController?.tabBar.isHidden = false
         let animatedTabBar = self.tabBarController as! TabBarViewController
         animatedTabBar.animationTabBarHidden(false)
         
@@ -919,9 +899,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             "lon": longitude,
             "userName": userName,
             "userImage": userImage])
-        
-        //加一個 update 更新 filter 下面的
-        
+      
         let myLocationUpdates = ["/FilterData/\(userId)/location": [
             "lat": latitude,
             "lon": longitude,
@@ -932,9 +910,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func showMessageAlert(title: String, message: String) {
-        //讓 hello world 也可以讀 20181111
-        
-        //新增對方到 firebase 的好友列表
+
         guard let friendId =  self.friendUserId else { return }
         
         guard let friendName = self.navigationUserName else { return }

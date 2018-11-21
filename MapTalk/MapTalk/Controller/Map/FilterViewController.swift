@@ -358,10 +358,11 @@ class FilterViewController: UIViewController {
                 
             } else {
                 
-                print("Data saved successfully!")
                 BaseNotificationBanner.successBanner(subtitle: "上傳資料成功～稍後將顯示結果")
-                //self.dismiss(animated: true, completion: nil)
-                self.navigationController?.popViewController(animated: true)
+
+                print("Data saved successfully!")
+                
+                //self.navigationController?.popViewController(animated: true)
                 
             }
         }

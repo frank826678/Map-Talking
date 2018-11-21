@@ -45,9 +45,7 @@ class ProfileViewController: UIViewController {
             String(describing: ProfileTableViewCell.self)
             ])
         
-        //        profileTableView.register(UINib(nibName: "ProfileTableViewCell", bundle: nil),
-        //                                  forCellReuseIdentifier: "Profile")
-        
+
         storyHighlightsTextField.delegate = self
         
         ref = Database.database().reference()
@@ -72,9 +70,7 @@ class ProfileViewController: UIViewController {
         storyHighlightsTextField.layer.borderWidth = 2
         storyHighlightsTextField.layer.borderColor = #colorLiteral(red: 0.4588235294, green: 0.6078431373, blue: 1, alpha: 1)
         storyHighlightsTextField.layer.cornerRadius = 30
-        //storyHighlightsTextField.frame.width/2
-        //iconBackgroundView.frame.width/2
-        
+                
     }
     
     func setImage() {
