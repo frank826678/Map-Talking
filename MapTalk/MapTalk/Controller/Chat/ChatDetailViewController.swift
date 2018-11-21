@@ -187,8 +187,6 @@ class ChatDetailViewController: UIViewController {
                     
                     self.chatDetailTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
                     
-                    // reloadData ?
-                    
                 } catch {
                     print(error)
                 }
@@ -258,8 +256,6 @@ class ChatDetailViewController: UIViewController {
             
             in
             
-            //print("找到的資料是\(snapshot)")
-            
             guard let value = snapshot.value as? NSDictionary else { return }
             
             guard let friendName = value["FBName"] as? String else { return }
@@ -268,13 +264,8 @@ class ChatDetailViewController: UIViewController {
             
              self.navigationController?.navigationBar.topItem?.title = "\(friendName)"
             
-            //let friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
-            
-            //20181111
             self.friendInfo = FriendInfo(friendName: friendName, friendImageUrl: friendImageUrl)
-            //self.friendInfo.append(friendInfo)
-            
-            //20181014 傳送發送照片的詳細資料 channel 已經變更好的來自全域變數
+
             let friendNewInfo: FriendNewInfo = FriendNewInfo(friendName: friendName, friendImageUrl: friendImageUrl, friendUID: friendUserId, friendChannel: self.friendChannel)
             
             NotificationCenter.default.post(name: .sendPersonalChannel, object: friendNewInfo)
@@ -284,12 +275,8 @@ class ChatDetailViewController: UIViewController {
     }
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
-        //20181110
-        //NotificationCenter.default.post(name: .sendPersonalChannel, object: nil)
         
         photoSelectorShowing()
-        // 20181014加上傳送頻道
-        //self.performSegue(withIdentifier: "GoPhotoVC", sender: friendChannel)
     }
     
     @objc func photoSelectorShowing() {
@@ -312,7 +299,6 @@ class ChatDetailViewController: UIViewController {
     }
     
     //傳送錄音檔開始
-    
     func getDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = paths[0]

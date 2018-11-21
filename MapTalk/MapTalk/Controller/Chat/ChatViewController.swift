@@ -32,7 +32,7 @@ class ChatViewController: UIViewController {
     var messages: [Message] = []
     
     var friendDataArray: [FreindData] = []
-    //newMessage 儲存所有資訊
+    
     var newMessage: [NewMessage] = []
     
     var myselfUID: String?
@@ -40,7 +40,7 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     var result: [NewMessage] = []
     var searchStatus = false
-    //20181020 偵測網路
+   
     
     var reachability = Reachability(hostName: "www.apple.com")
     
@@ -71,13 +71,12 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
         
         // swiftlint:disable force_cast
-        let ramTBC = tabBarController as! TabBarViewController
+        let ramTabBarController = tabBarController as! TabBarViewController
         // swiftlint:enable force_cast
         
-        ramTBC.selectedIndex = 1
-        ramTBC.setSelectIndex(from: 0, to: 1)
+        ramTabBarController.selectedIndex = 1
+        ramTabBarController.setSelectIndex(from: 0, to: 1)
         
-        //偵測網路
         downloadData()
         
         setImage()
@@ -87,14 +86,12 @@ class ChatViewController: UIViewController {
         
         chatTableView.register(UINib(nibName: "ChatTableViewCell", bundle: nil),
                                forCellReuseIdentifier: "Chat")
-        //讀取好友清單
-        ref = Database.database().reference() //重要 沒有會 nil
+     
+        ref = Database.database().reference()
         
-        //取消 tableView 虛線
         chatTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        //20181016 searchbar
+        
         searchBar.delegate = self
-        //self.result = self.newMessage
         
         hintLabel.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector (getDataFrom(_:)), name: .blockUser, object: nil)
@@ -118,7 +115,7 @@ class ChatViewController: UIViewController {
         newMessage.removeAll()
         getFriendList()
         chatTableView.reloadData()
-        print("收到封鎖資料")
+        
     }
     
     func setAniView() {
@@ -167,8 +164,6 @@ class ChatViewController: UIViewController {
     
     func getFriendList() {
         
-        //找出所有好友列表 剛進本業就要做的事情
-        
         guard let myselfId = Auth.auth().currentUser?.uid else { return }
         
         ref.child("UserData").child(myselfId).child("FriendsList").observeSingleEvent(of: .value, with: { (snapshot)
@@ -177,19 +172,12 @@ class ChatViewController: UIViewController {
             
             guard let value = snapshot.value as? NSDictionary else { return }
             
-            //            print("以下為value資料")
-            //            print(value)
-            //            print("value資料結束")
             let allkeyCount = value.allKeys.count
-            print(allkeyCount)
             
-            print("------")
-            //let key = value?.allKeys.first
             for index in 0 ..< allkeyCount {
                 
                 guard let allFriends = value.allKeys[index] as? String else { return }
                 
-                //封鎖功能 20181022
                 let userDefaults = UserDefaults.standard
                 
                 guard userDefaults.value(forKey: allFriends) == nil else {
@@ -199,14 +187,7 @@ class ChatViewController: UIViewController {
                     
                 }
                 
-                //20181019 下面已經直接把值傳入 應該不需要這個 array 了
                 self.friendsList.append(allFriends)
-                //這裡有每個朋友的 UID , UID 比較重要 為結構的外層第一筆 （名字 這時候去請求
-    
-                //OK
-                //self.getFriendLastMessage(friendId: allFriends)
-                
-                //20181006
                 
                 self.getNewFriendMessage(friendId: allFriends)
             }
@@ -215,9 +196,7 @@ class ChatViewController: UIViewController {
         
     }
     
-    //let chatroomKey = "publicChannel"
     //每個 channel 都要讀取 讀最後一筆
-    
     func getNewFriendMessage(friendId: String) {
         
         var channel: String = "Nothing"
@@ -233,11 +212,8 @@ class ChatViewController: UIViewController {
         }
         ref.child("chatroom").child("PersonalChannel").child(channel).queryOrdered(byChild: "time").queryLimited(toLast: 1).observe(.childAdded) { (snapshot) in
             
-            //var message: NewMessage
-            
             guard let value = snapshot.value as? NSDictionary else { return }
             
-            //codable 開始
             guard let messageJSONData = try? JSONSerialization.data(withJSONObject: value) else { return }
             
             do {
@@ -247,9 +223,6 @@ class ChatViewController: UIViewController {
                     
                     for (index, user) in self.newMessage.enumerated() where user.friendUID == message.friendUID || user.senderId == message.friendUID {
                         
-                        //user.friendUID == message.friendUID || user.senderId == message.friendUID  {
-                        
-                        // || user.friendUID == message.senderId
                         self.newMessage[index].content = message.content
                         self.newMessage[index].time = message.time
                         
@@ -259,7 +232,7 @@ class ChatViewController: UIViewController {
                         
                         self.chatTableView.reloadData()
                         
-                        return //跳出 整個 getNewFriendMessage 的 func
+                        return 
                     }
                     
                 } else {
@@ -268,7 +241,6 @@ class ChatViewController: UIViewController {
                         where user.friendUID == message.senderId
                             || user.senderId == message.senderId {
                                 
-                                //user.friendUID == message.senderId
                                 self.newMessage[index].content = message.content
                                 self.newMessage[index].time = message.time
                                 
@@ -392,7 +364,6 @@ extension ChatViewController: UITableViewDataSource {
                 
             }
             
-            //點擊 cell 後 不反灰
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
             
