@@ -37,7 +37,7 @@ class UserInfoController: UIViewController {
     var pickerView: UIPickerView!
     var datePicker: UIDatePicker!
     
-    var cell: EditUserDataTableViewCell?
+    //var cell: EditUserDataTableViewCell?
     
     let fullScreenSize = UIScreen.main.bounds.size
     
@@ -63,6 +63,8 @@ class UserInfoController: UIViewController {
         ref = Database.database().reference()
         
         downloadUserInfo()
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editClicked))
         
         editTableView.allowsSelection = false
         editTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
