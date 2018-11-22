@@ -301,7 +301,7 @@ extension PhotoViewController: UICollectionViewDataSource {
             //取得縮圖
             self.imageManager.requestImage(for: asset, targetSize: assetGridThumbnailSize,
                                            contentMode: PHImageContentMode.aspectFill,
-                                           options: nil) { (image, nfo) in
+                                           options: nil) { (image, info) in
                                             
             cell.photoImage.image = image
             

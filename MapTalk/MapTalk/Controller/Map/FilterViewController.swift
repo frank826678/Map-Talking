@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
-import MapKit //為了拿到 CLLocationCoordinate2D
+import MapKit
 import NotificationBannerSwift
 
 protocol sendAlertstatus: AnyObject {
@@ -79,14 +79,12 @@ class FilterViewController: UIViewController {
     var selectedTimeIcon1: IndexPath = []
     var timeNumber: Int?
     
-    //20181009
     var centerDeliveryFromMap: CLLocationCoordinate2D?
     
     var locManager = CLLocationManager()
     var currentLocation: CLLocation!
     var currentCenter: CLLocationCoordinate2D?
     
-    //20181028
     var flag: Bool = false
     
     override func viewDidLoad() {
@@ -111,18 +109,16 @@ class FilterViewController: UIViewController {
         
         filterCollectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FilterHeaderCell")
         
-        ref = Database.database().reference() //重要 沒有會 nil
+        ref = Database.database().reference()
         
         setAgeSlider()
         setLocationSlider()
         detectUserInfo()
         
-        //是否跳過 alert 判斷
         guard let myselfId = Auth.auth().currentUser?.uid else {
             BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
             return }
         
-        //20181009
         locManager.requestWhenInUseAuthorization()
         currentLocation = locManager.location
 
@@ -130,7 +126,6 @@ class FilterViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //showLocationAlert()
         
         delegate?.checkBool(flag: true)
         
@@ -141,12 +136,9 @@ class FilterViewController: UIViewController {
                 BaseNotificationBanner.warningBanner(subtitle: "目前為匿名模式,請使用 Facebook 登入")
                 return }
             showLocationAlert()
-            //flag = true
         }
         
     }
-    
-    //20181028 增加 alert 告訴他我正在使用他的位置
     
     func showLocationAlert() {
         
@@ -210,9 +202,6 @@ class FilterViewController: UIViewController {
         maxAgeSlider.maximumValue = 65
         maxAgeSlider.setValue(30, animated: true)
         
-        // UISlider 是否可以在變動時同步執行動作
-        // 設定 false 時 則是滑動完後才會執行動作
-        
         minAgeSlider.isContinuous = true
         minAgeSlider.addTarget(self, action: #selector(minAgeSliderDidchange(_:)), for: UIControl.Event.valueChanged)
         
@@ -233,11 +222,8 @@ class FilterViewController: UIViewController {
         let roundedStepValue = round(slider.value / step) * step
         slider.value = roundedStepValue
         
-        //        minAgeSlider.maximumValue = maxAgeSlider.value
-        //        maxAgeSlider.minimumValue = minAgeSlider.value
         maxAgeSlider.minimumValue = minAgeSlider.value
         
-        //locationSliderValue.text = String(Int(slider.value))
         maxAgeSliderValue.text = " \(Int(maxAgeSlider.value))"
         print(slider.value)
     }
@@ -258,7 +244,6 @@ class FilterViewController: UIViewController {
         let roundedStepValue = round(slider.value / step) * step
         slider.value = roundedStepValue
         
-        //locationSliderValue.text = String(Int(slider.value))
         locationSliderValue.text = " \(Int(slider.value)) 公里 "
         print(slider.value)
         
@@ -380,12 +365,8 @@ class FilterViewController: UIViewController {
             in
             
             guard let userId = Auth.auth().currentUser?.uid else { return }
-            
-            print("測試用20181013")
                         
             guard let value = snapshot.value as? NSDictionary else { return }
-            
-            //print(value)
             
             // swiftlint:disable identifier_name
             guard let age = value["age"] as? Int else { return }
@@ -421,15 +402,6 @@ class FilterViewController: UIViewController {
                                               senderId: senderId,
                                               senderName: senderName,
                                               senderPhotoURL: senderPhoto)
-            //上面增加自己的性別
-            
-            //距離的計算
-            
-            //let myLocation = CLLocation(latitude: 25.998443,longitude: 120.174183)
-            //下面的預設值是台北車站
-            
-            //            let myLocation = CLLocation(latitude: self.currentCenter?.latitude ?? 25.048134,longitude: self.currentCenter?.longitude ?? 121.517314
-            //            )
             
             let myLocation =  CLLocation(latitude: self.centerDeliveryFromMap?.latitude ?? 25.048134, longitude: self.centerDeliveryFromMap?.longitude ?? 121.517314)
             
@@ -438,19 +410,10 @@ class FilterViewController: UIViewController {
             let distance = myLocation.distance(from: friendLocation) / 1000
             
             let roundDistance = round(distance * 100) / 100
-            //print("***自己目前的實際所在地\(self.currentCenter?.latitude),\(self.currentCenter?.longitude )***")
             
-            print("***自己目前的實際所在地\(myLocation)")
-            print("***算出目前跟朋友的距離***\(senderName)")
-            print("\(roundDistance) km")
-            //打死算距離
-            
-            //時間的限制 用現在時間 減 下載下來資料的時間 小於 24 小時內才比對 （24 小時 友 86400 秒 + 000）一小時 3600 000
             let createdTime = Date().millisecondsSince1970
             let in24hr = createdTime - friendFilterData.time
             
-            // 測試時間 1538924236062 Your time zone: Sunday, October 7, 2018 10:57:16.062 PM GMT+08:00
-            //先用名字 到時候再加上性別 和時間 (上面的搜尋是搜尋 約會類型相同的人) filterData 是自己的本地端要去搜尋的資料
             if userId != senderId &&  filterData.time == friendFilterData.datingTime && in24hr  < 86400000 && filterData.gender == friendFilterData.myselfGender {
                 
                 self.filterNewData.append(friendFilterData)
@@ -461,70 +424,34 @@ class FilterViewController: UIViewController {
             } else {
                 print("自己的資料不用存")
             }
-            //            self.friendUserName = senderName
-            //            self.friendUserId = senderId
-            //
-            //            guard let friendUserName = self.friendUserName  else { return }
             
-            print(" *** 準備印 searchFilterData 的資料 ")
-            print(value)
-            
-            print(" *** 準備印 filterData 的資料 ")
-            print(friendFilterData)
-            
-            //search 完去比對資料配對
-            
-            //                    self.showMessageAlert(title: "傳訊息給\(self.friendUserName) 嗎～？", message: "認識一下吧！")
-            //                    print("選取的人的 userID 是 \(self.friendUserId)")
-            
-        } //)
+        }
         
     }
     
     func showMessageAlert(title: String, message: String, senderId: String, senderName: String) {
         
-        //把全域變數拿掉
-        
-        //要直接跳到 chatDetail 頁面
-        //可以跳過去 但是返回上一頁會直接跳回 map 主頁
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "確認", style: .default) { (_) in
-            
-            //collectionView.deselectItem(at: indexPath, animated: true)
             
             // 換頁並且改變 detail頁的 friendUserId 的值
             guard let controller = UIStoryboard.chatStoryboard().instantiateViewController(
                 withIdentifier: String(describing: ChatDetailViewController.self)
                 ) as? ChatDetailViewController else { return }
             
-            //controller.article = articles[indexPath.row]
             
             controller.friendUserId = senderId
             
             self.show(controller, sender: nil)
-            print("跳頁成功")
-            
-            //新增對方到 firebase 的好友列表
-            
-            //guard let friendId =  self.friendUserId else { return }
             
             guard let myselfId = Auth.auth().currentUser?.uid else { return }
-            //guard let friendName = self.friendUserName else { return }
             
             guard let myselfName = Auth.auth().currentUser?.displayName else { return }
-            
-            //refference.child("UserFriendList").child(myselfId).child(friendId).setValue([])
-            
-            // 我媒合到 friend 在我自己的節點下 存朋友的 ID 並且 朋友的狀態為 發出邀請中
-            // 被我媒合的到的朋友 在朋友的節點下 存下自己的 ID 並且 朋友的狀態為 收到邀請中
-            // 朋友應該監控自己下方的節點 邀請中 如果有 要跳出 alert 提醒有人要跟你當朋友
             
             let myChildUpdates = ["/UserData/\(myselfId)/FriendsList/\(senderId)": ["FriendUID": "\(senderId)", "FriendName": "\(senderName)", "Accept": "發出邀請中", "Friend_Email": "emailTest"]]
             
             let friendChildUpdates = ["/UserData/\(senderId)/FriendsList/\(myselfId)": ["FriendUID": "\(myselfId)", "FriendName": "\(myselfName)", "Accept": "收到邀請中", "Friend_Email": "emailTest"]]
             
-            //            self.refference.child.updateChildValues(["/UserData/\(myselfId)/FriendsList/\(friendId)": ["accept": "發送邀請中","friend_email": "emailTest"]])
-            //
             self.ref.updateChildValues(myChildUpdates)
             self.ref.updateChildValues(friendChildUpdates)
             
